@@ -1,0 +1,13 @@
+{
+  "name": "FileExplorer",
+  "description": "Simple file explorer.",
+  "main": "index.html",
+  "window": {
+    "toolbar": false,
+    "width": 660,
+    "height": 500
+  },
+  "scripts": {
+    "start": "nodewebkit"
+  }
+}

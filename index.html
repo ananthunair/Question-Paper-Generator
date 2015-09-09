@@ -1,0 +1,22 @@
+<html>
+<head>
+  <script type="text/javascript">
+    function openWin(){
+      // myWindow=window.open('','','width=300,height=500');
+      var button = document.getElementById('print');
+      button.style.visibility = 'hidden'
+      window.print()
+      button.style.visibility = 'visible'
+
+    }
+  </script>
+</head>
+<body>
+<input id ="print" type="button" value="print" onclick="openWin()" />
+Hello,
+Run Fast
+<code>
+  var a =b;
+</code>
+</body>
+</html>
