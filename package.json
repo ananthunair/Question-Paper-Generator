@@ -1,6 +1,6 @@
 {
-  "name": "FileExplorer",
-  "description": "Simple file explorer.",
+  "name": "Question-Paper-Generator",
+  "description": "Question Paper Generator.",
   "main": "index.html",
   "window": {
     "toolbar": false,
@@ -9,5 +9,8 @@
   },
   "scripts": {
     "start": "nodewebkit"
+  },
+  "dependencies": {
+    "nodewebkit": "^0.11.6"
   }
 }
