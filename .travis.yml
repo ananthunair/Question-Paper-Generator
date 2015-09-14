@@ -13,3 +13,4 @@ deploy:
 script:
  - mocha tests/**
  - sleep 300
+ - echo "parallel"
