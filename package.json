@@ -11,6 +11,12 @@
     "start": "nodewebkit"
   },
   "dependencies": {
-    "nodewebkit": "^0.11.6"
+    "nodewebkit": "^0.11.6",
+    "jade":"*",
+    "sqlite3":"*",
+    "mocha":"*"
+  },
+  "devDependencies": {
+    "chai": "1.10.0"
   }
 }
