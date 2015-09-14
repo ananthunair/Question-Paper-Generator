@@ -1,14 +1,14 @@
+var presenter = require('create_question_presenter').presenter;
 
 function markAsCode(){
     var textComponent = document.getElementById('question');
-    var selectedText;
     var startPos = textComponent.selectionStart;
     var endPos = textComponent.selectionEnd;
-    selectedText = textComponent.value.substring(startPos, endPos)
-    textComponent.value =  textComponent.value.replace(selectedText,"<code>"+selectedText+"</code>")
-
+    textComponent.value =  presenter.getCodeSnippet(textComponent.value,startPos,endPos);
 }
+
+
 $(document).ready(function() {
     $("#markAsCode").on('click',markAsCode)
-
 })
+

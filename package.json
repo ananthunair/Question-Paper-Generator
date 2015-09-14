@@ -9,16 +9,15 @@
   },
   "scripts": {
     "start": "nodewebkit",
-    "test": "echo tests are running",
-    "init_db":"sh scripts/create_db.sh"
+    "init_db": "sh scripts/create_db.sh",
+    "test":"mocha tests/**"
   },
   "dependencies": {
     "nodewebkit": "^0.11.6",
-    "jade":"*",
-    "sqlite3":"*",
-    "mocha":"*"
+    "sqlite3": "*"
   },
   "devDependencies": {
+    "mocha": "*",
     "chai": "1.10.0"
   },
   "repository": {
