@@ -1,7 +1,7 @@
 {
   "name": "Question-Paper-Generator",
   "description": "Question Paper Generator.",
-  "main": "index.html",
+  "main": "src/index.html",
   "window": {
     "toolbar": false,
     "width": 660,
