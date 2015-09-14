@@ -1,4 +1,4 @@
-var presenter = require('create_question_presenter').presenter;
+var presenter = require('./createQuestion/create_question_presenter.js').Presenter;
 
 function markAsCode(){
     var textComponent = document.getElementById('question');
