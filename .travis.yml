@@ -11,4 +11,4 @@ deploy:
   on:
     tags: true
 script:
- -mocha tests/**
+ mocha tests/**
