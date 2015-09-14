@@ -8,7 +8,8 @@
     "height": 500
   },
   "scripts": {
-    "start": "nodewebkit"
+    "start": "nodewebkit",
+    "init_db":"sh scripts/create_db.sh"
   },
   "dependencies": {
     "nodewebkit": "^0.11.6",
