@@ -3,8 +3,8 @@
  */
 
 
-$( document ).ready(function() {
-    var gui = require('nw.gui');
-    var window = gui.Window.get();
-    window.maximize();
-});
+//$( document ).ready(function() {
+//    var gui = require('nw.gui');
+//    var window = gui.Window.get();
+//    window.maximize();
+//});

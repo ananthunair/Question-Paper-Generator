@@ -3,9 +3,8 @@
   "description": "Question Paper Generator.",
   "main": "src/index.html",
   "window": {
-    "toolbar": false,
-    "width": 660,
-    "height": 500
+    "show":true,
+    "toolbar": false
   },
   "scripts": {
     "start": "nodewebkit",
