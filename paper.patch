@@ -1,0 +1,66 @@
+Index: src/index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/index.html	(revision 63aa71e64950aea22644447e1305dbee2ce4e2a6)
++++ src/index.html	(revision )
+@@ -6,7 +6,9 @@
+   </head>
+ 
+   <body>
+-  <a href="createQuestion/create_question.html">Create Question</a>
++  <a href="createQuestion/create_question.html">Create Question</a><br>
++  <a href="createQuestionPaper/create_question_paper.html">Create Question Paper</a>
++
+   </body>
+ 
+ </html>
+\ No newline at end of file
+Index: src/CreateQuestionPaper/create_question_paper.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/CreateQuestionPaper/create_question_paper.js	(revision )
++++ src/CreateQuestionPaper/create_question_paper.js	(revision )
+@@ -0,0 +1,10 @@
++/**
++ * Created by poojap on 14/09/15.
++ */
++
++
++$( document ).ready(function() {
++    var gui = require('nw.gui');
++    var window = gui.Window.get();
++    window.maximize();
++});
+Index: src/CreateQuestionPaper/create_question_paper.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/CreateQuestionPaper/create_question_paper.html	(revision )
++++ src/CreateQuestionPaper/create_question_paper.html	(revision )
+@@ -0,0 +1,20 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++    <meta charset="UTF-8">
++    <script src="../../js/jquery-1.7.2.js"></script>
++    <script src="create_question_paper.js"></script>
++    <title>create question paper</title>
++</head>
++<style>
++
++</style>
++<body>
++<div>
++    <div>
++
++    </div>>
++</div>>
++</div>
++</body>
++</html>
+\ No newline at end of file

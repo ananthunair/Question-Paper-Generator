@@ -9,6 +9,7 @@
   },
   "scripts": {
     "start": "nodewebkit",
+    "test": "echo tests are running",
     "init_db":"sh scripts/create_db.sh"
   },
   "dependencies": {
@@ -19,5 +20,9 @@
   },
   "devDependencies": {
     "chai": "1.10.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prajapatip00ja/Question-Paper-Generator.git"
   }
 }
