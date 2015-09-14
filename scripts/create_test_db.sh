@@ -6,4 +6,4 @@ echo "databases removed"
 mkdir tests/data
 echo "initializing test db"
 node scripts/initialize_db.js tests/data/question_bank.db
-sqlite3 tests/data/question_bank.db < fillSampleData.sql
+sqlite3 tests/data/question_bank.db < scripts/fillSampleData.sql

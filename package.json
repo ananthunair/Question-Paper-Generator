@@ -3,17 +3,18 @@
   "description": "Question Paper Generator.",
   "main": "src/index.html",
   "window": {
-    "show":true,
+    "show": true,
     "toolbar": false
   },
   "scripts": {
     "start": "nodewebkit",
     "init_db": "sh scripts/create_db.sh",
-    "test":"mocha tests/**"
+    "test": "mocha tests/**"
   },
   "dependencies": {
     "nodewebkit": "^0.11.6",
-    "sqlite3": "*"
+    "sqlite3": "^3.1.0",
+    "sqliteorm": "0.0.1"
   },
   "devDependencies": {
     "mocha": "*",
