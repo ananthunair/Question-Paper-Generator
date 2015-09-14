@@ -3,3 +3,12 @@ node_js:
  - "0.12"
 install:
  - npm install
+deploy:
+  provider: releases
+  api_key: "GITHUB OAUTH TOKEN"
+  file: "FILE TO UPLOAD"
+  skip_cleanup: true
+  on:
+    tags: true
+script:
+ -mocha tests/**
