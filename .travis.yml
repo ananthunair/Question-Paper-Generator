@@ -11,4 +11,5 @@ deploy:
   on:
     tags: true
 script:
- mocha tests/**
+ - mocha tests/**
+ - sleep 300
