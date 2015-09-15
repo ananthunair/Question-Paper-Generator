@@ -11,7 +11,7 @@ var view = {
     }
 }
 
-var callback = function(err,rows) {
+var onComplete = function(err,rows) {
     $(document).ready(function () {
         var presenter =new Presenter(view,repo);
         console.log("************",rows);
@@ -19,5 +19,5 @@ var callback = function(err,rows) {
         view.setQuestions(questions);
     })
 }
-repo.getQuestions(callback)
+repo.getQuestions(onComplete)
 

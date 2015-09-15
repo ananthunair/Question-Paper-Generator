@@ -6,6 +6,7 @@ exports.Presenter = function (view, questions_repo) {
     this.view = view;
     this.repo = questions_repo;
 }
+
 exports.Presenter.prototype = {
     markAsCode: function () {
         var selection = this.view.getSelection();

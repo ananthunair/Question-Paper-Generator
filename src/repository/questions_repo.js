@@ -1,6 +1,5 @@
 var sqlite3 = require('sqlite3');
 
-
 exports.Question_repository = function(path){
     this.db = new sqlite3.Database(path);
     this.db.run("PRAGMA foreign_keys = 'ON';");
@@ -8,10 +7,9 @@ exports.Question_repository = function(path){
 
 exports.Question_repository.prototype ={
     create:function(question,answer){
-        console.log("question = ",question)
-        console.log("answer = ",answer)
+        var query = "insert into questions(question, answer) values('"+question+"','"+answer+"')";
+        this.db.run(query);
     },
-
     getQuestions : function(oncomplete){
         this.db.all("select question , answer from questions",oncomplete)
     }
