@@ -9,12 +9,10 @@ exports.Presenter = function (view, questions_repo) {
 
 exports.Presenter.prototype = {
     getQuestions : function(rows) {
-        var string = "";
-
+        var questions = "";
         rows.forEach(function (row) {
-            console.log("=====================  ",string)
-            string += row.question + "\n"
+            questions += "<div> <input type=" + "checkbox " + "value=" + row.question + ">" + row.question + "</div> <br>"
         })
-        return string;
+        this.view.setQuestions(questions);
     }
 }
