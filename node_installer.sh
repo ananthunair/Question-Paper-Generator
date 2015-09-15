@@ -4,3 +4,7 @@ source ~/.bash_profile
 nvm install 4.0
 echo export PATH=$PATH:~/.nvm/versions/node/v4.0.0/bin > ~/.bash_profile
 source ~/.bash_profile
+
+npm install
+npm test
+tar -cvf QPG.tar .
