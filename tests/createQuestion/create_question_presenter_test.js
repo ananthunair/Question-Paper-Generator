@@ -1,7 +1,6 @@
 var Presenter = require('../../src/createQuestion/create_question_presenter.js').Presenter;
 var assert = require('chai').assert;
 var mokito = require('jsmockito');
-//var constant =require('../../src/Constants.js').constants;
 var moke_view;
 var moke_repo;
 describe("create_question_presenter", function () {

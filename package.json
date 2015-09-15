@@ -4,7 +4,7 @@
   "main": "src/index.html",
   "window": {
     "show": true,
-    "toolbar": false
+    "toolbar": true
   },
   "scripts": {
     "start": "sh scripts/binary_rename.sh && nodewebkit",
@@ -13,7 +13,10 @@
   },
   "dependencies": {
     "nodewebkit": "^0.11.6",
+
     "sqlite3": "3.1.0"
+
+
   },
   "devDependencies": {
     "mocha": "2.2.5",
