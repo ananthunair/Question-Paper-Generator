@@ -11,7 +11,10 @@ describe("create_question_presenter", function () {
         view.setQuestion =function(){};
         view.getQuestion = function(){};
         view.getAnswer = function(){};
+        var repo = {};
+        repo.create = function(){};
         moke_view=mokito.JsMockito.mock(view);
+        moke_repo=mokito.JsMockito.mock(repo);
     })
     context("#markAsCode", function () {
         it("should mark selected text as code", function () {
@@ -46,5 +49,39 @@ describe("create_question_presenter", function () {
             mokito.JsMockito.verify(moke_view).setQuestion(text)
         })
     })
+    context("#onCreate", function () {
+        it("should create question with answer", function () {
+            var question = "do you have a piece of code?";
+            var answer = "yes"
+            mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question)
+            mokito.JsMockito.when(moke_view).getAnswer().thenReturn(answer)
 
+            var presenter = new Presenter(moke_view,moke_repo)
+            presenter.onCreate();
+
+            mokito.JsMockito.verify(moke_repo).create(question,answer)
+        })
+        it("should create question with blank answer when answer is empty", function () {
+            var question = "i have no answer";
+            var answer = ""
+            mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question)
+            mokito.JsMockito.when(moke_view).getAnswer().thenReturn(answer)
+
+            var presenter = new Presenter(moke_view,moke_repo)
+            presenter.onCreate();
+
+            mokito.JsMockito.verify(moke_repo).create(question,answer)
+        })
+        it("should not create question when question is empty", function () {
+            var question = " ";
+            var answer = " "
+            mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question)
+            mokito.JsMockito.when(moke_view).getAnswer().thenReturn(answer)
+
+            var presenter = new Presenter(moke_view,moke_repo)
+            presenter.onCreate();
+
+            mokito.JsMockito.verifyNoMoreInteractions(moke_repo)
+        })
+    })
 });

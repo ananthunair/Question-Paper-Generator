@@ -1,5 +1,5 @@
-var wrapWithCode = function(selectedText){
-      return  selectedText.trim()? "<code>" + selectedText + "</code>":selectedText ;
+var wrapWithCode = function (selectedText) {
+    return selectedText.trim() ? "<code>" + selectedText + "</code>" : selectedText;
 }
 
 exports.Presenter = function (view, questions_repo) {
@@ -15,7 +15,8 @@ exports.Presenter.prototype = {
         var postFix = text.substring(selection.end);
         this.view.setQuestion(preFix+wrapWithCode(selectedText)+postFix)
     },
-    createQuestion: function () {
-        this.repo.create(this.view.getQuestion(),this.view.getAnswer());
+    onCreate: function () {
+        var question = this.view.getQuestion();
+        question.trim() && this.repo.create(question, this.view.getAnswer());
     }
 }
