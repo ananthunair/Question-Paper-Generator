@@ -1,4 +1,4 @@
-//var sqlite3 = require('sqlite3');
+var sqlite3 = require('sqlite3');
 exports.Question_repository = function(){
 }
 exports.Question_repository.prototype ={
