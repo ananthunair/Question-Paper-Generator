@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cruise xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cruise-config.xsd" schemaVersion="75">
+  <server artifactsdir="artifacts" commandRepositoryLocation="default" serverId="7a1d9391-f274-4205-b424-79b539a657f8" />
+  <pipelines group="QuestionPaperGenerator">
+    <pipeline name="questionPaperGenerator">
+      <materials>
+        <git url="https://github.com/prajapatip00ja/Question-Paper-Generator.git" />
+      </materials>
+      <stage name="unitTests">
+        <jobs>
+          <job name="defaultJob">
+            <tasks>
+              <exec command="bash">
+                <arg>-c</arg>
+                <arg>mkdir -p QuestionPaperGeneratorArtifacts</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="bash">
+                <arg>-c</arg>
+                <arg>sh runUnitTests.sh $GO_PIPELINE_LABEL</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+            <artifacts>
+              <artifact src="QPG-*.tar" dest="QuestionPaperGeneratorArtifacts/" />
+            </artifacts>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+  </pipelines>
+  <pipelines group="English_Teacher">
+    <pipeline name="Service" labeltemplate="Service-${COUNT}" isLocked="false">
+      <materials>
+        <git url="https://maheshkkolla@bitbucket.org/maheshkkolla/english_teacher_service.git" />
+      </materials>
+      <stage name="UnitTests">
+        <jobs>
+          <job name="RunUnitTests">
+            <tasks>
+              <exec command="sh">
+                <arg>buildScripts/runUnitTests.sh</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="IntegrationTests">
+        <jobs>
+          <job name="RunIntegrationTests">
+            <tasks>
+              <exec command="sh">
+                <arg>buildScripts/runIntegrationTests.sh</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="GenerateArtifacts">
+        <jobs>
+          <job name="GenerateArtifacts">
+            <tasks>
+              <exec command="sh">
+                <arg>buildScripts/package.sh</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+    <pipeline name="Application" labeltemplate="App-${COUNT}" isLocked="false">
+      <materials>
+        <git url="https://maheshkkolla@bitbucket.org/maheshkkolla/english_teacher_app.git" />
+        <pipeline pipelineName="Service" stageName="GenerateArtifacts" materialName="Service" />
+      </materials>
+      <stage name="UnitTests">
+        <jobs>
+          <job name="RunUnitTests">
+            <tasks>
+              <exec command="sh">
+                <arg>buildScripts/runUnitTests.sh</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="IntegrationTests">
+        <jobs>
+          <job name="RunIntegrationTests">
+            <tasks>
+              <exec command="sh">
+                <arg>buildScripts/runIntegrationTests.sh</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="GenerateArtifacts">
+        <jobs>
+          <job name="GenerateArtifacts">
+            <tasks>
+              <exec command="sh">
+                <arg>buildScripts/package.sh</arg>
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+    <pipeline name="FunctionalTests" labeltemplate="FT-${COUNT}" isLocked="false">
+      <materials>
+        <git url="https://maheshkkolla@bitbucket.org/maheshkkolla/english_teacher_functional_tests.git" />
+      </materials>
+      <stage name="StartServers">
+        <jobs>
+          <job name="RunServiceAndApp">
+            <tasks>
+              <exec command="sh">
+                <arg>runServiceAndApp</arg>
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="FunctionalTests">
+        <jobs>
+          <job name="RunFunctionalTests">
+            <tasks>
+              <exec command="sh">
+                <arg>runFunctionalTests.sh</arg>
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+  </pipelines>
+  <pipelines group="Setup">
+    <pipeline name="SetupProject" labeltemplate="Setup-${COUNT}" isLocked="false">
+      <materials>
+        <git url="https://maheshkkolla@bitbucket.org/maheshkkolla/english_teacher_service.git" />
+      </materials>
+      <stage name="SetupService">
+        <approval type="manual" />
+        <jobs>
+          <job name="InstallDependencies">
+            <tasks>
+              <exec command="sh">
+                <arg>setup.sh</arg>
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="SetupApplicaation">
+        <approval type="manual" />
+        <jobs>
+          <job name="Installdependencies">
+            <tasks>
+              <exec command="sh">
+                <arg>setup.sh</arg>
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+  </pipelines>
+  <agents>
+    <agent hostname="INstepuser.local" ipaddress="10.4.22.233" uuid="b7f48455-ee74-4c6e-8818-5d917033fdfd" />
+  </agents>
+</cruise>
+
