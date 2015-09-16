@@ -10,7 +10,7 @@ exports.Question_repository.prototype ={
         var query = "insert into questions(question, answer) values('"+question+"','"+answer+"')";
         this.db.run(query);
     },
-    getQuestions : function(oncomplete){
+    getAllQuestions : function(oncomplete){
         this.db.all("select question , answer from questions",oncomplete)
     }
 
