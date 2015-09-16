@@ -1,0 +1,35 @@
+.mainContainer {
+    height: 700px;
+    width: 1330px;
+    border: 1px solid;
+    margin-left: 50px;
+    margin-right: 150px;
+}
+#selectQuestion {
+    margin-top: 50px;
+    margin-left: 20px;
+    width : 96%;
+    height: 600px;
+
+}
+#questions {
+    height: 300px;
+    width: 49%;
+    border: 1px solid;
+    float: right;
+    display: inline-block;
+    margin-top: 150px;
+}
+#add{
+    margin-top: 100px;
+    margin-left: 1150px;
+}
+#selectedQuestion{
+    height: 300px;
+    width: 49%;
+    border: 1px solid;
+    float: left;
+    display: inline-block;
+    margin-top: 150px;
+
+}

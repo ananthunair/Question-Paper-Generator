@@ -13,7 +13,7 @@ exports.Presenter.prototype = {
         var checkboxName = "questionCheckBox";
         rows.forEach(function (row) {
             //questions += "<div id="+ "question_container" +"> <input type=" + "checkbox "+" name=" +checkboxName+ " value=" + row.question + ">" + row.question + "</div> <br>"
-            questions += "<input type=" + "checkbox "+" name=" +checkboxName+ " value=" + row.question + ">" + row.question + "<br>";
+            questions += "<input type=" + "checkbox "+" name=" +checkboxName+  ">" + row.question + "<br>";
         })
         this.view.setQuestions(questions );
     }

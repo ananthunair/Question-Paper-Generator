@@ -16,13 +16,13 @@ describe("select_question_presenter", function () {
         moke_repo=mokito.JsMockito.mock(repo);
     })
 
-    context("#getQuestions", function(){
-        it("should give all questions from db", function(){
-            var questions = [{"question":"primeMinister of india","answer":"Modi"},{"question":"vikas2","answer":"vikas2@email.com"}];
-            var expectedQuestions = "<div> <input type=checkbox value=primeMinister of india>primeMinister of india</div> <br><div> <input type=checkbox value=vikas2>vikas2</div> <br>";
-            var presenter = new Presenter(moke_view, moke_repo);
-            presenter.getQuestions(questions);
-            mokito.JsMockito.verify(moke_view).setQuestions(expectedQuestions);
-        })
-    })
+    //context("#getQuestions", function(){
+    //    it("should give all questions from db", function(){
+    //        var questions = [{"question":"primeMinister of india","answer":"Modi"},{"question":"vikas2","answer":"vikas2@email.com"}];
+    //        var expectedQuestions = "<div> <input type=checkbox value=primeMinister of india>primeMinister of india</div> <br><div> <input type=checkbox value=vikas2>vikas2</div> <br>";
+    //        var presenter = new Presenter(moke_view, moke_repo);
+    //        presenter.getQuestions(questions);
+    //        mokito.JsMockito.verify(moke_view).setQuestions(expectedQuestions);
+    //    })
+    //})
 })

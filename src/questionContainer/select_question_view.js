@@ -27,7 +27,7 @@ var view = {
                 formatedQuestions += "<div>" + question + "<button> X </button>" + "</div> <br>"
             })
 
-            $("#selectedQuestion").html(formatedQuestions);
+            $("#selectedQuestion").html();
         })
 
     }
