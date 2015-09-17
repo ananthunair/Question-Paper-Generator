@@ -1,4 +1,5 @@
 each question in questions
-    input(type="checkbox" name="questionBox")
-    |#{question.question}
-    br
+    div(class="well input-group input-group-lg")
+     span(class="input-group-addon")
+        input(type="checkbox" name="questionBox")
+        |  #{question.question}

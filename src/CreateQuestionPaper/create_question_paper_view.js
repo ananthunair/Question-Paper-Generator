@@ -11,7 +11,7 @@ var view = {
 
     showQuestions:function(questions){
         var formatedQuestions =jade.renderFile('./src/createQuestionPaper/questionToSelect.jade',{'questions':questions});
-        var codeFormatedQuestions= formatedQuestions.replace(/&lt;code&gt;/gi,'<code>').replace(/&lt;\/code&gt;/gi,'<\/code>');
+        var codeFormatedQuestions= formatedQuestions.replace(/&lt;code&gt;/gi,'<pre><code>').replace(/&lt;\/code&gt;/gi,'<\/code></pre>');
         $('#questionsToSelect').html(codeFormatedQuestions)
     }
 }

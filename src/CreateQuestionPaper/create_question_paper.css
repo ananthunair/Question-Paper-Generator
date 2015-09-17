@@ -13,12 +13,12 @@
 
 }
 #questionsToSelect {
-    height: 300px;
-    width: 49%;
+    width: 45%;
     border: 1px solid;
     float: right;
     display: inline-block;
     margin-top: 150px;
+    padding: 20px;
 }
 #add{
     margin-top: 100px;
