@@ -4,6 +4,13 @@ render =function(path,options){
     $('#container').html(html);
 }
 
-$(document).ready(function() {
+var renderDashboard = function(){
     render('./src/dashboard/dashboard.jade');
+}
+
+$(document).ready(function() {
+    renderDashboard()
+    $("#home").click(function(){
+        renderDashboard()
+    })
 })
