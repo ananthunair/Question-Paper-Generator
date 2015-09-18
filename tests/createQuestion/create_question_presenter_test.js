@@ -11,6 +11,10 @@ describe("create_question_presenter", function () {
         view.setQuestion =function(){};
         view.getQuestion = function(){};
         view.getAnswer = function(){};
+        view.isQuestionFieldEmpty =function(){};
+        view.showErrorMessage =function(){}
+        view.showSuccessMessage =function(){}
+        view.clearScreen = function(){}
         var repo = {};
         repo.create = function(){};
         moke_view=mokito.JsMockito.mock(view);
