@@ -1,11 +1,6 @@
 
 
-function isSelectedQuestion(question){
-    return selectedIds.indexOf(question.id.toString())>=0;
-}
-function isNotSelectedQuestion(question){
-    return !isSelectedQuestion(question)
-}
+
 
 
 exports.Presenter = function (view, questions_repo) {
@@ -25,6 +20,12 @@ exports.Presenter.prototype = {
     },
 
     onAddClick : function(){
+        function isSelectedQuestion(question){
+            return selectedIds.indexOf(question.id.toString())>=0;
+        }
+        function isNotSelectedQuestion(question){
+            return !isSelectedQuestion(question)
+        }
         var selectedIds = this.view.getSelectedQuestions();
         var questionsToAddInPaper =this.all_questions.filter(isSelectedQuestion);
         this.questionPaper = this.questionPaper.concat(questionsToAddInPaper);
