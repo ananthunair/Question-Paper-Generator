@@ -19,7 +19,21 @@ var view ={
     clearScreen:function(){
         document.getElementById("question").value = "";
         document.getElementById("answer").value = "";
+    },
+
+    isQuestionFieldEmpty:function(){
+        return document.getElementById("question").value == "";
+    },
+    showErrorMessage:function(){
+        setAlert("alert alert-danger", "Question field can not be empty");
+    },
+    showSuccessMessage:function(){
+        setAlert("alert alert-success","Your question was added successfully")
     }
+}
+
+var setAlert = function(className, message){
+    $('#message_alert').fadeIn().html("<div class='"+ className + "' role='alert'>"+ message + "</div>").delay(3000).fadeOut();
 }
 
 $(document).ready(function() {
@@ -28,7 +42,7 @@ $(document).ready(function() {
     $("#markAsCode").on('click',function(){presenter.markAsCode()});
     $("#create").on('click',function(){
         presenter.onCreate();
-        view.clearScreen();
     });
-})
+});
+
 
