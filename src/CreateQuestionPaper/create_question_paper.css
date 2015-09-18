@@ -1,5 +1,4 @@
 .mainContainer {
-    height: 700px;
     width: 1330px;
     border: 1px solid;
     margin-left: 50px;
@@ -24,8 +23,7 @@
     margin-top: 100px;
     margin-left: 1150px;
 }
-#selectedQuestion{
-    height: 300px;
+#questionPaperContainer {
     width: 49%;
     border: 1px solid;
     float: left;

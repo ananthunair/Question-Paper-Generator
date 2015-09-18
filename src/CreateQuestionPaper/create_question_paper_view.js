@@ -7,8 +7,8 @@ var Question_repository = require('./repository/questions_repo').Question_reposi
 var jade = require('jade');
 var repo = new Question_repository(Contants.db_path);
 
-function codeFormator(path,options) {
-    var formatedQuestions = jade.renderFile(path,options);
+function codeFormator(path, options) {
+    var formatedQuestions = jade.renderFile(path, options);
     var codeFormatedQuestions = formatedQuestions.replace(/&lt;code&gt;/gi, '<pre><code>').replace(/&lt;\/code&gt;/gi, '<\/code></pre>');
     return codeFormatedQuestions;
 }
@@ -21,7 +21,7 @@ var view = {
     getSelectedQuestions: function () {
         var selectedQuestions = [];
         $.each($("input[name='questionBox']:checked"),
-            function(){
+            function () {
                 selectedQuestions.push($(this).val());
             });
         return selectedQuestions;
@@ -29,9 +29,11 @@ var view = {
     },
     addToQuestionPaper: function (selectedQuestions) {
 
-        $('#selectedQuestion').html(codeFormator("./src/createQuestionPaper/questionToSelect.jade",{'questions': selectedQuestions}))
-    },
+        $('#questionPaperContainer').html(codeFormator("./src/createQuestionPaper/questionToSelect.jade", {'questions': selectedQuestions}))
+    }
+
 }
+
 
 
 $(document).ready(function () {
