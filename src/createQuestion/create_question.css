@@ -14,9 +14,21 @@
 }
 
 #markAsCode{
-    margin: 2em;
+    margin-bottom: 5px;
+    float: right;
+    display: inline;
+}
+
+#questionLabel{
+    margin-bottom: 2px;
+    float: left;
+    display: inline;
 }
 
 #message_alert{
     text-align: center;
+}
+
+#questionContainer{
+    width: 50%;
 }

@@ -2,8 +2,9 @@ script(src="./createQuestion/create_question_view.js")
 link(rel="stylesheet" type="text/css" href="./createQuestion/create_question.css")
 h1 Create Question
 div(id="message_alert")
-button(id = "markAsCode", class="btn btn-default") Mark as Code
-p Quesion :
+div(id="questionContainer")
+    button(id = "markAsCode", class="btn btn-default") Mark as Code
+    p(id="questionLabel") Quesion :
 textarea(name="question" id="question" cols="75" rows="10")
 p Answer :
 textarea(name="answer" id="answer" cols="75" rows="10")
