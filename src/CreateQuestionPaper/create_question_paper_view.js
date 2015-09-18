@@ -3,35 +3,42 @@
  */
 var Presenter = require('./createQuestionPaper/create_question_paper_presenter.js').Presenter;
 var Contants = require('./Constants.js').constants;
-var Question_repository =  require('./repository/questions_repo').Question_repository;
-var jade =  require('jade');
+var Question_repository = require('./repository/questions_repo').Question_repository;
+var jade = require('jade');
 var repo = new Question_repository(Contants.db_path);
 
+function codeFormator(path,options) {
+    var formatedQuestions = jade.renderFile(path,options);
+    var codeFormatedQuestions = formatedQuestions.replace(/&lt;code&gt;/gi, '<pre><code>').replace(/&lt;\/code&gt;/gi, '<\/code></pre>');
+    return codeFormatedQuestions;
+}
 var view = {
 
-    showQuestions:function(questions){
-        var formatedQuestions =jade.renderFile('./src/createQuestionPaper/questionToSelect.jade',{'questions':questions});
-        var codeFormatedQuestions= formatedQuestions.replace(/&lt;code&gt;/gi,'<pre><code>').replace(/&lt;\/code&gt;/gi,'<\/code></pre>');
+    showQuestions: function (questions) {
+        var codeFormatedQuestions = codeFormator('./src/createQuestionPaper/questionToSelect.jade', {'questions': questions});
         $('#questionsToSelect').html(codeFormatedQuestions)
-    }
-}
-
-
-$(document).ready(function(){
-    var presenter = new Presenter(view,repo);
-    var questions = presenter.onDocumentReady();
-    $("#add").click(function(){
+    },
+    getSelectedQuestions: function () {
         var selectedQuestions = [];
         $.each($("input[name='questionBox']:checked"),
             function(){
-                selectedQuestions.push("qustion");
+                selectedQuestions.push($(this).val());
             });
-        var formatedQuestions = "";
-        selectedQuestions.forEach(function(question){
-            formatedQuestions += "<div>" + question + "<button> X </button>" + "</div> <br>"
-        })
+        return selectedQuestions;
 
-        $("#selectedQuestion").html(formatedQuestions);
+    },
+    addToQuestionPaper: function (selectedQuestions) {
+
+        $('#selectedQuestion').html(codeFormator("./src/createQuestionPaper/questionToSelect.jade",{'questions': selectedQuestions}))
+    },
+}
+
+
+$(document).ready(function () {
+    var presenter = new Presenter(view, repo);
+    var questions = presenter.onDocumentReady();
+    $("#add").click(function () {
+        presenter.onAddClick();
     })
 })
 

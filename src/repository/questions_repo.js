@@ -11,7 +11,7 @@ exports.Question_repository.prototype ={
         this.db.run(query);
     },
     getAllQuestions : function(oncomplete){
-        this.db.all("select question , answer from questions",oncomplete)
+        this.db.all("select id, question , answer from questions",oncomplete)
     }
 
 }

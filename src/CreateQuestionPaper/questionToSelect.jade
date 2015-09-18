@@ -1,5 +1,5 @@
 each question in questions
     div(class="well input-group input-group-lg")
      span(class="input-group-addon")
-        input(type="checkbox" name="questionBox")
+        input(type="checkbox" name="questionBox" value="#{question.id}")
         |  #{question.question}
