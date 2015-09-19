@@ -87,9 +87,5 @@ describe("create_question_presenter", function () {
 
             mokito.JsMockito.verifyNoMoreInteractions(moke_repo)
         })
-
-        it("should fail", function(){
-            assert.equal(1, 0);
-        })
     })
 });
