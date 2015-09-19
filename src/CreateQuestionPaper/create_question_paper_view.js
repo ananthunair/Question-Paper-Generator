@@ -43,8 +43,8 @@ var view = {
     getQuestionPaperTitle : function() {
         return $('#questionPaperName').val();
     },
-    openPreview: function(questionPaper) {
-        var preview = jade.renderFile("./src/createQuestionPaper/preview.jade",{questionPaper:{title:"title",'questions':questionPaper}})
+    openPreview: function(questionPaper,title) {
+        var preview = jade.renderFile("./src/createQuestionPaper/preview.jade",{questionPaper:{title:title,'questions':questionPaper}})
         var previewWindow = window.open("", "width=600,height=600,scrollbars=yes")
         previewWindow.moveTo(0,0);
         previewWindow.resizeTo(screen.width, screen.height)

@@ -42,10 +42,9 @@ exports.Presenter.prototype = {
         var questionPaperName = this.view.getQuestionPaperTitle();
         var questionPaperId = this.repo.saveQuestionPaper(questionPaperName, onComplete, this.questionPaper);
     },
+
     onPreviewClick:function(){
-        this.view.openPreview(this.questionPaper)
+        var title = this.view.getQuestionPaperTitle();
+        this.view.openPreview(this.questionPaper,title)
     }
-
-
-
 }
