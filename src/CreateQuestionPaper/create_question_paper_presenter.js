@@ -32,6 +32,20 @@ exports.Presenter.prototype = {
         var remainingQuestions = this.all_questions.filter(isNotSelectedQuestion)
         this.view.showQuestions(remainingQuestions)
         this.view.addToQuestionPaper(this.questionPaper);
+    },
+
+    onSaveClick : function(){
+        var view = this.view;
+        var onComplete = function(err){
+            if(err==null){
+                view.showSuccessMessage();
+            }
+            else{
+                view.showErrorMessage();
+            }
+        }
+        var questionPaperName = this.view.getQuestionPaperTitle();
+        var questionPaperId = this.repo.saveQuestionPaper(questionPaperName,onComplete,this.questionPaper);
     }
 
 

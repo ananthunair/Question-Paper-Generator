@@ -12,6 +12,7 @@ function codeFormator(path, options) {
     var codeFormatedQuestions = formatedQuestions.replace(/&lt;code&gt;/gi, '<pre><code>').replace(/&lt;\/code&gt;/gi, '<\/code></pre>');
     return codeFormatedQuestions;
 }
+
 var view = {
 
     showQuestions: function (questions) {
@@ -30,10 +31,25 @@ var view = {
     addToQuestionPaper: function (selectedQuestions) {
 
         $('#questionPaperContainer').html(codeFormator("./src/createQuestionPaper/questionToSelect.jade", {'questions': selectedQuestions}))
+    },
+
+    showSuccessMessage : function(){
+        setAlert("alert alert-success","Your questionPaper was successfully added");
+    },
+
+    showErrorMessage : function(){
+        setAlert("alert alert-danger", "Question Paper can not be empty");
+    },
+
+    getQuestionPaperTitle : function(){
+       return $('#questionPaperName').val();
     }
 
 }
 
+var setAlert = function(className, message){
+    $('#message_alert').fadeIn().html("<div class='"+ className + "' role='alert'>"+ message + "</div>").delay(3000).fadeOut();
+}
 
 
 $(document).ready(function () {
@@ -41,6 +57,9 @@ $(document).ready(function () {
     var questions = presenter.onDocumentReady();
     $("#add").click(function () {
         presenter.onAddClick();
+    })
+    $('#save').click(function(){
+        presenter.onSaveClick();
     })
 })
 

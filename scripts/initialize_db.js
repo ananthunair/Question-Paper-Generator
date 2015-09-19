@@ -13,7 +13,11 @@ var runAllQueries = function(){
     };
 
     [	"create table questions(id integer primary key autoincrement,"+
-    " question text, answer text);"
+    " question text, answer text);",
+        "create table questionPapers(id integer primary key autoincrement,"+
+            " questionPaperName text);",
+        "create table questionDictionary(id integer primary key autoincrement,"+
+            " questionId integer, questionPaperId integer, foreign key(questionPaperId) references questionPapers(id));"
     ].forEach(runQuery)	;
 };
 db.serialize(runAllQueries);
