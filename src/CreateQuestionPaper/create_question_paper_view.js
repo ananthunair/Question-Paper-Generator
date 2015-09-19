@@ -49,7 +49,6 @@ var view = {
         previewWindow.moveTo(0,0);
         previewWindow.resizeTo(screen.width, screen.height)
         previewWindow.document.write(preview)
-
     }
 
 }

@@ -37,4 +37,6 @@
 .paperContent{
     margin: 50px;
     font-size: large;
+    text-align: justify;
+    text-justify: inter-word;
 }
