@@ -13,6 +13,7 @@ describe("create_question_paper_presenter", function () {
         view.showQuestions = function () {}
         view.getSelectedQuestions = function () {};
         view.addToQuestionPaper = function () {};
+        view.openPreview =function(){};
         var repo = {};
         repo.create = function () {};
         repo.getAllQuestions = function () {};
@@ -79,5 +80,13 @@ describe("create_question_paper_presenter", function () {
             })
         })
     })
-
+    context("#onPreviewClick",function(){
+        it('should Open Preview Window',function(){
+            questionPaper = [{id:1,'question':"how are you?",'answer':"fine"}]
+            var presenter =  new Presenter(moke_view,moke_repo);
+            presenter.questionPaper = questionPaper
+            presenter.onPreviewClick()
+            mokito.JsMockito.verify(moke_view).openPreview(questionPaper)
+        })
+    })
 })

@@ -1,8 +1,3 @@
-
-
-
-
-
 exports.Presenter = function (view, questions_repo) {
     this.view = view;
     this.repo = questions_repo;
@@ -34,18 +29,21 @@ exports.Presenter.prototype = {
         this.view.addToQuestionPaper(this.questionPaper);
     },
 
-    onSaveClick : function(){
+    onSaveClick : function() {
         var view = this.view;
-        var onComplete = function(err){
-            if(err==null){
+        var onComplete = function (err) {
+            if (err == null) {
                 view.showSuccessMessage();
             }
-            else{
+            else {
                 view.showErrorMessage();
             }
         }
         var questionPaperName = this.view.getQuestionPaperTitle();
-        var questionPaperId = this.repo.saveQuestionPaper(questionPaperName,onComplete,this.questionPaper);
+        var questionPaperId = this.repo.saveQuestionPaper(questionPaperName, onComplete, this.questionPaper);
+    },
+    onPreviewClick:function(){
+        this.view.openPreview(this.questionPaper)
     }
 
 

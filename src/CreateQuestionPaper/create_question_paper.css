@@ -29,5 +29,12 @@
     float: left;
     display: inline-block;
     margin-top: 150px;
+}
 
+.questionPaperTitle{
+    text-align: center;
+}
+.paperContent{
+    margin: 50px;
+    font-size: large;
 }

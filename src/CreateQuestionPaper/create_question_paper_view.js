@@ -32,7 +32,6 @@ var view = {
 
         $('#questionPaperContainer').html(codeFormator("./src/createQuestionPaper/questionToSelect.jade", {'questions': selectedQuestions}))
     },
-
     showSuccessMessage : function(){
         setAlert("alert alert-success","Your questionPaper was successfully added");
     },
@@ -41,8 +40,16 @@ var view = {
         setAlert("alert alert-danger", "Question Paper can not be empty");
     },
 
-    getQuestionPaperTitle : function(){
-       return $('#questionPaperName').val();
+    getQuestionPaperTitle : function() {
+        return $('#questionPaperName').val();
+    },
+    openPreview: function(questionPaper) {
+        var preview = jade.renderFile("./src/createQuestionPaper/preview.jade",{questionPaper:{title:"title",'questions':questionPaper}})
+        var previewWindow = window.open("", "width=600,height=600,scrollbars=yes")
+        previewWindow.moveTo(0,0);
+        previewWindow.resizeTo(screen.width, screen.height)
+        previewWindow.document.write(preview)
+
     }
 
 }
@@ -54,12 +61,15 @@ var setAlert = function(className, message){
 
 $(document).ready(function () {
     var presenter = new Presenter(view, repo);
-    var questions = presenter.onDocumentReady();
+    presenter.onDocumentReady();
     $("#add").click(function () {
         presenter.onAddClick();
     })
-    $('#save').click(function(){
+    $('#save').click(function() {
         presenter.onSaveClick();
+    })
+    $("#preview").click(function(){
+        presenter.onPreviewClick();
     })
 })
 
