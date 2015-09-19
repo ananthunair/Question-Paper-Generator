@@ -7,7 +7,7 @@ exports.Question_papers_repository = function(path){
 
 exports.Question_papers_repository.prototype ={
     getAllQuestionPapers : function(oncomplete){
-        this.db.all("select * from questionsPapers",oncomplete)
+        this.db.all("select * from questionPapers",oncomplete)
     }
 
 }
