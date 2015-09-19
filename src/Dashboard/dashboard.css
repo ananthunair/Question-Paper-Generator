@@ -1,0 +1,29 @@
+#questionP{
+    width: 20%;
+    height: 12%;
+    display: inline-block;
+    background-color: #BBB8B3;
+    padding: 5%;
+    border: solid 1px;
+    margin: 1%;
+    border-radius: 6%;
+}
+
+#questionP:hover{
+    background-color: greenyellow;
+}
+
+#createQP{
+    width: 20%;
+    height: 12%;
+    display: inline-block;
+    background-color: #fff;
+    padding: 5%;
+    border: solid 1px;
+    margin: 1%;
+    border-radius: 6%;
+}
+
+#createQP:hover{
+    background-color: gold;
+}
