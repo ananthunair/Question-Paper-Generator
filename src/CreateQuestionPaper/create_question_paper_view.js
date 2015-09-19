@@ -4,9 +4,10 @@
 var Presenter = require('./createQuestionPaper/create_question_paper_presenter.js').Presenter;
 var Contants = require('./Constants.js').constants;
 var Question_repository = require('./repository/questions_repo').Question_repository;
+var Question_papers_repository = require('./repository/question_papers_repo.js').Question_papers_repository
 var jade = require('jade');
 var repo = new Question_repository(Contants.db_path);
-
+var paper_repo = new Question_papers_repository(Contants.db_path);
 function codeFormator(path, options) {
     var formatedQuestions = jade.renderFile(path, options);
     var codeFormatedQuestions = formatedQuestions.replace(/&lt;code&gt;/gi, '<pre><code>').replace(/&lt;\/code&gt;/gi, '<\/code></pre>');
@@ -43,6 +44,12 @@ var view = {
     getQuestionPaperTitle : function() {
         return $('#questionPaperName').val();
     },
+
+    showTotalNumberOfQuestion : function(totalQuestion){
+      $('#totalQuestion').html('<p>'+totalQuestion+'</p>')
+    },
+
+
     openPreview: function(questionPaper,title) {
         var preview = jade.renderFile("./src/createQuestionPaper/preview.jade",{questionPaper:{title:title,'questions':questionPaper}})
         var previewWindow = window.open("", "width=600,height=600,scrollbars=yes")
@@ -60,7 +67,7 @@ var setAlert = function(className, message){
 
 
 $(document).ready(function () {
-    var presenter = new Presenter(view, repo);
+    var presenter = new Presenter(view, repo,paper_repo);
     presenter.onDocumentReady();
     $("#add").click(function () {
         presenter.onAddClick();

@@ -6,6 +6,7 @@ var assert = require('chai').assert;
 var mokito = require('jsmockito');
 var moke_view;
 var moke_repo;
+var moke_paper_repo;
 describe("create_question_paper_presenter", function () {
     beforeEach(function () {
         var view = {};
@@ -15,11 +16,18 @@ describe("create_question_paper_presenter", function () {
         view.addToQuestionPaper = function () {};
         view.openPreview =function(){};
         view.getQuestionPaperTitle = function(){};
+        view.showSuccessMessage = function(){};
+        view.showErrorMessage = function(){};
+        view.showTotalNumberOfQuestion = function(){};
         var repo = {};
+        var paper_repo = {};
+        paper_repo.getAllQuestionPapers = function(){};
+        paper_repo.saveQuestionPaper = function(){};
         repo.create = function () {};
         repo.getAllQuestions = function () {};
         moke_view = mokito.JsMockito.mock(view);
         moke_repo = mokito.JsMockito.mock(repo);
+        moke_paper_repo = mokito.JsMockito.mock(paper_repo);
     })
 
     context('#onDocumentReady', function () {
@@ -92,5 +100,33 @@ describe("create_question_paper_presenter", function () {
             mokito.JsMockito.verify(moke_view).openPreview(questionPaper, title)
         })
 
+    })
+    context("#onSaveClck",function(){
+        it('should show success if questions are saved in db',function(){
+            var paperName = "objectQuestions";
+            var questionPaper = [{id:1,'question':"how are you?",'answer':"fine"}]
+            mokito.JsMockito.when(moke_view).getQuestionPaperTitle().thenReturn(paperName);
+            moke_paper_repo.saveQuestionPaper = function(paperName,onComplete,questionPaper){
+                onComplete(null);
+            }
+            var presenter =  new Presenter(moke_view,moke_repo,moke_paper_repo);
+            presenter.onSaveClick();
+            mokito.JsMockito.verify(moke_view).showSuccessMessage();
+
+        })
+    })
+
+    context("#onSaveClck",function(){
+        it('should show success if questions are not saved in db',function(){
+            var paperName = "objectQuestions";
+            var questionPaper = [{id:1,'question':"how are you?",'answer':"fine"}]
+            mokito.JsMockito.when(moke_view).getQuestionPaperTitle().thenReturn(paperName);
+            moke_paper_repo.saveQuestionPaper = function(paperName,onComplete,questionPaper){
+                onComplete({id:1,code:"sqlite_error"});
+            }
+            var presenter =  new Presenter(moke_view,moke_repo,moke_paper_repo);
+            presenter.onSaveClick();
+            mokito.JsMockito.verify(moke_view).showErrorMessage();
+        })
     })
 })

@@ -1,6 +1,7 @@
-exports.Presenter = function (view, questions_repo) {
+exports.Presenter = function (view, questions_repo,paper_repo) {
     this.view = view;
     this.repo = questions_repo;
+    this.paper_repo = paper_repo;
     this.questionPaper =[];
 }
 
@@ -27,6 +28,7 @@ exports.Presenter.prototype = {
         var remainingQuestions = this.all_questions.filter(isNotSelectedQuestion)
         this.view.showQuestions(remainingQuestions)
         this.view.addToQuestionPaper(this.questionPaper);
+        this.view.showTotalNumberOfQuestion(this.questionPaper.length)
     },
 
     onSaveClick : function() {
@@ -40,7 +42,7 @@ exports.Presenter.prototype = {
             }
         }
         var questionPaperName = this.view.getQuestionPaperTitle();
-        var questionPaperId = this.repo.saveQuestionPaper(questionPaperName, onComplete, this.questionPaper);
+        this.paper_repo.saveQuestionPaper(questionPaperName, onComplete, this.questionPaper);
     },
 
     onPreviewClick:function(){

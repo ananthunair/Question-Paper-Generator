@@ -1,8 +1,7 @@
 .mainContainer {
-    width: 1330px;
-    border: 1px solid;
+    width: 1500px   ;
     margin-left: 50px;
-    margin-right: 150px;
+    height: 800px;
 }
 #selectQuestion {
     margin-top: 50px;
@@ -12,8 +11,8 @@
 
 }
 #questionsToSelect {
-    width: 45%;
-    border: 1px solid;
+    margin-left: 200px;
+    width: 500px;
     float: right;
     display: inline-block;
     margin-top: 150px;
@@ -24,13 +23,18 @@
     margin-left: 1150px;
 }
 #questionPaperContainer {
-    width: 49%;
-    border: 1px solid;
+    width: 500px;
     float: left;
     display: inline-block;
     margin-top: 150px;
-}
+    padding: 20px;
 
+}
+#questionContainer{
+    width: 1500px
+    display: inline;
+    height: 900px;
+}
 .questionPaperTitle{
     text-align: center;
 }
@@ -39,4 +43,28 @@
     font-size: large;
     text-align: justify;
     text-justify: inter-word;
+}
+
+
+#questionPaperName{
+    width: 30%;
+}
+
+#total{
+    display: inline-block;
+    margin-top: 50px;
+    height: 20px;
+    width: 60px;
+}
+
+#totalQuestion{
+    display:inline-block;
+}
+#save {
+    margin-left: 50px;
+    margin-right: 1300px;
+}
+#preview{
+    margin-left: 200px;
+    margin-right: 500px;
 }

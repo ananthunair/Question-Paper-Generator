@@ -1,13 +1,16 @@
 script(src="./createQuestionPaper/create_question_paper_view.js")
 link(rel="stylesheet" type="text/css" href="./createQuestionPaper/create_question_paper.css")
 div(class="mainContainer col-xs-2" )
- textarea(id = "questionPaperName")
- p Total:
- textarea(id = "totalQuestion")
+ div(class="input-group")
+  span(class="input-group-addon" id="basic-addon1") Enter Question Paper Name
+  input(type="text" id="questionPaperName" class="form-control" placeholder="" aria-describedby="basic-addon1")
+ span(id="total" class="label label-primary") Total:
+ div(id = "totalQuestion")
  div(id="message_alert")
- div(id="questionsToSelect")
- div(id="questionPaperContainer")
- button(id="add") Add question
- button(id="preview") Preview
- button(id="save") Save
+ div(id="questionContainer")
+  div(id="questionsToSelect" class="well well-lg")
+  div(id="questionPaperContainer")
+  button(type="button" id="add" class="btn btn-primary") Add question
+  button(type="button" id="preview" class="btn btn-primary") Preview
+  button(type="button" id="save" class="btn btn-primary") Save
 
