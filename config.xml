@@ -6,24 +6,54 @@
       <materials>
         <git url="https://github.com/prajapatip00ja/Question-Paper-Generator.git" />
       </materials>
-      <stage name="unitTests">
+      <stage name="UnitTests">
         <jobs>
-          <job name="defaultJob">
+          <job name="RunUnitTests">
             <tasks>
-              <exec command="bash">
+              <exec command="sh">
+                <arg>devops/runUnitTests.sh</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="Artifacts">
+        <jobs>
+          <job name="CreateArtifact">
+            <tasks>
+              <exec command="/bin/bash">
                 <arg>-c</arg>
-                <arg>mkdir -p QuestionPaperGeneratorArtifacts</arg>
+                <arg>mkdir -p QPG-Artifacts</arg>
                 <runif status="passed" />
               </exec>
               <exec command="bash">
                 <arg>-c</arg>
-                <arg>sh runUnitTests.sh $GO_PIPELINE_LABEL</arg>
+                <arg>sh devops/generateArtifact.sh $GO_PIPELINE_LABEL</arg>
                 <runif status="passed" />
               </exec>
             </tasks>
             <artifacts>
-              <artifact src="QPG-*.tar" dest="QuestionPaperGeneratorArtifacts/" />
+              <artifact src="QPG-*.tar" dest="QPG-Artifacts" />
             </artifacts>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+    <pipeline name="Setup">
+      <materials>
+        <svn url="https://github.com/prajapatip00ja/Question-Paper-Generator.git" username="" />
+      </materials>
+      <stage name="installDependencies">
+        <approval type="manual" />
+        <jobs>
+          <job name="installNode">
+            <tasks>
+              <exec command="sh">
+                <arg>installNode.sh</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
           </job>
         </jobs>
       </stage>
@@ -106,6 +136,8 @@
             <tasks>
               <exec command="sh">
                 <arg>buildScripts/package.sh</arg>
+                <arg>$GO_PIPELINE_LABEL</arg>
+                <runif status="passed" />
               </exec>
             </tasks>
           </job>
@@ -140,30 +172,47 @@
       </stage>
     </pipeline>
   </pipelines>
-  <pipelines group="Setup">
-    <pipeline name="SetupProject" labeltemplate="Setup-${COUNT}" isLocked="false">
+  <pipelines group="SetupAndDeploy">
+    <pipeline name="SetupEnglishTeacher" labeltemplate="SetupApp-${COUNT}" isLocked="false">
       <materials>
-        <git url="https://maheshkkolla@bitbucket.org/maheshkkolla/english_teacher_service.git" />
+        <git url="https://maheshkkolla@bitbucket.org/maheshkkolla/english_teacher_app.git" />
       </materials>
-      <stage name="SetupService">
+      <stage name="InstallAppDependencies">
         <approval type="manual" />
         <jobs>
-          <job name="InstallDependencies">
+          <job name="installAppDependencies">
             <tasks>
               <exec command="sh">
-                <arg>setup.sh</arg>
+                <arg>buildScripts/installAppDependencies.sh</arg>
               </exec>
             </tasks>
           </job>
         </jobs>
       </stage>
-      <stage name="SetupApplicaation">
+      <stage name="InstallServiceDependencies">
         <approval type="manual" />
         <jobs>
-          <job name="Installdependencies">
+          <job name="installServiceDependencies">
             <tasks>
               <exec command="sh">
-                <arg>setup.sh</arg>
+                <arg>buildScripts/installServiceDependencies.sh</arg>
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+    <pipeline name="DeployEnglishTeacher" labeltemplate="Deploy-${COUNT}" isLocked="false">
+      <materials>
+        <git url="https://maheshkkolla@bitbucket.org/maheshkkolla/english_teacher_app.git" materialName="Application" />
+      </materials>
+      <stage name="DeployApp">
+        <jobs>
+          <job name="DeployApp">
+            <tasks>
+              <exec command="sh">
+                <arg>buildScripts/deploy.sh</arg>
+                <runif status="passed" />
               </exec>
             </tasks>
           </job>
@@ -171,6 +220,7 @@
       </stage>
     </pipeline>
   </pipelines>
+  <pipelines group="STEP_Management" />
   <agents>
     <agent hostname="INstepuser.local" ipaddress="10.4.22.233" uuid="b7f48455-ee74-4c6e-8818-5d917033fdfd" />
   </agents>
