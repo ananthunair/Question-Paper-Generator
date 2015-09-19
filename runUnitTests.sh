@@ -7,4 +7,5 @@ nvm install 4.0
 export PATH=$PATH:~/.nvm/versions/node/v4.0.0/bin
 npm install
 npm test
+echo creating artifact
 tar --exclude='./tests' --exclude='./node_modules' --exclude='./README.md' --exclude='.gitignore' --exclude='./.git' --exclude='runUnitTests.sh'  -cvf QPG-$LABEL.tar .
