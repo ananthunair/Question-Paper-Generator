@@ -1,42 +1,14 @@
-
-/*--------------------------*/
-
-#leftContainer {
-    display:        table-cell;
-    background:     #d9d9d9;
-    float:          none;
-    padding:        0;
-}
-
-#rightContainer {
-    display:        table-cell;
-    float:          none;
-    padding:        0;
-}
-
-#wrapper {
-    display:        table;
-    width:          100%;
-    margin-top:     -40px;
-    margin-bottom:  -40px;
-    padding:        40px 0 0 0;
-    -moz-box-sizing: border-box;
-    box-sizing:     border-box;
+.inner-container {
+    height: 90%;
 }
 
 .header-footer-wrapper {
     height:         10%;
     background:     #666;
-    display:        block;
-    position:       relative;
     text-align:     center;
 }
 
 .question-container {
-    overflow-y: scroll;
-    height: 80%;
-}
-.xx {
     overflow-y: scroll;
     height: 80%;
 }
@@ -49,11 +21,23 @@
     margin-left: 50%;
 }
 
-.lbl-totalQuestions {
-    margin-top: -3%;
+#preview{
     margin-left: 50%;
+}
+
+#save{
+    margin-left: 10%;
 }
 
 .header-footer-content {
     margin-top: 2%;
+}
+
+.col-md-6{
+    padding-left: 0%;
+    padding-right: 0%;
+}
+
+#total-questions {
+    width: 30%;
 }

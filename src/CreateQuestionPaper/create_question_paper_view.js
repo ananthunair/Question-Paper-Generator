@@ -30,8 +30,8 @@ var view = {
 
     },
     addToQuestionPaper: function (selectedQuestions) {
-
-        $('#questionPaperContainer').html(codeFormator("./src/createQuestionPaper/questionToSelect.jade", {'questions': selectedQuestions}))
+        var _html = $('#questionPaperContainer').html()
+        $('#questionPaperContainer').html(_html + codeFormator("./src/createQuestionPaper/questionToSelect.jade", {'questions': selectedQuestions}))
     },
     showSuccessMessage : function(){
         setAlert("alert alert-success","Your questionPaper was successfully added");
@@ -42,7 +42,7 @@ var view = {
     },
 
     getQuestionPaperTitle : function() {
-        return $('#questionPaperName').val();
+        return $('#questionPaperTitle').val();
     },
 
     showTotalNumberOfQuestion : function(totalQuestions){
