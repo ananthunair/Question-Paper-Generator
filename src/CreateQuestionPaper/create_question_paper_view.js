@@ -45,8 +45,8 @@ var view = {
         return $('#questionPaperName').val();
     },
 
-    showTotalNumberOfQuestion : function(totalQuestion){
-      $('#totalQuestion').html('<p>'+totalQuestion+'</p>')
+    showTotalNumberOfQuestion : function(totalQuestions){
+      $('#totalQuestions').html('<p>'+totalQuestions+'</p>')
     },
 
 
@@ -65,6 +65,12 @@ var setAlert = function(className, message){
     $('#message_alert').fadeIn().html("<div class='"+ className + "' role='alert'>"+ message + "</div>").delay(3000).fadeOut();
 }
 
+var setWrapperHeight = function(){
+    var windowHeight = $(window).height();
+    var headerHeight = $('#title-header').height();
+    $('#wrapper').height(windowHeight - headerHeight)
+
+}
 
 $(document).ready(function () {
     var presenter = new Presenter(view, repo,paper_repo);
@@ -78,6 +84,7 @@ $(document).ready(function () {
     $("#preview").click(function(){
         presenter.onPreviewClick();
     })
+    setWrapperHeight()
 })
 
 

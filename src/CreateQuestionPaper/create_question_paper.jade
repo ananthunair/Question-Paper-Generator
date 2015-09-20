@@ -1,16 +1,30 @@
 script(src="./createQuestionPaper/create_question_paper_view.js")
 link(rel="stylesheet" type="text/css" href="./createQuestionPaper/create_question_paper.css")
-div(class="mainContainer col-xs-2" )
- div(class="input-group")
-  span(class="input-group-addon" id="basic-addon1") Enter Question Paper Name
-  input(type="text" id="questionPaperName" class="form-control" placeholder="" aria-describedby="basic-addon1")
- span(id="total" class="label label-primary") Total:
- div(id = "totalQuestion")
- div(id="message_alert")
- div(id="questionContainer")
-  div(id="questionsToSelect" class="well well-lg")
-  div(id="questionPaperContainer")
-  button(type="button" id="add" class="btn btn-primary") Add question
-  button(type="button" id="preview" class="btn btn-primary") Preview
-  button(type="button" id="save" class="btn btn-primary") Save
+div(id="wrapper" class="wrapper fullHeight")
+ div(id="leftContainer" class="col-lg-6 fullHeight")
+  header(id="wrapper-header" class="header-footer-wrapper")
+   div(class="col-xs-12 header-footer-content")
+    div(id="question-title" class="col-lg-6")
+     div(class="input-group input-group-lg")
+      span(class="input-group-addon" id="sizing-addon1") Question Paper Title
+      input(type="text" class="form-control" aria-describedby="sizing-addon1" autofocus)
+    div(id="total-questions" class="col-lg-6")
+     div(class="input-group input-group-lg")
+      span(class="input-group-addon" id="sizing-addon1") Total Questions
+      div(class="form-control" id="totalQuestions") 0
 
+  div(id="questionPaperContainer" class="xx")
+  footer(id="wrapper-footer" class="header-footer-wrapper")
+   div(class="col-xs-12 header-footer-content")
+    button(type="button" id="save" class="btn btn-primary btn-lg") Save
+    button(type="button" id="preview" class="btn btn-primary btn-lg") Preview
+
+ div(id="rightContainer" class="col-lg-6 fullHeight")
+  header(id="wrapper-header" class="header-footer-wrapper")
+   div(class="col-xs-12 header-footer-content") header
+  div(id="questionsToSelect" class="question-container")
+  footer(id="wrapper-footer" class="header-footer-wrapper")
+   div(class="col-xs-12 header-footer-content")
+    button(type="button" id="add" class="btn btn-primary btn-lg") Add question
+
+//div(id="message_alert")

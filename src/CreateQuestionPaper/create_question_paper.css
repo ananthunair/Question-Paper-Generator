@@ -1,70 +1,59 @@
-.mainContainer {
-    width: 1500px   ;
-    margin-left: 50px;
-    height: 800px;
-}
-#selectQuestion {
-    margin-top: 50px;
-    margin-left: 20px;
-    width : 96%;
-    height: 600px;
 
-}
-#questionsToSelect {
-    margin-left: 200px;
-    width: 500px;
-    float: right;
-    display: inline-block;
-    margin-top: 150px;
-    padding: 20px;
-}
-#add{
-    margin-top: 100px;
-    margin-left: 1150px;
-}
-#questionPaperContainer {
-    width: 500px;
-    float: left;
-    display: inline-block;
-    margin-top: 150px;
-    padding: 20px;
+/*--------------------------*/
 
-}
-#questionContainer{
-    width: 1500px
-    display: inline;
-    height: 900px;
-}
-.questionPaperTitle{
-    text-align: center;
-}
-.paperContent{
-    margin: 50px;
-    font-size: large;
-    text-align: justify;
-    text-justify: inter-word;
+#leftContainer {
+    display:        table-cell;
+    background:     #d9d9d9;
+    float:          none;
+    padding:        0;
 }
 
-
-#questionPaperName{
-    width: 30%;
+#rightContainer {
+    display:        table-cell;
+    float:          none;
+    padding:        0;
 }
 
-#total{
-    display: inline-block;
-    margin-top: 50px;
-    height: 20px;
-    width: 60px;
+#wrapper {
+    display:        table;
+    width:          100%;
+    margin-top:     -40px;
+    margin-bottom:  -40px;
+    padding:        40px 0 0 0;
+    -moz-box-sizing: border-box;
+    box-sizing:     border-box;
 }
 
-#totalQuestion{
-    display:inline-block;
+.header-footer-wrapper {
+    height:         10%;
+    background:     #666;
+    display:        block;
+    position:       relative;
+    text-align:     center;
 }
-#save {
-    margin-left: 50px;
-    margin-right: 1300px;
+
+.question-container {
+    overflow-y: scroll;
+    height: 80%;
 }
-#preview{
-    margin-left: 200px;
-    margin-right: 500px;
+.xx {
+    overflow-y: scroll;
+    height: 80%;
+}
+
+.fullHeight {
+    height: 100%;
+}
+
+#add {
+    margin-left: 50%;
+}
+
+.lbl-totalQuestions {
+    margin-top: -3%;
+    margin-left: 50%;
+}
+
+.header-footer-content {
+    margin-top: 2%;
 }
