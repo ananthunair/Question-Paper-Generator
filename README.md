@@ -3,6 +3,10 @@
 
 ## APIs
 
-## Question-Paper-Generator          [![Build Status](https://travis-ci.org/prajapatip00ja/Question-Paper-Generator.svg?branch=master)](https://travis-ci.org/prajapatip00ja/Question-Paper-Generator)
+## Question-Paper-Generator       
 
 An app for generating question paper
+
+## installation
+
+npm run initialize_app.sh
