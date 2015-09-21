@@ -7,7 +7,6 @@ exports.Presenter.prototype = {
     onDocumentReady:function(){
         var presenter =  this
         var onComplete = function(err, questionPapers){
-
             presenter.view.showQuestionPapers(questionPapers)
         }
         this.repo.getAllQuestionPapers(onComplete)

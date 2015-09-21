@@ -28,6 +28,10 @@ exports.Question_papers_repository.prototype ={
             var insertQuery = getInsertQuestionsQuery(questionPaper, id);
             db.run(insertQuery, onComplete)
         });
-    }
+    },
+    getQuestionPaper : function(onComplete, id) {
+        var query = "select questionId from questionDictionary where questionPaperId=" + id;
+        this.db.all(query, onComplete)
 
+    }
 }

@@ -1,4 +1,4 @@
-#questionP{
+.questionP{
     width: 22.6%;
     height: 12%;
     display: inline-block;
@@ -13,7 +13,7 @@
     color:#fff;
 }
 
-#questionP:hover{
+.questionP:hover{
     background-color: #3b87c8;
 }
 
