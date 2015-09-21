@@ -7,7 +7,8 @@
     "toolbar": true
   },
   "scripts": {
-    "start": "sh scripts/binary_rename.sh && nodewebkit",
+    "init" : "sh scripts/initialize_app.sh",
+    "start": "nodewebkit",
     "init_db": "sh scripts/create_db.sh",
     "test": "sh scripts/create_test_db.sh && mocha tests/**"
   },
