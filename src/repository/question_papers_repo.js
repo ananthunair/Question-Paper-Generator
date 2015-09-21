@@ -37,5 +37,9 @@ exports.Question_papers_repository.prototype ={
     getAllQuestionsOfPaper : function(onComplete, questions){
         var qeury = "select question from questions where id in(" + questions.join(",")  +");"
         this.db.all(qeury, onComplete);
+    },
+    getTitle : function(onComplete, questionPaperId){
+        var query = "select questionPaperName from questionPapers where id=" + questionPaperId;
+        this.db.get(query, onComplete);
     }
 }

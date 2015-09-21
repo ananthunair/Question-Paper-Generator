@@ -10,13 +10,19 @@ exports.Presenter.prototype = {
         var repo = this.repo;
         var view = this.view;
 
-        onComplete = function(err, questionIds) {
+        var onComplete = function(err, questionIds) {
             var questions = questionIds.map(function (questionId) {
                 return questionId.questionId;
             })
 
-            onCompleteForQuestion = function (err1, setOfQuestions){
-                view.getAllQuestionsFromPaper(setOfQuestions);
+            var onCompleteForQuestion = function (err1, setOfQuestions){
+                var onCompleteForTitle = function(err2, title){
+                    var questionPaper = {};
+                    questionPaper.que = setOfQuestions;
+                    questionPaper.title = title.questionPaperName;
+                    view.getAllQuestionsFromPaper(questionPaper)
+                }
+                repo.getTitle(onCompleteForTitle,id);
             }
 
             repo.getAllQuestionsOfPaper(onCompleteForQuestion,questions);
