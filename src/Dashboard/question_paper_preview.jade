@@ -1,0 +1,8 @@
+html
+    head
+        h2 #{title}
+        link(rel="stylesheet" type="text/css" href="./Dashboard/question_paper_preview.css")
+    body
+        div
+            each questionset,index in que
+                p #{index+1}. #{questionset.question}

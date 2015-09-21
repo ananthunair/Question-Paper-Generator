@@ -5,6 +5,12 @@ var jade = require('jade');
 
 var view = {
     getAllQuestionsFromPaper:function(setOfQuestions){
+        var preview = jade.renderFile("./src/dashboard/question_paper_preview.jade",setOfQuestions)
+        var previewWindow = window.open("", "width=600,height=600,scrollbars=yes")
+        previewWindow.focus();
+        previewWindow.moveTo(0,0);
+        previewWindow.resizeTo(screen.width, screen.height)
+        previewWindow.document.write(preview);
     }
 };
 
