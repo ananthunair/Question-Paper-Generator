@@ -19,7 +19,8 @@ exports.Presenter.prototype = {
     onCreate: function () {
         if(!this.view.isQuestionFieldEmpty()){
             var question = this.view.getQuestion();
-            question.trim() && this.repo.create(question, this.view.getAnswer());
+            var tags = this.view.getTags()
+           tags.length && question.trim() && this.repo.create(question, this.view.getAnswer(),tags);
             this.view.clearScreen();
             this.view.showSuccessMessage();
         }else{

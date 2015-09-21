@@ -15,6 +15,7 @@ describe("create_question_presenter", function () {
         view.showErrorMessage =function(){}
         view.showSuccessMessage =function(){}
         view.clearScreen = function(){}
+        view.getTags = function(){}
         var repo = {};
         repo.create = function(){};
         moke_view=mokito.JsMockito.mock(view);
@@ -54,33 +55,51 @@ describe("create_question_presenter", function () {
         })
     })
     context("#onCreate", function () {
-        it("should create question with answer", function () {
+        it("should create question with answer and tags", function () {
             var question = "do you have a piece of code?";
             var answer = "yes"
+            var tags = ["array","object"]
             mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question)
             mokito.JsMockito.when(moke_view).getAnswer().thenReturn(answer)
+            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags)
 
             var presenter = new Presenter(moke_view,moke_repo)
             presenter.onCreate();
-
-            mokito.JsMockito.verify(moke_repo).create(question,answer)
+            mokito.JsMockito.verify(moke_repo).create(question,answer,tags)
         })
         it("should create question with blank answer when answer is empty", function () {
             var question = "i have no answer";
             var answer = ""
+            var tags=["array"]
             mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question)
             mokito.JsMockito.when(moke_view).getAnswer().thenReturn(answer)
+            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags)
 
             var presenter = new Presenter(moke_view,moke_repo)
             presenter.onCreate();
 
-            mokito.JsMockito.verify(moke_repo).create(question,answer)
+            mokito.JsMockito.verify(moke_repo).create(question,answer,tags)
         })
         it("should not create question when question is empty", function () {
             var question = " ";
             var answer = " "
+            var tags =["array"]
             mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question)
             mokito.JsMockito.when(moke_view).getAnswer().thenReturn(answer)
+            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags)
+
+            var presenter = new Presenter(moke_view,moke_repo)
+            presenter.onCreate();
+
+            mokito.JsMockito.verifyNoMoreInteractions(moke_repo)
+        })
+        it("should not create question when tag is not specified", function () {
+            var question = " how are you?";
+            var answer = "fine "
+            var tags =[]
+            mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question)
+            mokito.JsMockito.when(moke_view).getAnswer().thenReturn(answer)
+            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags)
 
             var presenter = new Presenter(moke_view,moke_repo)
             presenter.onCreate();
