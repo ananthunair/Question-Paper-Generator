@@ -23,10 +23,11 @@ exports.Presenter.prototype = {
             return !isSelectedQuestion(question)
         }
         var selectedIds = this.view.getSelectedQuestions();
+
         var questionsToAddInPaper =this.all_questions.filter(isSelectedQuestion);
         this.questionPaper = this.questionPaper.concat(questionsToAddInPaper);
-        var remainingQuestions = this.all_questions.filter(isNotSelectedQuestion)
-        this.view.showQuestions(remainingQuestions)
+        this.all_questions = this.all_questions.filter(isNotSelectedQuestion);
+        this.view.showQuestions(this.all_questions)
         this.view.addToQuestionPaper(this.questionPaper);
         this.view.showTotalNumberOfQuestion(this.questionPaper.length)
     },

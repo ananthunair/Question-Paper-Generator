@@ -9,8 +9,7 @@ function getInsertQuestionsQuery(questionPaper, id) {
     var insertQuery = "insert into questionDictionary(questionId,questionPaperId) values";
     var values = "";
     questionPaper.forEach(function (question) {
-        question["questionPaperId"] = id.id;
-        values = '(' + question.id + ',' + question.questionPaperId + '),';
+        values += '(' + question.id + ',' + id.id + '),';
     })
     var values = values.replace(/,$/, "");
     return insertQuery+values;

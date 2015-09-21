@@ -30,8 +30,7 @@ var view = {
 
     },
     addToQuestionPaper: function (selectedQuestions) {
-        var _html = $('#questionPaperContainer').html()
-        $('#questionPaperContainer').html(_html + codeFormator("./src/createQuestionPaper/questionToSelect.jade", {'questions': selectedQuestions}))
+        $('#questionPaperContainer').html(codeFormator("./src/createQuestionPaper/questionToSelect.jade", {'questions': selectedQuestions}))
     },
     showSuccessMessage : function(){
         setAlert("alert alert-success","Your questionPaper was successfully added");
