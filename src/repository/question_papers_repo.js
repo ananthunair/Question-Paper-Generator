@@ -29,9 +29,13 @@ exports.Question_papers_repository.prototype ={
             db.run(insertQuery, onComplete)
         });
     },
-    getQuestionPaper : function(onComplete, id) {
+    getQuestionIds : function(onComplete, id) {
         var query = "select questionId from questionDictionary where questionPaperId=" + id;
         this.db.all(query, onComplete)
 
+    },
+    getAllQuestionsOfPaper : function(onComplete, questions){
+        var qeury = "select question from questions where id in(" + questions.join(",")  +");"
+        this.db.all(qeury, onComplete);
     }
 }

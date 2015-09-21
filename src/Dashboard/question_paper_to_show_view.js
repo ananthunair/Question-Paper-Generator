@@ -4,10 +4,7 @@ var Question_papers_repository = require('./repository/question_papers_repo.js')
 var jade = require('jade');
 
 var view = {
-    showQuestionPaper:function(questionIds){
-        var allId = questionIds.map(function(questionId){
-            return questionId.questionId;
-        })
+    getAllQuestionsFromPaper:function(setOfQuestions){
     }
 };
 

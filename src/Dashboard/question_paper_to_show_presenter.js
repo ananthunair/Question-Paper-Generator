@@ -7,9 +7,21 @@ exports.Presenter.prototype = {
 
     getAllQuestionsFromPaper:function(id){
         var presenter = this;
-        onComplete = function(err, questionPaperIds){
-            presenter.view.showQuestionPaper(questionPaperIds)
+        var repo = this.repo;
+        var view = this.view;
+
+        onComplete = function(err, questionIds) {
+            var questions = questionIds.map(function (questionId) {
+                return questionId.questionId;
+            })
+
+            onCompleteForQuestion = function (err1, setOfQuestions){
+                view.getAllQuestionsFromPaper(setOfQuestions);
+            }
+
+            repo.getAllQuestionsOfPaper(onCompleteForQuestion,questions);
         }
-        this.repo.getQuestionPaper(onComplete, id);
+
+        repo.getQuestionIds(onComplete, id);
     }
 }
