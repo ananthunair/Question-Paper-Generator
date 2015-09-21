@@ -14,12 +14,9 @@ var view = {
 $(function(){
     var repo = new Question_papers_repository(Contants.db_path);
     var presenter = new Presenter(view, repo);
-     presenter.onDocumentReady();
+    presenter.onDocumentReady();
 
     $('#create_question').click(function(){
         render('./src/createQuestion/create_question.jade')
     });
-    $('#create_question_paper').click(function(){
-        render('./src/createQuestionPaper/create_question_paper.jade')
-    })
 })

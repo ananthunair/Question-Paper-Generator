@@ -2,7 +2,7 @@
     width: 20%;
     height: 12%;
     display: inline-block;
-    background-color: #BBB8B3;
+    background-color: #337FB7;
     padding: 5%;
     border: solid 1px;
     margin: 1%;
@@ -10,20 +10,20 @@
 }
 
 #questionP:hover{
-    background-color: greenyellow;
+    background-color: #3370B7;
 }
 
-#createQP{
+#create_question_paper{
     width: 20%;
     height: 12%;
     display: inline-block;
-    background-color: #fff;
+    background-color: #f0f8ff;
     padding: 5%;
     border: solid 1px;
     margin: 1%;
     border-radius: 6%;
 }
 
-#createQP:hover{
-    background-color: gold;
+#create_question_paper:hover{
+    background-color: #f0f0ff;
 }
