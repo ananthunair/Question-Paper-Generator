@@ -5,31 +5,33 @@ exports.Presenter = function (view, questions_repo,paper_repo) {
     this.questionPaper =[];
 }
 
+
 exports.Presenter.prototype = {
     onDocumentReady:function(){
-        var presenter =  this
+        var presenter =  this;
+
         var onComplete = function(err,questions){
             presenter.all_questions = questions;
-            presenter.view.showQuestions(questions)
+            var formattedQuestions = questions.map(function(question){
+                return [question.id, question.question]
+            });
+            presenter.view.showQuestions(formattedQuestions);
+            presenter.view.addQuestionSelectionListener();
         }
         this.repo.getAllQuestions(onComplete)
     },
 
     onAddClick : function(){
-        function isSelectedQuestion(question){
-            return selectedIds.indexOf(question.id.toString())>=0;
+        var view = this.view;
+        function isSelected(question){
+            var selectedIds = view.getSelectedQuestions();
+            return selectedIds.indexOf(question.id)>=0;
         }
-        function isNotSelectedQuestion(question){
-            return !isSelectedQuestion(question)
-        }
-        var selectedIds = this.view.getSelectedQuestions();
-
-        var questionsToAddInPaper =this.all_questions.filter(isSelectedQuestion);
+        var questionsToAddInPaper =this.all_questions.filter(isSelected);
         this.questionPaper = this.questionPaper.concat(questionsToAddInPaper);
-        this.all_questions = this.all_questions.filter(isNotSelectedQuestion);
-        this.view.showQuestions(this.all_questions)
-        this.view.addToQuestionPaper(this.questionPaper);
-        this.view.showTotalNumberOfQuestion(this.questionPaper.length)
+        view.deleteSelectedRows();
+        view.addToQuestionPaper(this.questionPaper);
+        view.showTotalNumberOfQuestion(this.questionPaper.length)
     },
 
     onSaveClick : function() {

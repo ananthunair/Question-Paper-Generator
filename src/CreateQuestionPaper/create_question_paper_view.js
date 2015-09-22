@@ -7,29 +7,45 @@ var jade = require('jade');
 var repo = new Question_repository(Contants.db_path);
 var preview = require('./preview/showPreview.js');
 var paper_repo = new Question_papers_repository(Contants.db_path);
-function codeFormator(path, options) {
-    var formatedQuestions = jade.renderFile(path, options);
-    var codeFormatedQuestions = formatedQuestions.replace(/&lt;code&gt;/gi, '<pre><code>').replace(/&lt;\/code&gt;/gi, '<\/code></pre>');
-    return codeFormatedQuestions;
-}
 
 var view = {
+    table: {},
+
+    createTable: function(questions){
+        return $('#tbl-questionsToSelect').DataTable({
+            data: questions,
+            columns: [
+                { title: "ID", "visible": false},
+                { title: "Question"}
+            ]
+        });
+    },
+
+    addQuestionSelectionListener: function () {
+        $('#tbl-questionsToSelect tbody tr').click(function () {
+            $(this).toggleClass('selected');
+        });
+    },
 
     showQuestions: function (questions) {
-        var codeFormatedQuestions = codeFormator('./src/createQuestionPaper/questionToSelect.jade', {'questions': questions});
-        $('#questionsToSelect').html(codeFormatedQuestions)
+        var htmlForQuestionsToSelect = jade.renderFile('./src/createQuestionPaper/questionToSelect.jade');
+        $('#questionsToSelect').html(htmlForQuestionsToSelect)
+        this.table = this.createTable(questions);
     },
-    getSelectedQuestions: function () {
-        var selectedQuestions = [];
-        $.each($("input[name='questionBox']:checked"),
-            function () {
-                selectedQuestions.push($(this).val());
-            });
-        return selectedQuestions;
 
+    deleteSelectedRows: function(){
+        this.table.rows('.selected').remove().draw(false);
     },
+
+    getSelectedQuestions : function(){
+        return this.table.rows('.selected').data().map(function(question){
+            return question[0];
+        });
+    },
+
     addToQuestionPaper: function (selectedQuestions) {
-        $('#questionPaperContainer').html(codeFormator("./src/createQuestionPaper/questionToSelect.jade", {'questions': selectedQuestions}))
+        var htmlForSelectedQuestions = jade.renderFile("./src/createQuestionPaper/selectedQuestions.jade", {'questions': selectedQuestions});
+        $('#questionPaperContainer').html(htmlForSelectedQuestions);
     },
     showSuccessMessage : function(){
         setAlert("alert alert-success","Your questionPaper was successfully added");
@@ -78,6 +94,7 @@ $(document).ready(function () {
         presenter.onPreviewClick();
     })
     setWrapperHeight()
+
 })
 
 

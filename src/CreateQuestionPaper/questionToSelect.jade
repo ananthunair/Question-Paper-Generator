@@ -1,5 +1,7 @@
-each question in questions
-    div(class="well input-group input-group-lg")
-     span(class="input-group-addon")
-        input(type="checkbox" name="questionBox" value="#{question.id}")
-        |  #{question.question}
+script(src="../js/jquery.dataTables.min.js" type="text/javascript")
+link(href="../js/jquery.dataTables.min.css" rel="stylesheet" type="text/css")
+
+table(id="tbl-questionsToSelect" class="display")
+ thead
+ tbody(id="question")
+
