@@ -7,13 +7,14 @@
     "toolbar": true
   },
   "scripts": {
-    "init" : "sh scripts/initialize_app.sh",
+    "init": "sh scripts/initialize_app.sh",
     "start": "nodewebkit",
     "init_db": "sh scripts/create_db.sh",
     "test": "sh scripts/create_test_db.sh && mocha tests/**"
   },
   "dependencies": {
     "jade": "^1.11.0",
+    "lodash": "^3.10.1",
     "nodewebkit": "^0.11.6",
     "sqlite3": "3.1.0"
   },

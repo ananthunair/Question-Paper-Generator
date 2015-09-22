@@ -20,6 +20,11 @@ exports.Question_repository.prototype ={
 
     save :  function(allQuestions){
         var query = "";
+    },
+    getUniqueTags: function(onComplete){
+        this.db.all("select distinct tagName from tags", function(err,tags){
+           onComplete(tags.map(getTagName))
+        });
     }
 }
 
@@ -27,7 +32,6 @@ var getTagQuery=function(id,tags){
  var query = tags.reduce(function(query,tag){
         return query +="("+id+",'"+tag+"'),"
     },"insert into tags(questionId,tagName) values ").slice(0,-1)+";";
-    console.log(query);
     return query
 }
 
@@ -37,3 +41,6 @@ var addTags = function(repo,tags){
         repo.db.run(getTagQuery(id.id,tags));
     })
 }
+
+var getTagName = function(tag){return tag.tagName}
+

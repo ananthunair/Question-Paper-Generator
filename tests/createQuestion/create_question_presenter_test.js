@@ -11,13 +11,15 @@ describe("create_question_presenter", function () {
         view.setQuestion =function(){};
         view.getQuestion = function(){};
         view.getAnswer = function(){};
-        view.isQuestionFieldEmpty =function(){};
         view.showErrorMessage =function(){}
         view.showSuccessMessage =function(){}
         view.clearScreen = function(){}
         view.getTags = function(){}
+        view.setupTagBox =function(){}
+        view.addSuggetions =function(){};
         var repo = {};
         repo.create = function(){};
+        repo.getUniqueTags =function(){};
         moke_view=mokito.JsMockito.mock(view);
         moke_repo=mokito.JsMockito.mock(repo);
     })
@@ -148,5 +150,29 @@ describe("create_question_presenter", function () {
 
             mokito.JsMockito.verify(moke_view).showErrorMessage();
         })
+        it("should autosuggest tagsName for new crated tag while creating question", function(){
+            var newSuggetions =["raw"]
+            mokito.JsMockito.when(moke_view).getTags().thenReturn(newSuggetions)
+            mokito.JsMockito.when(moke_view).getQuestion().thenReturn("how are you?")
+            var preseneter = new  Presenter(moke_view, moke_repo);
+
+            preseneter.onCreate();
+            mokito.JsMockito.verify(moke_view).addSuggetions(newSuggetions)
+        })
+
+    })
+    context("#onDocumentReady",function(){
+        it("should autosuggest tags Name for already added tags", function(){
+            var suggestedTags = ["array", "object", "mocks"]
+            moke_repo.getUniqueTags = function(oncomplete){
+                oncomplete(suggestedTags);
+            }
+            var preseneter = new  Presenter(moke_view, moke_repo);
+            preseneter.onDocumentReady();
+            mokito.JsMockito.verify(moke_view).setupTagBox(suggestedTags)
+
+        })
+
+
     })
 });
