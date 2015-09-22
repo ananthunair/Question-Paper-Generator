@@ -17,7 +17,8 @@ var runAllQueries = function(){
         "create table questionPapers(id integer primary key autoincrement,"+
             " questionPaperName text);",
         "create table questionDictionary(id integer primary key autoincrement,"+
-            " questionId integer, questionPaperId integer, foreign key(questionPaperId) references questionPapers(id));"
+            " questionId integer, questionPaperId integer, foreign key(questionPaperId) references questionPapers(id));",
+        "create table tags(questionId,tagName,foreign key(questionId) references questions(id))"
     ].forEach(runQuery)	;
 };
 db.serialize(runAllQueries);

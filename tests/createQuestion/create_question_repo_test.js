@@ -14,9 +14,10 @@ describe('create_question', function() {
         it("Should insert data into questions table", function(done){
             var que_ans={
                 question:"What is name of Ananthu?",
-                answer:"Ananthu"
+                answer:"Ananthu",
+                tags:["array"]
             };
-            repo.create(que_ans.question,que_ans.answer);
+            repo.create(que_ans.question,que_ans.answer,que_ans.tags);
             var db = new sqlite3.Database(constants.test_db_path);
             db.get("select * from questions",function(err,row){
                 assert.equal(row.question,que_ans.question)
