@@ -37,13 +37,8 @@ exports.Presenter.prototype = {
     onSaveClick : function() {
         var view = this.view;
         var onComplete = function (err) {
-            if (err == null) {
-                view.showSuccessMessage();
-            }
-            else {
-                view.showErrorMessage();
-            }
-        }
+            err ? view.showErrorMessage() : view.showSuccessMessage();
+        };
         var questionPaperName = this.view.getQuestionPaperTitle();
         this.paper_repo.saveQuestionPaper(questionPaperName, onComplete, this.questionPaper);
     },

@@ -16,7 +16,8 @@ var view = {
             data: questions,
             columns: [
                 { title: "ID", "visible": false},
-                { title: "Question"}
+                { title: "Question",width:"1%"}
+
             ]
         });
     },
@@ -47,12 +48,17 @@ var view = {
         var htmlForSelectedQuestions = jade.renderFile("./src/createQuestionPaper/selectedQuestions.jade", {'questions': selectedQuestions});
         $('#questionPaperContainer').html(htmlForSelectedQuestions);
     },
+
+    setAlert : function(className, message){
+        $('#message_alert').fadeIn().html("<div class='"+ className + "' role='alert'>"+ message + "</div>").delay(3000).fadeOut();
+    },
+
     showSuccessMessage : function(){
-        setAlert("alert alert-success","Your questionPaper was successfully added");
+        this.setAlert("alert alert-success","Your questionPaper was successfully added");
     },
 
     showErrorMessage : function(){
-        setAlert("alert alert-danger", "Question Paper can not be empty");
+        this.setAlert("alert alert-danger", "Question Paper can not be empty");
     },
 
     getQuestionPaperTitle : function() {
@@ -63,38 +69,34 @@ var view = {
       $('#totalQuestions').html('<p>'+totalQuestions+'</p>')
     },
 
-
     openPreview: function(questionPaper,title) {
         preview.show({title:title,'questions':questionPaper},screen)
     }
 
-}
+};
 
-var setAlert = function(className, message){
-    $('#message_alert').fadeIn().html("<div class='"+ className + "' role='alert'>"+ message + "</div>").delay(3000).fadeOut();
-}
 
 var setWrapperHeight = function(){
     var windowHeight = $(window).height();
     var headerHeight = $('#title-header').height();
     $('#wrapper').height(windowHeight - headerHeight)
 
-}
+};
 
 $(document).ready(function () {
     var presenter = new Presenter(view, repo,paper_repo);
     presenter.onDocumentReady();
     $("#add").click(function () {
         presenter.onAddClick();
-    })
+    });
     $('#save').click(function() {
         presenter.onSaveClick();
-    })
+    });
     $("#preview").click(function(){
         presenter.onPreviewClick();
-    })
+    });
     setWrapperHeight()
 
-})
+});
 
 
