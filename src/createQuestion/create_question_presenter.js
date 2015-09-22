@@ -17,10 +17,11 @@ exports.Presenter.prototype = {
         this.view.setQuestion(preFix+wrapWithCode(selectedText)+postFix)
     },
     onCreate: function () {
-        if(!this.view.isQuestionFieldEmpty()){
+        var isQuestionEmpty = this.view.getQuestion().trim().length == 0;
+        if(!this.view.isQuestionFieldEmpty() && !isQuestionEmpty){
             var question = this.view.getQuestion();
             var tags = this.view.getTags()
-           tags.length && question.trim() && this.repo.create(question, this.view.getAnswer(),tags);
+            tags.length && question.trim() && this.repo.create(question, this.view.getAnswer(),tags);
             this.view.clearScreen();
             this.view.showSuccessMessage();
         }else{
