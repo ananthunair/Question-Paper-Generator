@@ -23,7 +23,7 @@ var view = {
     },
 
     addQuestionSelectionListener: function () {
-        $('#tbl-questionsToSelect tbody tr').click(function () {
+        $('#tbl-questionsToSelect tbody').on('click','tr',function () {
             $(this).toggleClass('selected');
         });
     },
