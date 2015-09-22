@@ -106,5 +106,47 @@ describe("create_question_presenter", function () {
 
             mokito.JsMockito.verifyNoMoreInteractions(moke_repo)
         })
+        it("Should give show success message if question is filled", function() {
+            var question = "vijay pratap singh";
+            var tags =["array"];
+            mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question)
+            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags)
+            var presenter = new Presenter(moke_view,moke_repo)
+            presenter.onCreate();
+
+            mokito.JsMockito.verify(moke_view).showSuccessMessage();
+        })
+        it("Should give error message if question is empty", function() {
+            var question = "";
+            var tags =["array"];
+            mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question)
+            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags)
+            var presenter = new Presenter(moke_view,moke_repo)
+            presenter.onCreate();
+
+            mokito.JsMockito.verify(moke_view).showErrorMessage();
+        })
+        it("Should give error message if question has only empty spaces", function() {
+            var question = "                 ";
+            var tags =["array"];
+            mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question)
+            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags)
+            var presenter = new Presenter(moke_view,moke_repo)
+            presenter.onCreate();
+
+            mokito.JsMockito.verify(moke_view).showErrorMessage();
+        })
+        it("Should give error message if when answer is filled and question not filled", function() {
+            var question = "";
+            var tags =["array"];
+            var answer = "Ankur";
+            mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question)
+            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags)
+            mokito.JsMockito.when(moke_view).getAnswer().thenReturn(answer)
+            var presenter = new Presenter(moke_view,moke_repo)
+            presenter.onCreate();
+
+            mokito.JsMockito.verify(moke_view).showErrorMessage();
+        })
     })
 });
