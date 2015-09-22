@@ -41,3 +41,8 @@
 #total-questions {
     width: 30%;
 }
+
+.questionPaperTitle{
+    text-align: center;
+    margin-bottom: 5vw;
+}

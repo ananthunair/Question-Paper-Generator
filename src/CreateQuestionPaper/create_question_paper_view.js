@@ -1,12 +1,11 @@
-/**
- * Created by vijaypratapsingh on 15/09/15.
- */
+
 var Presenter = require('./createQuestionPaper/create_question_paper_presenter.js').Presenter;
 var Contants = require('./Constants.js').constants;
 var Question_repository = require('./repository/questions_repo').Question_repository;
 var Question_papers_repository = require('./repository/question_papers_repo.js').Question_papers_repository
 var jade = require('jade');
 var repo = new Question_repository(Contants.db_path);
+var preview = require('./preview/showPreview.js');
 var paper_repo = new Question_papers_repository(Contants.db_path);
 function codeFormator(path, options) {
     var formatedQuestions = jade.renderFile(path, options);
@@ -50,12 +49,7 @@ var view = {
 
 
     openPreview: function(questionPaper,title) {
-        var preview = jade.renderFile("./src/createQuestionPaper/preview.jade",{questionPaper:{title:title,'questions':questionPaper}})
-        var previewWindow = window.open("", "width=600,height=600,scrollbars=yes")
-        previewWindow.focus();
-        previewWindow.moveTo(0,0);
-        previewWindow.resizeTo(screen.width, screen.height)
-        previewWindow.document.write(preview)
+        preview.show({title:title,'questions':questionPaper},screen)
     }
 
 }

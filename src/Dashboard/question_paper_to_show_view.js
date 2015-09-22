@@ -2,15 +2,12 @@ var Presenter = require('./dashboard/question_paper_to_show_presenter.js').Prese
 var Contants = require('./Constants.js').constants;
 var Question_papers_repository = require('./repository/question_papers_repo.js').Question_papers_repository
 var jade = require('jade');
+var preview = require('./preview/showPreview.js');
+
 
 var view = {
-    getAllQuestionsFromPaper:function(setOfQuestions){
-        var preview = jade.renderFile("./src/dashboard/question_paper_preview.jade",setOfQuestions)
-        var previewWindow = window.open("", "width=600,height=600,scrollbars=yes")
-        previewWindow.focus();
-        previewWindow.moveTo(0,0);
-        previewWindow.resizeTo(screen.width, screen.height)
-        previewWindow.document.write(preview);
+    onQuestionPaperClick:function(setOfQuestions,title){
+        preview.show({title:title,'questions':setOfQuestions},screen)
     }
 };
 

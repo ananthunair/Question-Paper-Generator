@@ -17,10 +17,7 @@ exports.Presenter.prototype = {
 
             var onCompleteForQuestion = function (err1, setOfQuestions){
                 var onCompleteForTitle = function(err2, title){
-                    var questionPaper = {};
-                    questionPaper.que = setOfQuestions;
-                    questionPaper.title = title.questionPaperName;
-                    view.getAllQuestionsFromPaper(questionPaper)
+                    view.onQuestionPaperClick(setOfQuestions, title.questionPaperName);
                 }
                 repo.getTitle(onCompleteForTitle,id);
             }
