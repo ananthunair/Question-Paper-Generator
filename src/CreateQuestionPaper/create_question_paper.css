@@ -85,3 +85,7 @@
     width: 100%;
     display: inline-block;
 }
+
+li {
+    padding: 3px;
+}
