@@ -26,7 +26,7 @@ var view ={
       return this.tagBox.getTagValues().slice(0);
     },
     showErrorMessage:function(){
-        setAlert("alert alert-danger", "Question field can not be empty");
+        setAlert("alert alert-danger", "Question and Tag field can not be empty");
     },
     showSuccessMessage:function(){
         setAlert("alert alert-success","Your question was added successfully")
@@ -36,7 +36,7 @@ var view ={
         this.tagBox = setupTagBox()
     },
     addSuggetions:function(tags){
-        var newTags = lodash.difference(tags,this.suggestedTag);
+        var newTags = lodash.difference(tags,suggestedTag);
         newTags.forEach(function(tag){
             suggestedTag.push(tag);
         });

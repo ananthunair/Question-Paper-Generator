@@ -22,7 +22,7 @@ exports.Presenter.prototype = {
     },
     onCreate: function () {
         var question = this.view.getQuestion();
-        var tags = this.view.getTags()
+        var tags = this.view.getTags();
         if (tags.length && question.trim()) {
             this.repo.create(question, this.view.getAnswer(), tags);
             this.view.clearScreen();
