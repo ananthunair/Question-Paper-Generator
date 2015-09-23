@@ -2,17 +2,14 @@ script(src="./createQuestionPaper/create_question_paper_view.js")
 link(rel="stylesheet" type="text/css" href="./createQuestionPaper/create_question_paper.css")
 div(id="inner-container" class="inner-container fullHeight")
 
- div(class="left-container col-md-6 zero-padding")
-  header(class="header-footer-wrapper")
-   div(class="col-xs-12 header-footer-content")
-    div(id="question-title" class="col-md-8")
-     div(class="input-group input-group-lg")
-      span(class="input-group-addon" id="sizing-addon1") Question Paper Title
-      input(id="questionPaperTitle" type="text" class="form-control" aria-describedby="sizing-addon1" autofocus)
-    div(id="total-questions" class="col-md-4")
-     div(class="input-group input-group-lg")
-      span(class="input-group-addon" id="sizing-addon1") Total Questions
-      div(class="form-control" id="totalQuestions") 0
+ div(class="fullHeight col-md-6")
+  header(class="header-footer-wrapper" id="selectedQuestionHeader")
+   div(id="question-title" class="col-md-8")
+    span(class="input-group-addon" id="sizing-addon1") Question Paper Title
+    input(id="questionPaperTitle" type="text" class="form-control" aria-describedby="sizing-addon1" autofocus)
+   div(id="total-questions" class="col-md-4")
+    span(class="input-group-addon" id="sizing-addon1") Total Questions
+    div(class="form-control" id="totalQuestions") 0
 
   div(class="question-container")
    div(id="message_alert")
@@ -23,9 +20,9 @@ div(id="inner-container" class="inner-container fullHeight")
     button(type="button" id="save" class="btn btn-primary btn-lg") Save
 
 
- div(class="right-container fullHeight col-md-6 zero-padding")
-  header(class="header-footer-wrapper")
-   div(class="col-xs-12 header-footer-content") header
+ div(class="fullHeight col-md-6")
+  header(class="header-footer-wrapper" id="questionToSelectHeader")
+   div(class="col-xs-12 header-footer-content")
   div(id="questionsToSelect" class="question-container")
   footer(class="header-footer-wrapper")
    div(class="col-xs-12 header-footer-content")
