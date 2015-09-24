@@ -6,6 +6,15 @@ exports.Question_repository = function(path){
 }
 
 
+function showSelectedQuestion(questionIds, db, onComplete) {
+    var flatQuestionId = [].concat.apply([], questionIds);
+    var uniqueQuestionIds = flatQuestionId.filter(function (item, i, ar) {
+        return ar.indexOf(item) === i;
+    });
+    var formattesIds = '(' + uniqueQuestionIds.join(", ") + ')';
+    var selectQuestion = "select id,question from questions where id in " + formattesIds;
+    db.all(selectQuestion, onComplete);
+}
 exports.Question_repository.prototype ={
     create:function(question, answer, tags){
         var questionQuery = "insert into questions(question, answer) values('"+question+"','"+answer+"')";
@@ -25,6 +34,22 @@ exports.Question_repository.prototype ={
         this.db.all("select distinct tagName from tags", function(err,tags){
            onComplete(tags.map(getTagName))
         });
+    },
+
+    fetchQuestionIds : function(tags,onComplete){
+        var db = this.db;
+        var questionIds = []
+        tags.map(function(tag, index, tags){
+            var query = "select questionId as id from tags where tagName='"+tag+"'";
+            db.all(query,function(err,res){
+                var ids = res.map(function(id){
+                    return id.id;
+                });
+                questionIds.push(ids);
+                if(tags.indexOf(tag)==tags.length-1)
+                    showSelectedQuestion(questionIds, db, onComplete);
+            })
+        })
     }
 }
 

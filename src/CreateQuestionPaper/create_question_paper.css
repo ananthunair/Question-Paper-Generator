@@ -30,9 +30,8 @@
 }
 
 .header-footer-content {
-    margin-top: 2%;
-    width: 99%;
-    vertical-align: middle;
+    margin-top: 1%;
+
 }
 
 .col-md-6{
@@ -89,3 +88,5 @@
 li {
     padding: 3px;
 }
+
+

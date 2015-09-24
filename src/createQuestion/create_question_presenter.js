@@ -10,7 +10,6 @@ exports.Presenter = function (view, questions_repo) {
 exports.Presenter.prototype = {
     onDocumentReady: function () {
         setAutosuggetions(this.repo, this.view)
-
     },
     markAsCode: function () {
         var selection = this.view.getSelection();

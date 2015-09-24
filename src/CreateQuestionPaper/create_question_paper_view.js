@@ -7,6 +7,7 @@ var jade = require('jade');
 var repo = new Question_repository(Contants.db_path);
 var preview = require('./preview/showPreview.js');
 var paper_repo = new Question_papers_repository(Contants.db_path);
+var suggestedTag = [];
 
 var view = {
     table: {},
@@ -33,6 +34,7 @@ var view = {
         $('#questionsToSelect').html(htmlForQuestionsToSelect)
         this.table = this.createTable(questions);
     },
+
 
     deleteSelectedRows: function(){
         this.table.rows('.selected').remove().draw(false);
@@ -71,6 +73,15 @@ var view = {
 
     openPreview: function(questionPaper,title) {
         preview.show({title:title,'questions':questionPaper},screen)
+    },
+
+    setupTagBox : function(tags){
+        suggestedTag = tags;
+        this.tagBox = setupTagBox()
+    },
+
+    getTags:function(){
+        return this.tagBox.getTagValues().slice(0);
     }
 
 };
@@ -82,6 +93,9 @@ var setWrapperHeight = function(){
     $('#wrapper').height(windowHeight - headerHeight)
 
 };
+
+
+
 
 $(document).ready(function () {
     var presenter = new Presenter(view, repo,paper_repo);
@@ -95,8 +109,33 @@ $(document).ready(function () {
     $("#preview").click(function(){
         presenter.onPreviewClick();
     });
+    $("#filter").click(function(){
+        presenter.onFilterClick();
+    });
     setWrapperHeight()
 
 });
 
 
+var setupTagBox = function() {
+    var tagbox = new Taggle($('.tagbox.textarea')[0], {
+        duplicateTagClass: 'bounce',
+        allowedTags:suggestedTag
+    });
+    var container = tagbox.getContainer();
+    var input = tagbox.getInput();
+
+    $(input).autocomplete(
+    {
+    source:suggestedTag,
+        appendTo: container,
+        position: { at: 'left bottom', of: container },
+        select: function(e, v) {
+            e.preventDefault();
+            if (e.which === 1) {
+                tagbox.add(v.item.value);
+            }
+        }
+    });
+    return tagbox;
+};

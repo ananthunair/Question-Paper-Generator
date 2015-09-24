@@ -35,6 +35,7 @@ var view ={
         suggestedTag = tags;
         this.tagBox = setupTagBox()
     },
+
     addSuggetions:function(tags){
         var newTags = lodash.difference(tags,suggestedTag);
         newTags.forEach(function(tag){

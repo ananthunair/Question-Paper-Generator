@@ -7,9 +7,10 @@ exports.Presenter = function (view, questions_repo,paper_repo) {
 
 
 exports.Presenter.prototype = {
+
+
     onDocumentReady:function(){
         var presenter =  this;
-
         var onComplete = function(err,questions){
             presenter.all_questions = questions;
             var formattedQuestions = questions.map(function(question){
@@ -18,7 +19,8 @@ exports.Presenter.prototype = {
             presenter.view.showQuestions(formattedQuestions);
             presenter.view.addQuestionSelectionListener();
         }
-        this.repo.getAllQuestions(onComplete)
+        this.repo.getAllQuestions(onComplete);
+        setAutosuggetions(this.repo, this.view)
     },
 
     onAddClick : function(){
@@ -46,5 +48,25 @@ exports.Presenter.prototype = {
     onPreviewClick:function(){
         var title = this.view.getQuestionPaperTitle();
         this.view.openPreview(this.questionPaper,title)
+    },
+
+    onFilterClick :  function(){
+        var tags = this.view.getTags();
+        var presenter =  this;
+        var onComplete = function(err,questions){
+            presenter.all_questions = questions;
+            var formattedQuestions = questions.map(function(question){
+                return [question.id, question.question]
+            });
+            presenter.view.showQuestions(formattedQuestions);
+            presenter.view.addQuestionSelectionListener();
+        }
+        this.repo.fetchQuestionIds(tags,onComplete);
     }
+}
+
+var setAutosuggetions = function (repo, view) {
+    repo.getUniqueTags(function (tags) {
+        view.setupTagBox(tags);
+    });
 }
