@@ -20,7 +20,6 @@ exports.Presenter.prototype = {
             presenter.view.addQuestionSelectionListener();
         }
         this.repo.getAllQuestions(onComplete);
-        setAutosuggetions(this.repo, this.view)
     },
 
     onAddClick : function(){
@@ -50,6 +49,14 @@ exports.Presenter.prototype = {
         this.view.openPreview(this.questionPaper,title)
     },
 
+    setAutosuggetions : function(){
+        var view = this.view;
+        this.repo.getUniqueTags(function (tags) {
+            view.setupTagBox(tags);
+        });
+    },
+
+
     onFilterClick :  function(){
         var tags = this.view.getTags();
         var presenter =  this;
@@ -65,8 +72,4 @@ exports.Presenter.prototype = {
     }
 }
 
-var setAutosuggetions = function (repo, view) {
-    repo.getUniqueTags(function (tags) {
-        view.setupTagBox(tags);
-    });
-}
+

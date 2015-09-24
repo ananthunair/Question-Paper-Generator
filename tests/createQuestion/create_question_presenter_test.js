@@ -172,7 +172,6 @@ describe("create_question_presenter", function () {
             mokito.JsMockito.verify(moke_view).setupTagBox(suggestedTags)
 
         })
-
-
     })
+
 });

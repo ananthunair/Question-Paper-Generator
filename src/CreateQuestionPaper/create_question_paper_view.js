@@ -100,6 +100,7 @@ var setWrapperHeight = function(){
 $(document).ready(function () {
     var presenter = new Presenter(view, repo,paper_repo);
     presenter.onDocumentReady();
+    presenter.setAutosuggetions();
     $("#add").click(function () {
         presenter.onAddClick();
     });

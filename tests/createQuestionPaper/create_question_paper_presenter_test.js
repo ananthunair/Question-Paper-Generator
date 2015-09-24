@@ -21,6 +21,8 @@ describe("create_question_paper_presenter", function () {
         view.showTotalNumberOfQuestion = function(){};
         view.addQuestionSelectionListener = function(){};
         view.deleteSelectedRows = function(){};
+        view.getTags = function(){};
+        view.setupTagBox = function(){};
         var repo = {};
         var paper_repo = {};
         paper_repo.getAllQuestionPapers = function(){};
@@ -129,6 +131,32 @@ describe("create_question_paper_presenter", function () {
             var presenter =  new Presenter(moke_view,moke_repo,moke_paper_repo);
             presenter.onSaveClick();
             mokito.JsMockito.verify(moke_view).showErrorMessage();
+        })
+    })
+    context("#onFilterClick",function(){
+        it("should load filtered question in the questionToSelect box",function(){
+            var questions = [{'id': 1, 'question': 'how are you?', 'answer': 'fine'}];
+            var tags = ["java","array"];
+            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags);
+            moke_repo.fetchQuestionIds = function (tags,oncomplete) {
+                oncomplete(null, questions)
+            };
+            var presenter = new Presenter(moke_view, moke_repo);
+            presenter.onFilterClick();
+            assert.deepEqual(presenter.all_questions, questions);
+            mokito.JsMockito.verify(moke_view).showQuestions([[1, 'how are you?']]);
+        })
+    })
+    context("#setAutoSuggestion",function(){
+        it("should suggest saved tags",function(){
+            var tags = ["java"];
+
+            moke_repo.getUniqueTags = function(onComplete){
+                onComplete(tags);
+            };
+            var presenter = new Presenter(moke_view, moke_repo);
+            presenter.setAutosuggetions();
+            mokito.JsMockito.verify(moke_view).setupTagBox(tags);
         })
     })
 });
