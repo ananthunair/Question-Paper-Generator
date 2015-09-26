@@ -1,4 +1,6 @@
 var sqlite3 = require('sqlite3');
+var lib = require("./question_paper_lib").lib;
+
 
 exports.Question_repository = function(path){
     this.db = new sqlite3.Database(path);
@@ -6,15 +8,22 @@ exports.Question_repository = function(path){
 }
 
 
-function showSelectedQuestion(questionIds, db, onComplete) {
+function showSelectedQuestion(questionIds, db, onComplete,tags) {
+
     var flatQuestionId = [].concat.apply([], questionIds);
-    var uniqueQuestionIds = flatQuestionId.filter(function (item, i, ar) {
-        return ar.indexOf(item) === i;
-    });
-    var formattesIds = '(' + uniqueQuestionIds.join(", ") + ')';
+    var questionIds = [];
+    if(lib.hasDuplicates(flatQuestionId) && tags.length>1)
+     questionIds = lib.getDuplicateQuestionIds(flatQuestionId);
+    else if(lib.hasDuplicates(flatQuestionId) || tags.length==1)
+        questionIds = flatQuestionId;
+
+    var formattesIds = '(' + questionIds.join(", ") + ')';
     var selectQuestion = "select id,question from questions where id in " + formattesIds;
     db.all(selectQuestion, onComplete);
 }
+
+
+
 exports.Question_repository.prototype ={
     create:function(question, answer, tags){
         var questionQuery = "insert into questions(question, answer) values('"+question+"','"+answer+"')";
@@ -47,7 +56,7 @@ exports.Question_repository.prototype ={
                 });
                 questionIds.push(ids);
                 if(tags.indexOf(tag)==tags.length-1)
-                    showSelectedQuestion(questionIds, db, onComplete);
+                    showSelectedQuestion(questionIds, db, onComplete,tags);
             })
         })
     }
