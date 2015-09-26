@@ -25,6 +25,7 @@ describe("create_question_paper_presenter", function () {
         view.setupTagBox = function(){};
         view.addToQuestionPaper = function(){};
         view.addRemovedQuestionToAllQuestions = function(){};
+        view.showTotalNumberOfQuestion = function(){};
         var repo = {};
         var paper_repo = {};
         paper_repo.getAllQuestionPapers = function(){};
@@ -169,7 +170,7 @@ describe("create_question_paper_presenter", function () {
             presenter.all_questions = [{id:1,'question':"how are you?",'answer':"fine"}, {id:2,'question':"where are you?",'answer':"hell"}];
             presenter.onRemoveQuestion("1");
             mokito.JsMockito.verify(moke_view).addRemovedQuestionToAllQuestions(["1", "how are you?"]);
-
+            mokito.JsMockito.verify(moke_view).showTotalNumberOfQuestion(0);
         })
     })
 })

@@ -85,6 +85,7 @@ exports.Presenter.prototype = {
             return q.id == parseInt(id);
         }));
         this.view.addRemovedQuestionToAllQuestions(removedQuestion);
+        this.view.showTotalNumberOfQuestion(this.questionPaper.length);
 
     }
 };
