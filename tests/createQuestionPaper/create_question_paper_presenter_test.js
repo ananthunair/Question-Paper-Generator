@@ -22,7 +22,6 @@ describe("create_question_paper_presenter", function () {
         view.addQuestionSelectionListener = function(){};
         view.deleteSelectedRows = function(){};
         view.getTags = function(){};
-        view.setupTagBox = function(){};
         view.addToQuestionPaper = function(){};
         view.addRemovedQuestionToAllQuestions = function(){};
         view.showTotalNumberOfQuestion = function(){};
@@ -159,7 +158,7 @@ describe("create_question_paper_presenter", function () {
             };
             var presenter = new Presenter(moke_view, moke_repo);
             presenter.setAutosuggetions();
-            mokito.JsMockito.verify(moke_view).setupTagBox(tags);
+            mokito.JsMockito.verify(moke_view).setupTagBoxData(tags);
         })
     })
 

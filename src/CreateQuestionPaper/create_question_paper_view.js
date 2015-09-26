@@ -1,16 +1,15 @@
-
 var Presenter = require('./createQuestionPaper/create_question_paper_presenter.js').Presenter;
-var Contants = require('./Constants.js').constants;
-var Question_repository = require('./repository/questions_repo').Question_repository;
-var Question_papers_repository = require('./repository/question_papers_repo.js').Question_papers_repository
+var Constants = require('./Constants.js').constants;
+var Question_repository = require('./repository/create_question_repo').Question_repository;
+var Question_papers_repository = require('./repository/question_paper_repo.js').Question_papers_repository;
 var jade = require('jade');
-var repo = new Question_repository(Contants.db_path);
+var repo = new Question_repository(Constants.db_path);
 var preview = require('./preview/showPreview.js');
-var paper_repo = new Question_papers_repository(Contants.db_path);
-var suggestedTag = [];
+var paper_repo = new Question_papers_repository(Constants.db_path);
 
 var view = {
     table: {},
+    suggestedTag : [],
 
     addRemovedQuestionToAllQuestions: function(question){
         this.table.row.add(question).draw();
@@ -82,9 +81,9 @@ var view = {
         preview.show({title:title,'questions':questionPaper},screen)
     },
 
-    setupTagBox : function(tags){
-        suggestedTag = tags;
-        this.tagBox = setupTagBox()
+    setupTagBoxData : function(tags){
+        this.suggestedTag = tags;
+        this.tagBox = setupTagBox(this.suggestedTag);
     },
 
     getTags:function(){
@@ -105,6 +104,7 @@ var setWrapperHeight = function(){
 
 
 $(document).ready(function () {
+    var presenter = new Presenter(view, repo, paper_repo);
     presenter.onDocumentReady();
     presenter.setAutosuggetions();
     $("#add").click(function () {
@@ -125,7 +125,7 @@ $(document).ready(function () {
 });
 
 
-var setupTagBox = function() {
+var setupTagBox = function(suggestedTag) {
     var tagbox = new Taggle($('.tagbox.textarea')[0], {
         duplicateTagClass: 'bounce',
         allowedTags:suggestedTag

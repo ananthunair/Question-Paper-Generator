@@ -1,6 +1,6 @@
 var Presenter = require('./dashboard/question_paper_to_show_presenter.js').Presenter;
 var Contants = require('./Constants.js').constants;
-var Question_papers_repository = require('./repository/question_papers_repo.js').Question_papers_repository
+var Question_papers_repository = require('./repository/question_paper_repo.js').Question_papers_repository
 var jade = require('jade');
 var preview = require('./preview/showPreview.js');
 

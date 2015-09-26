@@ -17,6 +17,7 @@ exports.Presenter.prototype = {
 
     onDocumentReady:function(){
         var presenter =  this;
+
         var onComplete = function(err,questions){
             presenter.all_questions = questions;
             var formattedQuestions = questions.map(formatQuestion);
@@ -56,7 +57,7 @@ exports.Presenter.prototype = {
     setAutosuggetions : function(){
         var view = this.view;
         this.repo.getUniqueTags(function (tags) {
-            view.setupTagBox(tags);
+            view.setupTagBoxData(tags);
         });
     },
 

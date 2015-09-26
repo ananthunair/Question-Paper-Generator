@@ -8,22 +8,6 @@ exports.Question_repository = function(path){
 }
 
 
-function showSelectedQuestion(questionIds, db, onComplete,tags) {
-
-    var flatQuestionId = [].concat.apply([], questionIds);
-    var questionIds = [];
-    if(lib.hasDuplicates(flatQuestionId) && tags.length>1)
-     questionIds = lib.getDuplicateQuestionIds(flatQuestionId);
-    else if(lib.hasDuplicates(flatQuestionId) || tags.length==1)
-        questionIds = flatQuestionId;
-
-    var formattesIds = '(' + questionIds.join(", ") + ')';
-    var selectQuestion = "select id,question from questions where id in " + formattesIds;
-    db.all(selectQuestion, onComplete);
-}
-
-
-
 exports.Question_repository.prototype ={
     create:function(question, answer, tags){
         var questionQuery = "insert into questions(question, answer) values('"+question+"','"+answer+"')";
@@ -41,24 +25,29 @@ exports.Question_repository.prototype ={
     },
     getUniqueTags: function(onComplete){
         this.db.all("select distinct tagName from tags", function(err,tags){
-           onComplete(tags.map(getTagName))
+           onComplete(tags.map(lib.getTagName));
         });
+    },
+
+    showSelectedQuestion : function(questionIds,onComplete,tags){
+        var selectedQuestionIds = lib.getSelectedQuestionIds(tags, questionIds);
+        var formattedIds = '(' + selectedQuestionIds.join(", ") + ')';
+        var selectQuestion = "select id,question from questions where id in " + formattedIds;
+        this.db.all(selectQuestion, onComplete)
     },
 
     fetchQuestionIds : function(tags,onComplete){
         var db = this.db;
-        var questionIds = []
-        tags.map(function(tag, index, tags){
-            var query = "select questionId as id from tags where tagName='"+tag+"'";
-            db.all(query,function(err,res){
-                var ids = res.map(function(id){
-                    return id.id;
-                });
-                questionIds.push(ids);
-                if(tags.indexOf(tag)==tags.length-1)
-                    showSelectedQuestion(questionIds, db, onComplete,tags);
-            })
-        })
+        var repo = this;
+        var tags = tags.map(lib.getFormatedTag);
+        var formattedTagList = '('+tags.join(',')+')';
+        var query = "select questionId as id from tags where tagName in "+formattedTagList;
+
+        db.all(query,function(err,questionIds){
+           var ids = questionIds.map(lib.getTagId);
+            repo.showSelectedQuestion(ids,onComplete,tags);
+        });
+
     }
 }
 
@@ -74,7 +63,6 @@ var addTags = function(repo,tags){
     repo.db.get("select max(id) as id from questions",function(err,id){
         repo.db.run(getTagQuery(id.id,tags));
     })
-}
+};
 
-var getTagName = function(tag){return tag.tagName}
 

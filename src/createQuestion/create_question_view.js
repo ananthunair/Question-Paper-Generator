@@ -1,5 +1,5 @@
 var Presenter = require('./createQuestion/create_question_presenter.js').Presenter;
-var Question_repository = require('./repository/questions_repo.js').Question_repository;
+var Question_repository = require('./repository/create_question_repo.js').Question_repository;
 var Contants = require('./Constants.js').constants;
 var lodash  = require('lodash');
 var suggestedTag = [];
