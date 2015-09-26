@@ -12,13 +12,16 @@ var suggestedTag = [];
 var view = {
     table: {},
 
+    addRemovedQuestionToAllQuestions: function(question){
+        this.table.row.add(question).draw();
+    },
+
     createTable: function(questions){
         return $('#tbl-questionsToSelect').DataTable({
             data: questions,
             columns: [
                 { title: "ID", "visible": false},
                 { title: "Question",width:"1%"}
-
             ]
         });
     },
@@ -49,6 +52,10 @@ var view = {
     addToQuestionPaper: function (selectedQuestions) {
         var htmlForSelectedQuestions = jade.renderFile("./src/createQuestionPaper/selectedQuestions.jade", {'questions': selectedQuestions});
         $('#questionPaperContainer').html(htmlForSelectedQuestions);
+        $('.remove').click(function(){
+            var id = $(this).attr('id');
+            presenter.onRemoveQuestion(id);
+        })
     },
 
     setAlert : function(className, message){
@@ -86,7 +93,7 @@ var view = {
 
 };
 
-
+var presenter = new Presenter(view, repo,paper_repo);
 var setWrapperHeight = function(){
     var windowHeight = $(window).height();
     var headerHeight = $('#title-header').height();
@@ -98,7 +105,6 @@ var setWrapperHeight = function(){
 
 
 $(document).ready(function () {
-    var presenter = new Presenter(view, repo,paper_repo);
     presenter.onDocumentReady();
     presenter.setAutosuggetions();
     $("#add").click(function () {
@@ -113,6 +119,7 @@ $(document).ready(function () {
     $("#filter").click(function(){
         presenter.onFilterClick();
     });
+
     setWrapperHeight()
 
 });

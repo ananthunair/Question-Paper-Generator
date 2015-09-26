@@ -23,6 +23,8 @@ describe("create_question_paper_presenter", function () {
         view.deleteSelectedRows = function(){};
         view.getTags = function(){};
         view.setupTagBox = function(){};
+        view.addToQuestionPaper = function(){};
+        view.addRemovedQuestionToAllQuestions = function(){};
         var repo = {};
         var paper_repo = {};
         paper_repo.getAllQuestionPapers = function(){};
@@ -120,7 +122,7 @@ describe("create_question_paper_presenter", function () {
         })
     });
 
-    context("#onSaveClck",function(){
+    context("#onSaveClick",function(){
         it('should show success if questions are not saved in db',function(){
             var paperName = "objectQuestions";
             var questionPaper = [{id:1,'question':"how are you?",'answer':"fine"}];
@@ -147,11 +149,11 @@ describe("create_question_paper_presenter", function () {
             mokito.JsMockito.verify(moke_view).showQuestions([[1, 'how are you?']]);
         })
     })
-    context("#setAutoSuggestion",function(){
-        it("should suggest saved tags",function(){
+    context("#setAutoSuggestion",function() {
+        it("should suggest saved tags", function () {
             var tags = ["java"];
 
-            moke_repo.getUniqueTags = function(onComplete){
+            moke_repo.getUniqueTags = function (onComplete) {
                 onComplete(tags);
             };
             var presenter = new Presenter(moke_view, moke_repo);
@@ -159,4 +161,15 @@ describe("create_question_paper_presenter", function () {
             mokito.JsMockito.verify(moke_view).setupTagBox(tags);
         })
     })
-});
+
+    context("#onRemoveQuestion", function(){
+        it("should remove the question from selected questions",function(){
+            var presenter =  new Presenter(moke_view,moke_repo,moke_paper_repo);
+            presenter.questionPaper = [{id:1,'question':"how are you?",'answer':"fine"}];
+            presenter.all_questions = [{id:1,'question':"how are you?",'answer':"fine"}, {id:2,'question':"where are you?",'answer':"hell"}];
+            presenter.onRemoveQuestion("1");
+            mokito.JsMockito.verify(moke_view).addRemovedQuestionToAllQuestions(["1", "how are you?"]);
+
+        })
+    })
+})

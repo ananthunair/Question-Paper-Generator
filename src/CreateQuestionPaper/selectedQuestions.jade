@@ -1,2 +1,4 @@
 each question in questions
- div(class="well input-group input-group-lg" ,id="selectedQuestion") !{question.question.replace('<code>','<pre><code>').replace('</code>','</pre></code>')}
+ div(class="well input-group input-group-lg" style="float:left" ,id="selectedQuestion")
+  div(id= "#{question.id}" class="remove") ✖
+  | !{question.question.replace('<code>','<pre><code>').replace('</code>','</pre></code>')}

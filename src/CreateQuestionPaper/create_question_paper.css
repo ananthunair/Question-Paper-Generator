@@ -89,4 +89,9 @@ li {
     padding: 3px;
 }
 
-
+.remove{
+    float:right;
+    margin-top: -3%;
+    margin-right: -2.5%;
+    cursor: hand;
+}

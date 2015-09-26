@@ -1,3 +1,5 @@
+var lodash  = require('lodash');
+
 exports.Presenter = function (view, questions_repo,paper_repo) {
     this.view = view;
     this.repo = questions_repo;
@@ -6,6 +8,10 @@ exports.Presenter = function (view, questions_repo,paper_repo) {
 }
 
 
+var formatQuestion = function(question){
+        return [question.id, question.question];
+};
+
 exports.Presenter.prototype = {
 
 
@@ -13,9 +19,7 @@ exports.Presenter.prototype = {
         var presenter =  this;
         var onComplete = function(err,questions){
             presenter.all_questions = questions;
-            var formattedQuestions = questions.map(function(question){
-                return [question.id, question.question]
-            });
+            var formattedQuestions = questions.map(formatQuestion);
             presenter.view.showQuestions(formattedQuestions);
             presenter.view.addQuestionSelectionListener();
         }
@@ -69,7 +73,18 @@ exports.Presenter.prototype = {
             presenter.view.addQuestionSelectionListener();
         }
         this.repo.fetchQuestionIds(tags,onComplete);
+    },
+
+    onRemoveQuestion: function(id){
+        this.questionPaper = this.questionPaper.filter(function(question){
+            return question.id != id;
+        });
+
+        this.view.addToQuestionPaper(this.questionPaper);
+        var removedQuestion = formatQuestion(lodash.find(this.all_questions,function (q) {
+            return q.id == parseInt(id);
+        }));
+        this.view.addRemovedQuestionToAllQuestions(removedQuestion);
+
     }
-}
-
-
+};
