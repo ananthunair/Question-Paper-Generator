@@ -22,6 +22,7 @@ describe("create_question_paper_presenter", function () {
         view.addQuestionSelectionListener = function(){};
         view.deleteSelectedRows = function(){};
         view.getTags = function(){};
+        view.setupTagBoxData = function(){};
         view.addToQuestionPaper = function(){};
         view.addRemovedQuestionToAllQuestions = function(){};
         view.showTotalNumberOfQuestion = function(){};
