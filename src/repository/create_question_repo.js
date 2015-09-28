@@ -1,5 +1,6 @@
 var sqlite3 = require('sqlite3');
 var lib = require("./question_paper_lib").lib;
+var lodash  = require('lodash');
 
 
 exports.Question_repository = function(path){
@@ -30,22 +31,21 @@ exports.Question_repository.prototype ={
     },
 
     showSelectedQuestion : function(questionIds,onComplete,tags){
-        var selectedQuestionIds = lib.getSelectedQuestionIds(tags, questionIds);
-        var formattedIds = '(' + selectedQuestionIds.join(", ") + ')';
+        var formattedIds = '(' + questionIds.join(", ") + ')';
         var selectQuestion = "select id,question from questions where id in " + formattedIds;
         this.db.all(selectQuestion, onComplete)
     },
 
-    fetchQuestionIds : function(tags,onComplete){
+    fetchQuestionIds : function(tags,onComplete,selectedQuestion){
         var db = this.db;
         var repo = this;
+        var selectedQuestionIds = lib.getQuestionIds(selectedQuestion);
         var tags = tags.map(lib.getFormatedTag);
         var formattedTagList = '('+tags.join(',')+')';
-        var query = "select questionId as id from tags where tagName in "+formattedTagList;
-
+        var query = "select questionId from tags where tagName in "+formattedTagList+" GROUP BY questionId HAVING COUNT(*) = "+tags.length;
         db.all(query,function(err,questionIds){
-           var ids = questionIds.map(lib.getTagId);
-            repo.showSelectedQuestion(ids,onComplete,tags);
+            var ids = lodash.difference(questionIds.map(lib.getTagId),selectedQuestionIds);
+            repo.showSelectedQuestion(ids,onComplete);
         });
 
     }

@@ -24,7 +24,13 @@ lib.getSelectedQuestionIds = function(tags, questionIds) {
     return selectedQuestionIds;
 };
 
-lib.getTagId = function(id){return id.id};
+lib.getQuestionIds = function(selectedQuestions){
+    return selectedQuestions.map(function(question){
+        return question.id;
+    })
+}
+
+lib.getTagId = function(id){return id.questionId};
 
 lib.getFormatedTag = function(tag){return "'"+tag+"'"};
 

@@ -5,7 +5,7 @@ var expect = chai.expect;
 
 context('#onLibLoad', function () {
     it('should give value of id key', function () {
-        var id= {id:1};
+        var id= {questionId:1};
         assert.equal(1,lib.getTagId(id));
     });
 

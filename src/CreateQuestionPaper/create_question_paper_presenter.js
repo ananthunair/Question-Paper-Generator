@@ -73,7 +73,8 @@ exports.Presenter.prototype = {
             presenter.view.showQuestions(formattedQuestions);
             presenter.view.addQuestionSelectionListener();
         }
-        this.repo.fetchQuestionIds(tags,onComplete);
+
+        this.repo.fetchQuestionIds(tags,onComplete,this.questionPaper);
     },
 
     onRemoveQuestion: function(id){
@@ -87,6 +88,5 @@ exports.Presenter.prototype = {
         }));
         this.view.addRemovedQuestionToAllQuestions(removedQuestion);
         this.view.showTotalNumberOfQuestion(this.questionPaper.length);
-
     }
 };
