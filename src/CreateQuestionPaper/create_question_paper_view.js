@@ -6,6 +6,7 @@ var jade = require('jade');
 var repo = new Question_repository(Constants.db_path);
 var preview = require('./preview/showPreview.js');
 var paper_repo = new Question_papers_repository(Constants.db_path);
+var lodash = require('lodash');
 
 var view = {
     table: {},
@@ -116,9 +117,7 @@ $(document).ready(function () {
     $("#preview").click(function(){
         presenter.onPreviewClick();
     });
-    $("#filter").click(function(){
-        presenter.onFilterClick();
-    });
+
 
     setWrapperHeight()
 
@@ -126,9 +125,18 @@ $(document).ready(function () {
 
 
 var setupTagBox = function(suggestedTag) {
+    var enteredtags = [];
     var tagbox = new Taggle($('.tagbox.textarea')[0], {
         duplicateTagClass: 'bounce',
-        allowedTags:suggestedTag
+        allowedTags:suggestedTag,
+        onTagAdd: function(event,tag) {
+            enteredtags.push(tag);
+            presenter.onAddOrRemoveTag(enteredtags);
+        },
+        onTagRemove:function(event,tag){
+            lodash.remove(enteredtags,function(t){return t==tag});
+            presenter.onAddOrRemoveTag(enteredtags);
+        }
     });
     var container = tagbox.getContainer();
     var input = tagbox.getInput();

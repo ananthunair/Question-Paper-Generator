@@ -36,13 +36,13 @@ exports.Question_repository.prototype ={
         this.db.all(selectQuestion, onComplete)
     },
 
-    fetchQuestionIds : function(tags,onComplete,selectedQuestion){
+    loadQuestions : function(tags,onComplete,selectedQuestion){
         var db = this.db;
         var repo = this;
         var selectedQuestionIds = lib.getQuestionIds(selectedQuestion);
         var tags = tags.map(lib.getFormatedTag);
-        var formattedTagList = '('+tags.join(',')+')';
-        var query = "select questionId from tags where tagName in "+formattedTagList+" GROUP BY questionId HAVING COUNT(*) = "+tags.length;
+
+        var query = getQuestionIdQuery(tags);
         db.all(query,function(err,questionIds){
             var ids = lodash.difference(questionIds.map(lib.getTagId),selectedQuestionIds);
             repo.showSelectedQuestion(ids,onComplete);
@@ -64,5 +64,12 @@ var addTags = function(repo,tags){
         repo.db.run(getTagQuery(id.id,tags));
     })
 };
+
+var getQuestionIdQuery = function(tags){
+    var formattedTagList = '('+tags.join(',')+')';
+    var query = "select questionId from tags where tagName in "+formattedTagList+" GROUP BY questionId HAVING COUNT(*) = "+tags.length;
+    var allQuestionIdQuery = "select distinct questionId from tags";
+    return tags.length==0 ? allQuestionIdQuery : query;
+} ;
 
 

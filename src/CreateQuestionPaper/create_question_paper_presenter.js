@@ -62,8 +62,7 @@ exports.Presenter.prototype = {
     },
 
 
-    onFilterClick :  function(){
-        var tags = this.view.getTags();
+    onAddOrRemoveTag :  function(tags){
         var presenter =  this;
         var onComplete = function(err,questions){
             presenter.all_questions = questions;
@@ -72,9 +71,9 @@ exports.Presenter.prototype = {
             });
             presenter.view.showQuestions(formattedQuestions);
             presenter.view.addQuestionSelectionListener();
-        }
+        };
 
-        this.repo.fetchQuestionIds(tags,onComplete,this.questionPaper);
+        this.repo.loadQuestions(tags,onComplete,this.questionPaper);
     },
 
     onRemoveQuestion : function(id){
