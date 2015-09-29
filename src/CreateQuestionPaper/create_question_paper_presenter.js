@@ -77,15 +77,17 @@ exports.Presenter.prototype = {
         this.repo.fetchQuestionIds(tags,onComplete,this.questionPaper);
     },
 
-    onRemoveQuestion: function(id){
+    onRemoveQuestion : function(id){
         this.questionPaper = this.questionPaper.filter(function(question){
             return question.id != id;
         });
 
         this.view.addToQuestionPaper(this.questionPaper);
-        var removedQuestion = formatQuestion(lodash.find(this.all_questions,function (q) {
+        var filteredQuestion = lodash.find(this.all_questions,function (q) {
             return q.id == parseInt(id);
-        }));
+        });
+
+        var removedQuestion = formatQuestion(filteredQuestion);
         this.view.addRemovedQuestionToAllQuestions(removedQuestion);
         this.view.showTotalNumberOfQuestion(this.questionPaper.length);
     }

@@ -93,6 +93,7 @@ var view = {
 };
 
 var presenter = new Presenter(view, repo,paper_repo);
+
 var setWrapperHeight = function(){
     var windowHeight = $(window).height();
     var headerHeight = $('#title-header').height();
@@ -104,7 +105,6 @@ var setWrapperHeight = function(){
 
 
 $(document).ready(function () {
-    var presenter = new Presenter(view, repo, paper_repo);
     presenter.onDocumentReady();
     presenter.setAutosuggetions();
     $("#add").click(function () {
