@@ -1,6 +1,5 @@
 var Presenter = require('./dashboard/dashboard_presenter.js').Presenter;
-var Contants = require('./Constants.js').constants;
-var Question_papers_repository = require('./repository/question_paper_repo.js').Question_papers_repository
+var Question_papers_repository = require('./repository/question_paper_repo.js').Question_papers_repository;
 var jade = require('jade');
 
 
@@ -12,11 +11,12 @@ var view = {
 };
 
 $(function(){
-    var repo = new Question_papers_repository(Contants.db_path);
+    var repo = new Question_papers_repository();
     var presenter = new Presenter(view, repo);
     presenter.onDocumentReady();
 
     $('#create_question').click(function(){
         render('./src/createQuestion/create_question.jade')
     });
-})
+
+});

@@ -1,6 +1,5 @@
 var Presenter = require('./createQuestion/create_question_presenter.js').Presenter;
 var Question_repository = require('./repository/create_question_repo.js').Question_repository;
-var Contants = require('./Constants.js').constants;
 var lodash  = require('lodash');
 var suggestedTag = [];
 var view ={
@@ -49,7 +48,7 @@ var setAlert = function(className, message){
 }
 
 $(document).ready(function() {
-    var repo = new  Question_repository(Contants.db_path);
+    var repo = new  Question_repository();
     var presenter =new Presenter(view,repo);
     $("#markAsCode").on('click',function(){presenter.markAsCode()});
     $("#create").on('click',function(){

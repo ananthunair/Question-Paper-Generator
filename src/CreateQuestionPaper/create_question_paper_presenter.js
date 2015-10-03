@@ -23,8 +23,8 @@ exports.Presenter.prototype = {
             var formattedQuestions = questions.map(formatQuestion);
             presenter.view.showQuestions(formattedQuestions);
             presenter.view.addQuestionSelectionListener();
-        }
-        this.repo.getAllQuestions(onComplete);
+        };
+        this.repo.fetchQuestions(onComplete);
     },
 
     onAddClick : function(){

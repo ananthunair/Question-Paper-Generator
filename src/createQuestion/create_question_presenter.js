@@ -1,11 +1,11 @@
 var wrapWithCode = function (selectedText) {
     return selectedText.trim() ? "<code>" + selectedText + "</code>" : selectedText;
-}
+};
 
 exports.Presenter = function (view, questions_repo) {
     this.view = view;
     this.repo = questions_repo;
-}
+};
 
 exports.Presenter.prototype = {
     onDocumentReady: function () {
@@ -20,22 +20,30 @@ exports.Presenter.prototype = {
         this.view.setQuestion(preFix + wrapWithCode(selectedText) + postFix)
     },
     onCreate: function () {
+        var view = this.view;
         var question = this.view.getQuestion();
         var tags = this.view.getTags();
         if (tags.length && question.trim()) {
-            this.repo.create(question, this.view.getAnswer(), tags);
-            this.view.clearScreen();
-            this.view.showSuccessMessage();
-            var view = this.view;
+            var questionDetails = {
+                question: question,
+                answer: this.view.getAnswer(),
+                tags: tags
+            };
+
+            var onComplete = function(err){
+                if(err) this.view.showErrorMessage();
+                view.clearScreen();
+                view.showSuccessMessage();
+            };
+            this.repo.create(questionDetails, onComplete);
+
             view.addSuggetions(tags);
 
-        } else {
-            this.view.showErrorMessage();
         }
     }
-}
+};
 var setAutosuggetions = function (repo, view) {
     repo.getUniqueTags(function (tags) {
         view.setupTagBox(tags);
     });
-}
+};

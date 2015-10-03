@@ -1,14 +1,20 @@
-exports.Presenter = function (view, questions_repo) {
+exports.Presenter = function (view, questionPaperRepo) {
     this.view = view;
-    this.repo = questions_repo;
-}
+    this.repo = questionPaperRepo;
+};
 
 exports.Presenter.prototype = {
-    onDocumentReady:function(){
-        var presenter =  this
+    onDocumentReady : function(){
+        var questionPaper = {
+            id:1,
+            questions: [{id:111,note:"ppppp"}],
+            header:{title:"arraytest",marks:100,duration:"1 minute"}
+        };
+        var view = this.view;
         var onComplete = function(err, questionPapers){
-            presenter.view.showQuestionPapers(questionPapers)
-        }
-        this.repo.getAllQuestionPapers(onComplete)
+            err && console.log("Error while showing all question papers: ",err);
+            view.showQuestionPapers(questionPapers);
+        };
+        this.repo.fetchQuestionPapers(onComplete);
     }
-}
+};
