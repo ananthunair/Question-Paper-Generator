@@ -35,14 +35,34 @@ describe('create_question_repo', function() {
             };
             repo.create(questionDetails,function(err,question){
                repo.fetchQuestions(function(err,questions){
-                   assert.equal(1,questions.length)
-                   assert.equal(question.question,questions[0].question)
-                   assert.equal(question.answer,questions[0].answer)
-                   assert.equal(question.id,questions[0].id)
-                   assert.equal(question.tags.length,questions[0].tags.length)
-                   done()
+                   assert.equal(1,questions.length);
+                   assert.equal(question.question,questions[0].question);
+                   assert.equal(question.answer,questions[0].answer);
+                   assert.equal(question.id,questions[0].id);
+                   assert.equal(question.tags.length,questions[0].tags.length);
+                   done();
                })
             })
 
-        })})
+        });
+
+        it("should fetch question that have specific tags",function(done){
+            var questionDetails = {
+                question: "var a =10; ",
+                answer: "true",
+                tags: ["array","object"]
+            };
+            repo.create(questionDetails,function(err,question){
+              repo.fetchQuestionsOfSpecificTags(['array'],function(err,questions){
+                  assert.equal(1,questions.length);
+                  assert.equal(question.question,questions[0].question);
+                  assert.equal(question.answer,questions[0].answer);
+                  assert.equal(question.id,questions[0].id);
+                  assert.equal(question.tags.length,questions[0].tags.length);
+                  done();
+              })
+            })
+        })
+    })
+
 });

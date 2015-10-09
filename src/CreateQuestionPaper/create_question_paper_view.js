@@ -121,7 +121,7 @@ $(document).ready(function () {
         presenter.onPreviewClick();
     });
 
-    setWrapperHeight()
+    //setWrapperHeight()
 
 });
 

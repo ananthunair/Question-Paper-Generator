@@ -9,12 +9,11 @@ var createDBConnection = function () {
 
 var createQuestionPaperCollection = function () {
     var questionSchema = new Schema({
-        id: Number,
+        id: String,
         note: String
     });
 
     var questionPaperSchema = new Schema({
-        id: Number,
         questions: [questionSchema],
         header: {title: String, marks: Number, duration: String}
 
@@ -26,7 +25,6 @@ var createQuestionPaperCollection = function () {
 
 var createQuestionCollection = function () {
     var questionSchema = new Schema({
-        id: Number,
         question: String,
         answer: String,
         tags: [String]

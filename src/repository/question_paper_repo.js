@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-
+var QuestionPaper ;
 exports.Question_papers_repository = function(){
     var db = mongoose.connection;
     this.db = db;
@@ -7,28 +7,26 @@ exports.Question_papers_repository = function(){
     db.once('open', function (callback) {
         console.log("Questions Repo opened");
     });
+    QuestionPaper = mongoose.model('QuestionPaper');
 };
 
 exports.Question_papers_repository.prototype = {
 
     fetchQuestionPapers: function (onComplete) {
         var QP = mongoose.model("QuestionPaper");
-        QP.find({},onComplete);
-    }
+        QP.find({},function(err,papers){
+            onComplete(err,papers.map(buildPaper));
+        });
+    },
 
-    //getAllQuestionPapers : function(oncomplete){
-    //    this.db.all("select * from questionPapers",oncomplete)
-    //},
-    //saveQuestionPaper : function(questionPaperName,onComplete,questionPaper) {
-    //    var query = "insert into questionPapers(questionPaperName) values('" + questionPaperName + "')";
-    //    var selectIdQuery = "select id from questionPapers where questionPaperName='" + questionPaperName + "'";
-    //    var db = this.db;
-    //    this.db.run(query);
-    //    this.db.get(selectIdQuery, function (err, id) {
-    //        var insertQuery = getInsertQuestionsQuery(questionPaper, id);
-    //        db.run(insertQuery, onComplete)
-    //    });
-    //},
+    saveQuestionPaper : function(questionPaper,onComplete) {
+        var paper = new QuestionPaper(questionPaper);
+        paper.save(function (err, paper) {
+            err && console.log("Error while creating question: ", err);
+            onComplete(err,buildPaper(paper));
+        });
+    },
+
     //getQuestionIds : function(onComplete, id) {
     //    var query = "select questionId from questionDictionary where questionPaperId=" + id;
     //    this.db.all(query, onComplete)
@@ -44,13 +42,14 @@ exports.Question_papers_repository.prototype = {
     //}
 };
 
-//function getInsertQuestionsQuery(questionPaper, id) {
-//    var insertQuery = "insert into questionDictionary(questionId,questionPaperId) values";
-//    var values = "";
-//    questionPaper.forEach(function (question) {
-//        values += '(' + question.id + ',' + id.id + '),';
-//    })
-//    var values = values.replace(/,$/, "");
-//    return insertQuery+values;
-//}
 
+
+var buildPaper = function(dbPaper){
+    return {id:dbPaper._id.id,questions:dbPaper.questions.map(buildQuestion),header:buildHeader(dbPaper.header)};
+};
+var buildHeader = function(dbHeader){
+    return { duration: dbHeader.duration, marks:dbHeader.marks, title: dbHeader.title };
+};
+var buildQuestion =function(dbQuestion){
+    return {id:dbQuestion.id,note:dbQuestion.note};
+};

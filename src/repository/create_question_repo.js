@@ -42,55 +42,27 @@ exports.Question_repository.prototype = {
         });
     },
 
+    fetchQuestionsOfSpecificTags : function(tags,onComplete){
+        var QuestionCollection = mongoose.model("Question");
+        QuestionCollection.find({'tags':{'$all':tags}},function(err,questions){
+            onComplete(err,questions.map(buildQuestion));
+        });
+    },
+
     getUniqueTags: function (onComplete) {
         var tags = mongoose.model("Tags");
         tags.find({}, function (err, tags) {
             onComplete(tags);
         })
-
     }
-    //
     //showSelectedQuestion : function(questionIds,onComplete,tags){
     //    var formattedIds = '(' + questionIds.join(", ") + ')';
     //    var selectQuestion = "select id,question from questions where id in " + formattedIds;
     //    this.db.all(selectQuestion, onComplete)
     //},
-    //
-    //loadQuestions : function(tags,onComplete,selectedQuestion){
-    //    var db = this.db;
-    //    var repo = this;
-    //    var selectedQuestionIds = lib.getQuestionIds(selectedQuestion);
-    //    var tags = tags.map(lib.getFormatedTag);
-    //
-    //    var query = getQuestionIdQuery(tags);
-    //    db.all(query,function(err,questionIds){
-    //        var ids = lodash.difference(questionIds.map(lib.getTagId),selectedQuestionIds);
-    //        repo.showSelectedQuestion(ids,onComplete);
-    //    });
-    //
-    //}
+
 };
 
-var getTagQuery = function (id, tags) {
-    var query = tags.reduce(function (query, tag) {
-            return query += "(" + id + ",'" + tag + "'),"
-        }, "insert into tags(questionId,tagName) values ").slice(0, -1) + ";";
-    return query
-}
-
-
-var addTags = function (repo, tags) {
-    repo.db.get("select max(id) as id from questions", function (err, id) {
-        repo.db.run(getTagQuery(id.id, tags));
-    })
-};
-
-var getQuestionIdQuery = function (tags) {
-    var formattedTagList = '(' + tags.join(',') + ')';
-    var query = "select questionId from tags where tagName in " + formattedTagList + " GROUP BY questionId HAVING COUNT(*) = " + tags.length;
-    var allQuestionIdQuery = "select distinct questionId from tags";
-    return tags.length == 0 ? allQuestionIdQuery : query;
-};
 
 
 var buildQuestion = function(dbquestion){
