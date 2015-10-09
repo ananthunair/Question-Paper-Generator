@@ -10,7 +10,7 @@
     "init": "sh scripts/initialize_app.sh",
     "start": "nodewebkit",
     "init_db": "sh scripts/create_db.sh",
-    "test": "sh scripts/create_test_db.sh && mocha tests/**"
+    "test": "mocha tests/**"
   },
   "dependencies": {
     "jade": "^1.11.0",
@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "mocha": "2.2.5",
-    "chai": "1.10.0",
+    "chai": "^3.3.0",
     "jsmockito": "^1.0.5"
   },
   "repository": {

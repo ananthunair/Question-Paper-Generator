@@ -15,15 +15,15 @@ describe("create_question_presenter", function () {
         moke_view = mokito.JsMockito.mock(view);
         moke_repo = mokito.JsMockito.mock(repo);
     })
-    context("on document ready",function(){
-        it("should show all question paper on dashboard",function(){
-            var questionPapers = [{id:1,questionPaperName:"dummy"}];
-            moke_repo.getAllQuestionPapers = function (oncomplete) {
-                oncomplete(null, questionPapers)
-            }
-            var presenter = new Presenter(moke_view,moke_repo);
-            presenter.onDocumentReady();
-            mokito.JsMockito.verify(moke_view).showQuestionPapers(questionPapers)
-        })
-    })
+    //context("on document ready",function(){
+    //    it("should show all question paper on dashboard",function(){
+    //        var questionPapers = [{id:1,questionPaperName:"dummy"}];
+    //        moke_repo.getAllQuestionPapers = function (oncomplete) {
+    //            oncomplete(null, questionPapers)
+    //        }
+    //        var presenter = new Presenter(moke_view,moke_repo);
+    //        presenter.onDocumentReady();
+    //        mokito.JsMockito.verify(moke_view).showQuestionPapers(questionPapers)
+    //    })
+    //})
 })

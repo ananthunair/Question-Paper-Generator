@@ -25,69 +25,70 @@ exports.Presenter.prototype = {
             presenter.view.addQuestionSelectionListener();
         };
         this.repo.fetchQuestions(onComplete);
-    },
-
-    onAddClick : function(){
-        var view = this.view;
-        function isSelected(question){
-            var selectedIds = view.getSelectedQuestions();
-            return selectedIds.indexOf(question.id)>=0;
-        }
-        var questionsToAddInPaper =this.all_questions.filter(isSelected);
-        this.questionPaper = this.questionPaper.concat(questionsToAddInPaper);
-        view.deleteSelectedRows();
-        view.addToQuestionPaper(this.questionPaper);
-        view.showTotalNumberOfQuestion(this.questionPaper.length)
-    },
-
-    onSaveClick : function() {
-        var view = this.view;
-        var onComplete = function (err) {
-            err ? view.showErrorMessage() : view.showSuccessMessage();
-        };
-        var questionPaperName = this.view.getQuestionPaperTitle();
-        this.paper_repo.saveQuestionPaper(questionPaperName, onComplete, this.questionPaper);
-    },
-
-    onPreviewClick:function(){
-        var title = this.view.getQuestionPaperTitle();
-        this.view.openPreview(this.questionPaper,title)
-    },
-
-    setAutosuggetions : function(){
-        var view = this.view;
-        this.repo.getUniqueTags(function (tags) {
-            view.setupTagBoxData(tags);
-        });
-    },
-
-
-    onAddOrRemoveTag :  function(tags){
-        var presenter =  this;
-        var onComplete = function(err,questions){
-            presenter.all_questions = questions;
-            var formattedQuestions = questions.map(function(question){
-                return [question.id, question.question]
-            });
-            presenter.view.showQuestions(formattedQuestions);
-            presenter.view.addQuestionSelectionListener();
-        };
-
-        this.repo.loadQuestions(tags,onComplete,this.questionPaper);
-    },
-
-    onRemoveQuestion : function(id){
-        this.questionPaper = this.questionPaper.filter(function(question){
-            return question.id != id;
-        });
-
-        this.view.addToQuestionPaper(this.questionPaper);
-        var filteredQuestion = lodash.find(this.all_questions,function (q) {
-            return q.id == parseInt(id);
-        });
-
-        var removedQuestion = formatQuestion(filteredQuestion);
-        this.view.addRemovedQuestionToAllQuestions(removedQuestion);
-        this.view.showTotalNumberOfQuestion(this.questionPaper.length);
     }
+    //onAddOrRemoveTag :  function(tags){
+        //    var presenter =  this;
+        //    var onComplete = function(err,questions){
+        //        presenter.all_questions = questions;
+        //        var formattedQuestions = questions.map(function(question){
+        //            return [question.id, question.question]
+        //        });
+        //        presenter.view.showQuestions(formattedQuestions);
+        //        presenter.view.addQuestionSelectionListener();
+        //    };
+        //
+        //    this.repo.loadQuestions(tags,onComplete,this.questionPaper);
+        //},
+
+    //onAddClick : function(){
+    //    var view = this.view;
+    //    function isSelected(question){
+    //        var selectedIds = view.getSelectedQuestions();
+    //        return selectedIds.indexOf(question.id)>=0;
+    //    }
+    //    var questionsToAddInPaper =this.all_questions.filter(isSelected);
+    //    this.questionPaper = this.questionPaper.concat(questionsToAddInPaper);
+    //    view.deleteSelectedRows();
+    //    view.addToQuestionPaper(this.questionPaper);
+    //    view.showTotalNumberOfQuestion(this.questionPaper.length)
+    //},
+    //
+    //onSaveClick : function() {
+    //    var view = this.view;
+    //    var onComplete = function (err) {
+    //        err ? view.showErrorMessage() : view.showSuccessMessage();
+    //    };
+    //    var questionPaperName = this.view.getQuestionPaperTitle();
+    //    this.paper_repo.saveQuestionPaper(questionPaperName, onComplete, this.questionPaper);
+    //},
+    //
+    //onPreviewClick:function(){
+    //    var title = this.view.getQuestionPaperTitle();
+    //    this.view.openPreview(this.questionPaper,title)
+    //},
+    //
+    //setAutosuggetions : function(){
+    //    var view = this.view;
+    //    this.repo.getUniqueTags(function (tags) {
+    //        view.setupTagBoxData(tags);
+    //    });
+    //},
+    //
+    //
+    //
+    //
+    //onRemoveQuestion : function(id){
+    //    this.questionPaper = this.questionPaper.filter(function(question){
+    //        return question.id != id;
+    //    });
+    //
+    //    this.view.addToQuestionPaper(this.questionPaper);
+    //    var filteredQuestion = lodash.find(this.all_questions,function (q) {
+    //        return q.id == parseInt(id);
+    //    });
+    //
+    //    var removedQuestion = formatQuestion(filteredQuestion);
+    //    this.view.addRemovedQuestionToAllQuestions(removedQuestion);
+    //    this.view.showTotalNumberOfQuestion(this.questionPaper.length);
+    //}
 };

@@ -60,118 +60,130 @@ describe("create_question_presenter", function () {
         it("should create question with answer and tags", function () {
             var question = "do you have a piece of code?";
             var answer = "yes"
-            var tags = ["array","object"]
-            mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question)
-            mokito.JsMockito.when(moke_view).getAnswer().thenReturn(answer)
-            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags)
+            var tags = ["array","object"];
+            mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question);
+            mokito.JsMockito.when(moke_view).getAnswer().thenReturn(answer);
+            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags);
 
-            var presenter = new Presenter(moke_view,moke_repo)
+            var presenter = new Presenter(moke_view,moke_repo);
             presenter.onCreate();
-            mokito.JsMockito.verify(moke_repo).create(question,answer,tags)
-        })
+           moke_repo.create =function(questionDetails,onComplete){
+              assert.equal(question,questionDetails.question);
+              assert.equal(answer,questionDetails.answer);
+              assert.equal(tags.length,questionDetails.tags.length);
+           };
+        });
         it("should create question with blank answer when answer is empty", function () {
             var question = "i have no answer";
-            var answer = ""
-            var tags=["array"]
-            mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question)
-            mokito.JsMockito.when(moke_view).getAnswer().thenReturn(answer)
-            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags)
+            var answer = "";
+            var tags=["array"];
+            mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question);
+            mokito.JsMockito.when(moke_view).getAnswer().thenReturn(answer);
+            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags);
 
-            var presenter = new Presenter(moke_view,moke_repo)
+            var presenter = new Presenter(moke_view,moke_repo);
             presenter.onCreate();
+            moke_repo.create =function(questionDetails,onComplete){
+                assert.equal(question,questionDetails.question);
+                assert.equal(answer,questionDetails.answer);
+                assert.equal(tags.length,questionDetails.tags.length);
+            };
 
-            mokito.JsMockito.verify(moke_repo).create(question,answer,tags)
-        })
+        });
         it("should not create question when question is empty", function () {
             var question = " ";
-            var answer = " "
-            var tags =["array"]
-            mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question)
-            mokito.JsMockito.when(moke_view).getAnswer().thenReturn(answer)
-            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags)
+            var answer = " ";
+            var tags =["array"];
+            mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question);
+            mokito.JsMockito.when(moke_view).getAnswer().thenReturn(answer);
+            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags);
 
-            var presenter = new Presenter(moke_view,moke_repo)
+            var presenter = new Presenter(moke_view,moke_repo);
             presenter.onCreate();
-
-            mokito.JsMockito.verifyNoMoreInteractions(moke_repo)
-        })
+            moke_repo.create =function(questionDetails,onComplete){
+                assert.equal(question,questionDetails.question);
+                assert.equal(answer,questionDetails.answer);
+                assert.equal(tags.length,questionDetails.tags.length);
+            };
+        });
         it("should not create question when tag is not specified", function () {
             var question = " how are you?";
-            var answer = "fine "
-            var tags =[]
-            mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question)
-            mokito.JsMockito.when(moke_view).getAnswer().thenReturn(answer)
-            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags)
+            var answer = "fine ";
+            var tags =[];
+            mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question);
+            mokito.JsMockito.when(moke_view).getAnswer().thenReturn(answer);
+            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags);
 
-            var presenter = new Presenter(moke_view,moke_repo)
+            var presenter = new Presenter(moke_view,moke_repo);
             presenter.onCreate();
-
-            mokito.JsMockito.verifyNoMoreInteractions(moke_repo)
-        })
+            moke_repo.create =function(questionDetails,onComplete){
+                assert.equal(question,questionDetails.question);
+                assert.equal(answer,questionDetails.answer);
+                assert.equal(tags.length,questionDetails.tags.length);
+            };
+        });
         it("Should give show success message if question is filled", function() {
             var question = "vijay pratap singh";
             var tags =["array"];
-            mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question)
-            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags)
-            var presenter = new Presenter(moke_view,moke_repo)
+            mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question);
+            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags);
+            moke_repo.create =function(questionDetails,onComplete){
+                onComplete(null);
+            };
+            var presenter = new Presenter(moke_view,moke_repo);
             presenter.onCreate();
-
             mokito.JsMockito.verify(moke_view).showSuccessMessage();
-        })
+        });
+
         it("Should give error message if question is empty", function() {
             var question = "";
             var tags =["array"];
-            mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question)
-            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags)
-            var presenter = new Presenter(moke_view,moke_repo)
-            presenter.onCreate();
 
+            mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question);
+            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags);
+            moke_repo.create = function(questionDetails,onComplete){
+                onComplete({err:1});
+            };
+            var presenter = new Presenter(moke_view,moke_repo);
+            presenter.onCreate();
             mokito.JsMockito.verify(moke_view).showErrorMessage();
-        })
+        });
         it("Should give error message if question has only empty spaces", function() {
             var question = "                 ";
             var tags =["array"];
-            mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question)
-            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags)
-            var presenter = new Presenter(moke_view,moke_repo)
-            presenter.onCreate();
 
-            mokito.JsMockito.verify(moke_view).showErrorMessage();
-        })
-        it("Should give error message if when answer is filled and question not filled", function() {
-            var question = "";
-            var tags =["array"];
-            var answer = "Ankur";
-            mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question)
-            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags)
-            mokito.JsMockito.when(moke_view).getAnswer().thenReturn(answer)
-            var presenter = new Presenter(moke_view,moke_repo)
+            mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question);
+            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags);
+            moke_repo.create = function(questionDetails,onComplete){
+                onComplete({err:1});
+            };
+            var presenter = new Presenter(moke_view,moke_repo);
             presenter.onCreate();
-
             mokito.JsMockito.verify(moke_view).showErrorMessage();
-        })
+
+        });
+
         it("should autosuggest tagsName for new crated tag while creating question", function(){
             var newSuggetions =["raw"]
-            mokito.JsMockito.when(moke_view).getTags().thenReturn(newSuggetions)
-            mokito.JsMockito.when(moke_view).getQuestion().thenReturn("how are you?")
+            mokito.JsMockito.when(moke_view).getTags().thenReturn(newSuggetions);
+            mokito.JsMockito.when(moke_view).getQuestion().thenReturn("how are you?");
             var preseneter = new  Presenter(moke_view, moke_repo);
-
             preseneter.onCreate();
             mokito.JsMockito.verify(moke_view).addSuggetions(newSuggetions)
         })
 
-    })
+    });
     context("#onDocumentReady",function(){
         it("should autosuggest tags Name for already added tags", function(){
             var suggestedTags = ["array", "object", "mocks"]
             moke_repo.getUniqueTags = function(oncomplete){
                 oncomplete(suggestedTags);
-            }
+            };
             var preseneter = new  Presenter(moke_view, moke_repo);
             preseneter.onDocumentReady();
             mokito.JsMockito.verify(moke_view).setupTagBox(suggestedTags)
 
-        })
-    })
+        });
+    });
 
 });

@@ -23,7 +23,9 @@ exports.Presenter.prototype = {
         var view = this.view;
         var question = this.view.getQuestion();
         var tags = this.view.getTags();
+
         if (tags.length && question.trim()) {
+
             var questionDetails = {
                 question: question,
                 answer: this.view.getAnswer(),
@@ -31,15 +33,14 @@ exports.Presenter.prototype = {
             };
 
             var onComplete = function(err){
-                if(err) this.view.showErrorMessage();
                 view.clearScreen();
-                view.showSuccessMessage();
+                if(!err) view.showSuccessMessage();
             };
             this.repo.create(questionDetails, onComplete);
-
             view.addSuggetions(tags);
-
         }
+        view.showErrorMessage();
+
     }
 };
 var setAutosuggetions = function (repo, view) {
