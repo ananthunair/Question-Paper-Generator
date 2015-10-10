@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var lib = require("./question_paper_lib").lib;
 var lodash = require('lodash');
 
 
