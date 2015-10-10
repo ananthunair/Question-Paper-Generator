@@ -115,3 +115,8 @@
     padding-top: 50%;
     height: 5%;
 }
+
+#create_question_container{
+    width: 100%;
+    display: inline-block;
+}

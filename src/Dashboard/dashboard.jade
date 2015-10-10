@@ -1,5 +1,6 @@
 script(src="dashboard/dashboard_view.js")
+link(rel="stylesheet" type="text/css" href="dashboard/dashboard.css")
 div(id="create_question_container")
-    button(id="create_question", type="button" ,class="btn btn-primary btn-lg") + Question
-    //button(id="all_question", type="button" ,class="btn btn-primary btn-lg") All Questions
+    button(id="create_question", type="button" ,class="btn btn-primary btn-lg",data-toggle="modal", data-target="#myModal") + Question
 div(id='questionPapers')
+div(class="modal fade",id="myModal",role="dialog")

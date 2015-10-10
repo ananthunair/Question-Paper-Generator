@@ -2,10 +2,9 @@ var Presenter = require('./dashboard/dashboard_presenter.js').Presenter;
 var Question_papers_repository = require('./repository/question_paper_repo.js').Question_papers_repository;
 var jade = require('jade');
 
-
 var view = {
     showQuestionPapers: function (questionPapers) {
-        var codeFormatedQuestions = jade.renderFile('./src/dashboard/questionPapersToShow.jade', {'questionPapers': questionPapers});
+        var codeFormatedQuestions = jade.renderFile('./src/Dashboard/questionPapersToShow.jade', {'questionPapers': questionPapers});
         $('#questionPapers').html(codeFormatedQuestions)
     }
 };
@@ -16,7 +15,7 @@ $(function(){
     presenter.onDocumentReady();
 
     $('#create_question').click(function(){
-        render('./src/createQuestion/create_question.jade')
+        var createQuestionPopUp =  jade.renderFile('./src/createQuestion/create_question.jade');
+        $('#myModal').html(createQuestionPopUp);
     });
-
 });

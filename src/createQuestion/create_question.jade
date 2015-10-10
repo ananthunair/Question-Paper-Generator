@@ -1,19 +1,22 @@
 
 link(rel="stylesheet" type="text/css" href="./createQuestion/create_question.css")
 link(rel="stylesheet" type="text/css" href="../library/taggle/assets/css/taggle.css")
-h1 Create Question
-div
-    div(id="message_alert")
-    div(id="questionContainer")
-     p(id="questionLabel") Quesion :
-     div(class="input textarea tagbox" id="tags")
-     button(id = "markAsCode", class="btn btn-default") Mark as Code
-    div(id="Qun")
-    textarea(name="question" id="question" cols="75" rows="10")
-    p Answer :
-    textarea(name="answer" id="answer" cols="75" rows="10")
-
-button(id="create", class="btn btn-default") Create
+div(class="modal-dialog")
+    div(class="modal-content")
+        div(class="modal-header")
+            button(type="button",class="close",data-dismiss="modal") &times
+            h4(class="modal-title") Create Question
+        div(class="modal-body")
+            div
+                div(id="message_alert")
+                div(id="questionContainer")
+                    button(id = "markAsCode", class="btn btn-default") Code
+                div(id="Qun")
+                textarea(name="question" id="question" cols="75" rows="10" placeholder="Question")
+                textarea(name="answer" id="answer" cols="75" rows="10" placeholder="Answer")
+                div(id="bottomHolder")
+                    div(class="input textarea tagbox" id="tags")
+                    button(id="create", class="btn btn-primary btn-lg") Create
 
 
 script(src="../library/taggle/assets/js/jquery-1.10.1.js")

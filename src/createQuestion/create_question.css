@@ -1,24 +1,26 @@
 #question{
     height: 30%;
-    width: 50%;
+    width: 94%;
     margin-left: 2%;
-    margin-bottom: 5px;
+    margin-bottom: 5%;
 }
 
 #answer {
     height: 10%;
-    width: 50%;
+    width: 94%;
     margin-left: 2%;
+    margin-bottom: 5%;
 }
 
 #create{
-    margin-top: 5px;
-    margin-left: 47%;
-    /*margin-bottom: 5%;*/
+    width: 20%;
+    display: inline-block;
+    float: right;
+    margin-top: 2%;
 }
 
 #markAsCode{
-    margin-bottom: 5px;
+    margin-bottom: 2%;
     float: right;
     display: inline;
 }
@@ -34,6 +36,26 @@
 }
 
 #questionContainer{
-    width: 50%;
+    width: 94%;
+    margin-left: 2%;
 }
 
+#tags{
+    width: 75%;
+    display: inline-block;
+    margin-left: 2%;
+    float: left;
+}
+
+#bottomHolder{
+    width: 94%;
+    height: 10%;
+}
+
+.modal-header{
+    background-color: #f0f8ff !important;
+}
+
+.modal-dialog{
+    margin-top: 10%;
+}

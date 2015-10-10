@@ -304,7 +304,7 @@
   float: left;
   margin-top: -5px;
   background: none;
-  width: 100%;
+  width: 100% !important;
   max-width: 100%;
 }
 
@@ -354,8 +354,8 @@
 /* line 380, ../../../sass/projects/taggle/taggle.scss */
 textarea.input,
 .textarea.input {
-  border: 0;
-  background: #FDFDFD;
+  border: solid 1px;
+  background: white;
   -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(255, 255, 255, 0.7);
   -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(255, 255, 255, 0.7);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(255, 255, 255, 0.7);
@@ -364,7 +364,7 @@ textarea.input,
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-  color: #555;
+  color: #777777;
   -webkit-transition: all 0.25s;
   -moz-transition: all 0.25s;
   -o-transition: all 0.25s;
