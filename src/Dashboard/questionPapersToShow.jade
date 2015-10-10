@@ -6,7 +6,7 @@ div(id='papers') Papers
     br
     if questionPapers.length == 0
         div(id='no_question_paper_container')
-            | No Question Paper Available
+            div(id='noQuestionPaperAvailable') No Question Paper Available
     else
         div(id='question_paper_container')
             each qp in questionPapers
