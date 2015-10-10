@@ -1,5 +1,6 @@
 var Presenter = require('./dashboard/question_paper_to_show_presenter.js').Presenter;
 var Question_papers_repository = require('./repository/question_paper_repo.js').Question_papers_repository;
+var Question_repository = require('./repository/create_question_repo.js').Question_repository;
 var preview = require('./preview/showPreview.js');
 
 
@@ -11,14 +12,15 @@ var view = {
 
 
 $(document).ready(function (){
-    var repo = new Question_papers_repository();
-    var presenter = new Presenter(view, repo);
+    var paperRepo = new Question_papers_repository();
+    var questionRepo = new Question_repository();
+    var presenter = new Presenter(view, paperRepo,questionRepo);
 
     $('#create_question_paper').click(function(){
         render('./src/createQuestionPaper/create_question_paper.jade')
     });
-    //$('.questionP').click(function(){
-    //    var status = $(this).attr('id');
-    //    presenter.getAllQuestionsFromPaper(status);
-    //});
+    $('.questionP').click(function(){
+        var status = $(this).attr('id');
+        presenter.getAllQuestionsFromPaper(status);
+    });
 });

@@ -1,28 +1,26 @@
-exports.Presenter = function (view, questions_repo) {
+exports.Presenter = function (view, paper_repo,questions_repo) {
     this.view = view;
-    this.repo = questions_repo;
+    this.question_repo = questions_repo;
+    this.paper_repo = paper_repo;
 }
 
 exports.Presenter.prototype = {
 
     getAllQuestionsFromPaper:function(id){
         var presenter = this;
-        var repo = this.repo;
+        var question_repo = this.question_repo;
+        var paper_repo = this.paper_repo;
         var view = this.view;
-        var onComplete = function(err, questionIds) {
-            var questions = questionIds.map(function (questionId) {
-                return questionId.questionId;
-            });
-
-            var onCompleteForQuestion = function (err1, setOfQuestions){
-                var onCompleteForTitle = function(err2, title){
-                    view.onQuestionPaperClick(setOfQuestions, title.questionPaperName);
-                };
-                repo.getTitle(onCompleteForTitle,id);
-            };
-            repo.getAllQuestionsOfPaper(onCompleteForQuestion,questions);
-        };
-
-        repo.getQuestionIds(onComplete, id);
+        var onComplete =function(err,paper){
+            question_repo.getQuestionsByIds(getQuestionIds(paper),function(err,questions){
+              view.onQuestionPaperClick(questions,paper.header.title)
+            })
+        }
+       paper_repo.getPaper(id,onComplete)
     }
 };
+var getQuestionIds = function(paper){
+   return paper.questions.map(function(question){
+        return question.id
+    })
+}

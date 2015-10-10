@@ -27,25 +27,23 @@ exports.Question_papers_repository.prototype = {
         });
     },
 
-    //getQuestionIds : function(onComplete, id) {
-    //    var query = "select questionId from questionDictionary where questionPaperId=" + id;
-    //    this.db.all(query, onComplete)
-    //
-    //},
+    getPaper : function(paperid,onComplete) {
+        var QP = mongoose.model("QuestionPaper");
+        QP.findOne({'_id' : paperid },function(err,paper){
+            onComplete(err,buildPaper(paper));
+        });
+    }
     //getAllQuestionsOfPaper : function(onComplete, questions){
     //    var qeury = "select question from questions where id in(" + questions.join(",")  +");"
     //    this.db.all(qeury, onComplete);
     //},
-    //getTitle : function(onComplete, questionPaperId){
-    //    var query = "select questionPaperName from questionPapers where id=" + questionPaperId;
-    //    this.db.get(query, onComplete);
-    //}
+
 };
 
 
 
 var buildPaper = function(dbPaper){
-    return {id:dbPaper._id.id,questions:dbPaper.questions.map(buildQuestion),header:buildHeader(dbPaper.header)};
+    return {id:dbPaper._id,questions:dbPaper.questions.map(buildQuestion),header:buildHeader(dbPaper.header)};
 };
 var buildHeader = function(dbHeader){
     return { duration: dbHeader.duration, marks:dbHeader.marks, title: dbHeader.title };
@@ -53,3 +51,4 @@ var buildHeader = function(dbHeader){
 var buildQuestion =function(dbQuestion){
     return {id:dbQuestion.id,note:dbQuestion.note};
 };
+

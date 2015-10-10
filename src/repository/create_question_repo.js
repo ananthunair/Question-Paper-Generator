@@ -53,17 +53,18 @@ exports.Question_repository.prototype = {
         tags.find({}, function (err, tags) {
             onComplete(tags);
         })
+    },
+    getQuestionsByIds : function(questionIds,onComplete){
+        var QuestionCollection = mongoose.model("Question");
+        QuestionCollection.find({"_id":{$in:questionIds}},function(err,questions){
+            onComplete(err,questions);
+        });
     }
-    //showSelectedQuestion : function(questionIds,onComplete,tags){
-    //    var formattedIds = '(' + questionIds.join(", ") + ')';
-    //    var selectQuestion = "select id,question from questions where id in " + formattedIds;
-    //    this.db.all(selectQuestion, onComplete)
-    //},
 
 };
 
 
 
 var buildQuestion = function(dbquestion){
-   return {"id":dbquestion._id.id,"question":dbquestion.question,"answer":dbquestion.answer,"tags":dbquestion.tags}
+   return {"id":dbquestion._id,"question":dbquestion.question,"answer":dbquestion.answer,"tags":dbquestion.tags}
 };

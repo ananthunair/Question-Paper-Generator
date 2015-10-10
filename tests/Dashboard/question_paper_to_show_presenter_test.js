@@ -2,42 +2,43 @@ var Presenter = require('../../src/Dashboard/question_paper_to_show_presenter.js
 var assert = require('chai').assert;
 var mokito = require('jsmockito');
 var moke_view;
-var moke_repo;
-
+var moke_paper_repo;
+var moke_question_repo;
 describe("create_question_presenter", function () {
     beforeEach(function () {
         var view = {};
         view.onQuestionPaperClick = function () {
         };
-        var repo = {};
-        repo.getQuestionIds = function () {
+        var paper_repo = {};
+        paper_repo.getQuestionIds = function () {
         };
-        repo.getAllQuestionsOfPaper = function () {
+        paper_repo.getAllQuestionsOfPaper = function () {
         };
-        repo.getTitle = function () {
+        paper_repo.getTitle = function () {
         };
+        paper_repo.getPaper =new Function()
+        var question_repo ={}
+
         moke_view = mokito.JsMockito.mock(view);
-        moke_repo = mokito.JsMockito.mock(repo);
+        moke_paper_repo = mokito.JsMockito.mock(paper_repo);
+        moke_question_repo = mokito.JsMockito.mock(question_repo)
     })
     context(".questionP",function(){
         it("should show preview after clicking on question paper name", function () {
-            var questionIds = [{questionId:1},{questionId:2}];
-            var setOfQuestion = [{question:"what"},{question:"is"}];
-            var id = "4";
-            var questions = [1,2]
-            var title = {questionPaperName:"kucchu dal do"};
-            moke_repo.getQuestionIds = function(onComplete){
-                onComplete(null, questionIds)
+            var paperId ="PaperId"
+            var paper ={id:paperId,questions:[{id:"someid",note:""}],header: {title: "array test#1", marks: 100, duration: "1 hour"}}
+            var setOfQuestion =[{id:"someid",question:"question",answer:"answer",tags:["array","object"]}]
+            moke_paper_repo.getPaper =function(id,onComplete){
+                assert.equal(id,paperId);
+                onComplete(null,paper);
             }
-            moke_repo.getAllQuestionsOfPaper = function(onComplete){
-                onComplete(null, setOfQuestion)
+            moke_question_repo.getQuestionsByIds =function(ids,onComplete){
+                assert.equal(ids[0],"someid")
+                onComplete(null,setOfQuestion)
             }
-            moke_repo.getTitle = function(onComplete){
-                onComplete(null, title)
-            }
-            var presenter = new Presenter(moke_view, moke_repo);
-            presenter.getAllQuestionsFromPaper(id);
-            mokito.JsMockito.verify(moke_view).onQuestionPaperClick(setOfQuestion,title.questionPaperName);
+            var presenter = new Presenter(moke_view, moke_paper_repo,moke_question_repo);
+            presenter.getAllQuestionsFromPaper(paperId);
+            mokito.JsMockito.verify(moke_view).onQuestionPaperClick(setOfQuestion,paper.header.title);
         })
 
     })
