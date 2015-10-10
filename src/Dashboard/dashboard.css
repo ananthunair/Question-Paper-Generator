@@ -72,6 +72,16 @@
     font-size: x-large;
 }
 
+#no_preview_available{
+    padding: 5%;
+    text-align: center;
+    font-weight: bold;
+    color: #a0a0a0;
+    font-size: x-large;
+    border: dashed;
+    margin: 20%;
+}
+
 .jumbotron{
     margin-top: 1%;
     margin-bottom: 1%;
@@ -119,4 +129,17 @@
 #create_question_container{
     width: 100%;
     display: inline-block;
+}
+#no_question_paper_container{
+    width: 100%;
+    height: 82%;
+    top: 30%;
+    font-weight: bold;
+    color: #a0a0a0;
+    text-align: center;
+    font-size: x-large;
+}
+
+.questionPaperTitle{
+    cursor: hand;
 }

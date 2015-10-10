@@ -2,13 +2,17 @@
     cursor: hand;
 }
 
+#title-header{
+    background-color: #0077C1;
+}
+
 .navbar-default {
     background-color: #337AB7;
 }
 
 a#home.navbar-brand{
     color: #fff;
-    background-color: transparent;
+    background-color: #0077C1;
 }
 
 html, body { height: 100% }
