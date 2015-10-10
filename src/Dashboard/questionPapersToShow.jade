@@ -6,7 +6,7 @@ div(id='papers') Papers
     br
     if questionPapers.length == 0
         div(id='no_question_paper_container')
-            div(id='noQuestionPaperAvailable') No Question Paper Available
+            div(id='noQuestionPaperAvailable') No Papers Available
     else
         div(id='question_paper_container')
             each qp in questionPapers
@@ -15,6 +15,6 @@ div(id='papers') Papers
 div(id='showQuestionPaper')
     div(id='question_paper')
     div(id='buttons' align="center")
-        button(id="edit_button", type="button" ,class="btn btn-primary btn-lg") Edit
-        button(id="clone_button", type="button" ,class="btn btn-primary btn-lg") Clone
+        //button(id="edit_button", type="button" ,class="btn btn-primary btn-lg") Edit
+        //button(id="clone_button", type="button" ,class="btn btn-primary btn-lg") Clone
         button(id="preview_button", type="button" ,class="btn btn-primary btn-lg") Preview
