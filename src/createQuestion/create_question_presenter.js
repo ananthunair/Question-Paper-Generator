@@ -44,7 +44,9 @@ exports.Presenter.prototype = {
     }
 };
 var setAutosuggetions = function (repo, view) {
-    repo.getUniqueTags(function (tags) {
-        view.setupTagBox(tags);
+    repo.getUniqueTags(function (err,tags) {
+        if(!err){
+            view.setupTagBox(tags);
+        }
     });
 };

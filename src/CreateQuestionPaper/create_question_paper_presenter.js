@@ -14,10 +14,8 @@ var formatQuestion = function(question){
 
 exports.Presenter.prototype = {
 
-
     onDocumentReady:function(){
         var presenter =  this;
-
         var onComplete = function(err,questions){
             presenter.all_questions = questions;
             var formattedQuestions = questions.map(formatQuestion);
@@ -26,6 +24,7 @@ exports.Presenter.prototype = {
         };
         this.repo.fetchQuestions(onComplete);
     },
+
     onAddOrRemoveTag :  function(tags){
             var presenter =  this;
             var onComplete = function(err,questions){
@@ -36,7 +35,6 @@ exports.Presenter.prototype = {
                 presenter.view.showQuestions(formattedQuestions);
                 presenter.view.addQuestionSelectionListener();
             };
-
             this.repo.fetchQuestionsOfSpecificTags(tags,onComplete);
         },
 
@@ -72,13 +70,11 @@ exports.Presenter.prototype = {
 
     setAutosuggetions : function(){
         var view = this.view;
-        this.repo.getUniqueTags(function (tags) {
-            view.setupTagBoxData(tags);
+        this.repo.getUniqueTags(function (err,tags) {
+            if(!err)
+                view.setupTagBoxData(tags);
         });
     },
-
-
-
 
     onRemoveQuestion : function(id){
         this.questionPaper = this.questionPaper.filter(function(question){

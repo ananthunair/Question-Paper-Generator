@@ -177,12 +177,11 @@ describe("create_question_presenter", function () {
         it("should autosuggest tags Name for already added tags", function(){
             var suggestedTags = ["array", "object", "mocks"]
             moke_repo.getUniqueTags = function(oncomplete){
-                oncomplete(suggestedTags);
+                oncomplete(null,suggestedTags)
             };
             var preseneter = new  Presenter(moke_view, moke_repo);
             preseneter.onDocumentReady();
             mokito.JsMockito.verify(moke_view).setupTagBox(suggestedTags)
-
         });
     });
 

@@ -154,7 +154,7 @@ describe("create_question_paper_presenter", function () {
             var tags = ["java"];
 
             moke_repo.getUniqueTags = function (onComplete) {
-                onComplete(tags);
+                onComplete(null,tags);
             };
             var presenter = new Presenter(moke_view, moke_repo);
             presenter.setAutosuggetions();

@@ -25,6 +25,7 @@ var view = {
     },
     setupTagBoxData: function (tags) {
         this.suggestedTag = tags;
+
         this.tagBox = setupTagBox(this.suggestedTag);
     },
 

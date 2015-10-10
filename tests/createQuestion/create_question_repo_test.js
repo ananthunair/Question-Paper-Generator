@@ -7,8 +7,13 @@ describe('create_question_repo', function() {
     beforeEach(function () {
         repo = new questions_repo();
         Question = repo.db.model("Question");
+        Tags = repo.db.model("Tags");
+
         Question.remove({}, function () {
-        })
+        });
+        Tags.remove({}, function () {
+        });
+
     });
     describe("create", function () {
         it("should persist the record and return the same ", function (done) {
@@ -83,4 +88,21 @@ describe('create_question_repo', function() {
             })
         })
     });
+    describe('getUniqueTags',function(){
+        it('should fetch unique tags',function(done) {
+            var questionDetails = {
+                question: "var a =10; ",
+                answer: "true",
+                tags: ["array", "object"]
+            };
+            repo.create(questionDetails, function (err, savedQuestion) {
+                repo.getUniqueTags(function(err,tags){
+                    assert.equal(2,tags.length);
+                    assert.equal('array',tags[0]);
+                    assert.equal('object',tags[1]);
+                    done();
+                });
+            });
+        });
+    })
 });

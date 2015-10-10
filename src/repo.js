@@ -33,7 +33,7 @@ var createQuestionCollection = function () {
 };
 
 var createTagCollection = function () {
-    var tagSchema = new Schema([String]);
+    var tagSchema = new Schema({name:String});
     mongoose.model('Tags', tagSchema);
 };
 

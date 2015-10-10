@@ -19,19 +19,12 @@ exports.Question_repository.prototype = {
         var question = new Question(questionDetails);
         question.save(function (err, record) {
             var question = record._doc;
-            var createTags = function () {
-                var Tags = mongoose.model("Tags");
-                var tags = new Tags(question.tags);
-                tags.save(function (err, tags) {
-                    err && console.log("Error while creating tags: ", err);
-                });
-            };
-
             err && console.log("Error while creating question: ", err);
-            err || createTags();
             var savedQuestion = buildQuestion(question);
+            !err && savedQuestion.tags.map(saveTag);
             onComplete(err,savedQuestion);
         });
+
     },
 
     fetchQuestions: function (onComplete) {
@@ -51,7 +44,7 @@ exports.Question_repository.prototype = {
     getUniqueTags: function (onComplete) {
         var tags = mongoose.model("Tags");
         tags.find({}, function (err, tags) {
-            onComplete(tags);
+            onComplete(err,tags.map(extractTag));
         })
     },
     getQuestionsByIds : function(questionIds,onComplete){
@@ -62,8 +55,17 @@ exports.Question_repository.prototype = {
     }
 
 };
+var saveTag = function(tag){
+    var Tags = mongoose.model("Tags");
+    var tags = new Tags({name : tag });
+    tags.save(function (err, tags) {
+        err && console.log("Error while creating tags: ", err);
+    });
+};
 
-
+var extractTag = function(tag){
+    return tag.name;
+}
 
 var buildQuestion = function(dbquestion){
    return {"id":dbquestion._id,"question":dbquestion.question,"answer":dbquestion.answer,"tags":dbquestion.tags}
