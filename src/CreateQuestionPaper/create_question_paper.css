@@ -95,3 +95,9 @@ li {
     margin-right: -2.5%;
     cursor: hand;
 }
+
+code{
+     color: black;
+     background-color: transparent;
+    font-family: Courier New;
+}

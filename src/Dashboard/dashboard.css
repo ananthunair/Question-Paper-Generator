@@ -3,7 +3,7 @@
     width: 28%;
     border-radius: 5px;
     border: 1px solid #888888;
-    padding: 10px;
+    padding: 0;
     float: left;
     margin-left: 1%;
     display: inline;
@@ -58,13 +58,13 @@
 
 #question_paper_container{
     width: 100%;
-    height: 82%;
+    height: 80%;
     overflow-y: scroll;
 }
 
 #no_question_paper_container{
     width: 100%;
-    height: 82%;
+    height: 80%;
     top: 30%;
     font-weight: bold;
     color: #a0a0a0;
@@ -85,14 +85,17 @@
 .jumbotron{
     margin-top: 1%;
     margin-bottom: 1%;
-    background-color: #F6F6F6;
+    background-color: #f8f8f8;
     vertical-align: middle;
     padding: 4%;
     font-family: "Helvetica";
-    font-weight: bold;
+    font-weight: 600;
     color: #86868C;
     cursor: hand;
-    border: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    border-top: 1px solid lightgray;
+    height: 10%;
+    font-size: medium;
 }
 
 .jumbotron.selected{
@@ -137,13 +140,10 @@
     width: 100%;
     display: inline-block;
 }
-#no_question_paper_container{
-    width: 100%;
-    height: 82%;
-    top: 30%;
-    font-weight: bold;
-    color: #a0a0a0;
-    text-align: center;
-    font-size: x-large;
-}
 
+#paper_heading{
+    padding-left: 4%;
+    padding-top: 4%;
+    height: 1%;
+    font-weight: 400;
+}
