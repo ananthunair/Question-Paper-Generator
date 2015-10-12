@@ -77,7 +77,7 @@
     text-align: center;
     font-weight: bold;
     color: #a0a0a0;
-    font-size: x-large;
+    font-size: large;
     border: dashed;
     margin: 20%;
 }
@@ -92,13 +92,12 @@
     font-weight: bold;
     color: #86868C;
     cursor: hand;
+    border: 1px solid lightgray;
 }
 
-.jumbotron:hover{
-    background-color: #F9FCFF;
-}
 .jumbotron.selected{
-    background-color: #F9FCFF;
+    background-color: lightgray;
+    /*color: #ffffff;*/
 }
 
 #create_question_paper{

@@ -16,9 +16,11 @@ var sortQuestionPaperByTitle = function(questionPapers){
 
 var view = {
     showQuestionPapers: function (questionPapers) {
-        var sortedQuestionPapers = sortQuestionPaperByTitle(questionPapers)
+        var sortedQuestionPapers = sortQuestionPaperByTitle(questionPapers);
         var codeFormatedQuestions = jade.renderFile('./src/Dashboard/questionPapersToShow.jade', {'questionPapers': sortedQuestionPapers});
         $('#questionPapers').html(codeFormatedQuestions)
+        if(sortedQuestionPapers.length)
+            $("#"+sortedQuestionPapers[0].id).click()
     }
 };
 
