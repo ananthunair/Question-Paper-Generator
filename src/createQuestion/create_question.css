@@ -13,10 +13,14 @@
 }
 
 #create{
-    width: 20%;
+
+    background-color: #008dca;
+    vertical-align: middle;
+    font-size: 1vw;
+    width: 13%;
     display: inline-block;
     float: right;
-    margin-top: 2%;
+    height: 65%;
 }
 
 #markAsCode{
@@ -41,14 +45,15 @@
 }
 
 #tags{
-    width: 75%;
+    width: 82%;
     display: inline-block;
     margin-left: 2%;
     float: left;
+    height: 10%;
 }
 
 #bottomHolder{
-    width: 94%;
+    width: 97%;
     height: 10%;
 }
 
@@ -60,6 +65,6 @@
     margin-top: 7.5%;
 }
 
-#create{
-    background-color: #008dca;
+.modal-lg{
+    width: 40%;
 }
