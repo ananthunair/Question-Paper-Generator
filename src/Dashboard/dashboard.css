@@ -89,7 +89,7 @@
     vertical-align: middle;
     padding: 2.5%;
     font-family: "Helvetica";
-    font-weight: 600;
+    font-weight: initial;
     color: #86868C;
     cursor: hand;
     border-bottom: 1px solid lightgray;
