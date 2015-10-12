@@ -55,7 +55,7 @@
 /* line 108, ../../../sass/projects/taggle/taggle.scss */
 .ui-menu .ui-menu-item a:hover {
   color: #fff;
-  background: #CCCCCC;
+  background: #008dca;
 }
 
 /* line 119, ../../../sass/projects/taggle/taggle.scss */
@@ -65,7 +65,7 @@
 .ui-state-focus,
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
-  background: #990033;
+  background: #008dca;
   color: #fff !important;
 }
 
@@ -345,7 +345,7 @@
 
 /* line 371, ../../../sass/projects/taggle/taggle.scss */
 .ui-autocomplete {
-  max-height: 200px;
+  max-height: 120%;
   overflow: scroll;
   width: 99% !important;
 }
