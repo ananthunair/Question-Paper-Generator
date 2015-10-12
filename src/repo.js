@@ -1,9 +1,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-
-var createDBConnection = function () {
-    mongoose.connect('mongodb://localhost:27017/questionBank');
+var createDBConnection = function (dbname) {
+   mongoose.connect('mongodb://localhost:27017/'+dbname);
 };
 
 
@@ -37,10 +36,15 @@ var createTagCollection = function () {
     mongoose.model('Tags', tagSchema);
 };
 
-createDBConnection();
-createQuestionPaperCollection();
-createQuestionCollection();
-createTagCollection();
 
+exports.connectDb =function(dbname){
+
+ if(mongoose.connection._readyState==0){
+    createDBConnection(dbname);
+    createQuestionPaperCollection();
+    createQuestionCollection();
+    createTagCollection();}
+
+}
 //autoIncrement.initialize(mongoose.connection)
 

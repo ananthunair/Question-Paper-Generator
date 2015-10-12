@@ -1,5 +1,5 @@
 var question_paper_repo = require('../../src/repository/question_paper_repo.js').Question_papers_repository;
-require('../../src/repo.js');
+require('../../src/repo.js').connectDb("questionBank");
 var assert = require('chai').assert;
 var repo;
 
@@ -9,6 +9,7 @@ describe('create_paper_repo', function () {
         Paper = repo.db.model('QuestionPaper');
         Paper.remove({}, function () {
         })
+
     });
     describe("save", function () {
         it("should persist the paper and return the same ", function (done) {
