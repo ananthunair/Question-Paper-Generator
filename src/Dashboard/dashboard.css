@@ -87,20 +87,19 @@
     margin-bottom: 1%;
     background-color: #f8f8f8;
     vertical-align: middle;
-    padding: 4%;
+    padding: 2.5%;
     font-family: "Helvetica";
     font-weight: 600;
     color: #86868C;
     cursor: hand;
     border-bottom: 1px solid lightgray;
     border-top: 1px solid lightgray;
-    height: 10%;
+    height: 8%;
     font-size: medium;
 }
 
 .jumbotron.selected{
     background-color: lightgray;
-    /*color: #ffffff;*/
 }
 
 #create_question_paper{
