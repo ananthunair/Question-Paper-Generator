@@ -69,6 +69,23 @@ describe('create_question_repo', function() {
                 })
             })
         });
+        it("should fetch all questions when tags are not given", function (done) {
+            var questionDetails = {
+                question: "var a =10; ",
+                answer: "true",
+                tags: ["array","object"]
+            };
+            repo.create(questionDetails, function (err, question) {
+                repo.fetchQuestionsOfSpecificTags([], function (err, questions) {
+                    assert.equal(1, questions.length);
+                    assert.equal(question.question, questions[0].question);
+                    assert.equal(question.answer, questions[0].answer);
+                    assert.deepEqual(question.id, questions[0].id);
+                    assert.equal(question.tags.length, questions[0].tags.length);
+                    done();
+                })
+            })
+        });
     });
     describe("getAllQuestionsOfPaper", function () {
         it('should fetch question that have given id', function (done) {

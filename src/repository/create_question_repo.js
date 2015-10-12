@@ -35,6 +35,10 @@ exports.Question_repository.prototype = {
     },
 
     fetchQuestionsOfSpecificTags : function(tags,onComplete){
+        if(lodash.isEmpty(tags)){
+            this.fetchQuestions(onComplete);
+            return;
+        };
         var QuestionCollection = mongoose.model("Question");
         QuestionCollection.find({'tags':{'$all':tags}},function(err,questions){
             onComplete(err,questions.map(buildQuestion));

@@ -13,6 +13,7 @@ var formatQuestion = function(question){
 };
 
 exports.Presenter.prototype = {
+    questionPaper : [],
 
     onDocumentReady:function(){
         var presenter =  this;
@@ -28,8 +29,10 @@ exports.Presenter.prototype = {
     onAddOrRemoveTag :  function(tags){
             var presenter =  this;
             var onComplete = function(err,questions){
-                presenter.all_questions = questions;
-                var formattedQuestions = questions.map(function(question){
+
+                presenter.all_questions = difference(presenter.questionPaper,questions);
+
+                var formattedQuestions = presenter.all_questions.map(function(question){
                     return [question.id, question.question]
                 });
                 presenter.view.showQuestions(formattedQuestions);
@@ -77,6 +80,7 @@ exports.Presenter.prototype = {
     },
 
     onRemoveQuestion : function(id){
+        console.log(id);
         this.questionPaper = this.questionPaper.filter(function(question){
             return question.id != id;
         });
@@ -97,3 +101,14 @@ var getQuestionIds = function(questions){
        note : ""}
     });
 };
+var difference = function(questionInPaper,allQuestion){
+
+    var questionInPaperId = questionInPaper.map(extractId);
+   return allQuestion.filter(function(question){
+       return questionInPaperId.indexOf(question.id.toString())<0;
+   })
+};
+
+var extractId =function(question){
+    return question.id.toString();
+}
