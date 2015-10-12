@@ -34,12 +34,13 @@ exports.Presenter.prototype = {
 
             var onComplete = function(err){
                 view.clearScreen();
-                if(!err) view.showSuccessMessage();
             };
             this.repo.create(questionDetails, onComplete);
             view.addSuggetions(tags);
+        }else{
+            !question.trim() && view.showError("question")
+            !tags.length && view.showError("tags")
         }
-        view.showErrorMessage();
 
     }
 };

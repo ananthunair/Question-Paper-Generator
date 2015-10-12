@@ -11,8 +11,7 @@ describe("create_question_presenter", function () {
         view.setQuestion =function(){};
         view.getQuestion = function(){};
         view.getAnswer = function(){};
-        view.showErrorMessage =function(){}
-        view.showSuccessMessage =function(){}
+        view.showError=function(){}
         view.clearScreen = function(){}
         view.getTags = function(){}
         view.setupTagBox =function(){}
@@ -122,19 +121,6 @@ describe("create_question_presenter", function () {
                 assert.equal(tags.length,questionDetails.tags.length);
             };
         });
-        it("Should give show success message if question is filled", function() {
-            var question = "vijay pratap singh";
-            var tags =["array"];
-            mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question);
-            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags);
-            moke_repo.create =function(questionDetails,onComplete){
-                onComplete(null);
-            };
-            var presenter = new Presenter(moke_view,moke_repo);
-            presenter.onCreate();
-            mokito.JsMockito.verify(moke_view).showSuccessMessage();
-        });
-
         it("Should give error message if question is empty", function() {
             var question = "";
             var tags =["array"];
@@ -146,7 +132,7 @@ describe("create_question_presenter", function () {
             };
             var presenter = new Presenter(moke_view,moke_repo);
             presenter.onCreate();
-            mokito.JsMockito.verify(moke_view).showErrorMessage();
+            mokito.JsMockito.verify(moke_view).showError();
         });
         it("Should give error message if question has only empty spaces", function() {
             var question = "                 ";
@@ -159,7 +145,7 @@ describe("create_question_presenter", function () {
             };
             var presenter = new Presenter(moke_view,moke_repo);
             presenter.onCreate();
-            mokito.JsMockito.verify(moke_view).showErrorMessage();
+            mokito.JsMockito.verify(moke_view).showError();
 
         });
 

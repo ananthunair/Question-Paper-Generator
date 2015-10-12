@@ -24,6 +24,9 @@ var view ={
     getTags:function(){
       return this.tagBox.getTagValues().slice(0);
     },
+    showError:function(id){
+        $('#'+id).css("border-color", "red");
+    },
     showErrorMessage:function(){
         setAlert("alert alert-danger", "Question and Tag field can not be empty");
     },
@@ -53,6 +56,9 @@ $(document).ready(function() {
     $("#markAsCode").on('click',function(){presenter.markAsCode()});
     $("#create").on('click',function(){
         presenter.onCreate();
+    });
+    $(".validate").keyup(function (e) {
+        $(".validate").css("border-color", "");
     });
     presenter.onDocumentReady()
 });
