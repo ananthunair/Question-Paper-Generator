@@ -3,13 +3,13 @@ var Question_papers_repository = require('./repository/question_paper_repo.js').
 var Question_repository = require('./repository/create_question_repo.js').Question_repository;
 var preview = require('./preview/showPreview.js');
 var jade = require('jade');
-
+var selectedid ;
 
 var view = {
-    onQuestionPaperClick:function(setOfQuestions,title){
-        //preview.show({title:title,'questions':setOfQuestions},screen)
-        console.log('=======view=======',setOfQuestions,'==========================',title);
-        var codeFormatedQuestions = jade.renderFile("./src/Preview/preview.jade",{title:title,'questions':setOfQuestions});
+    onQuestionPaperClick:function(setOfQuestions,title,id){
+        $(".question_paper_title").toggleClass('selected',false)
+        $("#"+id).toggleClass('selected')
+        var codeFormatedQuestions = jade.renderFile("./src/Dashboard/question_paper_preview.jade",{title:title,'questions':setOfQuestions});
         $('#question_paper_preview').html(codeFormatedQuestions)
     }
 };
@@ -24,7 +24,8 @@ $(document).ready(function (){
         render('./src/createQuestionPaper/create_question_paper.jade')
     });
     $('.question_paper_title').click(function(){
-        var status = $(this).attr('id');
-        presenter.getAllQuestionsFromPaper(status);
+        var id = $(this).attr('id');
+        presenter.getAllQuestionsFromPaper(id);
     });
+
 });

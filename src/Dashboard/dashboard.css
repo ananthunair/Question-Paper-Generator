@@ -91,6 +91,14 @@
     font-family: "Helvetica";
     font-weight: bold;
     color: #86868C;
+    cursor: hand;
+}
+
+.jumbotron:hover{
+    background-color: #F9FCFF;
+}
+.jumbotron.selected{
+    background-color: #F9FCFF;
 }
 
 #create_question_paper{
@@ -140,6 +148,3 @@
     font-size: x-large;
 }
 
-.question_paper_title{
-    cursor: hand;
-}

@@ -13,7 +13,7 @@ exports.Presenter.prototype = {
         var view = this.view;
         var onComplete =function(err,paper){
             question_repo.getQuestionsByIds(getQuestionIds(paper),function(err,questions){
-              view.onQuestionPaperClick(questions,paper.header.title)
+              view.onQuestionPaperClick(questions,paper.header.title,id)
             })
         }
        paper_repo.getPaper(id,onComplete)
