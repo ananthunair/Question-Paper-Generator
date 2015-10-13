@@ -135,18 +135,19 @@ describe("create_question_paper_presenter", function () {
     });
 
     context("#onAddOrRemoveTag",function(){
-        //it("should load filtered question in the questionToSelect box",function(){
-        //    var questions = [{'id': 1, 'question': 'how are you?', 'answer': 'fine'}];
-        //    var tags = ["java","array"];
-        //    mokito.JsMockito.when(moke_view).getTags().thenReturn(tags);
-        //    moke_repo.fetchQuestionsOfSpecificTags = function (tags,oncomplete) {
-        //        oncomplete(null, questions)
-        //    };
-        //    var presenter = new Presenter(moke_view, moke_repo);
-        //    presenter.onAddOrRemoveTag();
-        //    assert.deepEqual(presenter.all_questions, questions);
-        //    mokito.JsMockito.verify(moke_view).showQuestions([[1, 'how are you?']]);
-        //});
+        it("should load filtered question in the questionToSelect box",function(){
+            var questions = [{'id': 1, 'question': 'how are you?', 'answer': 'fine'}];
+            var tags = ["java","array"];
+            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags);
+            moke_repo.fetchQuestionsOfSpecificTags = function (tags,oncomplete) {
+                oncomplete(null, questions)
+            };
+            var presenter = new Presenter(moke_view, moke_repo);
+            presenter.onAddOrRemoveTag();
+            assert.deepEqual(presenter.all_questions, questions);
+            mokito.JsMockito.verify(moke_view).showQuestions([[1, 'how are you?']]);
+        });
+        
         it("should not load filtered question which are already added paper",function(){
             var questions = [{'id': 1, 'question': 'how are you?', 'answer': 'fine'},
                 {'id': 2, 'question': 'how are you again?', 'answer': 'notfine'}];
