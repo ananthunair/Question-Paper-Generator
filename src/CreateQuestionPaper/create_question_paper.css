@@ -279,11 +279,16 @@ code, pre {
     overflow-y: scroll;
 }
 
-#tagsInput{
+
+#tagsInput {
     width: 95%;
     margin-left: 2%;
     vertical-align: top;
     height: 5%;
+}
+li {
+    padding: 3px;
+    font-size: large;
 }
 
 #create_questions {
@@ -372,3 +377,9 @@ code, pre {
 }
 
 
+code{
+     color: black;
+     background-color: transparent;
+    font-family: Courier New;
+    font-size: large;
+}
