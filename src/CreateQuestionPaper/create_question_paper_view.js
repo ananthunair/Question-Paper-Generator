@@ -12,9 +12,10 @@ var view = {
     suggestedTag: [],
 
     showQuestions: function (questions) {
-        var htmlForQuestionsToSelect = jade.renderFile('./src/createQuestionPaper/questionToSelect.jade');
-        $('#questionsToSelect').html(htmlForQuestionsToSelect)
-        this.table = this.createTable(questions);
+        console.log("question = ",questions.length);
+        var htmlForQuestionsToSelect = jade.renderFile('./src/createQuestionPaper/questionToSelect.jade',{'questions':questions});
+        $('#all_question_container').html(htmlForQuestionsToSelect)
+        //this.table = this.createTable(questions);
     },
 
 

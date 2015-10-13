@@ -1,9 +1,13 @@
-script(src="../js/jquery.dataTables.min.js" type="text/javascript")
-link(href="../js/jquery.dataTables.min.css" rel="stylesheet" type="text/css")
-//link(href="./createQuestionPaper/questions_to_select.css" rel="stylesheet" type="text/css")
+if questions.length == 0
+    div(id='no_question_paper_container')
+        div(id='noQuestionPaperAvailable') No Questions Available
 
-div(class="table-container")
- table(id="tbl-questionsToSelect" class="display")
-  thead
-  tbody(class="question")
+else
 
+    div(id='question_paper_container')
+        each qp in questions
+            div(class="col-xs-12 jumbotron questionContainer" id='#{qp.id}')
+                div(class='inputBoxContainer')
+                    input(type="checkbox" value='#{qp.id}')
+                div(class='question')
+                    | !{qp.question.split('\n').join('\n').substr(0,100).replace('<code>','<code>').replace('</code>','</code>')}

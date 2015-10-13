@@ -1,4 +1,4 @@
-//script(src="./createQuestionPaper/create_question_paper_view.js")
+script(src="./createQuestionPaper/create_question_paper_view.js")
 link(rel="stylesheet" type="text/css" href="./dashboard/dashboard.css")
 link(rel="stylesheet" type="text/css" href="./createQuestionPaper/create_question_paper.css")
 link(rel="stylesheet" type="text/css" href="../library/taggle/assets/css/taggle.css")
@@ -7,10 +7,9 @@ div(id="inner-container" class="inner-container fullHeight")
   div(id='question_heading') Questions
   br
   div(class="input-group col-md-12")
-   input(type="text" id="st-search-input" autocomplete="off" placeholder="search" autocorrect="off" autocapitalize="off")
-   span(class="input-group-btn")
-    button(class="btn btn-primary" type="button")
-     span(class=" glyphicon glyphicon-search")
+   div(class="input textarea tagbox" id="tags")
+   //span(class="input-group-btn")
+   // span(class=" glyphicon glyphicon-search")
   br
   div(id="all_question_container")
   button(id="create_questions", type="button" ,class="btn btn-primary btn-lg") + Question

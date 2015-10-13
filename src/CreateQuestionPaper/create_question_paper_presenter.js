@@ -18,10 +18,10 @@ exports.Presenter.prototype = {
     onDocumentReady:function(){
         var presenter =  this;
         var onComplete = function(err,questions){
+
             presenter.all_questions = questions;
-            var formattedQuestions = questions.map(formatQuestion);
-            presenter.view.showQuestions(formattedQuestions);
-            presenter.view.addQuestionSelectionListener();
+            presenter.view.showQuestions(questions);
+            //presenter.view.addQuestionSelectionListener();
         };
         this.repo.fetchQuestions(onComplete);
     },
@@ -29,7 +29,6 @@ exports.Presenter.prototype = {
     onAddOrRemoveTag :  function(tags){
             var presenter =  this;
             var onComplete = function(err,questions){
-
                 presenter.all_questions = difference(presenter.questionPaper,questions);
 
                 var formattedQuestions = presenter.all_questions.map(function(question){
