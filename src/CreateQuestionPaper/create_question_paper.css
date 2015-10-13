@@ -243,10 +243,14 @@ code, pre {
 }
 
 
-#all_question_container{
+#all_question_container {
     width: 100%;
     height: 72%;
     overflow-y: scroll;
+}
+#question-title{
+    width: 50%;
+    text-align: center;
 }
 
 .questionContainer{
@@ -307,6 +311,7 @@ li {
     background-color: #008dca;
 }
 
+<<<<<<< HEAD
 #questionsToSelect{
     height: 99%;
     width: 28%;
@@ -384,9 +389,12 @@ li {
 }
 
 
-code{
+
+code, pre{
      color: black;
      background-color: transparent;
     font-family: Courier New;
     font-size: large;
+    border: 0px;
+    overflow:inherit;
 }
