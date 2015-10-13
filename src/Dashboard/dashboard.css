@@ -117,6 +117,9 @@
     margin-bottom: 1%;
     background-color: #F9FCFF;
     border-color: #D0D1D1;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    text-align: justify;
 }
 
 #clone_button, #preview_button, #edit_button{

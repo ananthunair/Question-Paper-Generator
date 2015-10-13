@@ -53,7 +53,6 @@
 #question-title{
     width: 50%;
     text-align: center;
-
 }
 
 #sizing-addon1{
@@ -99,9 +98,11 @@ li {
     cursor: hand;
 }
 
-code{
+code, pre{
      color: black;
      background-color: transparent;
     font-family: Courier New;
     font-size: large;
+    border: 0px;
+    overflow:inherit;
 }
