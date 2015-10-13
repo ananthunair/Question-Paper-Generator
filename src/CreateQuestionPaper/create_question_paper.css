@@ -236,6 +236,12 @@ code, pre {
 }
 
 
+.questionPaperTitle{
+    text-align: center;
+    margin-bottom: 5vw;
+    word-wrap: break-word;
+}
+
 
 #all_question_container{
     width: 100%;
@@ -289,6 +295,7 @@ code, pre {
 li {
     padding: 3px;
     font-size: large;
+    word-wrap: break-word;
 }
 
 #create_questions {
