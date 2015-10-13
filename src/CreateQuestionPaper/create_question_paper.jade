@@ -1,35 +1,48 @@
-script(src="./createQuestionPaper/create_question_paper_view.js")
+//script(src="./createQuestionPaper/create_question_paper_view.js")
+link(rel="stylesheet" type="text/css" href="./dashboard/dashboard.css")
 link(rel="stylesheet" type="text/css" href="./createQuestionPaper/create_question_paper.css")
 link(rel="stylesheet" type="text/css" href="../library/taggle/assets/css/taggle.css")
 div(id="inner-container" class="inner-container fullHeight")
+ div(id="questionsToSelect")
+  div(id='question_heading') Questions
+  br
+  div(class="input-group col-md-12")
+   input(type="text" id="st-search-input" autocomplete="off" placeholder="search" autocorrect="off" autocapitalize="off")
+   span(class="input-group-btn")
+    button(class="btn btn-primary" type="button")
+     span(class=" glyphicon glyphicon-search")
+  br
+  div(id="all_question_container")
+  button(id="create_questions", type="button" ,class="btn btn-primary btn-lg") + Question
+ div(id="questionPaper")
 
- div(class="fullHeight col-md-6")
-  header(class="header-footer-wrapper" id="selectedQuestionHeader")
-   div(id="question-title" class="col-md-8")
-    span(class="input-group-addon" id="sizing-addon1") Question Paper Title
-    input(id="questionPaperTitle" type="text" class="form-control" aria-describedby="sizing-addon1" autofocus)
-   div(id="total-questions" class="col-md-4")
-    span(class="input-group-addon" id="sizing-addon1") Total Questions
-    div(class="form-control" id="totalQuestions") 0
-
-  div(class="question-container")
-   div(id="message_alert")
-   div(id="questionPaperContainer")
-  footer(id="wrapper-footer" class="header-footer-wrapper")
-   div(class="col-xs-12 header-footer-content")
-    button(type="button" id="preview" class="btn btn-primary btn-lg") Preview
-    button(type="button" id="save" class="btn btn-primary btn-lg") Save
-
-
- div(class="fullHeight col-md-6")
-  header(class="header-footer-wrapper" id="questionToSelectHeader")
-   div(class="col-xs-6 header-footer-content")
-    div(class="input textarea tagbox" id="tags")
-  div(id="questionsToSelect" class="question-container")
-  footer(class="header-footer-wrapper")
-   div(class="col-xs-12 header-footer-content")
-    button(type="button" id="add" class="btn btn-primary btn-lg") Add question
-
+// div(class="fullHeight col-md-6")
+//  header(class="header-footer-wrapper" id="selectedQuestionHeader")
+//   div(id="question-title" class="col-md-8")
+//    span(class="input-group-addon" id="sizing-addon1") Question Paper Title
+//    input(id="questionPaperTitle" type="text" class="form-control" aria-describedby="sizing-addon1" autofocus)
+//   div(id="total-questions" class="col-md-4")
+//    span(class="input-group-addon" id="sizing-addon1") Total Questions
+//    div(class="form-control" id="totalQuestions") 0
+//
+//  div(class="question-container")
+//   div(id="message_alert")
+//   div(id="questionPaperContainer")
+//  footer(id="wrapper-footer" class="header-footer-wrapper")
+//   div(class="col-xs-12 header-footer-content")
+//    button(type="button" id="preview" class="btn btn-primary btn-lg") Preview
+//    button(type="button" id="save" class="btn btn-primary btn-lg") Save
+//
+//
+// div(class="fullHeight col-md-6")
+//  header(class="header-footer-wrapper" id="questionToSelectHeader")
+//   div(class="col-xs-6 header-footer-content")
+//    div(class="input textarea tagbox" id="tags")
+//  div(id="questionsToSelect" class="question-container")
+//  footer(class="header-footer-wrapper")
+//   div(class="col-xs-12 header-footer-content")
+//    button(type="button" id="add" class="btn btn-primary btn-lg") Add question
+//
 script(src="../library/taggle/assets/js/jquery-1.10.1.js")
 script(src="../library/taggle/assets/js/jquery-ui.js")
 script(src="../library/taggle/assets/js/taggle.js")
