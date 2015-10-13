@@ -13,7 +13,7 @@
 }
 
 #create{
-
+    text-align: center;
     background-color: #008dca;
     vertical-align: middle;
     font-size: 1vw;
@@ -21,6 +21,7 @@
     display: inline-block;
     float: right;
     height: 65%;
+    padding: 0;
 }
 
 #markAsCode{
