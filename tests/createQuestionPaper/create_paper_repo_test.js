@@ -1,5 +1,5 @@
 var question_paper_repo = require('../../src/repository/question_paper_repo.js').Question_papers_repository;
-require('../../src/repo.js').connectDb("questionBank");
+require('../../src/repo.js').connectDb("qpg_test");
 var assert = require('chai').assert;
 var repo;
 
@@ -57,14 +57,6 @@ describe('create_paper_repo', function () {
                 })
             })
         });
-        //it('should fetch title of given paper',function(done){
-        //    var questionPaper = {
-        //        questions: [{id: "someId", note: ""}],
-        //        header: {title: "array test#1", marks: 100, duration: "1 hour"}
-        //    };
-        //    repo.saveQuestionPaper(questionPaper, function (err, savedPaper) {
-        //        repo.getTitle(savedPaper.i)
-        //    })
     })
 
 });

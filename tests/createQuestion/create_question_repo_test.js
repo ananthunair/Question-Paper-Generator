@@ -1,5 +1,5 @@
 var questions_repo = require('../../src/repository/create_question_repo.js').Question_repository;
-require('../../src/repo.js').connectDb("questionBank");
+require('../../src/repo.js').connectDb("qpg_test");
 var assert = require('chai').assert;
 var repo ;
 
