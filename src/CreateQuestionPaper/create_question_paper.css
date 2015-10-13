@@ -47,6 +47,7 @@
 .questionPaperTitle{
     text-align: center;
     margin-bottom: 5vw;
+    word-wrap: break-word;
 }
 
 #question-title{
@@ -88,6 +89,7 @@
 li {
     padding: 3px;
     font-size: large;
+    word-wrap: break-word;
 }
 
 .remove{

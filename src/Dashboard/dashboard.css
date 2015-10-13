@@ -94,8 +94,8 @@
     cursor: hand;
     border-bottom: 1px solid lightgray;
     border-top: 1px solid lightgray;
-    height: 8%;
     font-size: medium;
+    word-wrap: break-word;
 }
 
 .jumbotron.selected{
