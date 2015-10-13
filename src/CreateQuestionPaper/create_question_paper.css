@@ -87,6 +87,7 @@
 
 li {
     padding: 3px;
+    font-size: large;
 }
 
 .remove{
@@ -100,4 +101,5 @@ code{
      color: black;
      background-color: transparent;
     font-family: Courier New;
+    font-size: large;
 }
