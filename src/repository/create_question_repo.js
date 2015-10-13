@@ -48,7 +48,7 @@ exports.Question_repository.prototype = {
     getUniqueTags: function (onComplete) {
         var tags = mongoose.model("Tags");
         tags.find({}, function (err, tags) {
-            onComplete(err,tags.map(extractTag));
+            onComplete(err,lodash.uniq(tags.map(extractTag)));
         })
     },
     getQuestionsByIds : function(questionIds,onComplete){

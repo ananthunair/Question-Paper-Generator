@@ -121,5 +121,20 @@ describe('create_question_repo', function() {
                 });
             });
         });
+        it('should fetch unique tags when the tags are not unique',function(done) {
+            var questionDetails = {
+                question: "var a =10; ",
+                answer: "true",
+                tags: ["array", "object","array","array","object"]
+            };
+            repo.create(questionDetails, function (err, savedQuestion) {
+                repo.getUniqueTags(function(err,tags){
+                    assert.equal(2,tags.length);
+                    assert.equal('array',tags[0]);
+                    assert.equal('object',tags[1]);
+                    done();
+                });
+            });
+        });
     })
 });
