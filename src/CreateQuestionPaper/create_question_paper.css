@@ -316,6 +316,7 @@ li {
     word-wrap: break-word;
 }
 
+
 #create_questions {
     width: 28%;
     height: 8%;
@@ -402,9 +403,16 @@ li {
 }
 
 
+.remove{
+    float:right;
+    margin-top: -3%;
+    margin-right: -2.5%;
+    cursor: hand;
+}
+
 
 code, pre{
-     color: black;
+     color: #86868C;
      background-color: transparent;
     font-family: Courier New;
     font-size: large;
@@ -457,6 +465,7 @@ code, pre{
 #all_question_container{
     width: 100%;
     height: 72%;
+    overflow-y: scroll;
 }
 
 .questionContainer{
@@ -471,7 +480,7 @@ code, pre{
     cursor: hand;
     border-bottom: 1px solid lightgray;
     border-top: 1px solid lightgray;
-    height: 15%;
+    height: 17%;
     font-size: small;
     text-align: justify;
 }
@@ -487,6 +496,12 @@ code, pre{
     display: inline-block;
     word-break: break-all;
     width: 90%;
+}
+
+#questions_container {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
 }
 
 
