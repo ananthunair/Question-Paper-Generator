@@ -199,6 +199,7 @@
 .taggle_list {
   float: left;
   width: 105%;
+  padding: 0;
 }
 
 /* line 250, ../../../sass/projects/taggle/taggle.scss */
@@ -537,4 +538,11 @@ textarea.input {
 .custom.stackoverflow .taggle .close:hover {
   background: #C03434;
   color: #fff;
+}
+.tagcontainer {
+  height: inherit;
+  position: fixed;
+  width: 74.5%;
+  overflow: auto;
+  padding: 4px;
 }

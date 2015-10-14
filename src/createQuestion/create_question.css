@@ -17,10 +17,10 @@
     background-color: #008dca;
     vertical-align: middle;
     font-size: 1vw;
-    width: 13%;
+    width: 14%;
     display: inline-block;
     float: right;
-    height: 65%;
+    height: 80%;
     padding: 0;
 }
 
@@ -51,6 +51,7 @@
     margin-left: 2%;
     float: left;
     height: 10%;
+    padding: 0;
 }
 
 #bottomHolder{

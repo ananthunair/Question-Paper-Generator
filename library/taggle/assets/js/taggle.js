@@ -118,6 +118,7 @@
             input_li = document.createElement('li'),
             input = document.createElement('input'),
             sizer = document.createElement('div'),
+            tagcontainer =document.createElement('div'),
             placeholder;
 
         if (settings.placeholder) {
@@ -165,6 +166,7 @@
             input.className = 'taggle_input';
             input.tabIndex = settings.tabIndex;
             sizer.className = 'taggle_sizer';
+            tagcontainer.className ='tagcontainer'
 
             if (settings.tags.length) {
                 for (var i = 0, len = settings.tags.length; i < len; i++) {
@@ -186,7 +188,8 @@
 
             input_li.appendChild(input);
             list.appendChild(input_li);
-            container.appendChild(list);
+            tagcontainer.appendChild(list)
+            container.appendChild(tagcontainer);
             container.appendChild(sizer);
             font_size = window.getComputedStyle(input).fontSize;
             sizer.style.fontSize = font_size;
