@@ -5,6 +5,7 @@ var jade = require('jade');
 
 var sortQuestionPaperByTitle = function(questionPapers){
     return questionPapers.sort(function(pv, cv){
+        //if(!pv.header.title || !cv.header.title) return 0;
         if(pv.header.title.toLowerCase() < cv.header.title.toLowerCase())
             return -1;
         if(pv.header.title.toLowerCase() > cv.header.title.toLowerCase())

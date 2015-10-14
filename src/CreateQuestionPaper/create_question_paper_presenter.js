@@ -13,12 +13,11 @@ var formatQuestion = function(question){
 };
 
 exports.Presenter.prototype = {
-    questionPaper : [],
+
 
     onDocumentReady:function(){
         var presenter =  this;
         var onComplete = function(err,questions){
-
             presenter.all_questions = questions;
             presenter.view.showQuestions(questions);
             //presenter.view.addQuestionSelectionListener();
@@ -42,13 +41,15 @@ exports.Presenter.prototype = {
 
     onAddClick : function(){
         var view = this.view;
+
+        var selectedIds = view.getSelectedQuestions();
+
         function isSelected(question){
-            var selectedIds = view.getSelectedQuestions();
-            return selectedIds.indexOf(question.id)>=0;
+            return selectedIds.indexOf(question.id.toString()) != -1;
         }
         var questionsToAddInPaper = this.all_questions.filter(isSelected);
         this.questionPaper = this.questionPaper.concat(questionsToAddInPaper);
-        view.deleteSelectedRows();
+        view.deleteSelectedQuestions();
         view.addToQuestionPaper(this.questionPaper);
         view.showTotalNumberOfQuestion(this.questionPaper.length)
     },
@@ -79,11 +80,10 @@ exports.Presenter.prototype = {
     },
 
     onRemoveQuestion : function(id){
-        console.log(id);
+
         this.questionPaper = this.questionPaper.filter(function(question){
             return question.id != id;
         });
-
         this.view.addToQuestionPaper(this.questionPaper);
         var filteredQuestion = lodash.find(this.all_questions,function (q) {
             return q.id == id;

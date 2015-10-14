@@ -12,7 +12,6 @@ var view = {
     suggestedTag: [],
 
     showQuestions: function (questions) {
-        console.log("question = ",questions.length);
         var htmlForQuestionsToSelect = jade.renderFile('./src/createQuestionPaper/questionToSelect.jade',{'questions':questions});
         $('#all_question_container').html(htmlForQuestionsToSelect)
         //this.table = this.createTable(questions);
@@ -36,7 +35,6 @@ var view = {
 
 
     addRemovedQuestionToAllQuestions: function (question) {
-        this.table.row.add(question).draw();
     },
 
     createTable: function (questions) {
@@ -49,21 +47,24 @@ var view = {
         });
     },
 
-
-
-    deleteSelectedRows: function () {
-        this.table.rows('.selected').remove().draw(false);
+    deleteSelectedQuestions: function () {
+       var ids= this.getSelectedQuestions();
+        ids.forEach(function(id){
+            $("#"+id).remove()
+        })
     },
 
     getSelectedQuestions: function () {
-        return this.table.rows('.selected').data().map(function (question) {
-            return question[0];
+        var ids = [];
+        $('.inputBoxContainer input:checked').each(function() {
+            ids.push(this.name);
         });
+        return ids;
     },
 
     addToQuestionPaper: function (selectedQuestions) {
         var htmlForSelectedQuestions = jade.renderFile("./src/createQuestionPaper/selectedQuestions.jade", {'questions': selectedQuestions});
-        $('#questionPaperContainer').html(htmlForSelectedQuestions);
+        $('#body').html(htmlForSelectedQuestions);
         $('.remove').click(function () {
             var id = $(this).attr('id');
             presenter.onRemoveQuestion(id);
@@ -113,7 +114,7 @@ var setWrapperHeight = function(){
 $(document).ready(function () {
     presenter.onDocumentReady();
     presenter.setAutosuggetions();
-    $("#add").click(function () {
+    $("#addQuestions").click(function () {
         presenter.onAddClick();
     });
     $('#save').click(function() {

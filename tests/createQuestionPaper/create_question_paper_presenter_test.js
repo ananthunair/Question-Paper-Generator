@@ -20,10 +20,9 @@ describe("create_question_paper_presenter", function () {
         view.showErrorMessage = function(){};
         view.showTotalNumberOfQuestion = function(){};
         view.addQuestionSelectionListener = function(){};
-        view.deleteSelectedRows = function(){};
+        view.deleteSelectedQuestions = function(){};
         view.getTags = function(){};
         view.setupTagBoxData = function(){};
-        view.addToQuestionPaper = function(){};
         view.addRemovedQuestionToAllQuestions = function(){};
         view.showTotalNumberOfQuestion = function(){};
         var repo = {};
@@ -46,20 +45,22 @@ describe("create_question_paper_presenter", function () {
             var presenter = new Presenter(moke_view, moke_repo);
 
             presenter.onDocumentReady();
-            mokito.JsMockito.verify(moke_view).showQuestions([[1, 'how are you?']]);
+            moke_view.showQuestions =function(argument){
+               assert.deepEqual(argument[1],[ { id: 1, question: 'how are you?', answer: 'fine' } ]);
+            }
         })
     });
     context('#onAddClick', function () {
         it('should get selected questions and add it to question paper', function () {
-            var questions = [{'id': 1, 'question': 'how are you?', 'answer': 'fine'}, {
-                'id': 2,
+            var questions = [{'id': '1', 'question': 'how are you?', 'answer': 'fine'}, {
+                'id': '2',
                 'question': 'how are you?',
                 'answer': 'fine'
             }];
-            var selectedQuestions = [{'id': 1, 'question': 'how are you?', 'answer': 'fine'}];
+            var selectedQuestions = [{'id': '1', 'question': 'how are you?', 'answer': 'fine'}];
             var presenter = new Presenter(moke_view, moke_repo);
             presenter.all_questions = questions;
-            mokito.JsMockito.when(moke_view).getSelectedQuestions().thenReturn([1]);
+            mokito.JsMockito.when(moke_view).getSelectedQuestions().thenReturn(['1']);
             presenter.onAddClick();
             assert.deepEqual(presenter.questionPaper, selectedQuestions)
             mokito.JsMockito.verify(moke_view).addToQuestionPaper(presenter.questionPaper)
@@ -80,16 +81,16 @@ describe("create_question_paper_presenter", function () {
 
         context('when some questions alreay in question paper ', function () {
             it('should get selected questions and append it to question paper', function () {
-                var questions = [{'id': 1, 'question': 'how are you?', 'answer': 'fine'}, {
-                    'id': 2,
+                var questions = [{'id': '1', 'question': 'how are you?', 'answer': 'fine'}, {
+                    'id': '2',
                     'question': 'how are you?',
                     'answer': 'fine'
                 }];
                 var presenter = new Presenter(moke_view, moke_repo);
                 presenter.all_questions = questions;
-                mokito.JsMockito.when(moke_view).getSelectedQuestions().thenReturn([1]);
+                mokito.JsMockito.when(moke_view).getSelectedQuestions().thenReturn(['1']);
                 presenter.onAddClick();
-                mokito.JsMockito.when(moke_view).getSelectedQuestions().thenReturn([2]);
+                mokito.JsMockito.when(moke_view).getSelectedQuestions().thenReturn(['2']);
                 presenter.onAddClick();
                 assert.deepEqual(presenter.questionPaper, questions)
                 mokito.JsMockito.verify(moke_view).addToQuestionPaper(presenter.questionPaper)
