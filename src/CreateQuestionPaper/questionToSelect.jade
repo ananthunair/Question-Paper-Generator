@@ -4,10 +4,10 @@ if questions.length == 0
 
 else
 
-    div(id='question_paper_container')
+    div(id='questions_container')
         each qp in questions
             div(class="col-xs-12 jumbotron questionContainer" id='#{qp.id}')
                 div(class='inputBoxContainer')
                     input(type="checkbox" value='#{qp.id}')
                 div(class='question')
-                    | !{qp.question.split('\n').join('\n').substr(0,100).replace('<code>','<code>').replace('</code>','</code>')}
+                    | !{qp.question.substr(0,125).split('\n').slice(0,3).join('<br>').replace('<code>','<code>').replace('</code>','</code>')}
