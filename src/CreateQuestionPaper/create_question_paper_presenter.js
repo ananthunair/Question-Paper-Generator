@@ -30,10 +30,8 @@ exports.Presenter.prototype = {
             var onComplete = function(err,questions){
                 presenter.all_questions = difference(presenter.questionPaper,questions);
 
-                var formattedQuestions = presenter.all_questions.map(function(question){
-                    return [question.id, question.question]
-                });
-                presenter.view.showQuestions(formattedQuestions);
+
+                presenter.view.showQuestions(presenter.all_questions);
                 presenter.view.addQuestionSelectionListener();
             };
             this.repo.fetchQuestionsOfSpecificTags(tags,onComplete);

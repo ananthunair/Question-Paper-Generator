@@ -146,7 +146,9 @@ describe("create_question_paper_presenter", function () {
             var presenter = new Presenter(moke_view, moke_repo);
             presenter.onAddOrRemoveTag();
             assert.deepEqual(presenter.all_questions, questions);
-            mokito.JsMockito.verify(moke_view).showQuestions([[1, 'how are you?']]);
+            moke_view.showQuestions =function(argument){
+                assert.deepEqual(argument[1],[ { id: 1, question: 'how are you?', answer: 'fine' } ]);
+            }
         });
         
         it("should not load filtered question which are already added paper",function(){
@@ -162,7 +164,9 @@ describe("create_question_paper_presenter", function () {
             presenter.questionPaper = questionPaper;
             presenter.onAddOrRemoveTag();
             assert.deepEqual(presenter.all_questions, [questions[1]]);
-            mokito.JsMockito.verify(moke_view).showQuestions([[2, 'how are you again?']]);
+            moke_view.showQuestions =function(argument){
+                assert.deepEqual(argument[1],[ {'id': 2, 'question': 'how are you again?', 'answer': 'notfine'} ]);
+            }
         });
     });
 
