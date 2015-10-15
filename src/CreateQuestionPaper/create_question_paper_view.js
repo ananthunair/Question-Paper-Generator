@@ -14,7 +14,6 @@ var view = {
     showQuestions: function (questions) {
         var htmlForQuestionsToSelect = jade.renderFile('./src/createQuestionPaper/questionToSelect.jade',{'questions':questions});
         $('#all_question_container').html(htmlForQuestionsToSelect)
-        //this.table = this.createTable(questions);
     },
 
     addQuestionSelectionListener: function () {
@@ -33,15 +32,7 @@ var view = {
     },
 
 
-    createTable: function (questions) {
-        return $('#tbl-questionsToSelect').DataTable({
-            data: questions,
-            columns: [
-                {title: "ID", "visible": false},
-                {title: "Question", width: "1%"}
-            ]
-        });
-    },
+
 
     deleteSelectedQuestions: function () {
        var ids= this.getSelectedQuestions();

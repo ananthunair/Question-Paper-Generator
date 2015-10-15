@@ -143,12 +143,14 @@ describe("create_question_paper_presenter", function () {
             moke_repo.fetchQuestionsOfSpecificTags = function (tags,oncomplete) {
                 oncomplete(null, questions)
             };
+            moke_view.showQuestions =function(argument){
+                assert.deepEqual(argument[0], { id: 1, question: 'how are you?', answer: 'fine' } );
+            }
             var presenter = new Presenter(moke_view, moke_repo);
             presenter.onAddOrRemoveTag();
+
             assert.deepEqual(presenter.all_questions, questions);
-            moke_view.showQuestions =function(argument){
-                assert.deepEqual(argument[1],[ { id: 1, question: 'how are you?', answer: 'fine' } ]);
-            }
+
         });
         
         it("should not load filtered question which are already added paper",function(){
@@ -160,13 +162,15 @@ describe("create_question_paper_presenter", function () {
             moke_repo.fetchQuestionsOfSpecificTags = function (tags,oncomplete) {
                 oncomplete(null, questions)
             };
+            moke_view.showQuestions = function(argument){
+
+                assert.deepEqual(argument[0], {'id': 2, 'question': 'how are you again?', 'answer': 'notfine'} );
+            }
             var presenter = new Presenter(moke_view, moke_repo);
             presenter.questionPaper = questionPaper;
             presenter.onAddOrRemoveTag();
             assert.deepEqual(presenter.all_questions, [questions[1]]);
-            moke_view.showQuestions =function(argument){
-                assert.deepEqual(argument[1],[ {'id': 2, 'question': 'how are you again?', 'answer': 'notfine'} ]);
-            }
+
         });
     });
 
@@ -181,16 +185,20 @@ describe("create_question_paper_presenter", function () {
             presenter.setAutosuggetions();
             mokito.JsMockito.verify(moke_view).setupTagBoxData(tags);
         })
-    })
+    });
 
     context("#onRemoveQuestion", function(){
         it("should remove the question from selected questions",function(){
             var presenter =  new Presenter(moke_view,moke_repo,moke_paper_repo);
+            var questionToShow = [ { id: 'someId', question: 'how are you?', answer: 'fine' },
+                { id: 'otherId', question: 'where are you?', answer: 'hell' } ];
             presenter.questionPaper = [{id:"someId",'question':"how are you?",'answer':"fine"}];
             presenter.all_questions = [{id:"someId",'question':"how are you?",'answer':"fine"}, {id:"otherId",'question':"where are you?",'answer':"hell"}];
-            presenter.onRemoveQuestion("someId");
-            //mokito.JsMockito.verify(moke_view).addRemovedQuestionToAllQuestions(["someId", "how are you?"]);
-            mokito.JsMockito.verify(moke_view).showTotalNumberOfQuestion(0);
+            mokito.JsMockito.verify(moke_view).showQuestions = function(argument){
+                assert.deepEqual(argument[0],questionToShow[0]);
+                assert.deepEqual(argument[1],questionToShow[1]);
+            };
+            presenter.onRemoveQuestion('someId');
         })
     })
-})
+});
