@@ -77,7 +77,7 @@ var view = {
         $('#'+id).css("border-color", "red");
     },
     showSuccessAlert:function(){
-        alert("Your question paper was added success false");
+        alert("Your question paper was added successfully");
     }
 };
 
