@@ -33,9 +33,6 @@ var view = {
     },
 
 
-    addRemovedQuestionToAllQuestions: function (question) {
-    },
-
     createTable: function (questions) {
         return $('#tbl-questionsToSelect').DataTable({
             data: questions,
