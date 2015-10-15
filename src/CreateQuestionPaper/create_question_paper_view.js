@@ -58,18 +58,6 @@ var view = {
         })
     },
 
-    setAlert: function (className, message) {
-        $('#message_alert').fadeIn().html("<div class='" + className + "' role='alert'>" + message + "</div>").delay(3000).fadeOut();
-    },
-
-    showSuccessMessage: function () {
-        this.setAlert("alert alert-success", "Your questionPaper was successfully added");
-    },
-
-    showErrorMessage: function () {
-        this.setAlert("alert alert-danger", "Question Paper can not be empty");
-    },
-
     getQuestionPaperTitle: function () {
         return $('#questionPaperTitle').val();
     },

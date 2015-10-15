@@ -16,8 +16,6 @@ describe("create_question_paper_presenter", function () {
         view.addToQuestionPaper = function () {};
         view.openPreview =function(){};
         view.getQuestionPaperTitle = function(){};
-        view.showSuccessMessage = function(){};
-        view.showErrorMessage = function(){};
         view.showTotalNumberOfQuestion = function(){};
         view.addQuestionSelectionListener = function(){};
         view.deleteSelectedQuestions = function(){};
@@ -25,6 +23,9 @@ describe("create_question_paper_presenter", function () {
         view.setupTagBoxData = function(){};
         view.addRemovedQuestionToAllQuestions = function(){};
         view.showTotalNumberOfQuestion = function(){};
+        view.title = function(){};
+        view.showError = function(){};
+        view.showSuccessAlert = function(){};
         var repo = {};
         var paper_repo = {};
         paper_repo.getAllQuestionPapers = function(){};
@@ -112,26 +113,27 @@ describe("create_question_paper_presenter", function () {
     context("#onSaveClck",function(){
         it('should show success if questions are saved in db',function(){
             var paperName = "objectQuestions";
-            mokito.JsMockito.when(moke_view).getQuestionPaperTitle().thenReturn(paperName);
+            mokito.JsMockito.when(moke_view).title().thenReturn(paperName);
             moke_paper_repo.saveQuestionPaper = function(paperName,onComplete){
+                console.log("ssss")
                 onComplete(null);
             }
             var presenter =  new Presenter(moke_view,moke_repo,moke_paper_repo);
             presenter.onSaveClick();
-            mokito.JsMockito.verify(moke_view).showSuccessMessage();
+            mokito.JsMockito.verify(moke_view).showSuccessAlert();
         })
     });
 
     context("#onSaveClick",function(){
-        it('should show success if questions are not saved in db',function(){
-            var paperName = "objectQuestions";
-            mokito.JsMockito.when(moke_view).getQuestionPaperTitle().thenReturn(paperName);
+        it('should show error if questions are not saved in db',function(){
+            var paperName = "";
+            mokito.JsMockito.when(moke_view).title().thenReturn(paperName);
             moke_paper_repo.saveQuestionPaper = function(paperName,onComplete){
-                onComplete({id:1,code:"sqlite_error"});
+                onComplete(null);
             };
             var presenter =  new Presenter(moke_view,moke_repo,moke_paper_repo);
             presenter.onSaveClick();
-            mokito.JsMockito.verify(moke_view).showErrorMessage();
+            mokito.JsMockito.verify(moke_view).showError();
         })
     });
 
