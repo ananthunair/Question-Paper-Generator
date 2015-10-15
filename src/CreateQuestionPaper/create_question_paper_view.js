@@ -6,13 +6,12 @@ var repo = new Question_repository();
 var preview = require('./preview/showPreview.js');
 var paper_repo = new Question_papers_repository();
 var lodash = require('lodash');
-
+var suggestedTag = [];
 var view = {
     table: {},
-    suggestedTag: [],
 
     showQuestions: function (questions) {
-        var htmlForQuestionsToSelect = jade.renderFile('./src/createQuestionPaper/questionToSelect.jade',{'questions':questions});
+        var htmlForQuestionsToSelect = jade.renderFile('./src/createQuestionPaper/questionToSelect.jade', {'questions': questions});
         $('#all_question_container').html(htmlForQuestionsToSelect)
     },
 
@@ -21,10 +20,9 @@ var view = {
             $(this).toggleClass('selected');
         });
     },
-    setupTagBoxData: function (tags) {
-        this.suggestedTag = tags;
-
-        this.tagBox = setupTagBox(this.suggestedTag);
+    setupTagBoxData: function(tags){
+        suggestedTag = tags;
+        this.tagBox = setupTagBox()
     },
 
     getTags: function () {
@@ -32,22 +30,33 @@ var view = {
     },
 
 
+    addSuggetions:function(tags){
+        var newTags = lodash.difference(tags,suggestedTag);
 
+        newTags.forEach(function(tag){
+           suggestedTag.push(tag)
+        });
+        resettagBox(this.tagBox)
+        this.tagBox.addAllowedTags(tags)
+    },
 
     deleteSelectedQuestions: function () {
-       var ids= this.getSelectedQuestions();
-        ids.forEach(function(id){
-            $("#"+id).remove()
+        var ids = this.getSelectedQuestions();
+        ids.forEach(function (id) {
+            $("#" + id).remove()
         })
-    },
+    }
+
+    ,
 
     getSelectedQuestions: function () {
         var ids = [];
-        $('.inputBoxContainer input:checked').each(function() {
+        $('.inputBoxContainer input:checked').each(function () {
             ids.push(this.name);
         });
         return ids;
-    },
+    }
+    ,
 
     addToQuestionPaper: function (selectedQuestions) {
         var htmlForSelectedQuestions = jade.renderFile("./src/createQuestionPaper/selectedQuestions.jade", {'questions': selectedQuestions});
@@ -56,40 +65,44 @@ var view = {
             var id = $(this).attr('id');
             presenter.onRemoveQuestion(id);
         })
-    },
+    }
+    ,
 
     getQuestionPaperTitle: function () {
         return $('#questionPaperTitle').val();
-    },
+    }
+    ,
 
     showTotalNumberOfQuestion: function (totalQuestions) {
         $('#totalQuestions').html('<p>' + totalQuestions + '</p>')
-    },
+    }
+    ,
 
     openPreview: function (questionPaper, title) {
         preview.show({title: title, 'questions': questionPaper}, screen)
-    },
+    }
+    ,
 
-    title: function(){
+    title: function () {
         return $("#questionPaperTitle").val().trim();
-    },
-    showError:function(id){
-        $('#'+id).css("border-color", "red");
-    },
-    showSuccessAlert:function(){
+    }
+    ,
+    showError: function (id) {
+        $('#' + id).css("border-color", "red");
+    }
+    ,
+    showSuccessAlert: function () {
         alert("Your question paper was added successfully");
     }
 };
 
 var presenter = new Presenter(view, repo, paper_repo);
 
-var setWrapperHeight = function(){
+var setWrapperHeight = function () {
     var windowHeight = $(window).height();
     var headerHeight = $('#title-header').height();
     $('#wrapper').height(windowHeight - headerHeight)
 };
-
-
 
 
 $(document).ready(function () {
@@ -98,45 +111,33 @@ $(document).ready(function () {
     $("#addQuestions").click(function () {
         presenter.onAddClick();
     });
-    $('#save').click(function() {
+    $('#save').click(function () {
         presenter.onSaveClick();
     });
-    $('#create_questions').click(function(){
-        var createQuestionPopUp =  jade.renderFile('./src/createQuestion/create_question.jade');
+    $('#create_questions').click(function () {
+        var createQuestionPopUp = jade.renderFile('./src/createQuestion/create_question.jade');
         $('#myModal').html(createQuestionPopUp);
+        $(".close").click(function () {
+            presenter.onNewQuestionAdded();
+        })
     });
     $("#questionPaperTitle").keyup(function (e) {
         $("#questionPaperTitle").css("border-color", "");
     });
 
-    $("#preview_button").click(function(){
+    $("#preview_button").click(function () {
         presenter.onPreviewClick();
     });
     //setWrapperHeight()
 
+
 });
 
-
-var setupTagBox = function(suggestedTag) {
-    var enteredtags = [];
-    var tagbox = new Taggle($('.tagbox.textarea')[0], {
-        duplicateTagClass: 'bounce',
-        allowedTags:suggestedTag,
-        onTagAdd: function(event,tag) {
-            enteredtags.push(tag);
-            presenter.onAddOrRemoveTag(enteredtags);
-        },
-        onTagRemove:function(event,tag){
-            lodash.remove(enteredtags,function(t){return t==tag});
-            presenter.onAddOrRemoveTag(enteredtags);
-        }
-    });
+var resettagBox =function(tagbox){
     var container = tagbox.getContainer();
     var input = tagbox.getInput();
-
-    $(input).autocomplete(
-    {
-    source:suggestedTag,
+    $(input).autocomplete({
+        source:suggestedTag,
         appendTo: container,
         position: { at: 'left bottom', of: container },
         select: function(e, v) {
@@ -146,5 +147,23 @@ var setupTagBox = function(suggestedTag) {
             }
         }
     });
+}
+var setupTagBox = function () {
+    var enteredtags = [];
+    var tagbox = new Taggle($('.tagbox.textarea')[0], {
+        duplicateTagClass: 'bounce',
+        allowedTags: suggestedTag,
+        onTagAdd: function (event, tag) {
+            enteredtags.push(tag);
+            presenter.onAddOrRemoveTag(enteredtags);
+        },
+        onTagRemove: function (event, tag) {
+            lodash.remove(enteredtags, function (t) {
+                return t == tag
+            });
+            presenter.onAddOrRemoveTag(enteredtags);
+        }
+    });
+  resettagBox(tagbox)
     return tagbox;
 };

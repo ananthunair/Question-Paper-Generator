@@ -245,7 +245,6 @@
             if (!text) {
                 return false;
             }
-
             if (!settings.allowDuplicates && _hasDupes(text)) {
                 return false;
             }
@@ -574,6 +573,10 @@
 
             return self;
         };
+        self.addAllowedTags=function(tags){
+
+            settings.allowedTags=tags;
+        }
 
         // Bang bang bang skeet skeet
         _init();

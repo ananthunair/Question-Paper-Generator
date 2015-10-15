@@ -34,6 +34,8 @@ exports.Presenter.prototype = {
 
             var onComplete = function(err){
                 view.clearScreen();
+                console.log("save ho gaya");
+
             };
             this.repo.create(questionDetails, onComplete);
             view.addSuggetions(tags);

@@ -4,7 +4,7 @@
   "main": "src/index.html",
   "window": {
     "show": true,
-    "toolbar": false
+    "toolbar": true
   },
   "scripts": {
     "init": "sh scripts/initialize_app.sh",

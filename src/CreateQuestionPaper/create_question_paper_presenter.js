@@ -83,6 +83,14 @@ exports.Presenter.prototype = {
         var questionsToShow = lodash.difference(this.all_questions,this.questionPaper);
         this.view.showQuestions(questionsToShow);
         this.view.showTotalNumberOfQuestion(this.questionPaper.length);
+    },
+    onNewQuestionAdded:function(){
+        console.log("agaya")
+        var presenter =this;
+            this.onDocumentReady();
+        this.repo.getUniqueTags(function(err,tags){
+            presenter.view.addSuggetions(tags)
+        });
     }
 };
 var getQuestionIds = function(questions){
