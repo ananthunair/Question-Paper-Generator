@@ -87,6 +87,9 @@ var view = {
     },
     showError:function(id){
         $('#'+id).css("border-color", "red");
+    },
+    showSuccessAlert:function(){
+        alert("Your question paper was added success false");
     }
 };
 

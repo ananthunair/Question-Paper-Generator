@@ -51,7 +51,7 @@ exports.Presenter.prototype = {
         console.log("title is",view.title);
         if(view.title()){
             var onComplete = function (err) {
-                err ? view.showErrorMessage() : view.showSuccessMessage();
+                view.showSuccessAlert();
             };
             var questionPaper = {
                 questions : getQuestionIds(this.questionPaper),
