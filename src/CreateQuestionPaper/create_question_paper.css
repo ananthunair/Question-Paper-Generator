@@ -190,6 +190,10 @@ li {
     word-wrap: break-word;
 }
 
+.my_checkbox{
+    width: 100%;
+    height: 100%;
+}
 
 #create_questions {
     width: 28%;
