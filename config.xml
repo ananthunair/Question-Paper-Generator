@@ -62,26 +62,14 @@
   <pipelines group="English_Teacher">
     <pipeline name="Service" labeltemplate="Service-${COUNT}" isLocked="false">
       <materials>
-        <git url="https://maheshkkolla@bitbucket.org/maheshkkolla/english_teacher_service.git" />
+        <git url="https://maheshkkolla@bitbucket.org/maheshkkolla/english_teacher_service_express.git" />
       </materials>
-      <stage name="UnitTests">
+      <stage name="RunTests">
         <jobs>
-          <job name="RunUnitTests">
+          <job name="RunTests">
             <tasks>
               <exec command="sh">
-                <arg>buildScripts/runUnitTests.sh</arg>
-                <runif status="passed" />
-              </exec>
-            </tasks>
-          </job>
-        </jobs>
-      </stage>
-      <stage name="IntegrationTests">
-        <jobs>
-          <job name="RunIntegrationTests">
-            <tasks>
-              <exec command="sh">
-                <arg>buildScripts/runIntegrationTests.sh</arg>
+                <arg>buildScripts/runTests.sh</arg>
                 <runif status="passed" />
               </exec>
             </tasks>
@@ -94,6 +82,7 @@
             <tasks>
               <exec command="sh">
                 <arg>buildScripts/package.sh</arg>
+                <arg>$GO_PIPELINE_LABEL</arg>
                 <runif status="passed" />
               </exec>
             </tasks>
@@ -106,25 +95,12 @@
         <git url="https://maheshkkolla@bitbucket.org/maheshkkolla/english_teacher_app.git" />
         <pipeline pipelineName="Service" stageName="GenerateArtifacts" materialName="Service" />
       </materials>
-      <stage name="UnitTests">
+      <stage name="RunTests">
         <jobs>
-          <job name="RunUnitTests">
+          <job name="RunTests">
             <tasks>
               <exec command="sh">
-                <arg>buildScripts/runUnitTests.sh</arg>
-                <runif status="passed" />
-              </exec>
-            </tasks>
-          </job>
-        </jobs>
-      </stage>
-      <stage name="IntegrationTests">
-        <jobs>
-          <job name="RunIntegrationTests">
-            <tasks>
-              <exec command="sh">
-                <arg>buildScripts/runIntegrationTests.sh</arg>
-                <runif status="passed" />
+                <arg>./buildScripts/runTests.sh</arg>
               </exec>
             </tasks>
           </job>
@@ -202,16 +178,53 @@
         </jobs>
       </stage>
     </pipeline>
-    <pipeline name="DeployEnglishTeacher" labeltemplate="Deploy-${COUNT}" isLocked="false">
+  </pipelines>
+  <pipelines group="STEP-Management">
+    <pipeline name="Tests" isLocked="false">
       <materials>
-        <git url="https://maheshkkolla@bitbucket.org/maheshkkolla/english_teacher_app.git" materialName="Application" />
+        <git url="git@bitbucket.org:step2014/step_management.git" materialName="step_management" />
       </materials>
-      <stage name="DeployApp">
+      <stage name="env_setup">
         <jobs>
-          <job name="DeployApp">
+          <job name="install_gems">
             <tasks>
-              <exec command="sh">
-                <arg>buildScripts/deploy.sh</arg>
+              <exec command="bundle">
+                <arg>install</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="DB_Setup">
+        <environmentvariables>
+          <variable name="RAILS_ENV">
+            <value>test</value>
+          </variable>
+        </environmentvariables>
+        <jobs>
+          <job name="setUp">
+            <tasks>
+              <exec command="rake">
+                <arg>db:setup</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+          <job name="migration">
+            <tasks>
+              <exec command="rake">
+                <arg>db:migrate</arg>
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="Unit-Tests">
+        <jobs>
+          <job name="run_specs" timeout=".5">
+            <tasks>
+              <exec command="rspec">
                 <runif status="passed" />
               </exec>
             </tasks>
@@ -219,10 +232,90 @@
         </jobs>
       </stage>
     </pipeline>
+    <pipeline name="Acceptance_Test" isLocked="true">
+      <environmentvariables>
+        <variable name="RAILS_ENV">
+          <value>test</value>
+        </variable>
+      </environmentvariables>
+      <materials>
+        <git url="https://github.com/phoenixTW/SMAcceptanceTest" dest="gauge_tests" materialName="Accptance_Test_Material" />
+        <git url="git@bitbucket.org:step2014/step_management.git" dest="app_code" materialName="app_code" />
+        <pipeline pipelineName="Tests" stageName="Unit-Tests" materialName="unit_test_pipeline" />
+      </materials>
+      <stage name="setup_app">
+        <jobs>
+          <job name="setup_app">
+            <tasks>
+              <exec command="/bin/bash" workingdir="app_code">
+                <arg>-c</arg>
+                <arg>bundle install</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="/bin/bash" workingdir="app_code">
+                <arg>-c</arg>
+                <arg>sh setup_db_environment.sh test s</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+            <resources>
+              <resource>gauge</resource>
+            </resources>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="run_app">
+        <jobs>
+          <job name="start_server">
+            <tasks>
+              <exec command="/bin/bash" workingdir="app_code">
+                <arg>-c</arg>
+                <arg>cat ./tmp/pids/server.pid | xargs kill -9</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="/bin/sh" workingdir="app_code">
+                <arg>bg_server.sh</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+            <resources>
+              <resource>gauge</resource>
+            </resources>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="run_gauge_tests">
+        <jobs>
+          <job name="run_gauge_tests">
+            <tasks>
+              <exec command="/bin/bash" workingdir="gauge_tests">
+                <arg>-c</arg>
+                <arg>gauge specs</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+            <resources>
+              <resource>gauge</resource>
+            </resources>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
   </pipelines>
-  <pipelines group="STEP_Management" />
+  <environments>
+    <environment name="step-management">
+      <agents>
+        <physical uuid="a4adbf1a-7173-4dd4-b527-f91130f14a7f" />
+      </agents>
+      <pipelines>
+        <pipeline name="Acceptance_Test" />
+        <pipeline name="Tests" />
+      </pipelines>
+    </environment>
+  </environments>
   <agents>
-    <agent hostname="INstepuser.local" ipaddress="10.4.22.233" uuid="b7f48455-ee74-4c6e-8818-5d917033fdfd" />
+    <agent hostname="INstepuser.local" ipaddress="10.4.20.38" uuid="b7f48455-ee74-4c6e-8818-5d917033fdfd" />
+    <agent hostname="step-management-agent2" ipaddress="10.4.22.22" uuid="a4adbf1a-7173-4dd4-b527-f91130f14a7f" />
   </agents>
 </cruise>
 
