@@ -136,10 +136,13 @@ code, pre {
 }
 
 
-.questionPaperTitle{
+#questionPaperTitle{
     text-align: center;
     margin-bottom: 5vw;
     word-wrap: break-word;
+    width: 30%;
+    height: 100%;
+    font-size: 140%;
 }
 
 
@@ -363,7 +366,7 @@ code, pre{
 }
 
 .titleHolder {
-    height: 2vw;
+    height: 3vw;
     display: block;
     text-align: center;
 }
