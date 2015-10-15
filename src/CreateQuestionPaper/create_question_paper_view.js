@@ -124,10 +124,10 @@ $(document).ready(function () {
         presenter.onPreviewClick();
     });
 
-    //$('#create_questions').click(function(){
-    //    var createQuestionPopUp =  jade.renderFile('./src/createQuestion/create_question.jade');
-    //    $('#myModal').html(createQuestionPopUp);
-    //});
+    $('#create_questions').click(function(){
+        var createQuestionPopUp =  jade.renderFile('./src/createQuestion/create_question.jade');
+        $('#myModal').html(createQuestionPopUp);
+    });
 
     //setWrapperHeight()
 
