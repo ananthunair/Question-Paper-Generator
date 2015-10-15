@@ -382,3 +382,7 @@ code, pre{
     padding: 10px;
     overflow: auto;
 }
+
+#totalQuestions {
+    margin: 1.25%;
+}
