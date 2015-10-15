@@ -7,11 +7,6 @@ exports.Presenter = function (view, questions_repo,paper_repo) {
     this.questionPaper =[];
 }
 
-
-var formatQuestion = function(question){
-        return [question.id, question.question];
-};
-
 exports.Presenter.prototype = {
 
 
@@ -78,17 +73,12 @@ exports.Presenter.prototype = {
     },
 
     onRemoveQuestion : function(id){
-
         this.questionPaper = this.questionPaper.filter(function(question){
             return question.id != id;
         });
         this.view.addToQuestionPaper(this.questionPaper);
-        var filteredQuestion = lodash.find(this.all_questions,function (q) {
-            return q.id == id;
-        });
-
-        var removedQuestion = formatQuestion(filteredQuestion);
-        this.view.addRemovedQuestionToAllQuestions(removedQuestion);
+        var questionsToShow = lodash.difference(this.all_questions,this.questionPaper);
+        this.view.showQuestions(questionsToShow);
         this.view.showTotalNumberOfQuestion(this.questionPaper.length);
     }
 };

@@ -17,7 +17,6 @@ var view = {
         //this.table = this.createTable(questions);
     },
 
-
     addQuestionSelectionListener: function () {
         $('#tbl-questionsToSelect tbody').on('click', 'tr', function () {
             $(this).toggleClass('selected');
