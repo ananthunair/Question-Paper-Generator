@@ -4,6 +4,7 @@ link(rel="stylesheet" type="text/css" href="./createQuestionPaper/create_questio
 link(rel="stylesheet" type="text/css" href="../library/taggle/assets/css/taggle.css")
 div(id="inner-container" class="inner-container fullHeight")
  button(id="create_questions",type="button" ,class="btn btn-primary btn-lg",data-toggle="modal", data-target="#myModal") + Question
+ div(class="modal fade",id="myModal",role="dialog")
  div(id="questionsToSelect")
   div(id='question_heading') Questions
   br
@@ -24,7 +25,6 @@ div(id="inner-container" class="inner-container fullHeight")
   div(id="footer")
    button(id="preview_button", type="button" ,class="btn btn-primary btn-lg") Preview
    button(type="button" id="save" class="btn btn-primary btn-lg") Save
-div(class="modal fade",id="myModal",role="dialog")
 script(src="../library/taggle/assets/js/jquery-1.10.1.js")
 script(src="../library/taggle/assets/js/jquery-ui.js")
 script(src="../library/taggle/assets/js/taggle.js")
