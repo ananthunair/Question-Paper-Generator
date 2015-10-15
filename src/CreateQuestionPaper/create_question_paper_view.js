@@ -101,10 +101,6 @@ $(document).ready(function () {
     $('#save').click(function() {
         presenter.onSaveClick();
     });
-    $("#preview").click(function(){
-        presenter.onPreviewClick();
-    });
-
     $('#create_questions').click(function(){
         var createQuestionPopUp =  jade.renderFile('./src/createQuestion/create_question.jade');
         $('#myModal').html(createQuestionPopUp);
@@ -113,6 +109,9 @@ $(document).ready(function () {
         $("#questionPaperTitle").css("border-color", "");
     });
 
+    $("#preview_button").click(function(){
+        presenter.onPreviewClick();
+    });
     //setWrapperHeight()
 
 });
