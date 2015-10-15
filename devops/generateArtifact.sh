@@ -1,2 +1,7 @@
 LABEL=$1
-tar --exclude='./tests' --exclude='./node_modules' --exclude='./README.md' --exclude='.gitignore' --exclude='./.git' --exclude='./devops' --exclude='./data' --exclude='./QPG-Artifacts'  -cvf QPG-$LABEL.tar .
+
+zip -r app.nw *
+mv app.nw node_modules/nodewebkit/nodewebkit/node-webkit.app/Contents/Resources/
+mkdir -p QPG.app
+cp -r node_modules/nodewebkit/nodewebkit/node-webkit.app/* QPG.app/
+zip -r QPG-$LABEL.app QPG-LABEL.app/*
