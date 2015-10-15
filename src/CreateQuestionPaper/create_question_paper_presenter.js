@@ -48,14 +48,18 @@ exports.Presenter.prototype = {
 
     onSaveClick : function() {
         var view = this.view;
-        var onComplete = function (err) {
-            err ? view.showErrorMessage() : view.showSuccessMessage();
-        };
-        var questionPaper = {
-            questions : getQuestionIds(this.questionPaper),
-            header : {title:this.view.getQuestionPaperTitle() , marks : "" ,duration : ""}
-        };
-        this.paper_repo.saveQuestionPaper(questionPaper,onComplete);
+        console.log("title is",view.title);
+        if(view.title()){
+            var onComplete = function (err) {
+                err ? view.showErrorMessage() : view.showSuccessMessage();
+            };
+            var questionPaper = {
+                questions : getQuestionIds(this.questionPaper),
+                header : {title:this.view.getQuestionPaperTitle() , marks : "" ,duration : ""}
+            };
+            this.paper_repo.saveQuestionPaper(questionPaper,onComplete);
+        }else
+            view.showError("questionPaperTitle");
     },
 
     onPreviewClick:function(){

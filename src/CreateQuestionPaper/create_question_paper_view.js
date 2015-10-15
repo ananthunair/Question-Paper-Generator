@@ -80,11 +80,14 @@ var view = {
 
     openPreview: function (questionPaper, title) {
         preview.show({title: title, 'questions': questionPaper}, screen)
+    },
+
+    title: function(){
+        return $("#questionPaperTitle").val().trim();
+    },
+    showError:function(id){
+        $('#'+id).css("border-color", "red");
     }
-
-
-
-
 };
 
 var presenter = new Presenter(view, repo, paper_repo);
@@ -114,6 +117,9 @@ $(document).ready(function () {
     $('#create_questions').click(function(){
         var createQuestionPopUp =  jade.renderFile('./src/createQuestion/create_question.jade');
         $('#myModal').html(createQuestionPopUp);
+    });
+    $("#questionPaperTitle").keyup(function (e) {
+        $("#questionPaperTitle").css("border-color", "");
     });
 
     //setWrapperHeight()
