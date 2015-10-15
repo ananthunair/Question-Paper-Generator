@@ -96,6 +96,9 @@
     border-top: 1px solid lightgray;
     font-size: medium;
     word-wrap: break-word;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .question_paper_title.selected{
