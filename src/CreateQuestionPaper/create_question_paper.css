@@ -333,10 +333,12 @@ code, pre{
 
 .totalQuestionLabel{
     display: inline-block;
+    font-family: "Helvetica";
 }
 
 #totalQuestions {
     display: inline-block;
+    font-family: "Helvetica";
 }
 
 #footer{
