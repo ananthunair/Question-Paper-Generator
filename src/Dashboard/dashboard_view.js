@@ -20,10 +20,14 @@ var view = {
         var sortedQuestionPapers = sortQuestionPaperByTitle(questionPapers);
         var codeFormatedQuestions = jade.renderFile('./src/Dashboard/questionPapersToShow.jade', {'questionPapers': sortedQuestionPapers});
         $('#questionPapers').html(codeFormatedQuestions)
-        if(sortedQuestionPapers.length)
-        var id = render.paperId|| sortedQuestionPapers[0].id;
-        render.paperId=undefined;
-            $("#"+id).click()
+        if(sortedQuestionPapers.length) {
+            var id = render.paperId || sortedQuestionPapers[0].id;
+            render.paperId = undefined;
+            $("#" + id).click()
+        }else{
+            $("#preview_button").hide();
+        }
+
     }
 };
 
