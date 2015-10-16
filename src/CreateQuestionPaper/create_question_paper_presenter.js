@@ -47,16 +47,19 @@ exports.Presenter.prototype = {
     },
 
     onSaveClick : function() {
+        var presenter = this;
         var view = this.view;
         console.log("title is",view.title);
         if(view.title()){
-            var onComplete = function (err) {
+            var onComplete = function (err,paper) {
                 view.showSuccessAlert();
+                view.renderDashbord(paper.id);
             };
             var questionPaper = {
                 questions : getQuestionIds(this.questionPaper),
                 header : {title:this.view.getQuestionPaperTitle() , marks : "" ,duration : ""}
             };
+
             this.paper_repo.saveQuestionPaper(questionPaper,onComplete);
         }else
             view.showError("questionPaperTitle");
@@ -85,9 +88,8 @@ exports.Presenter.prototype = {
         this.view.showTotalNumberOfQuestion(this.questionPaper.length);
     },
     onNewQuestionAdded:function(){
-        console.log("agaya")
         var presenter =this;
-            this.onDocumentReady();
+            this.onAddOrRemoveTag(this.view.getTags())
         this.repo.getUniqueTags(function(err,tags){
             presenter.view.addSuggetions(tags)
         });

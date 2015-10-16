@@ -92,8 +92,16 @@ var view = {
     }
     ,
     showSuccessAlert: function () {
-        alert("Your question paper was added successfully");
+        //alert("Your question paper was added successfully");
     }
+    ,
+    renderDashbord :function(paperId){
+        render.paperId =paperId;
+        render('./src/dashboard/dashboard.jade');
+
+    }
+
+
 };
 
 var presenter = new Presenter(view, repo, paper_repo);
@@ -116,7 +124,7 @@ $(document).ready(function () {
     });
     $('#create_questions').click(function () {
         var createQuestionPopUp = jade.renderFile('./src/createQuestion/create_question.jade');
-        $('#myModal').html(createQuestionPopUp);
+     ;
         $(".close").click(function () {
             presenter.onNewQuestionAdded();
         })

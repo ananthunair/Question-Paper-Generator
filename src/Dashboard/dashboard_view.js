@@ -21,7 +21,9 @@ var view = {
         var codeFormatedQuestions = jade.renderFile('./src/Dashboard/questionPapersToShow.jade', {'questionPapers': sortedQuestionPapers});
         $('#questionPapers').html(codeFormatedQuestions)
         if(sortedQuestionPapers.length)
-            $("#"+sortedQuestionPapers[0].id).click()
+        var id = render.paperId|| sortedQuestionPapers[0].id;
+        render.paperId=undefined;
+            $("#"+id).click()
     }
 };
 
