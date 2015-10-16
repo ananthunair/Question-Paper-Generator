@@ -367,3 +367,8 @@ code, pre{
 .tagcontainer{
     width: 25% !important;
 }
+
+.questionPaperTitleInPreview{
+    text-align: center;
+    font-family: "Helvetica";
+}
