@@ -49,7 +49,6 @@ exports.Presenter.prototype = {
     onSaveClick : function() {
         var presenter = this;
         var view = this.view;
-        console.log("title is",view.title);
         if(view.title()){
             var onComplete = function (err,paper) {
                 view.renderDashbord(paper.id);
