@@ -41,7 +41,7 @@
     border-color: #D0D1D1;
 }
 
-#create_question, #all_question{
+#create_question{
     color: #ffffff;
     float: left;
     width: 10%;
@@ -121,8 +121,7 @@
     background-color: lightgray;
 }
 
-#create_question_paper, #addQuestions{
-
+#create_question_paper{
     vertical-align: bottom;
     width: 100%;
     height: 11%;
