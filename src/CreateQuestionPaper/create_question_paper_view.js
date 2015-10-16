@@ -91,10 +91,7 @@ var view = {
         $('#' + id).css("border-color", "red");
     }
     ,
-    showSuccessAlert: function () {
-        //alert("Your question paper was added successfully");
-    }
-    ,
+
     renderDashbord :function(paperId){
         render.paperId =paperId;
         render('./src/dashboard/dashboard.jade');

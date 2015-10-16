@@ -52,7 +52,6 @@ exports.Presenter.prototype = {
         console.log("title is",view.title);
         if(view.title()){
             var onComplete = function (err,paper) {
-                view.showSuccessAlert();
                 view.renderDashbord(paper.id);
             };
             var questionPaper = {

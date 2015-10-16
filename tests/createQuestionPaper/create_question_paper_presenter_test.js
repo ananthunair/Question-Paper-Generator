@@ -25,7 +25,7 @@ describe("create_question_paper_presenter", function () {
         view.showTotalNumberOfQuestion = function(){};
         view.title = function(){};
         view.showError = function(){};
-        view.showSuccessAlert = function(){};
+        view.renderDashbord = function(){};
         var repo = {};
         var paper_repo = {};
         paper_repo.getAllQuestionPapers = function(){};
@@ -115,12 +115,11 @@ describe("create_question_paper_presenter", function () {
             var paperName = "objectQuestions";
             mokito.JsMockito.when(moke_view).title().thenReturn(paperName);
             moke_paper_repo.saveQuestionPaper = function(paperName,onComplete){
-                console.log("ssss")
-                onComplete(null);
+                onComplete(null,{id:"paperId"});
             }
             var presenter =  new Presenter(moke_view,moke_repo,moke_paper_repo);
             presenter.onSaveClick();
-            mokito.JsMockito.verify(moke_view).showSuccessAlert();
+            mokito.JsMockito.verify(moke_view).renderDashbord("paperId");
         })
     });
 
