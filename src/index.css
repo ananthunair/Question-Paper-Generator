@@ -3,7 +3,7 @@
 }
 
 #title-header{
-    background-color: #0077C1;
+    background-color: #008dca;
 }
 
 .navbar-default {
@@ -12,7 +12,7 @@
 
 a#home.navbar-brand{
     color: #fff;
-    background-color: #0077C1;
+    background-color: #008dca;
 }
 
 html, body { height: 100% }
