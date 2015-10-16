@@ -541,9 +541,6 @@ textarea.input {
   color: #fff;
 }
 .tagcontainer {
-  height: inherit;
   position: fixed;
-  width: 74.5%;
-  overflow: auto;
   padding: 4px;
 }

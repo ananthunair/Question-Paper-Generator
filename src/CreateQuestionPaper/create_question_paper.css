@@ -382,7 +382,7 @@ code, pre{
     z-index: 2;
 }
 .tagcontainer{
-    width: 25% !important;
+    overflow: hidden;
 }
 
 .questionPaperTitleInPreview {
