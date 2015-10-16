@@ -9,6 +9,6 @@ else
         each qp in questions
             div(class="col-xs-12 jumbotron questionContainer" id='#{qp.id}')
                 div(class='inputBoxContainer')
-                    input(type="checkbox" value='#{qp.id}' name='#{qp.id}' class='my_checkbox')
+                    input(type="checkbox" value='#{qp.id}' name='#{qp.id}' class='select_question_checkbox')
                 div(class='question')
                     | !{qp.question.substr(0,125).split('\n').slice(0,2).join('<br>').replace('<code>','<code>').replace('</code>','</code>')}
