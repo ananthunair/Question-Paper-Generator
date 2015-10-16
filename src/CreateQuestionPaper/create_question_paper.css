@@ -364,3 +364,6 @@ code, pre{
     max-height: 220% !important;
     z-index: 2;
 }
+.tagcontainer{
+    width: 25% !important;
+}
