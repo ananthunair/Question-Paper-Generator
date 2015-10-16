@@ -91,7 +91,6 @@ var view = {
         $('#' + id).css("border-color", "red");
     }
     ,
-
     renderDashbord :function(paperId){
         render.paperId =paperId;
         render('./src/dashboard/dashboard.jade');
@@ -121,7 +120,7 @@ $(document).ready(function () {
     });
     $('#create_questions').click(function () {
         var createQuestionPopUp = jade.renderFile('./src/createQuestion/create_question.jade');
-     ;
+        $('#myModal').html(createQuestionPopUp);
         $(".close").click(function () {
             presenter.onNewQuestionAdded();
         })
