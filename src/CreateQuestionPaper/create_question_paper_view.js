@@ -153,6 +153,7 @@ var setupTagBox = function () {
     var tagbox = new Taggle($('.tagbox.textarea')[0], {
         duplicateTagClass: 'bounce',
         allowedTags: suggestedTag,
+        placeholder:"Search Questions",
         onTagAdd: function (event, tag) {
             enteredtags.push(tag);
             presenter.onAddOrRemoveTag(enteredtags);

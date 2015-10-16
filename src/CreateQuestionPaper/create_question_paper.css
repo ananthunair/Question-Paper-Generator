@@ -89,21 +89,7 @@ li {
     word-wrap: break-word;
 }
 
-#questionsToSelect{
-    height: 99%;
-    width: 28%;
-    border-radius: 5px;
-    border: 1px solid #888888;
-    padding: 0;
-    float: left;
-    margin-left: 1%;
-    display: inline;
-    font-weight: 200;
-    font-size: initial;
-    font-weight: bold;
-    color: #a0a0a0;
-    border-color: #D0D1D1;
-}
+
 
 #questionPaper{
     height: 109%;
@@ -204,21 +190,7 @@ li {
     background-color: #008dca;
 }
 
-#questionsToSelect{
-    height: 99%;
-    width: 28%;
-    border-radius: 5px;
-    border: 1px solid #888888;
-    padding: 0;
-    float: left;
-    margin-left: 1%;
-    display: inline;
-    font-weight: 200;
-    font-size: initial;
-    font-weight: bold;
-    color: #a0a0a0;
-    border-color: #D0D1D1;
-}
+
 
 #question_heading{
     padding-left: 4%;
@@ -288,10 +260,8 @@ code, pre{
     display: inline;
     font-weight: 200;
     font-size: initial;
-    font-weight: bold;
     color: #a0a0a0;
 }
-
 #question_heading{
     padding-left: 4%;
     padding-top: 4%;
@@ -389,4 +359,8 @@ code, pre{
 
 #totalQuestions {
     margin: 1.25%;
+}
+.ui-autocomplete{
+    max-height: 220% !important;
+    z-index: 2;
 }
