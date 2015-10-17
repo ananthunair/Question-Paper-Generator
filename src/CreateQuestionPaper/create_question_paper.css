@@ -366,14 +366,16 @@ code, pre{
 #totalQuestions {
     margin: 1.25%;
 }
+.searchTagBox{
+    position: absolute;
+    width: 98%;
+    height: 84%;
+    overflow: auto;
+}
 .ui-autocomplete{
     max-height: 220% !important;
     z-index: 2;
 }
-.tagcontainer{
-    overflow: hidden;
-}
-
 .questionPaperTitleInPreview {
     text-align: center;
     font-family: "Helvetica";

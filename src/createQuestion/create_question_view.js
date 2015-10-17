@@ -65,7 +65,8 @@ $(document).ready(function() {
 
 var setupTagBox = function() {
     var tagbox = new Taggle($('.tagbox.textarea')[0], {
-        duplicateTagClass: 'bounce'
+        duplicateTagClass: 'bounce',
+        cssclass:'createTagBox'
     });
     var container = tagbox.getContainer();
     var input = tagbox.getInput();

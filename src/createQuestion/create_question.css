@@ -71,9 +71,9 @@
 .modal-lg{
     width: 40%;
 }
-
-.tagcontainer{
-    width: 30vw !important;
-    overflow: auto !important;
-    height: 8%; !important;
+.createTagBox {
+    position: fixed;
+    width: 74%;
+    height: inherit;
+    overflow: auto;
 }
