@@ -1,6 +1,6 @@
 /*jshint scripturl:true, smarttabs:true */
 
- /*!
+/*!
  * @author Sean Coker <sean@seancoker.com>
  * @version 1.5.0
  * @url http://sean.is/poppin/tags
@@ -8,96 +8,99 @@
  * @description Taggle is a dependency-less tagging library
  */
 
-;(function(window, document, undefined) {
+;
+(function (window, document, undefined) {
 
     var DEFAULTS = {
 
-        /**
-         * Class names to be added on each tag entered
-         * @type {String}
-         */
-        additionalTagClasses:   '',
+            /**
+             * Class names to be added on each tag entered
+             * @type {String}
+             */
+            additionalTagClasses: '',
+            cssclass:'',
+            /**
+             * Allow duplicate tags to be entered in the field?
+             * @type {Boolean}
+             */
+            allowDuplicates: false,
 
-        /**
-         * Allow duplicate tags to be entered in the field?
-         * @type {Boolean}
-         */
-        allowDuplicates:        false,
+            /**
+             * Class name that will be added onto duplicate existant tag
+             * @type {String}
+             */
+            duplicateTagClass: '',
 
-        /**
-         * Class name that will be added onto duplicate existant tag
-         * @type {String}
-         */
-        duplicateTagClass:      '',
+            /**
+             * Class added to the container div when focused
+             * @type {String}
+             */
+            containerFocusClass: 'active',
 
-        /**
-         * Class added to the container div when focused
-         * @type {String}
-         */
-        containerFocusClass:    'active',
+            /**
+             * Name added to the hidden inputs within each tag
+             * @type {String}
+             */
+            hiddenInputName: 'taggles[]',
 
-        /**
-         * Name added to the hidden inputs within each tag
-         * @type {String}
-         */
-        hiddenInputName:        'taggles[]',
+            /**
+             * Tags that should be preloaded in the div on load
+             * @type {Array}
+             */
+            tags: [],
 
-        /**
-         * Tags that should be preloaded in the div on load
-         * @type {Array}
-         */
-        tags:                   [],
+            /**
+             * Tags that the user will be restricted to
+             * @type {Array}
+             */
+            allowedTags: [],
 
-        /**
-         * Tags that the user will be restricted to
-         * @type {Array}
-         */
-        allowedTags:            [],
+            /**
+             * If within a form, you can specify the tab index flow
+             * @type {Number}
+             */
+            tabIndex: 1,
 
-        /**
-         * If within a form, you can specify the tab index flow
-         * @type {Number}
-         */
-        tabIndex:               1,
+            /**
+             * Placeholder string to be placed in an empty taggle field
+             * @type {String}
+             */
+            placeholder: 'Enter tags...',
 
-        /**
-         * Placeholder string to be placed in an empty taggle field
-         * @type {String}
-         */
-        placeholder:            'Enter tags...',
+            /**
+             * Keycodes that will add a tag
+             * @type {Array}
+             */
+            submitKeys: [],
 
-        /**
-         * Keycodes that will add a tag
-         * @type {Array}
-         */
-        submitKeys:             [],
+            /**
+             * Function hook called when a tag is added
+             * @param  {Event} event Event triggered when tag was added
+             * @param  {String} tag The tag added
+             */
+            onTagAdd: function () {
+            },
 
-        /**
-         * Function hook called when a tag is added
-         * @param  {Event} event Event triggered when tag was added
-         * @param  {String} tag The tag added
-         */
-        onTagAdd:               function() {},
+            /**
+             * Function hook called when a tag is removed
+             * @param  {Event} event Event triggered when tag was removed
+             * @param  {String} tag The tag removed
+             */
+            onTagRemove: function () {
+            }
+        },
 
-        /**
-         * Function hook called when a tag is removed
-         * @param  {Event} event Event triggered when tag was removed
-         * @param  {String} tag The tag removed
-         */
-        onTagRemove:            function() {}
-    },
-
-    BACKSPACE = 8,
-    COMMA = 188,
-    TAB = 9,
-    ENTER = 13;
+        BACKSPACE = 8,
+        COMMA = 188,
+        TAB = 9,
+        ENTER = 13;
 
     /**
      * Constructor
      * @param {Mixed} el ID of an element or the actual element
      * @param {Object} options
      */
-    var Taggle = function(el, options) {
+    var Taggle = function (el, options) {
         var self = this,
             settings = _extend({}, DEFAULTS, options),
             measurements = {
@@ -118,7 +121,7 @@
             input_li = document.createElement('li'),
             input = document.createElement('input'),
             sizer = document.createElement('div'),
-            tagcontainer =document.createElement('div'),
+            tagcontainer = document.createElement('div'),
             placeholder;
 
         if (settings.placeholder) {
@@ -152,7 +155,7 @@
             style = measurements.container.style;
             lpad = parseInt(style['padding-left'] || style.paddingLeft, 10);
             rpad = parseInt(style['padding-right'] || style.paddingRight, 10);
-            measurements.container.padding =  lpad + rpad;
+            measurements.container.padding = lpad + rpad;
         }
 
         /**
@@ -166,7 +169,8 @@
             input.className = 'taggle_input';
             input.tabIndex = settings.tabIndex;
             sizer.className = 'taggle_sizer';
-            tagcontainer.className ='tagcontainer'
+            tagcontainer.className = 'tagcontainer';
+            tagcontainer.className += " " + settings.cssclass
 
             if (settings.tags.length) {
                 for (var i = 0, len = settings.tags.length; i < len; i++) {
@@ -199,7 +203,7 @@
          * Attaches neccessary events
          */
         function _attachEvents() {
-            _on(container, 'click', function() {
+            _on(container, 'click', function () {
                 input.focus();
             });
 
@@ -398,7 +402,7 @@
          * Runs all the events that need to run on keydown
          * @param  {Event} e
          */
-         function _keydownEvents(e) {
+        function _keydownEvents(e) {
             e = e || window.event;
 
             var key = e.keyCode;
@@ -516,27 +520,27 @@
             _focusInput();
         }
 
-        self.getTags = function() {
+        self.getTags = function () {
             return tag;
         };
 
-        self.getTagElements = function() {
+        self.getTagElements = function () {
             return tag.elements;
         };
 
-        self.getTagValues = function() {
+        self.getTagValues = function () {
             return tag.values;
         };
 
-        self.getInput = function() {
+        self.getInput = function () {
             return input;
         };
 
-        self.getContainer = function() {
+        self.getContainer = function () {
             return container;
         };
 
-        self.add = function(text) {
+        self.add = function (text) {
             var is_arr = _isArray(text);
 
             if (typeof text === 'string') {
@@ -554,7 +558,7 @@
             return self;
         };
 
-        self.remove = function(text, all) {
+        self.remove = function (text, all) {
             var len = tag.values.length - 1,
                 found = false;
 
@@ -573,11 +577,24 @@
 
             return self;
         };
-        self.addAllowedTags=function(tags){
-
-            settings.allowedTags=tags;
-        }
-
+        self.resetAllowedTags = function (tags) {
+            settings.allowedTags = tags;
+        };
+        self.resetSuggetions = function (tags) {
+            var container = this.getContainer();
+            var input = this.getInput();
+            $(input).autocomplete({
+                source: tags,
+                appendTo: container,
+                position: {at: 'left bottom', of: container},
+                select: function (e, v) {
+                    e.preventDefault();
+                    if (e.which === 1) {
+                        this.add(v.item.value);
+                    }
+                }
+            });
+        };
         // Bang bang bang skeet skeet
         _init();
     };

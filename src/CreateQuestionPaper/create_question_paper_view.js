@@ -37,7 +37,7 @@ var view = {
            suggestedTag.push(tag)
         });
         resettagBox(this.tagBox)
-        this.tagBox.addAllowedTags(tags)
+        this.tagBox.resetAllowedTags(tags)
     },
 
     deleteSelectedQuestions: function () {
