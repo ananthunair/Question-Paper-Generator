@@ -49,6 +49,11 @@ var view = {
     addToQuestionPaper: function (selectedQuestions) {
         var htmlForSelectedQuestions = jade.renderFile("./src/createQuestionPaper/selectedQuestions.jade", {'questions': selectedQuestions});
         $('#body').html(htmlForSelectedQuestions);
+        $('.addNote').click(function () {
+            var htmlForAddNote = jade.renderFile("./src/createQuestionPaper/addNotePopUp.jade");
+            //alert(htmlForAddNote);
+            $('#myModal').html(htmlForAddNote);
+        });
         $('.remove').click(function () {
             var id = $(this).attr('id');
             presenter.onRemoveQuestion(id);
