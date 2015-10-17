@@ -1,3 +1,4 @@
+script(src="./createQuestionPaper/select_all.js")
 if questions.length == 0
     div(id='no_question_paper_container')
         div(id='noQuestionPaperAvailable') No Questions Available
@@ -5,7 +6,8 @@ if questions.length == 0
 else
 
     div(id='questions_container')
-
+        input(type='checkbox' id='selectAll')
+        | button
         each qp in questions
             div(class="col-xs-12 jumbotron questionContainer" id='#{qp.id}')
                 div(class='inputBoxContainer')
