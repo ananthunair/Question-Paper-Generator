@@ -27,6 +27,7 @@ describe("create_question_paper_presenter", function () {
         view.showError = function(){};
         view.renderDashbord = function(){};
         view.addSuggetions =function(){};
+        view.getNote = function(){};
         var repo = {};
         var paper_repo = {};
         paper_repo.getAllQuestionPapers = function(){};
@@ -102,7 +103,7 @@ describe("create_question_paper_presenter", function () {
     context("#onPreviewClick",function(){
         it('should Open Preview Window',function(){
             var title = "Question Title"
-            var questionPaper = [{id:1,'question':"how are you?",'answer':"fine"}]
+            var questionPaper = [{id:1,'question':"how are you?",'answer':"fine",note:"xyz"}]
             mokito.JsMockito.when(moke_view).getQuestionPaperTitle().thenReturn(title)
             var presenter =  new Presenter(moke_view,moke_repo);
             presenter.questionPaper = questionPaper

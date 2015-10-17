@@ -66,9 +66,8 @@ exports.Presenter.prototype = {
         var view = this.view;
         this.questionPaper.forEach(function(question){
            question.note =  view.getNote(question) ? view.getNote(question) : "";
-            console.log('----------------',question.note)
         });
-        this.view.openPreview(this.questionPaper,view.title())
+        this.view.openPreview(this.questionPaper,view.getQuestionPaperTitle());
     },
 
     setAutosuggetions : function(){
