@@ -42,7 +42,7 @@ describe('create_paper_repo', function () {
             });
         })
     })
-    describe('getQuestionIds', function () {
+    describe('getQuestionIdAndNote', function () {
         it('should fetch all question id from given paper', function (done) {
             var questionPaper = {
                 questions: [{id: "someId", note: ""}],

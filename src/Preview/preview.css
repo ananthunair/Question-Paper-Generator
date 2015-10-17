@@ -11,3 +11,9 @@ li {
 .questionPaperTitle {
     text-align: center;
 }
+
+.note {
+    margin-bottom: 1%;
+    margin-left: -1.4%;
+    margin-top: 1.3%;
+}

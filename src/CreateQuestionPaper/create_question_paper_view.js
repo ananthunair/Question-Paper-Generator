@@ -50,9 +50,8 @@ var view = {
         var htmlForSelectedQuestions = jade.renderFile("./src/createQuestionPaper/selectedQuestions.jade", {'questions': selectedQuestions});
         $('#body').html(htmlForSelectedQuestions);
         $('.addNote').click(function () {
-            var htmlForAddNote = jade.renderFile("./src/createQuestionPaper/addNotePopUp.jade");
-            //alert(htmlForAddNote);
-            $('#myModal').html(htmlForAddNote);
+            var id = $(this).attr('id');
+            $("#"+id+"_note").html("<textarea id="+id+"_text"+"></textarea>");
         });
         $('.remove').click(function () {
             var id = $(this).attr('id');
@@ -87,6 +86,12 @@ var view = {
     renderDashbord :function(paperId){
         Dashboard.setExtraArgs({'paperId':paperId})
         Dashboard.render();
+        render.paperId =paperId;
+        render('./src/dashboard/dashboard.jade');
+
+    },
+    getNote : function(question){
+        return $('#'+question.id+'_text').val();
     }
 
 

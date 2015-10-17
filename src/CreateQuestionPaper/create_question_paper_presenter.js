@@ -7,6 +7,12 @@ exports.Presenter = function (view, questions_repo,paper_repo) {
     this.questionPaper =[];
 }
 
+var generateQuestionPaper = function(questionPaper,view) {
+    return {
+        questions: questionPaper.map(getQuestionIdAndNote),
+        header: {title: view.getQuestionPaperTitle(), marks: "", duration: ""}
+    };
+}
 exports.Presenter.prototype = {
 
 
@@ -45,25 +51,24 @@ exports.Presenter.prototype = {
     },
 
     onSaveClick : function() {
-        var presenter = this;
         var view = this.view;
         if(view.title()){
             var onComplete = function (err,paper) {
                 view.renderDashbord(paper.id);
             };
-            var questionPaper = {
-                questions : getQuestionIds(this.questionPaper),
-                header : {title:this.view.getQuestionPaperTitle() , marks : "" ,duration : ""}
-            };
-
+            var questionPaper = generateQuestionPaper(this.questionPaper,view);
             this.paper_repo.saveQuestionPaper(questionPaper,onComplete);
         }else
             view.showError("questionPaperTitle");
     },
 
     onPreviewClick:function(){
-        var title = this.view.getQuestionPaperTitle();
-        this.view.openPreview(this.questionPaper,title)
+        var view = this.view;
+        this.questionPaper.forEach(function(question){
+           question.note =  view.getNote(question) ? view.getNote(question) : "";
+            console.log('----------------',question.note)
+        });
+        this.view.openPreview(this.questionPaper,view.title())
     },
 
     setAutosuggetions : function(){
@@ -91,11 +96,8 @@ exports.Presenter.prototype = {
         });
     }
 };
-var getQuestionIds = function(questions){
-    return questions.map(function(question){
-       return {id:question.id,
-       note : ""}
-    });
+var getQuestionIdAndNote = function(question){
+       return {id:question.id,note : question.note};
 };
 var difference = function(questionInPaper,allQuestion){
 
