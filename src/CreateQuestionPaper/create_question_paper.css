@@ -398,3 +398,26 @@ code, pre{
     vertical-align: middle;
     font-weight: initial;
 }
+
+#selectAllContainer{
+    margin-top: 1%;
+    margin-bottom: 1%;
+    background-color: #008dca;
+    vertical-align: middle;
+    padding: 2.5%;
+    font-family: "Helvetica";
+    font-weight: bold;
+    color: white;
+    border-bottom: 1px solid lightgray;
+    border-top: 1px solid lightgray;
+    height: 10%;
+    font-size: small;
+}
+
+#selectAll{
+    cursor: hand;
+    margin-right: 5%;
+    width: 5%;
+    height: 60%;
+    margin-left: 1%;
+}

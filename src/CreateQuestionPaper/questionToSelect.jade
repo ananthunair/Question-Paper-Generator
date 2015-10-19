@@ -6,8 +6,9 @@ if questions.length == 0
 else
 
     div(id='questions_container')
-        input(type='checkbox' id='selectAll')
-        | button
+        div(id='selectAllContainer')
+            input(type='checkbox' id='selectAll')
+            | Select All
         each qp in questions
             div(class="col-xs-12 jumbotron questionContainer" id='#{qp.id}')
                 div(class='inputBoxContainer')
