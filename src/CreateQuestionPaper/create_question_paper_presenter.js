@@ -15,7 +15,6 @@ exports.Presenter.prototype = {
         var onComplete = function(err,questions){
             presenter.all_questions = questions;
             presenter.view.showQuestions(questions);
-            //presenter.view.addQuestionSelectionListener();
         };
         this.repo.fetchQuestions(onComplete);
     },
@@ -26,7 +25,6 @@ exports.Presenter.prototype = {
                 presenter.all_questions = difference(presenter.questionPaper,questions);
 
                 presenter.view.showQuestions(presenter.all_questions);
-                presenter.view.addQuestionSelectionListener();
             };
             this.repo.fetchQuestionsOfSpecificTags(tags,onComplete);
         },

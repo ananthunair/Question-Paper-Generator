@@ -14,11 +14,6 @@ var view = {
         $('#all_question_container').html(htmlForQuestionsToSelect)
     },
 
-    addQuestionSelectionListener: function () {
-        $('#tbl-questionsToSelect tbody').on('click', 'tr', function () {
-            $(this).toggleClass('selected');
-        });
-    },
     setupTagBoxData: function(tags){
         this.tagBox = setupTagBox(tags)
     },

@@ -17,7 +17,7 @@ describe("create_question_paper_presenter", function () {
         view.openPreview =function(){};
         view.getQuestionPaperTitle = function(){};
         view.showTotalNumberOfQuestion = function(){};
-        view.addQuestionSelectionListener = function(){};
+
         view.deleteSelectedQuestions = function(){};
         view.getTags = function(){};
         view.setupTagBoxData = function(){};
@@ -26,6 +26,7 @@ describe("create_question_paper_presenter", function () {
         view.title = function(){};
         view.showError = function(){};
         view.renderDashbord = function(){};
+        view.addSuggetions =function(){};
         var repo = {};
         var paper_repo = {};
         paper_repo.getAllQuestionPapers = function(){};
@@ -200,6 +201,22 @@ describe("create_question_paper_presenter", function () {
                 assert.deepEqual(argument[1],questionToShow[1]);
             };
             presenter.onRemoveQuestion('someId');
+        })
+    })
+    context("#onNewQuestionAdded", function(){
+        it("should reapply the filters on new set of questions and update suggested tags with new created tags",function(){
+          mokito.JsMockito.when(moke_view).getTags().thenReturn(["array"])
+            var presenter = new Presenter(moke_view,moke_repo,moke_paper_repo);
+
+            moke_repo.fetchQuestionsOfSpecificTags =function(tags,oncomplete){
+                assert.equal(tags[0],"array")
+                oncomplete(null,[{id:"someid",question:"how are u?",answer:"fine",tags:["array"]}])
+            }
+            moke_repo.getUniqueTags =function(oncomplete){
+                oncomplete(null,["array"])
+            }
+            presenter.onNewQuestionAdded();
+            mokito.JsMockito.verify(moke_view).showQuestions(presenter.all_questions)
         })
     })
 });
