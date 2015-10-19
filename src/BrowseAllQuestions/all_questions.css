@@ -14,3 +14,14 @@
     border-color: #D0D1D1;
     display: block;
 }
+
+#questionPreviewContainer{
+    height: 86%;
+    width: 69%;
+    border-radius: 5px;
+    border: 1px solid #888888;
+    padding: 10px;
+    float: right;
+    margin-right: 1%;
+    border-color: #D0D1D1;
+}
