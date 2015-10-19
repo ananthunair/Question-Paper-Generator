@@ -33,7 +33,14 @@ $(document).ready(function (){
         var id = $(this).attr('id');
         presenter.getAllQuestionsFromPaper(id);
     });
+
     $("#preview_button").click(function(){
         view.openPreview();
+
+        $("#preview_button").attr("disabled", "disabled");
+        setTimeout(function() {
+            $("#preview_button").removeAttr("disabled");
+        }, 400);
     });
+
 });

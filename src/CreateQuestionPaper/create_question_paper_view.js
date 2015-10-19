@@ -131,7 +131,14 @@ $(document).ready(function () {
 
     $("#preview_button").click(function () {
         presenter.onPreviewClick();
+
+        $("#preview_button").attr("disabled", "disabled");
+        setTimeout(function() {
+            $("#preview_button").removeAttr("disabled");
+        }, 400);
     });
+
+
     //setWrapperHeight()
 
 
