@@ -36,11 +36,6 @@ $(document).ready(function (){
 
     $("#preview_button").click(function(){
         view.openPreview();
-
-        $("#preview_button").attr("disabled", "disabled");
-        setTimeout(function() {
-            $("#preview_button").removeAttr("disabled");
-        }, 400);
     });
 
 });

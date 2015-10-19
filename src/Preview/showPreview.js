@@ -9,5 +9,10 @@ exports.show =function(questionPaper,screen){
     previewWindow.focus();
     previewWindow.moveTo(0,0);
     previewWindow.resizeTo(screen.width, screen.height)
+    clearDocument(previewWindow.document)
     previewWindow.document.write(preview)
+}
+var clearDocument =function(document){
+    document.open()
+    document.close()
 }
