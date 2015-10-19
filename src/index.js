@@ -10,7 +10,6 @@ var setArgs =function(extraArgs){
 }
 
 var render =function(path,options){
-    console.log(path)
     var html = jade.renderFile(path,options)
     $('#container').html(html);
 };

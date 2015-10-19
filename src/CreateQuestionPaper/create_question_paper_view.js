@@ -6,7 +6,6 @@ var repo = new Question_repository();
 var preview = require('./preview/showPreview.js');
 var paper_repo = new Question_papers_repository();
 var lodash = require('lodash');
-var suggestedTag = [];
 var view = {
     table: {},
 
@@ -21,8 +20,7 @@ var view = {
         });
     },
     setupTagBoxData: function(tags){
-        suggestedTag = tags;
-        this.tagBox = setupTagBox()
+        this.tagBox = setupTagBox(tags)
     },
 
     getTags: function () {
@@ -31,13 +29,8 @@ var view = {
 
 
     addSuggetions:function(tags){
-        var newTags = lodash.difference(tags,suggestedTag);
-
-        newTags.forEach(function(tag){
-           suggestedTag.push(tag)
-        });
-        resettagBox(this.tagBox)
         this.tagBox.resetAllowedTags(tags)
+        this.tagBox.resetSuggetions(tags)
     },
 
     deleteSelectedQuestions: function () {
@@ -133,26 +126,12 @@ $(document).ready(function () {
 
 });
 
-var resettagBox =function(tagbox){
-    var container = tagbox.getContainer();
-    var input = tagbox.getInput();
-    $(input).autocomplete({
-        source:suggestedTag,
-        appendTo: container,
-        position: { at: 'left bottom', of: container },
-        select: function(e, v) {
-            e.preventDefault();
-            if (e.which === 1) {
-                tagbox.add(v.item.value);
-            }
-        }
-    });
-}
-var setupTagBox = function () {
+
+var setupTagBox = function (tags) {
     var enteredtags = [];
     var tagbox = new Taggle($('.tagbox.textarea')[0], {
         duplicateTagClass: 'bounce',
-        allowedTags: suggestedTag,
+        allowedTags: tags,
         cssclass:"searchTagBox",
         placeholder:"Search Questions",
         onTagAdd: function (event, tag) {
@@ -166,6 +145,6 @@ var setupTagBox = function () {
             presenter.onAddOrRemoveTag(enteredtags);
         }
     });
-  resettagBox(tagbox)
+  tagbox.resetSuggetions(tags);
     return tagbox;
 };

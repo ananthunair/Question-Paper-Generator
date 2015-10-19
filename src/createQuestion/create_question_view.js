@@ -1,7 +1,6 @@
 var Presenter = require('./createQuestion/create_question_presenter.js').Presenter;
 var Question_repository = require('./repository/create_question_repo.js').Question_repository;
 var lodash  = require('lodash');
-var suggestedTag = [];
 var view ={
     getSelection:function(){
         var textComponent = document.getElementById('question');
@@ -34,15 +33,11 @@ var view ={
         setAlert("alert alert-success","Your question was added successfully")
     },
     setupTagBox:function(tags){
-        suggestedTag = tags;
-        this.tagBox = setupTagBox()
+        this.tagBox = setupTagBox(tags)
     },
 
     addSuggetions:function(tags){
-        var newTags = lodash.difference(tags,suggestedTag);
-        newTags.forEach(function(tag){
-            suggestedTag.push(tag);
-        });
+      this.tagBox.resetSuggetions(tags)
     }
 }
 
@@ -63,24 +58,12 @@ $(document).ready(function() {
     presenter.onDocumentReady()
 });
 
-var setupTagBox = function() {
+var setupTagBox = function(tags) {
     var tagbox = new Taggle($('.tagbox.textarea')[0], {
         duplicateTagClass: 'bounce',
         cssclass:'createTagBox'
     });
-    var container = tagbox.getContainer();
-    var input = tagbox.getInput();
-    $(input).autocomplete({
-        source:suggestedTag,
-        appendTo: container,
-        position: { at: 'left bottom', of: container },
-        select: function(e, v) {
-            e.preventDefault();
-            if (e.which === 1) {
-                tagbox.add(v.item.value);
-            }
-        }
-    });
+   tagbox.resetSuggetions(tags)
     return tagbox;
 };
 

@@ -67,7 +67,7 @@ describe("create_question_paper_presenter", function () {
             mokito.JsMockito.verify(moke_view).addToQuestionPaper(presenter.questionPaper)
         });
 
-        it('should remove selected question from questios to select', function () {
+        it('should remove selected question from questions to select', function () {
             var questions = [{'id': 1, 'question': 'how are you?', 'answer': 'fine'},
                 {'id': 2, 'question': 'how are you?', 'answer': 'fine'}];
             var remainingQuestions = [{'id': 2, 'question': 'how are you?', 'answer': 'fine'}];
@@ -110,8 +110,8 @@ describe("create_question_paper_presenter", function () {
         })
 
     });
-    context("#onSaveClck",function(){
-        it('should show success if questions are saved in db',function(){
+    context("#onSaveClick",function(){
+        it('should render dashbord if paper is saved successfully',function(){
             var paperName = "objectQuestions";
             mokito.JsMockito.when(moke_view).title().thenReturn(paperName);
             moke_paper_repo.saveQuestionPaper = function(paperName,onComplete){
