@@ -39,6 +39,10 @@ $(function(){
     $('#create_question').click(function(){
         CreateQuestion.render()
     });
+
+    $('#showAllQuestions').click(function(){
+        render('./src/BrowseAllQuestions/all_questions.jade');
+    })
 });
 
 var fetchExtraArgs=function(){

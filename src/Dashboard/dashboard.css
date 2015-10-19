@@ -41,7 +41,7 @@
     border-color: #D0D1D1;
 }
 
-#create_question{
+#create_question, #showAllQuestions{
     color: #ffffff;
     float: left;
     width: 10%;

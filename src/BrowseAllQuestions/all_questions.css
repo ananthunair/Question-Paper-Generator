@@ -1,0 +1,16 @@
+#browseAllQuestionContainer{
+    height: 86%;
+    width: 28%;
+    border-radius: 5px;
+    border: 1px solid #888888;
+    padding: 0;
+    float: left;
+    margin-left: 1%;
+    display: inline;
+    font-weight: 200;
+    font-size: initial;
+    font-weight: bold;
+    color: #a0a0a0;
+    border-color: #D0D1D1;
+    display: block;
+}
