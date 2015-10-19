@@ -92,9 +92,8 @@ var view = {
     }
     ,
     renderDashbord :function(paperId){
-        render.paperId =paperId;
-        render('./src/dashboard/dashboard.jade');
-
+        Dashboard.setExtraArgs({'paperId':paperId})
+        Dashboard.render();
     }
 
 
@@ -119,8 +118,7 @@ $(document).ready(function () {
         presenter.onSaveClick();
     });
     $('#create_questions').click(function () {
-        var createQuestionPopUp = jade.renderFile('./src/createQuestion/create_question.jade');
-        $('#myModal').html(createQuestionPopUp);
+        CreateQuestion.render();
         $(".close").click(function () {
             presenter.onNewQuestionAdded();
         })

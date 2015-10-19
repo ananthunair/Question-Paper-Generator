@@ -27,7 +27,7 @@ $(document).ready(function (){
     var presenter = new Presenter(view, paperRepo,questionRepo);
 
     $('#create_question_paper').click(function(){
-        render('./src/createQuestionPaper/create_question_paper.jade')
+       CreatePaper.render()
     });
     $('.question_paper_title').click(function(){
         var id = $(this).attr('id');

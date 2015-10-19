@@ -1,7 +1,7 @@
 var Presenter = require('./dashboard/dashboard_presenter.js').Presenter;
 var Question_papers_repository = require('./repository/question_paper_repo.js').Question_papers_repository;
 var jade = require('jade');
-
+var extraArgs ={};
 
 var sortQuestionPaperByTitle = function(questionPapers){
     return questionPapers.sort(function(pv, cv){
@@ -21,8 +21,7 @@ var view = {
         var codeFormatedQuestions = jade.renderFile('./src/Dashboard/questionPapersToShow.jade', {'questionPapers': sortedQuestionPapers});
         $('#questionPapers').html(codeFormatedQuestions)
         if(sortedQuestionPapers.length) {
-            var id = render.paperId || sortedQuestionPapers[0].id;
-            render.paperId = undefined;
+            var id = extraArgs.paperId || sortedQuestionPapers[0].id;
             $("#" + id).click()
         }else{
             $("#preview_button").hide();
@@ -32,12 +31,17 @@ var view = {
 };
 
 $(function(){
+   fetchExtraArgs()
     var repo = new Question_papers_repository();
     var presenter = new Presenter(view, repo);
     presenter.onDocumentReady();
 
     $('#create_question').click(function(){
-        var createQuestionPopUp =  jade.renderFile('./src/createQuestion/create_question.jade');
-        $('#myModal').html(createQuestionPopUp);
+        CreateQuestion.render()
     });
 });
+
+var fetchExtraArgs=function(){
+    extraArgs =Dashboard.extraArgs;
+    Dashboard.resetArgs();
+}
