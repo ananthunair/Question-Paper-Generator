@@ -5,6 +5,7 @@ exports.Presenter = function (view, questions_repo,paper_repo) {
     this.repo = questions_repo;
     this.paper_repo = paper_repo;
     this.questionPaper =[];
+    this.notes  = {};
 }
 
 var generateQuestionPaper = function(questionPaper,view) {
@@ -37,7 +38,6 @@ exports.Presenter.prototype = {
 
     onAddClick : function(){
         var view = this.view;
-
         var selectedIds = view.getSelectedQuestions();
 
         function isSelected(question){
@@ -46,7 +46,7 @@ exports.Presenter.prototype = {
         var questionsToAddInPaper = this.all_questions.filter(isSelected);
         this.questionPaper = this.questionPaper.concat(questionsToAddInPaper);
         view.deleteSelectedQuestions();
-        view.addToQuestionPaper(this.questionPaper);
+        view.addToQuestionPaper(this.questionPaper,this.notes);
         view.showTotalNumberOfQuestion(this.questionPaper.length)
     },
 
@@ -64,9 +64,6 @@ exports.Presenter.prototype = {
 
     onPreviewClick:function(){
         var view = this.view;
-        this.questionPaper.forEach(function(question){
-           question.note =  view.getNote(question) ? view.getNote(question) : "";
-        });
         this.view.openPreview(this.questionPaper,view.getQuestionPaperTitle());
     },
 
@@ -82,7 +79,8 @@ exports.Presenter.prototype = {
         this.questionPaper = this.questionPaper.filter(function(question){
             return question.id != id;
         });
-        this.view.addToQuestionPaper(this.questionPaper);
+
+        this.view.addToQuestionPaper(this.questionPaper,this.notes);
         var questionsToShow = lodash.difference(this.all_questions,this.questionPaper);
         this.view.showQuestions(questionsToShow);
         this.view.showTotalNumberOfQuestion(this.questionPaper.length);
@@ -93,8 +91,16 @@ exports.Presenter.prototype = {
         this.repo.getUniqueTags(function(err,tags){
             presenter.view.addSuggetions(tags)
         });
+    },
+    onRemoveNotes:function(id){
+        this.notes[id]="";
+    }
+    ,
+    onSaveNotes:function(id,note) {
+        this.notes[id] =note;
     }
 };
+
 var getQuestionIdAndNote = function(question){
        return {id:question.id,note : question.note};
 };

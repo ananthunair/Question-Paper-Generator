@@ -46,17 +46,11 @@ var view = {
     }
     ,
 
-    addToQuestionPaper: function (selectedQuestions) {
-        var htmlForSelectedQuestions = jade.renderFile("./src/createQuestionPaper/selectedQuestions.jade", {'questions': selectedQuestions});
+    addToQuestionPaper: function (selectedQuestions,notes) {
+        var htmlForSelectedQuestions = jade.renderFile("./src/createQuestionPaper/selectedQuestions.jade", {'questions': selectedQuestions,'notes':notes});
         $('#body').html(htmlForSelectedQuestions);
-        $('.addNote').click(function () {
-            var id = $(this).attr('id');
-            $("#"+id+"_note").html("<textarea id="+id+"_text"+"></textarea>");
-        });
-        $('.remove').click(function () {
-            var id = $(this).attr('id');
-            presenter.onRemoveQuestion(id);
-        })
+        registerAddNotesListeners();
+
     }
     ,
 
@@ -90,8 +84,8 @@ var view = {
         render('./src/dashboard/dashboard.jade');
 
     },
-    getNote : function(question){
-        return $('#'+question.id+'_text').val();
+    getNote : function(index){
+        return $('#'+index+'_text').val();
     }
 
 
@@ -99,13 +93,33 @@ var view = {
 
 var presenter = new Presenter(view, repo, paper_repo);
 
-var setWrapperHeight = function () {
-    var windowHeight = $(window).height();
-    var headerHeight = $('#title-header').height();
-    $('#wrapper').height(windowHeight - headerHeight)
-};
 
 
+var registerAddNotesListeners =function(){
+    $('.addNote').click(function(){
+        var id = $(this).attr('id');
+        $("#"+id+"_noteHolder").html(jade.renderFile('./src/createQuestionPaper/addNote.jade',{id:id}))
+        setNoteListener();
+    });
+    setNoteListener();
+    $('.remove').click(function () {
+        var id = $(this).attr('id');
+        presenter.onRemoveQuestion(id);
+    })
+}
+var setNoteListener =function(){
+    $(".removeNote").click(function(){
+        var id = $(this).attr('id')
+        presenter.onRemoveNotes(id)
+        $("#"+id+"_noteHolder").empty();
+    });
+    $(".noteText").focusout(function(){
+        var id = $(this).attr('id')
+        var val =  $(this).val()
+        presenter.onSaveNotes(id,val)
+    });
+
+}
 $(document).ready(function () {
     presenter.onDocumentReady();
     presenter.setAutosuggetions();

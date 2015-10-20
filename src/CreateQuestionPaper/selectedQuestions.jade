@@ -1,7 +1,10 @@
-each question in questions
- div(class="notesPlaceHolder" id="#{question.id}_note")
+each question,index in questions
+ div(class="notesPlaceHolder" id="#{index}_noteHolder")
+  if(notes[index])
+   div(id='#{index}' class='removeNote') ✖
+   textarea(id='#{question.id}' class='noteText') #{notes[index]}
  div(class="well input-group input-group-lg" style="float:left" ,id="selectedQuestion")
   div(class="questionHeader")
-   div(id= "#{question.id}" class="addNote") Add note
+   div(id= "#{index}" class="addNote") Add note
    div(id= "#{question.id}" class="remove")  ✖
   | !{question.question.replace('<code>','<pre><code>').replace('</code>','</pre></code>')}

@@ -204,20 +204,40 @@ describe("create_question_paper_presenter", function () {
             presenter.onRemoveQuestion('someId');
         })
     })
-    context("#onNewQuestionAdded", function(){
-        it("should reapply the filters on new set of questions and update suggested tags with new created tags",function(){
-          mokito.JsMockito.when(moke_view).getTags().thenReturn(["array"])
-            var presenter = new Presenter(moke_view,moke_repo,moke_paper_repo);
+    context("#onNewQuestionAdded", function() {
+        it("should reapply the filters on new set of questions and update suggested tags with new created tags", function () {
+            mokito.JsMockito.when(moke_view).getTags().thenReturn(["array"])
+            var presenter = new Presenter(moke_view, moke_repo, moke_paper_repo);
 
-            moke_repo.fetchQuestionsOfSpecificTags =function(tags,oncomplete){
-                assert.equal(tags[0],"array")
-                oncomplete(null,[{id:"someid",question:"how are u?",answer:"fine",tags:["array"]}])
+            moke_repo.fetchQuestionsOfSpecificTags = function (tags, oncomplete) {
+                assert.equal(tags[0], "array")
+                oncomplete(null, [{id: "someid", question: "how are u?", answer: "fine", tags: ["array"]}])
             }
-            moke_repo.getUniqueTags =function(oncomplete){
-                oncomplete(null,["array"])
+            moke_repo.getUniqueTags = function (oncomplete) {
+                oncomplete(null, ["array"])
             }
             presenter.onNewQuestionAdded();
             mokito.JsMockito.verify(moke_view).showQuestions(presenter.all_questions)
+        })
+    })
+
+    context('#onSaveNotes',function(){
+        it('should save the note with associated index',function(){
+            var presenter =  new Presenter(moke_view,moke_repo,moke_paper_repo);
+            var expectedNote = {2:"some note"};
+            presenter.onSaveNotes(2,"some note")
+            assert.deepEqual(presenter.notes,expectedNote);
+
+        })
+    })
+
+    context('#onRemoveNotes',function(){
+        it('should remove the note with associated index',function(){
+            var presenter =  new Presenter(moke_view,moke_repo,moke_paper_repo);
+            var expectedNote = {2:""};
+            presenter.onRemoveNotes(2,"");
+            assert.deepEqual(presenter.notes,expectedNote);
+
         })
     })
 });

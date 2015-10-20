@@ -216,7 +216,7 @@ question{
 }
 
 .remove {
-    /* float: right; */
+     /*float: right;*/
     /* margin-top: 0%; */
     /* margin-right: 28%; */
     cursor: hand;
@@ -378,3 +378,30 @@ code, pre{
     margin-top: 1.6%;
 }
 
+.questionList{
+    display: inline-block;
+    word-break: break-all;
+    width: 90%;
+    padding: 2.5%;
+    font-family: "Helvetica";
+    font-size: medium;
+    vertical-align: middle;
+    font-weight: initial;
+}
+
+.notesPlaceHolder{
+    border: 1px solid blue;
+    background: #e3e3e3;
+    display: inline-table;
+    width: 100%;
+    margin-top: 1%;
+}
+
+.removeNote{
+    border: 1px solid red;
+    width: 2%;
+    margin-left: 96%;
+    margin-top: 1%;
+    background: #e3e3e3;
+    cursor: hand;
+}

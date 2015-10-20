@@ -10,4 +10,6 @@ html
                 li
                     question
                         !{question.question.replace('<code>','<pre><code>').replace('</code>','</pre></code>')}
+                div(class="note") #{question.note}
+                li !{question.question.replace('<code>','<pre><code>').replace('</code>','</pre></code>')}
 
