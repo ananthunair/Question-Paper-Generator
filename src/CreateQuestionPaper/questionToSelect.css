@@ -77,16 +77,17 @@
     width: 90%;
     padding: 2.5%;
     font-family: "Helvetica";
-    font-size: medium;
+    font-size: small;
     vertical-align: middle;
     font-weight: initial;
 }
 
 code, pre{
-      color: #86868C;
-      background-color: transparent;
-      font-family: Courier New;
-      font-size: large;
-      border: 0px;
-      overflow:inherit;
+    color: #86868C;
+    background-color: transparent;
+    font-family: Courier New;
+    font-size: small;
+    border: 0px;
+    overflow:inherit;
+    font-weight: bold;
   }
