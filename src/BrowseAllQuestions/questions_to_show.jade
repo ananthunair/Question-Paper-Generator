@@ -1,0 +1,11 @@
+link(rel="stylesheet" type="text/css" href="./createQuestionPaper/questionToSelect.css")
+script(src="./createQuestionPaper/select_all.js")
+if questions.length == 0
+    div(id='no_question_container')
+        div(id='noQuestionAvailable') No Questions Available
+else
+    div(id='questions_container', style='height:100%')
+        each qp in questions
+            div(class="col-xs-12 jumbotron questionContainer" id='#{qp.id}')
+                div(class='questionList')
+                    | !{qp.question.substr(0, 125).split('\n').slice(0, 2).join('<br>').replace('<code>', '<code>').replace('</code>', '</code>')}

@@ -6,7 +6,7 @@ var lodash = require('lodash');
 var suggestedTag = [];
 var view = {
     showAllQuestions:function(questions){
-        var htmlForQuestionsToSelect = jade.renderFile('./src/createQuestionPaper/questionToSelect.jade', {'questions': questions});
+        var htmlForQuestionsToSelect = jade.renderFile('./src/BrowseAllQuestions/questions_to_show.jade', {'questions': questions});
         $('#all_question_container').html(htmlForQuestionsToSelect)
     },
     setupTagBoxData: function(tags){

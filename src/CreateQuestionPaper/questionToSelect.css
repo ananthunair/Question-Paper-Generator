@@ -56,7 +56,6 @@
     border-top: 1px solid lightgray;
     height: 17%;
     font-size: small;
-    text-align: justify;
 }
 
 .inputBoxContainer {
@@ -80,6 +79,7 @@
     font-size: small;
     vertical-align: middle;
     font-weight: initial;
+    text-align: justify;
 }
 
 code, pre{
@@ -90,4 +90,6 @@ code, pre{
     border: 0px;
     overflow:inherit;
     font-weight: bold;
+    word-break: break-all;
+    text-align: justify;
   }
