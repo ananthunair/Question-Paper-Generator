@@ -164,9 +164,17 @@
     display: inline-block;
 }
 
-#paper_heading{
+#paper_heading, #length_of_qun_papers{
     padding-left: 4%;
     padding-top: 4%;
     height: 1%;
     font-weight: 400;
+    display: inline-block;
+}
+
+.badge{
+    margin-left: 2%;
+    background-color: #C9C9C9;
+    color: #171718;
+    font-size: 1vw;
 }
