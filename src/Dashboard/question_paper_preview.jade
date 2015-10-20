@@ -7,5 +7,7 @@ html
         h1(class="questionPaperTitleInPreview") #{title}
         ol
             each question,index in questions
-                li !{question.question.replace('<code>','<pre><code>').replace('</code>','</pre></code>')}
+                li
+                    question
+                        !{question.question.replace('<code>','<pre><code>').replace('</code>','</pre></code>')}
 

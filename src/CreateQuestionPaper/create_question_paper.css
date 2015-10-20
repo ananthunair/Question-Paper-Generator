@@ -163,7 +163,13 @@ li {
 li {
     padding: 3px;
     font-size: large;
+    font-weight: bold;
+    margin-bottom: inherit;
     word-wrap: break-word;
+}
+
+question{
+    font-weight: 400;
 }
 
 #create_questions {
@@ -221,7 +227,7 @@ code, pre{
      color: #86868C;
      background-color: transparent;
     font-family: Courier New;
-    font-size: small;
+    font-size: large;
     border: 0px;
     overflow:inherit;
 }
