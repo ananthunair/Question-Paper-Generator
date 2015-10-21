@@ -26,19 +26,21 @@ describe("create_question_presenter", function () {
     context(".questionP",function(){
         it("should show preview after clicking on question paper name", function () {
             var paperId ="PaperId"
-            var paper ={id:paperId,questions:[{id:"someid",note:""}],header: {title: "array test#1", marks: 100, duration: "1 hour"}}
+            var paper ={id:paperId,notes:{1:"some note"},questions:["someid"],header: {title: "array test#1", marks: 100, duration: "1 hour"}}
             var setOfQuestion =[{id:"someid",question:"question",answer:"answer",tags:["array","object"]}]
+
             moke_paper_repo.getPaper =function(id,onComplete){
                 assert.equal(id,paperId);
                 onComplete(null,paper);
-            }
+            };
             moke_question_repo.getQuestionsByIds =function(ids,onComplete){
-                assert.equal(ids[0],"someid")
+                assert.equal(ids[0],"someid");
                 onComplete(null,setOfQuestion)
-            }
+            };
+
             var presenter = new Presenter(moke_view, moke_paper_repo,moke_question_repo);
             presenter.getAllQuestionsFromPaper(paperId);
-            mokito.JsMockito.verify(moke_view).onQuestionPaperClick(setOfQuestion,paper.header.title);
+            mokito.JsMockito.verify(moke_view).onQuestionPaperClick(setOfQuestion,paper.header.title,paperId,paper.notes);
         })
 
     })

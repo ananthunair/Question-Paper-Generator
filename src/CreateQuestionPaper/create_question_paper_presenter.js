@@ -8,13 +8,7 @@ exports.Presenter = function (view, questions_repo,paper_repo) {
     this.notes  = {};
 }
 
-var generateQuestionPaper = function(questionPaper,view) {
-    return {
-        notes : this.notes,
-        questions: questionPaper.map(extractId),
-        header: {title: view.getQuestionPaperTitle(), marks: "", duration: ""}
-    };
-}
+
 exports.Presenter.prototype = {
 
 
@@ -25,6 +19,14 @@ exports.Presenter.prototype = {
             presenter.view.showQuestions(questions);
         };
         this.repo.fetchQuestions(onComplete);
+    },
+
+    generateQuestionPaper : function(questionPaper,view) {
+        return {
+            notes : this.notes,
+            questions: questionPaper.map(extractId),
+            header: {title: view.getQuestionPaperTitle(), marks: "", duration: ""}
+        };
     },
 
     onAddOrRemoveTag :  function(tags){
@@ -57,7 +59,7 @@ exports.Presenter.prototype = {
             var onComplete = function (err,paper) {
                 view.renderDashbord(paper.id);
             };
-            var questionPaper = generateQuestionPaper(this.questionPaper,view);
+            var questionPaper = this.generateQuestionPaper(this.questionPaper,view);
             this.paper_repo.saveQuestionPaper(questionPaper,onComplete);
         }else
             view.showError("questionPaperTitle");
@@ -65,7 +67,7 @@ exports.Presenter.prototype = {
 
     onPreviewClick:function(){
         var view = this.view;
-        this.view.openPreview(this.questionPaper,view.getQuestionPaperTitle());
+        this.view.openPreview(this.questionPaper,this.notes,view.getQuestionPaperTitle());
     },
 
     setAutosuggetions : function(){

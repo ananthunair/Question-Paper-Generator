@@ -5,7 +5,6 @@ exports.Presenter = function (view, questionPaperRepo) {
 
 exports.Presenter.prototype = {
     onDocumentReady : function(){
-
         var view = this.view;
         var onComplete = function(err, questionPapers){
             err && console.log("Error while showing all question papers: ",err);

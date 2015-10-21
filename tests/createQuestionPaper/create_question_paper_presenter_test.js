@@ -103,12 +103,14 @@ describe("create_question_paper_presenter", function () {
     context("#onPreviewClick",function(){
         it('should Open Preview Window',function(){
             var title = "Question Title"
-            var questionPaper = [{id:1,'question':"how are you?",'answer':"fine",note:"xyz"}]
+            var questionPaper = [{id:1,'question':"how are you?",'answer':"fine"}];
+            var notes = {1:"some note"};
             mokito.JsMockito.when(moke_view).getQuestionPaperTitle().thenReturn(title)
             var presenter =  new Presenter(moke_view,moke_repo);
-            presenter.questionPaper = questionPaper
+            presenter.questionPaper = questionPaper;
+            presenter.notes = notes;
             presenter.onPreviewClick()
-            mokito.JsMockito.verify(moke_view).openPreview(questionPaper, title)
+            mokito.JsMockito.verify(moke_view).openPreview(questionPaper,notes, title)
         })
 
     });

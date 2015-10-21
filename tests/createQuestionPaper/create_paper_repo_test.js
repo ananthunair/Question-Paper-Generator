@@ -57,6 +57,7 @@ describe('create_paper_repo', function () {
                 repo.getPaper(savedPaper.id, function (err,paper) {
                     assert.deepEqual(questionPaper.questions[0], paper.questions[0]);
                     assert.equal(questionPaper.questions.length, paper.questions.length);
+                    assert.deepEqual(questionPaper.notes,paper.notes);
                     done();
                 });
             });

@@ -3,20 +3,22 @@ var Question_papers_repository = require('./repository/question_paper_repo.js').
 var Question_repository = require('./repository/create_question_repo.js').Question_repository;
 var preview = require('./preview/showPreview.js');
 var jade = require('jade');
-var setOfQuestionsOfPaper, titleOfPaper;
+var setOfQuestionsOfPaper, titleOfPaper,notesOfPaper;
 
 var view = {
-    onQuestionPaperClick:function(setOfQuestions,title,id){
+    onQuestionPaperClick:function(setOfQuestions,title,id,notes){
         setOfQuestionsOfPaper = setOfQuestions;
         titleOfPaper = title;
+        notesOfPaper = notes;
+        console.log(notesOfPaper)
         $(".question_paper_title").toggleClass('selected',false)
-        $("#"+id).toggleClass('selected')
-        var codeFormatedQuestions = jade.renderFile("./src/Dashboard/question_paper_preview.jade",{title:title,'questions':setOfQuestions});
-        $('#question_paper_preview').html(codeFormatedQuestions)
+        $("#"+id).toggleClass('selected');
+        var codeFormatedQuestions = jade.renderFile("./src/Dashboard/question_paper_preview.jade",{title:title,'questions':setOfQuestions,'notes':notes});
+        $('#question_paper_preview').html(codeFormatedQuestions);
     },
 
     openPreview: function () {
-        preview.show({title: titleOfPaper, 'questions': setOfQuestionsOfPaper}, screen)
+        preview.show({title: titleOfPaper, 'questions': setOfQuestionsOfPaper,'notes': notesOfPaper}, screen)
     }
 };
 

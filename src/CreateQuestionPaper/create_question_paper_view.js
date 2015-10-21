@@ -64,8 +64,8 @@ var view = {
     }
     ,
 
-    openPreview: function (questionPaper, title) {
-        preview.show({title: title, 'questions': questionPaper}, screen)
+    openPreview: function (questionPaper,notes, title) {
+        preview.show({title: title, 'questions': questionPaper, 'notes':notes}, screen)
     }
     ,
 
@@ -82,7 +82,6 @@ var view = {
         Dashboard.render();
         render.paperId =paperId;
         render('./src/dashboard/dashboard.jade');
-
     },
     getNote : function(index){
         return $('#'+index+'_text').val();

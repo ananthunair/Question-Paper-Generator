@@ -12,15 +12,10 @@ exports.Presenter.prototype = {
         var paper_repo = this.paper_repo;
         var view = this.view;
         var onComplete =function(err,paper){
-            question_repo.getQuestionsByIds(getQuestionIds(paper),function(err,questions){
-              view.onQuestionPaperClick(questions,paper.header.title,id)
+            question_repo.getQuestionsByIds(paper.questions,function(err,questions){
+              view.onQuestionPaperClick(questions,paper.header.title,id,paper.notes)
             })
         }
        paper_repo.getPaper(id,onComplete)
     }
 };
-var getQuestionIds = function(paper){
-   return paper.questions.map(function(question){
-        return question.id
-    })
-}
