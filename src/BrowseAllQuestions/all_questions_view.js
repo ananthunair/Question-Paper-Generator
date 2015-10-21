@@ -2,6 +2,7 @@ var Presenter = require('./BrowseAllQuestions/all_questions_presenter.js').Prese
 var Question_repository = require('./repository/create_question_repo').Question_repository;
 var jade = require('jade');
 var lodash = require('lodash');
+var repo = new Question_repository();
 var view = {
     showAllQuestions:function(questions){
         var htmlForQuestionsToSelect = jade.renderFile('./src/BrowseAllQuestions/questions_to_show.jade', {'questions': questions});
@@ -10,10 +11,9 @@ var view = {
             var htmlForQuestionsToSelect = jade.renderFile('./src/BrowseAllQuestions/no_question_preview.jade');
             $('#questionPreviewContainer').html(htmlForQuestionsToSelect)
         }
-        //else {
-        //    var htmlForQuestionsToSelect = jade.renderFile('./src/BrowseAllQuestions/question_preview.jade');
-        //    $('#questionPreviewContainer').html(htmlForQuestionsToSelect)
-        //}
+        else {
+            $("#" + questions[0]['id']).click();
+        }
     },
     setupTagBoxData: function(tags){
         this.tagBox = setupTagBox(tags)
@@ -35,11 +35,8 @@ var view = {
 
 }
 
-
+var presenter = new Presenter(view, repo);
 $(document).ready(function(){
-    var repo = new Question_repository();
-
-    var presenter = new Presenter(view, repo);
 
     presenter.onDocumentReady();
     presenter.setAutosuggetions();

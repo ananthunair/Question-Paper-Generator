@@ -75,7 +75,36 @@
 #questionDetailHolder{
     height: 98%;
     width: 98%;
-    border: solid 1px black;
+    border: solid 1px #a0a0a0;
     margin: 1%;
     overflow: auto;
+    background-color: #F9FCFF;
+}
+
+#tagsInQuestionHandler, #questionContentHandler, #answerHandler{
+    margin-top: 5%;
+    margin-left: 5%;
+    padding: 2%;
+    width: 80%;
+    height: auto;
+    font-family: "Helvetica Neue";
+}
+
+#questionContentHandler, #answerHandler{
+    border-top: solid 1px #a0a0a0;
+}
+
+.tagLabel{
+    margin: 1%;
+}
+
+code, pre{
+    color: #86868C;
+    background-color: transparent;
+    font-family: Courier New;
+    font-size: small;
+    border: 0px;
+    overflow:inherit;
+    word-break: break-all;
+    text-align: justify;
 }

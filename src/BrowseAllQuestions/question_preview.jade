@@ -1,9 +1,9 @@
+link(rel="stylesheet" type="text/css" href="./createQuestionPaper/questionToSelect.css")
 div(id='questionDetailHolder')
     div(id='tagsInQuestionHandler')
         each tag in tags
-            | #{tag}
+            span(class="label label-default tagLabel") #{tag}
     div(id='questionContentHandler')
-        p #{question}
-    br
+        | !{question.replace('<code>','<pre><code>').replace('</code>','</pre></code>')}
     div(id='answerHandler')
         p #{answer}
