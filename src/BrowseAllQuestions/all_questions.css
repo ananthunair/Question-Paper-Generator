@@ -82,7 +82,7 @@
 }
 
 #tagsInQuestionHandler, #questionContentHandler, #answerHandler{
-    margin-top: 5%;
+    margin-top: 1%;
     margin-left: 5%;
     padding: 2%;
     width: 80%;
@@ -107,4 +107,9 @@ code, pre{
     overflow:inherit;
     word-break: break-all;
     text-align: justify;
+}
+
+.ui-autocomplete{
+    max-height: 220% !important;
+    z-index: 2;
 }
