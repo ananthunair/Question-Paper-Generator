@@ -2,7 +2,7 @@
     height: 88%;
     width: 28%;
     border-radius: 5px;
-    border: 1px solid #888888;
+    border: 1px solid #D0D1D1;
     padding: 0;
     float: left;
     margin-left: 1%;
@@ -11,7 +11,6 @@
     font-size: initial;
     font-weight: bold;
     color: #a0a0a0;
-    border-color: #D0D1D1;
     display: block;
 }
 
@@ -19,11 +18,10 @@
     height: 88%;
     width: 69%;
     border-radius: 5px;
-    border: 1px solid #888888;
+    border: 1px solid #D0D1D1;
     padding: 10px;
     float: right;
     margin-right: 1%;
-    border-color: #D0D1D1;
 }
 
 #allQuestionHeading{
@@ -75,10 +73,11 @@
 #questionDetailHolder{
     height: 98%;
     width: 98%;
-    border: solid 1px #a0a0a0;
+    border: solid 1px #D0D1D1;
     margin: 1%;
     overflow: auto;
     background-color: #F9FCFF;
+    border-radius: 5px;
 }
 
 #tagsInQuestionHandler, #questionContentHandler, #answerHandler{
@@ -91,11 +90,13 @@
 }
 
 #questionContentHandler, #answerHandler{
-    border-top: solid 1px #a0a0a0;
+    border-top: solid 1px #D0D1D1;
 }
 
 .tagLabel{
     margin: 1%;
+    font-family: "Helvetica Neue Light";
+    font-size: 1.3vw !important;
 }
 
 code, pre{
