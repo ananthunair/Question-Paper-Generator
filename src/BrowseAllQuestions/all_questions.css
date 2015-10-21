@@ -87,6 +87,8 @@
     width: 80%;
     height: auto;
     font-family: "Helvetica Neue";
+    text-align: justify !important;
+    word-break: break-all !important;
 }
 
 #questionContentHandler, #answerHandler{
@@ -95,8 +97,11 @@
 
 .tagLabel{
     margin: 1%;
-    font-family: "Helvetica Neue Light";
-    font-size: 1.3vw !important;
+    font-family: "Helvetica Neue";
+    font-size: 1vw !important;
+    font-weight: 200;
+    background-color: #858585;
+    display: inline-block !important;
 }
 
 code, pre{
