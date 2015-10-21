@@ -10,7 +10,8 @@ exports.Presenter = function (view, questions_repo,paper_repo) {
 
 var generateQuestionPaper = function(questionPaper,view) {
     return {
-        questions: questionPaper.map(getQuestionIdAndNote),
+        notes : this.notes,
+        questions: questionPaper.map(extractId),
         header: {title: view.getQuestionPaperTitle(), marks: "", duration: ""}
     };
 }
@@ -79,7 +80,6 @@ exports.Presenter.prototype = {
         this.questionPaper = this.questionPaper.filter(function(question){
             return question.id != id;
         });
-
         this.view.addToQuestionPaper(this.questionPaper,this.notes);
         var questionsToShow = lodash.difference(this.all_questions,this.questionPaper);
         this.view.showQuestions(questionsToShow);
@@ -93,7 +93,7 @@ exports.Presenter.prototype = {
         });
     },
     onRemoveNotes:function(id){
-        this.notes[id]="";
+       delete this.notes[id];
     }
     ,
     onSaveNotes:function(id,note) {
@@ -101,9 +101,7 @@ exports.Presenter.prototype = {
     }
 };
 
-var getQuestionIdAndNote = function(question){
-       return {id:question.id,note : question.note};
-};
+
 var difference = function(questionInPaper,allQuestion){
 
     var questionInPaperId = questionInPaper.map(extractId);

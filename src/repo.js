@@ -7,15 +7,11 @@ var createDBConnection = function (dbname) {
 
 
 var createQuestionPaperCollection = function () {
-    var questionSchema = new Schema({
-        id: String,
-        note: String
-    });
 
     var questionPaperSchema = new Schema({
-        questions: [questionSchema],
+        notes : Object,
+        questions: [String],
         header: {title: String, marks: Number, duration: String}
-
     });
 
 

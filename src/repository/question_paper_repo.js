@@ -33,17 +33,14 @@ exports.Question_papers_repository.prototype = {
             onComplete(err,buildPaper(paper));
         });
     }
-    //getAllQuestionsOfPaper : function(onComplete, questions){
-    //    var qeury = "select question from questions where id in(" + questions.join(",")  +");"
-    //    this.db.all(qeury, onComplete);
-    //},
+
 
 };
 
 
 
 var buildPaper = function(dbPaper){
-    return {id:dbPaper._id,questions:dbPaper.questions.map(buildQuestion),header:buildHeader(dbPaper.header)};
+    return {id:dbPaper._id,notes:dbPaper.notes,questions:dbPaper.questions,header:buildHeader(dbPaper.header)};
 };
 var buildHeader = function(dbHeader){
     return { duration: dbHeader.duration, marks:dbHeader.marks, title: dbHeader.title };

@@ -390,18 +390,25 @@ code, pre{
 }
 
 .notesPlaceHolder{
-    border: 1px solid blue;
-    background: #e3e3e3;
+    border: 1px dashed #D0D1D1;
     display: inline-table;
-    width: 100%;
+    width: 101%;
     margin-top: 1%;
+
 }
 
 .removeNote{
-    border: 1px solid red;
+    border: 1px solid white
     width: 2%;
-    margin-left: 96%;
+    margin-left: 97%;
     margin-top: 1%;
-    background: #e3e3e3;
     cursor: hand;
 }
+.noteText{
+    margin-left: 1%;
+    margin-bottom: 1%;
+    width: 98%;
+}
+
+
+

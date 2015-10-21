@@ -234,8 +234,8 @@ describe("create_question_paper_presenter", function () {
     context('#onRemoveNotes',function(){
         it('should remove the note with associated index',function(){
             var presenter =  new Presenter(moke_view,moke_repo,moke_paper_repo);
-            var expectedNote = {2:""};
-            presenter.onRemoveNotes(2,"");
+            var expectedNote = {};
+            presenter.onRemoveNotes(2,"someNote");
             assert.deepEqual(presenter.notes,expectedNote);
 
         })
