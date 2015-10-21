@@ -61,3 +61,21 @@
     background-color: #008dca;
     margin-top: 1.6%;
 }
+
+#no_preview_available{
+    padding: 5%;
+    text-align: center;
+    font-weight: bold;
+    color: #a0a0a0;
+    font-size: large;
+    border: dashed;
+    margin: 20%;
+}
+
+#questionDetailHolder{
+    height: 98%;
+    width: 98%;
+    border: solid 1px black;
+    margin: 1%;
+    overflow: auto;
+}

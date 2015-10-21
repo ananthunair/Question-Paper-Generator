@@ -1,0 +1,9 @@
+div(id='questionDetailHolder')
+    div(id='tagsInQuestionHandler')
+        each tag in tags
+            | #{tag}
+    div(id='questionContentHandler')
+        p #{question}
+    br
+    div(id='answerHandler')
+        p #{answer}

@@ -41,7 +41,7 @@ $(function(){
     });
 
     $('#showAllQuestions').click(function(){
-        render('./src/BrowseAllQuestions/all_questions.jade');
+        BrowseQuestions.render()
     })
 });
 

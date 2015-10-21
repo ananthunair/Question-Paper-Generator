@@ -1,17 +1,22 @@
 var Presenter = require('./BrowseAllQuestions/all_questions_presenter.js').Presenter;
 var Question_repository = require('./repository/create_question_repo').Question_repository;
 var jade = require('jade');
-var repo = new Question_repository();
 var lodash = require('lodash');
-var suggestedTag = [];
 var view = {
     showAllQuestions:function(questions){
         var htmlForQuestionsToSelect = jade.renderFile('./src/BrowseAllQuestions/questions_to_show.jade', {'questions': questions});
-        $('#all_question_container').html(htmlForQuestionsToSelect)
+        $('#all_question_container').html(htmlForQuestionsToSelect);
+        if(questions.length == 0){
+            var htmlForQuestionsToSelect = jade.renderFile('./src/BrowseAllQuestions/no_question_preview.jade');
+            $('#questionPreviewContainer').html(htmlForQuestionsToSelect)
+        }
+        //else {
+        //    var htmlForQuestionsToSelect = jade.renderFile('./src/BrowseAllQuestions/question_preview.jade');
+        //    $('#questionPreviewContainer').html(htmlForQuestionsToSelect)
+        //}
     },
     setupTagBoxData: function(tags){
-        suggestedTag = tags;
-        this.tagBox = setupTagBox()
+        this.tagBox = setupTagBox(tags)
     },
     addQuestionSelectionListener: function () {
         $('#tbl-questionsToSelect tbody').on('click', 'tr', function () {
@@ -24,54 +29,38 @@ var view = {
 
 
     addSuggetions:function(tags){
-        var newTags = lodash.difference(tags,suggestedTag);
-
-        newTags.forEach(function(tag){
-            suggestedTag.push(tag)
-        });
-        resettagBox(this.tagBox)
+        this.tagBox.resetSuggetions(tags)
         this.tagBox.resetAllowedTags(tags)
     }
 
 }
 
-var presenter = new Presenter(view, repo);
 
 $(document).ready(function(){
+    var repo = new Question_repository();
+
+    var presenter = new Presenter(view, repo);
+
     presenter.onDocumentReady();
     presenter.setAutosuggetions();
 
     $('#create_question').click(function(){
-        var createQuestionPopUp =  jade.renderFile('./src/createQuestion/create_question.jade');
-        $('#myModal').html(createQuestionPopUp);
+        CreateQuestion.render();
         $(".close").click(function () {
             presenter.onNewQuestionAdded();
         })
-    });
+    })
+
 });
 
-var resettagBox =function(tagbox){
-    var container = tagbox.getContainer();
-    var input = tagbox.getInput();
-    $(input).autocomplete({
-        source:suggestedTag,
-        appendTo: container,
-        position: { at: 'left bottom', of: container },
-        select: function(e, v) {
-            e.preventDefault();
-            if (e.which === 1) {
-                tagbox.add(v.item.value);
-            }
-        }
-    });
-}
 
 
-var setupTagBox = function () {
+
+var setupTagBox = function (tags) {
     var enteredtags = [];
     var tagbox = new Taggle($('.tagbox.textarea')[0], {
         duplicateTagClass: 'bounce',
-        allowedTags: suggestedTag,
+        allowedTags: tags,
         cssclass:"searchTagBox",
         placeholder:"Search Questions",
         onTagAdd: function (event, tag) {
@@ -85,6 +74,6 @@ var setupTagBox = function () {
             presenter.onAddOrRemoveTag(enteredtags);
         }
     });
-    resettagBox(tagbox)
+    tagbox.resetSuggetions(tags)
     return tagbox;
 }

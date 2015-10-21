@@ -56,6 +56,12 @@ exports.Question_repository.prototype = {
         QuestionCollection.find({"_id":{$in:questionIds}},function(err,questions){
             onComplete(err,questions);
         });
+    },
+    fetchQuestionDetail : function(id, onComplete){
+        var QuestionCollection = mongoose.model("Question");
+        QuestionCollection.findOne({_id:id},function(err,question){
+            onComplete(err,question);
+        })
     }
 
 };

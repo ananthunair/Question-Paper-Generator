@@ -38,6 +38,14 @@ CreatePaper ={
     setExtraArgs:setArgs
 }
 
+BrowseQuestions ={
+    extraArgs:{},
+    render:render.bind(this,'./src/BrowseAllQuestions/all_questions.jade'),
+    resetArgs:resetArgs,
+    setExtraArgs:setArgs
+}
+
+
 //var renderDashboard = function(){
 //    render('./src/dashboard/dashboard.jade');
 //};
