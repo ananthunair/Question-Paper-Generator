@@ -83,8 +83,7 @@ exports.Presenter.prototype = {
             return question.id != id;
         });
         this.view.addToQuestionPaper(this.questionPaper,this.notes);
-        var questionsToShow = lodash.difference(this.all_questions,this.questionPaper);
-        this.view.showQuestions(questionsToShow);
+        this.onAddOrRemoveTag(this.view.getTags());
         this.view.showTotalNumberOfQuestion(this.questionPaper.length);
     },
     onNewQuestionAdded:function(){
