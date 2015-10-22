@@ -36,6 +36,7 @@ exports.Presenter.prototype = {
                 view.clearScreen();
             };
             this.repo.create(questionDetails, onComplete);
+            view.showSuccessMessage()
             view.addSuggetions(tags);
         }else{
             !question.trim() && view.showError("question")

@@ -30,7 +30,7 @@ var view ={
         setAlert("alert alert-danger", "Question and Tag field can not be empty");
     },
     showSuccessMessage:function(){
-        setAlert("alert alert-success","Your question was added successfully")
+        setAlert("alert alert-success","Question saved successfully")
     },
     setupTagBox:function(tags){
         this.tagBox = setupTagBox(tags)
@@ -42,7 +42,10 @@ var view ={
 }
 
 var setAlert = function(className, message){
-    $('#message_alert').fadeIn().html("<div class='"+ className + "' role='alert'>"+ message + "</div>").delay(3000).fadeOut();
+    $('#successAlert').fadeIn().html("<div style='box-shadow: 0px 3px 2px #888888;width:60%;height:5%;margin-top: -2.5%;margin-left: 20%;float: left;background: #F0FFE5;font-weight: bold;padding:1%; text-align: center'>"+ message + "</div>");
+    $('.modal-body').focusin(function(){
+        $('#successAlert').fadeOut();
+    })
 }
 
 $(document).ready(function() {
