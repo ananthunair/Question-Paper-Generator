@@ -1,0 +1,1 @@
+echo "db.questionpapers.remove({});db.questions.remove({});db.tags.remove({});" | mongo qpg_prod
