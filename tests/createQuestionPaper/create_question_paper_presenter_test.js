@@ -16,8 +16,6 @@ describe("create_question_paper_presenter", function () {
         view.addToQuestionPaper = function () {};
         view.openPreview =function(){};
         view.getQuestionPaperTitle = function(){};
-        view.showTotalNumberOfQuestion = function(){};
-
         view.deleteSelectedQuestions = function(){};
         view.getTags = function(){};
         view.setupTagBoxData = function(){};
@@ -194,16 +192,22 @@ describe("create_question_paper_presenter", function () {
 
     context("#onRemoveQuestion", function(){
         it("should remove the question from selected questions",function(){
-            var presenter =  new Presenter(moke_view,moke_repo,moke_paper_repo);
+            var tags = [""];
+            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags);
             var questionToShow = [ { id: 'someId', question: 'how are you?', answer: 'fine' },
                 { id: 'otherId', question: 'where are you?', answer: 'hell' } ];
-            presenter.questionPaper = [{id:"someId",'question':"how are you?",'answer':"fine"}];
-            presenter.all_questions = [{id:"someId",'question':"how are you?",'answer':"fine"}, {id:"otherId",'question':"where are you?",'answer':"hell"}];
-            mokito.JsMockito.verify(moke_view).showQuestions = function(argument){
-                assert.deepEqual(argument[0],questionToShow[0]);
-                assert.deepEqual(argument[1],questionToShow[1]);
+            moke_repo.fetchQuestionsOfSpecificTags = function (tags,oncomplete) {
+                oncomplete(null, questionToShow);
             };
+            var presenter =  new Presenter(moke_view,moke_repo,moke_paper_repo);
+            presenter.questionPaper = [{id:"otherId",'question':"where are you?",'answer':"hell"}];
+            presenter.notes ={1:"somenotes"};
+            presenter.all_questions = [{id:"someId",'question':"how are you?",'answer':"fine"},{id:"otherId",'question':"where are you?",'answer':"hell"} ];
             presenter.onRemoveQuestion('someId');
+            mokito.JsMockito.verify(moke_view).addToQuestionPaper(presenter.questionPaper,presenter.notes);
+            mokito.JsMockito.verify(moke_view).showTotalNumberOfQuestion(presenter.questionPaper.length);
+
+
         })
     })
     context("#onNewQuestionAdded", function() {
