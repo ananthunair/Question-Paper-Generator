@@ -1,8 +1,9 @@
 each question,index in questions
- div(class="notesPlaceHolder" id="#{index}_noteHolder")
+ div(id="#{index}_noteHolder")
   if(notes[index])
-   div(id='#{index}' class='removeNote') ✖
-   textarea(id='#{index}' class='form-control noteText') #{notes[index]}
+   div(class="notesPlaceHolder")
+    div(id='#{index}' class='removeNote') ✖
+    textarea(id='#{index}' class='form-control noteText') #{notes[index]}
  div(class="well input-group input-group-lg" style="float:left" ,id="selectedQuestion")
   div(class="questionHeader")
    div(id= "#{index}" class="addNote") Add note

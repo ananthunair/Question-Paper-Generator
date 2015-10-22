@@ -97,7 +97,8 @@ var presenter = new Presenter(view, repo, paper_repo);
 var registerAddNotesListeners =function(){
     $('.addNote').click(function(){
         var id = $(this).attr('id');
-        $("#"+id+"_noteHolder").html(jade.renderFile('./src/createQuestionPaper/addNote.jade',{id:id}))
+        if(!($("#"+id+"_noteHolder").children().length>0))
+         $("#"+id+"_noteHolder").html(jade.renderFile('./src/createQuestionPaper/addNote.jade',{id:id}))
         setNoteListener();
     });
     setNoteListener();

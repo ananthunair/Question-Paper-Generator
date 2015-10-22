@@ -5,7 +5,7 @@ var lodash = require('lodash');
 exports.Question_repository = function () {
     var db = mongoose.connection;
     this.db = db;
-    db.on('error', console.error.bind(console, 'connection error:'));
+    //db.on('error', console.error.bind(console, 'connection error:'));
     db.once('open', function (callback) {
         console.log("Questions Repo opened");
     });

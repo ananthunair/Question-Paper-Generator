@@ -10,7 +10,6 @@ var view = {
         setOfQuestionsOfPaper = setOfQuestions;
         titleOfPaper = title;
         notesOfPaper = notes;
-        console.log(notesOfPaper)
         $(".question_paper_title").toggleClass('selected',false)
         $("#"+id).toggleClass('selected');
         var codeFormatedQuestions = jade.renderFile("./src/Dashboard/question_paper_preview.jade",{title:title,'questions':setOfQuestions,'notes':notes});

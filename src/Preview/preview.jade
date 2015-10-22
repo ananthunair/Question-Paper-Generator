@@ -11,3 +11,6 @@ html
             each question,index in questionPaper.questions
                 div(class="note") #{questionPaper.notes[index]}
                 li !{question.question.replace('<code>','<pre><code>').replace('</code>','</pre></code>')}
+            each key in Object.keys(questionPaper.notes)
+                if(key>=questionPaper.questions.length)
+                    div(class="note") #{questionPaper.notes[key]}
