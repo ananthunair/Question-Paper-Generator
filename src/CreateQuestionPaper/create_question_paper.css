@@ -168,9 +168,6 @@ li {
     word-wrap: break-word;
 }
 
-question{
-    font-weight: 400;
-}
 
 #create_questions {
     width: 28%;
@@ -216,11 +213,7 @@ question{
 }
 
 .remove {
-     /*float: right;*/
-    /* margin-top: 0%; */
-    /* margin-right: 28%; */
     cursor: hand;
-    /*border: solid 1px blue;*/
     display: inline;
 }
 
@@ -236,7 +229,6 @@ question{
 }
 
 .questionHeader {
-    /*border: 1px solid;*/
     height: 10%;
     width: 100%;
     margin-top: -1%;
@@ -366,10 +358,7 @@ code, pre{
     max-height: 220% !important;
     z-index: 2;
 }
-.questionPaperTitleInPreview {
-    text-align: center;
-    font-family: "Helvetica";
-}
+
 #addQuestions {
     vertical-align: bottom;
     width: 100%;

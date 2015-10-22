@@ -56,6 +56,29 @@
     height: 10%;
 }
 
+.questionPaperTitleInPreview {
+    text-align: center;
+    font-family: "Helvetica";
+}
+
+li {
+    padding: 3px;
+    font-size: large;
+    word-wrap: break-word;
+}
+
+question{
+    font-weight: 400;
+}
+
+code, pre{
+    color: #86868C;
+    background-color: transparent;
+    font-family: Courier New;
+    font-size: large;
+    border: 0px;
+    overflow:inherit;
+}
 
 #st-search-input{
     padding: 1% 0% 1% 5%;
@@ -177,4 +200,9 @@
     background-color: #C9C9C9;
     color: #171718;
     font-size: 1vw;
+}
+
+.notes{
+    margin-left: -2.1%;
+    margin-bottom: 2%;
 }
