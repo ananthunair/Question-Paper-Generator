@@ -5,9 +5,11 @@ html
   h1(class="questionPaperTitleInPreview") #{title}
   ol
    each question,index in questions
-    div(class='notes') !{notes[index]}
+    if(notes)
+     div(class='notes') !{notes[index]}
     li
      question !{question.question.replace('<code>','<pre><code>').replace('</code>','</pre></code>')}
-   each key in Object.keys(notes)
-    if(key>=questions.length)
-     div(class='notes') !{notes[key]}
+   if(notes)
+    each key in Object.keys(notes)
+     if(key>=questions.length)
+      div(class='notes') !{notes[key]}

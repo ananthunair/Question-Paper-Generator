@@ -39,4 +39,8 @@ $(document).ready(function (){
         view.openPreview();
     });
 
+    $("#edit_button").click(function(){
+    });
+
+
 });
