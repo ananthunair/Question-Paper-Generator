@@ -99,6 +99,8 @@ var registerAddNotesListeners =function(){
         var id = $(this).attr('id');
         if(!($("#"+id+"_noteHolder").children().length>0))
          $("#"+id+"_noteHolder").html(jade.renderFile('./src/createQuestionPaper/addNote.jade',{id:id}))
+        $("#"+id+"_noteHolder").html(jade.renderFile('./src/createQuestionPaper/addNote.jade',{id:id}));
+        $('#noteID' + id).focus();
         setNoteListener();
     });
     setNoteListener();

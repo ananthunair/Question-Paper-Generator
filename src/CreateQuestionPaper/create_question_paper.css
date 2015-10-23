@@ -215,6 +215,8 @@ li {
 .remove {
     cursor: hand;
     display: inline;
+    float: right;
+    margin-right: 0.3%;
 }
 
 .addNote {
