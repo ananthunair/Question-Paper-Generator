@@ -84,11 +84,13 @@
     margin-top: 1%;
     margin-left: 5%;
     padding: 2%;
-    width: 80%;
+    width: 89%;
     height: auto;
     font-family: "Helvetica Neue";
     text-align: justify !important;
     word-break: break-all !important;
+    font-weight: initial;
+    font-size: large;
 }
 
 #questionContentHandler, #answerHandler{
@@ -108,7 +110,7 @@ code, pre{
     color: #86868C;
     background-color: transparent;
     font-family: Courier New;
-    font-size: small;
+    font-size: large;
     border: 0px;
     overflow:inherit;
     word-break: break-all;

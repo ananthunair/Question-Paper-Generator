@@ -48,6 +48,7 @@
     background-color: #F9FCFF;
     vertical-align: middle;
     padding: 2.5%;
+    padding-top: 5.8%;
     font-family: "Helvetica";
     font-weight: bold;
     color: #86868C;
@@ -83,11 +84,16 @@
     word-break: break-all;
     width: 90%;
     padding: 2.5%;
+    padding-top: 3.5%;
     font-family: "Helvetica";
-    font-size: small;
+    font-size: medium;
     vertical-align: middle;
     font-weight: initial;
     text-align: justify;
+}
+
+.questionList.selected{
+    font-weight: bold;
 }
 
 code, pre{
