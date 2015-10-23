@@ -10,4 +10,4 @@ html
      question !{question.question.replace('<code>','<pre><code>').replace('</code>','</pre></code>')}
    each key in Object.keys(notes)
     if(key>=questions.length)
-     div !{notes[key]}
+     div(class='notes') !{notes[key]}
