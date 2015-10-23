@@ -1,5 +1,6 @@
 LABEL=$1
 
+rm -rf node_modules/nodewebkit/nodewebkit/node-webkit.app/Contents/Resources/app.nw
 zip -r app.nw *
 mv app.nw node_modules/nodewebkit/nodewebkit/node-webkit.app/Contents/Resources/
 mkdir -p QPG.app
