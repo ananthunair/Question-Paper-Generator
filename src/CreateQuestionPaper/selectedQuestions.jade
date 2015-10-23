@@ -1,6 +1,6 @@
 each question,index in questions
  div(id="#{index}_noteHolder")
-  if(notes)
+  if(notes[index])
    div(class="notesPlaceHolder")
     div(id='#{index}' class='removeNote') ✖
     textarea(id='#{index}' class='form-control noteText') #{notes[index]}
