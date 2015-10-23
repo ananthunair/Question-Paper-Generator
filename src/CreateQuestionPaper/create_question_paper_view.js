@@ -99,8 +99,8 @@ var registerAddNotesListeners =function(){
         var id = $(this).attr('id');
         if(!($("#"+id+"_noteHolder").children().length>0))
          $("#"+id+"_noteHolder").html(jade.renderFile('./src/createQuestionPaper/addNote.jade',{id:id}))
-        $("#"+id+"_noteHolder").html(jade.renderFile('./src/createQuestionPaper/addNote.jade',{id:id}));
-        $('#noteID' + id).focus();
+        //$("#"+id+"_noteHolder").html(jade.renderFile('./src/createQuestionPaper/addNote.jade',{id:id}));
+        //$('#noteID' + id).focus();
         setNoteListener();
     });
     setNoteListener();
@@ -135,7 +135,12 @@ $(document).ready(function () {
         CreateQuestion.render();
         $(".close").click(function () {
             presenter.onNewQuestionAdded();
-        })
+        });
+        $(document).keyup(function(e) {
+            if (e.keyCode == 27) {
+                presenter.onNewQuestionAdded();
+            }
+        });
     });
     $("#questionPaperTitle").keyup(function (e) {
         $("#questionPaperTitle").css("border-color", "");
