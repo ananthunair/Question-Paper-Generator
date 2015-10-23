@@ -198,7 +198,8 @@ li {
     cursor: hand;
     display: inline;
     float: right;
-    margin-right: 0.3%;
+    margin: -1%;
+    margin-top: auto;
 }
 
 .addNote {
