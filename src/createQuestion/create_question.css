@@ -61,7 +61,7 @@
 }
 
 .modal-header{
-    background-color: #f0f8ff !important;
+    background-color: #dbeeff !important
 }
 
 .modal-dialog{
@@ -91,4 +91,8 @@
      font-weight: bold;
      padding:1%;
      text-align: center;
+ }
+
+ .close{
+     opacity: .4;
  }

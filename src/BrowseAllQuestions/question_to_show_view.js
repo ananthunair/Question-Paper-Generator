@@ -5,6 +5,8 @@ var lodash = require('lodash');
 
 var view = {
     questionPreview : function(question){
+        $(".questionContainer").toggleClass('selected',false)
+        $("#"+question.id).toggleClass('selected');
         var htmlForQuestionsToSelect = jade.renderFile('./src/BrowseAllQuestions/question_preview.jade', question);
         $('#questionPreviewContainer').html(htmlForQuestionsToSelect)
     }

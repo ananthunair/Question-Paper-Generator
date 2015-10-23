@@ -59,6 +59,13 @@
 
 }
 
+.questionContainer.selected{
+    background-color: #dbeeff;
+    border-left: 6px solid #008df5;
+    color: #000;
+    font-weight: bold;
+}
+
 .inputBoxContainer {
     float: left;
     display: inline;
