@@ -48,6 +48,7 @@ var view = {
 
     addToQuestionPaper: function (selectedQuestions,notes) {
         var htmlForSelectedQuestions = jade.renderFile("./src/createQuestionPaper/selectedQuestions.jade", {'questions': selectedQuestions,'notes':notes});
+
         $('#body').html(htmlForSelectedQuestions);
         registerAddNotesListeners();
 

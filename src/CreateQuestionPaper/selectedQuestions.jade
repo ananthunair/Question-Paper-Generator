@@ -12,6 +12,7 @@ each question,index in questions
 if(notes)
  each key in Object.keys(notes)
   if(key>=questions.length)
-   div(class="notesPlaceHolder" id="#{key}_noteHolder")
-    div(id='#{key}' class='removeNote') ✖
-    textarea(id='#{key}' class='form-control noteText') #{notes[key]}
+   div(id="#{key}_noteHolder")
+    div(class="notesPlaceHolder")
+     div(id='#{key}' class='removeNote') ✖
+     textarea(id='#{key}' class='form-control noteText') #{notes[key]}
