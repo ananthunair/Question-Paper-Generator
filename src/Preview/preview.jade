@@ -10,7 +10,8 @@ html
         ol
             each question,index in questionPaper.questions
                 if(questionPaper.notes)
-                    div(class="note") #{questionPaper.notes[index]}
+                    div(class="note")
+                     pre #{questionPaper.notes[index]}
                 li !{question.question.replace('<code>','<pre><code>').replace('</code>','</pre></code>')}
             if(questionPaper.notes)
                 each key in Object.keys(questionPaper.notes)
