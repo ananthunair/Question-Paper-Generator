@@ -42,7 +42,7 @@ var view ={
 }
 
 var setAlert = function(className, message){
-    $('#successAlert').fadeIn().html("<div style='box-shadow: 0px 3px 2px #888888;width:60%;height:5%;margin-top: -2.5%;margin-left: 20%;float: left;background: #F0FFE5;font-weight: bold;padding:1%; text-align: center'>"+ message + "</div>");
+    $('#successAlert').fadeIn().addClass('successAlert').text(message);
     $('.modal-body').focusin(function(){
         $('#successAlert').fadeOut();
     })
