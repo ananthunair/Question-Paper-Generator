@@ -1,6 +1,6 @@
 each question,index in questions
  div(id="#{index}_noteHolder")
-  if(notes[index])
+  if(notes)
    div(class="notesPlaceHolder")
     div(id='#{index}' class='removeNote') ✖
     textarea(id='#{index}' class='form-control noteText') #{notes[index]}
@@ -9,8 +9,8 @@ each question,index in questions
    div(id= "#{index}" class="addNote") Add note
    div(id= "#{question.id}" class="remove")  ✖
   | !{question.question.replace('<code>','<pre><code>').replace('</code>','</pre></code>')}
-
-each key in Object.keys(notes)
+if(notes)
+ each key in Object.keys(notes)
   if(key>=questions.length)
    div(class="notesPlaceHolder" id="#{key}_noteHolder")
     div(id='#{key}' class='removeNote') ✖
