@@ -45,7 +45,7 @@
 .questionContainer{
     margin-top: 1%;
     margin-bottom: 1%;
-    background-color: #f8f8f8;
+    background-color: #F9FCFF;
     vertical-align: middle;
     padding: 2.5%;
     font-family: "Helvetica";
@@ -56,6 +56,7 @@
     border-top: 1px solid lightgray;
     height: 17%;
     font-size: small;
+
 }
 
 .inputBoxContainer {

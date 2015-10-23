@@ -125,7 +125,7 @@ code, pre{
 .question_paper_title{
     margin-top: 1%;
     margin-bottom: 1%;
-    background-color: #f8f8f8;
+    background-color: #F9FCFF;
     vertical-align: middle;
     padding: 2.5%;
     font-family: "Helvetica";
@@ -142,7 +142,10 @@ code, pre{
 }
 
 .question_paper_title.selected{
-    background-color: lightgray;
+    background-color: #dbeeff;
+    border-left: 6px solid #008df5;
+    color: #000;
+    font-weight: bold;
 }
 
 #create_question_paper{
@@ -197,9 +200,10 @@ code, pre{
 
 .badge{
     margin-left: 2%;
-    background-color: #C9C9C9;
+    background-color: #dbeeff;
     color: #171718;
     font-size: 1vw;
+    border-color: #dbeeff;;
 }
 
 .notes{
