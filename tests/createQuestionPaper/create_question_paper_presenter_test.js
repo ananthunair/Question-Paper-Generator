@@ -58,23 +58,33 @@ describe("create_question_paper_presenter", function () {
                 'question': 'how are you?',
                 'answer': 'fine'
             }];
+            var tags = [""];
+            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags);
+            moke_repo.fetchQuestionsOfSpecificTags = function (tags,oncomplete) {
+                oncomplete(null, questions);
+            };
             var selectedQuestions = [{'id': '1', 'question': 'how are you?', 'answer': 'fine'}];
             var presenter = new Presenter(moke_view, moke_repo);
             presenter.all_questions = questions;
             mokito.JsMockito.when(moke_view).getSelectedQuestions().thenReturn(['1']);
             presenter.onAddClick();
-            assert.deepEqual(presenter.questionPaper, selectedQuestions)
+            assert.deepEqual(presenter.questionPaper, selectedQuestions);
             mokito.JsMockito.verify(moke_view).addToQuestionPaper(presenter.questionPaper)
         });
 
         it('should remove selected question from questions to select', function () {
             var questions = [{'id': 1, 'question': 'how are you?', 'answer': 'fine'},
                 {'id': 2, 'question': 'how are you?', 'answer': 'fine'}];
+            var tags = [];
+            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags);
+            moke_repo.fetchQuestionsOfSpecificTags = function (tags,oncomplete) {
+                oncomplete(null, questions);
+            };
             var remainingQuestions = [{'id': 2, 'question': 'how are you?', 'answer': 'fine'}];
             var presenter = new Presenter(moke_view, moke_repo);
             presenter.all_questions = questions;
-            mokito.JsMockito.when(moke_view).getSelectedQuestions().thenReturn([1]);
-            moke_view.showQuestions =function(arguments){
+            mokito.JsMockito.when(moke_view).getSelectedQuestions().thenReturn(['1']);
+            moke_view.showQuestions = function(arguments){
                 assert.deepEqual(arguments,remainingQuestions)
             };
             presenter.onAddClick();
@@ -87,6 +97,11 @@ describe("create_question_paper_presenter", function () {
                     'question': 'how are you?',
                     'answer': 'fine'
                 }];
+                var tags = [""];
+                mokito.JsMockito.when(moke_view).getTags().thenReturn(tags);
+                moke_repo.fetchQuestionsOfSpecificTags = function (tags,oncomplete) {
+                    oncomplete(null, questions);
+                };
                 var presenter = new Presenter(moke_view, moke_repo);
                 presenter.all_questions = questions;
                 mokito.JsMockito.when(moke_view).getSelectedQuestions().thenReturn(['1']);

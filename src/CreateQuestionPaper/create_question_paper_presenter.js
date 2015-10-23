@@ -48,9 +48,9 @@ exports.Presenter.prototype = {
         }
         var questionsToAddInPaper = this.all_questions.filter(isSelected);
         this.questionPaper = this.questionPaper.concat(questionsToAddInPaper);
-        view.deleteSelectedQuestions();
         view.addToQuestionPaper(this.questionPaper,this.notes);
-        view.showTotalNumberOfQuestion(this.questionPaper.length)
+        view.showTotalNumberOfQuestion(this.questionPaper.length);
+        this.onAddOrRemoveTag(this.view.getTags());
     },
 
     onSaveClick : function() {
