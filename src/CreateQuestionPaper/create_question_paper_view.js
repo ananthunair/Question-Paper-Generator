@@ -81,8 +81,6 @@ var view = {
     renderDashbord :function(paperId){
         Dashboard.setExtraArgs({'paperId':paperId})
         Dashboard.render();
-        render.paperId = paperId;
-        render('./src/dashboard/dashboard.jade');
     },
     getNote : function(index){
         return $('#'+index+'_text').val();
