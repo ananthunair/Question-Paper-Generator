@@ -38,7 +38,8 @@ exports.Presenter.prototype = {
             this.repo.create(questionDetails, onComplete);
             view.showSuccessMessage()
             view.addSuggetions(tags);
-        }else{
+        }
+        else{
             !question.trim() && view.showError("question")
             !tags.length && view.showError("tags")
         }

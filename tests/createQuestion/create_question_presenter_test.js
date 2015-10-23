@@ -16,6 +16,7 @@ describe("create_question_presenter", function () {
         view.getTags = function(){}
         view.setupTagBox =function(){}
         view.addSuggetions =function(){};
+        view.showSuccessMessage = function(){};
         var repo = {};
         repo.create = function(){};
         repo.getUniqueTags =function(){};
@@ -58,19 +59,20 @@ describe("create_question_presenter", function () {
     context("#onCreate", function () {
         it("should create question with answer and tags", function () {
             var question = "do you have a piece of code?";
-            var answer = "yes"
+            var answer = "yes";
             var tags = ["array","object"];
             mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question);
             mokito.JsMockito.when(moke_view).getAnswer().thenReturn(answer);
             mokito.JsMockito.when(moke_view).getTags().thenReturn(tags);
 
             var presenter = new Presenter(moke_view,moke_repo);
+            moke_repo.create = function(questionDetails,onComplete){
+                assert.equal(question,questionDetails.question);
+                assert.equal(answer,questionDetails.answer);
+                assert.equal(tags.length,questionDetails.tags.length);
+            };
             presenter.onCreate();
-           moke_repo.create =function(questionDetails,onComplete){
-              assert.equal(question,questionDetails.question);
-              assert.equal(answer,questionDetails.answer);
-              assert.equal(tags.length,questionDetails.tags.length);
-           };
+
         });
         it("should create question with blank answer when answer is empty", function () {
             var question = "i have no answer";
