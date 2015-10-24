@@ -3,13 +3,14 @@ var Question_papers_repository = require('./repository/question_paper_repo.js').
 var Question_repository = require('./repository/create_question_repo.js').Question_repository;
 var preview = require('./preview/showPreview.js');
 var jade = require('jade');
-var setOfQuestionsOfPaper, titleOfPaper,notesOfPaper;
+var setOfQuestionsOfPaper, titleOfPaper,notesOfPaper,paperId;
 
 var view = {
     onQuestionPaperClick:function(setOfQuestions,title,id,notes){
         setOfQuestionsOfPaper = setOfQuestions;
         titleOfPaper = title;
         notesOfPaper = notes;
+        paperId = id;
         $(".question_paper_title").toggleClass('selected',false)
         $("#"+id).toggleClass('selected');
         var codeFormatedQuestions = jade.renderFile("./src/Dashboard/question_paper_preview.jade",{title:title,'questions':setOfQuestions,'notes':notes});
@@ -18,7 +19,13 @@ var view = {
 
     openPreview: function () {
         preview.show({title: titleOfPaper, 'questions': setOfQuestionsOfPaper,'notes': notesOfPaper}, screen)
+    },
+
+    openPaperInEditMode : function(){
+        CreatePaper.setExtraArgs({title: titleOfPaper, 'questions': setOfQuestionsOfPaper,'notes': notesOfPaper,'paperId':paperId});
+        CreatePaper.render();
     }
+
 };
 
 
@@ -40,6 +47,7 @@ $(document).ready(function (){
     });
 
     $("#edit_button").click(function(){
+        view.openPaperInEditMode();
     });
 
 

@@ -74,6 +74,10 @@ var view = {
         return $("#questionPaperTitle").val().trim();
     }
     ,
+    setPaperTitle : function(title){
+        $("#questionPaperTitle").val(title);
+    },
+
     showError: function (id) {
         $('#' + id).css("border-color", "red");
     }
@@ -84,6 +88,14 @@ var view = {
     },
     getNote : function(index){
         return $('#'+index+'_text').val();
+    },
+
+    showEditMode : function(){
+        $('#save').attr('id','update');
+        $('#update').html('Update');
+        $('#update').click(function(){
+            presenter.onUpdateClick();
+        })
     }
 
 
@@ -122,7 +134,9 @@ var setNoteListener =function(){
 
 }
 $(document).ready(function () {
-    presenter.onDocumentReady();
+
+    presenter.onDocumentReady(CreatePaper.extraArgs);
+    CreatePaper.resetArgs();
     presenter.setAutosuggetions();
     $("#addQuestions").click(function () {
         presenter.onAddClick();

@@ -40,16 +40,18 @@ describe("create_question_paper_presenter", function () {
     context('#onDocumentReady', function () {
         it('should load questions and show it on view', function () {
             var questions = [{'id': 1, 'question': 'how are you?', 'answer': 'fine'}];
+            var extraArgs = {};
             moke_repo.fetchQuestions = function (oncomplete) {
                 oncomplete(null, questions)
             };
             var presenter = new Presenter(moke_view, moke_repo);
 
-            presenter.onDocumentReady();
+            presenter.onDocumentReady(extraArgs);
             moke_view.showQuestions =function(argument){
                assert.deepEqual(argument[1],[ { id: 1, question: 'how are you?', answer: 'fine' } ]);
             }
         })
+
     });
     context('#onAddClick', function () {
         it('should get selected questions and add it to question paper', function () {

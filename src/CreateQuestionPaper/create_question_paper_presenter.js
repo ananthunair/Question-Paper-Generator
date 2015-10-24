@@ -6,19 +6,32 @@ exports.Presenter = function (view, questions_repo,paper_repo) {
     this.paper_repo = paper_repo;
     this.questionPaper =[];
     this.notes  = {};
+    this.paperId = {};
 }
 
 
 exports.Presenter.prototype = {
 
 
-    onDocumentReady:function(){
+    onDocumentReady:function(extraArgs){
         var presenter =  this;
         var onComplete = function(err,questions){
             presenter.all_questions = questions;
             presenter.view.showQuestions(questions);
         };
         this.repo.fetchQuestions(onComplete);
+        if(Object.keys(extraArgs).length){
+            this.loadPaperInEditMode(extraArgs);
+        }
+    },
+
+    loadPaperInEditMode : function(paperContents){
+        this.questionPaper = paperContents.questions.map(extractQuestion);
+        this.notes = paperContents.notes ? paperContents.notes : {};
+        this.view.addToQuestionPaper(this.questionPaper,this.notes);
+        this.view.setPaperTitle(paperContents.title);
+        this.paperId = paperContents.paperId;
+        this.view.showEditMode();
     },
 
     generateQuestionPaper : function(questionPaper,view) {
@@ -61,6 +74,18 @@ exports.Presenter.prototype = {
             };
             var questionPaper = this.generateQuestionPaper(this.questionPaper,view);
             this.paper_repo.saveQuestionPaper(questionPaper,onComplete);
+        }else
+            view.showError("questionPaperTitle");
+    },
+
+    onUpdateClick : function(){
+        var view = this.view;
+        if(view.title()){
+            var onComplete = function (err,paper) {
+                view.renderDashbord(paper.id);
+            };
+            var questionPaper = this.generateQuestionPaper(this.questionPaper,view);
+            this.paper_repo.updateQuestionPaper(this.paperId,questionPaper,onComplete);
         }else
             view.showError("questionPaperTitle");
     },
@@ -113,4 +138,7 @@ var difference = function(questionInPaper,allQuestion){
 
 var extractId =function(question){
     return question.id.toString();
-}
+};
+var extractQuestion = function(questionObject){
+    return {'id':questionObject._doc._id,'question':questionObject._doc.question};
+};
