@@ -22,7 +22,7 @@ var view = {
     },
 
     openPaperInEditMode : function(){
-        CreatePaper.setExtraArgs({title: titleOfPaper, 'questions': setOfQuestionsOfPaper,'notes': notesOfPaper,'paperId':paperId});
+        CreatePaper.setExtraArgs({title: titleOfPaper, 'questions': setOfQuestionsOfPaper.map(extractQuestion),'notes': notesOfPaper,'paperId':paperId});
         CreatePaper.render();
     }
 
@@ -52,3 +52,7 @@ $(document).ready(function (){
 
 
 });
+
+var extractQuestion = function(questionObject){
+    return {'id':questionObject._doc._id,'question':questionObject._doc.question};
+};

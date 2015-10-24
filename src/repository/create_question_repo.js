@@ -27,10 +27,10 @@ exports.Question_repository.prototype = {
 
     },
 
-    fetchQuestions: function (onComplete) {
+    fetchQuestions: function (onComplete,editModeContents) {
         var QuestionCollection = mongoose.model("Question");
         QuestionCollection.find({},function(err,questions){
-            onComplete(err,questions.map(buildQuestion))
+            onComplete(err,questions.map(buildQuestion),editModeContents);
         });
     },
 

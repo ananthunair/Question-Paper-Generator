@@ -15,18 +15,24 @@ exports.Presenter.prototype = {
 
     onDocumentReady:function(extraArgs){
         var presenter =  this;
-        var onComplete = function(err,questions){
+        var openInEditMode = Object.keys(extraArgs).length;
+
+        var onComplete = function(err,questions,extraArgs){
             presenter.all_questions = questions;
-            presenter.view.showQuestions(questions);
+            if(Object.keys(extraArgs).length){
+                presenter.all_questions = difference(extraArgs.questions,questions);
+            }
+            presenter.view.showQuestions(presenter.all_questions);
         };
-        this.repo.fetchQuestions(onComplete);
-        if(Object.keys(extraArgs).length){
+
+        this.repo.fetchQuestions(onComplete,extraArgs);
+        if(openInEditMode){
             this.loadPaperInEditMode(extraArgs);
         }
     },
 
     loadPaperInEditMode : function(paperContents){
-        this.questionPaper = paperContents.questions.map(extractQuestion);
+        this.questionPaper = paperContents.questions;
         this.notes = paperContents.notes ? paperContents.notes : {};
         this.view.addToQuestionPaper(this.questionPaper,this.notes);
         this.view.setPaperTitle(paperContents.title);
@@ -138,7 +144,4 @@ var difference = function(questionInPaper,allQuestion){
 
 var extractId =function(question){
     return question.id.toString();
-};
-var extractQuestion = function(questionObject){
-    return {'id':questionObject._doc._id,'question':questionObject._doc.question};
 };

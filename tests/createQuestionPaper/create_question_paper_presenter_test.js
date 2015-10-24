@@ -26,6 +26,8 @@ describe("create_question_paper_presenter", function () {
         view.renderDashbord = function(){};
         view.addSuggetions =function(){};
         view.getNote = function(){};
+        view.showEditMode = function(){};
+        view.setPaperTitle = function(){};
         var repo = {};
         var paper_repo = {};
         paper_repo.getAllQuestionPapers = function(){};
@@ -40,17 +42,34 @@ describe("create_question_paper_presenter", function () {
     context('#onDocumentReady', function () {
         it('should load questions and show it on view', function () {
             var questions = [{'id': 1, 'question': 'how are you?', 'answer': 'fine'}];
-            var extraArgs = {};
-            moke_repo.fetchQuestions = function (oncomplete) {
-                oncomplete(null, questions)
+            var editModeContents = {};
+            moke_repo.fetchQuestions = function (oncomplete,editModeContents) {
+                    oncomplete(null, questions,editModeContents)
             };
             var presenter = new Presenter(moke_view, moke_repo);
 
-            presenter.onDocumentReady(extraArgs);
+            presenter.onDocumentReady(editModeContents);
             moke_view.showQuestions =function(argument){
                assert.deepEqual(argument[1],[ { id: 1, question: 'how are you?', answer: 'fine' } ]);
             }
         })
+
+        it('should load remaining questions and open it in edit mode', function () {
+            var questions = [{'id': 1, 'question': 'how are you?', 'answer': 'fine'},
+                {'id':2,'question': 'whats your name', 'answer': 'Pooja'}];
+            var editModeContents = {'questions':[{'id':2,'question': 'whats your name', 'answer': 'Pooja'}]};
+            moke_repo.fetchQuestions = function (oncomplete,editModeContents) {
+                oncomplete(null, questions,editModeContents)
+            };
+            var presenter = new Presenter(moke_view, moke_repo);
+            presenter.all_questions = [{'id': 1, 'question': 'how are you?', 'answer': 'fine'}];
+
+            presenter.onDocumentReady(editModeContents);
+            mokito.JsMockito.verify(moke_view).showQuestions(presenter.all_questions);
+
+        })
+
+
 
     });
     context('#onAddClick', function () {
