@@ -27,13 +27,19 @@ exports.Question_papers_repository.prototype = {
         });
     },
 
+    updateQuestionPaper : function(paperId,paperForUpdate,onComplete){
+        var QP = mongoose.model("QuestionPaper");
+        QP.update({_id:paperId},paperForUpdate,{multi:true},function(err,updatedStatus){
+            onComplete(err,updatedStatus);
+        });
+    },
+
     getPaper : function(paperid,onComplete) {
         var QP = mongoose.model("QuestionPaper");
         QP.findOne({'_id' : paperid },function(err,paper){
             onComplete(err,buildPaper(paper));
         });
     }
-
 
 };
 
