@@ -174,6 +174,23 @@ describe("create_question_paper_presenter", function () {
         })
     });
 
+    context("#onUpdateClick",function(){
+        it('should render dashbord if paper is updated successfully',function(){
+            var paperName = 'somePaper';
+            var paperId = "someId";
+            mokito.JsMockito.when(moke_view).title().thenReturn(paperName);
+            moke_paper_repo.updateQuestionPaper = function(paperId,questionPaper,onComplete){
+                status = {ok : 1};
+                onComplete(null,{id:paperId},status);
+            };
+            var presenter =  new Presenter(moke_view,moke_repo,moke_paper_repo);
+            presenter.paperId = paperId;
+            presenter.onUpdateClick();
+            mokito.JsMockito.verify(moke_view).renderDashbord(presenter.paperId);
+        })
+    });
+
+
     context("#onAddOrRemoveTag",function(){
         it("should load filtered question in the questionToSelect box",function(){
             var questions = [{'id': 1, 'question': 'how are you?', 'answer': 'fine'}];

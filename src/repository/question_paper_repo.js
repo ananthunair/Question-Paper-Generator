@@ -30,7 +30,7 @@ exports.Question_papers_repository.prototype = {
     updateQuestionPaper : function(paperId,paperForUpdate,onComplete){
         var QP = mongoose.model("QuestionPaper");
         QP.update({_id:paperId},paperForUpdate,{multi:true},function(err,updatedStatus){
-            onComplete(err,updatedStatus);
+            onComplete(err,{id:paperId},updatedStatus);
         });
     },
 

@@ -30,7 +30,7 @@ describe('create_paper_repo', function () {
     });
 
     describe("update", function () {
-        it("should update the paper and return the updated Paper ", function (done) {
+        it("should update the paper and return the update status", function (done) {
             var questionPaper = {
                 notes : {1:'some notes'},
                 questions: ["someId"],
@@ -42,7 +42,7 @@ describe('create_paper_repo', function () {
                 header: {title: "ModifiedArray test#1 ", marks: 100, duration: "1 hour"}
             };
             repo.saveQuestionPaper(questionPaper, function (err, savedQuestionPaper) {
-                repo.updateQuestionPaper(savedQuestionPaper.id,expectedQuestionPaper,function(err,updatedStatus){
+                repo.updateQuestionPaper(savedQuestionPaper.id,expectedQuestionPaper,function(err,savedPaperId,updatedStatus){
                     assert.equal(updatedStatus.ok,1);
                     assert.equal(updatedStatus.nModified,1);
                     done();
