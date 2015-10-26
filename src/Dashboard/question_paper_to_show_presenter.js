@@ -17,5 +17,11 @@ exports.Presenter.prototype = {
             })
         }
        paper_repo.getPaper(id,onComplete)
+    },
+    onPreviewClick : function(){
+        this.view.openPreview();
+    },
+    onEditClick : function(){
+        this.view.openPaperInEditMode();
     }
 };

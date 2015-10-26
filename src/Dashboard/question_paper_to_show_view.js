@@ -43,11 +43,11 @@ $(document).ready(function (){
     });
 
     $("#preview_button").click(function(){
-        view.openPreview();
+        presenter.onPreviewClick();
     });
 
     $("#edit_button").click(function(){
-        view.openPaperInEditMode();
+        presenter.onEditClick();
     });
 
 
