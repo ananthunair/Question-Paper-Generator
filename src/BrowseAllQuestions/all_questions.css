@@ -71,7 +71,7 @@
 }
 
 #questionDetailHolder{
-    height: 98%;
+    height: 88%;
     width: 98%;
     border: solid 1px #D0D1D1;
     margin: 1%;
@@ -120,4 +120,22 @@ code, pre{
 .ui-autocomplete{
     max-height: 220% !important;
     z-index: 2;
+}
+
+#buttonContainer{
+    height: 8%;
+    width: 67%;
+    position: fixed;
+    text-align: center;
+}
+
+#editQuestion{
+    color: #ffffff;
+    float: inherit;
+    width: 15%;
+    text-align: center;
+    font-size: 1vw;
+    font-family: "Helvetica Neue";
+    background-color: #008dca;
+    margin-left: 5%;
 }
