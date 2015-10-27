@@ -1,5 +1,5 @@
-var Presenter = require('./BrowseAllQuestions/question_to_show_presenter.js').Presenter;
-var Question_repository = require('./repository/create_question_repo').Question_repository;
+var Presenter = require('../BrowseAllQuestions/question_to_show_presenter.js').Presenter;
+var Question_repository = require('../repository/create_question_repo').Question_repository;
 var jade = require('jade');
 var lodash = require('lodash');
 

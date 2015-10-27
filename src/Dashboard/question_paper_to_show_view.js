@@ -1,7 +1,7 @@
-var Presenter = require('./dashboard/question_paper_to_show_presenter.js').Presenter;
-var Question_papers_repository = require('./repository/question_paper_repo.js').Question_papers_repository;
-var Question_repository = require('./repository/create_question_repo.js').Question_repository;
-var preview = require('./preview/showPreview.js');
+var Presenter = require('./question_paper_to_show_presenter.js').Presenter;
+var Question_papers_repository = require('../repository/question_paper_repo.js').Question_papers_repository;
+var Question_repository = require('../repository/create_question_repo.js').Question_repository;
+var preview = require('../preview/showPreview.js');
 var jade = require('jade');
 var setOfQuestionsOfPaper, titleOfPaper,notesOfPaper,paperId;
 
@@ -23,7 +23,7 @@ var view = {
 
     openPaperInEditMode : function(){
         CreatePaper.setExtraArgs({title: titleOfPaper, 'questions': setOfQuestionsOfPaper.map(extractQuestion),'notes': notesOfPaper,'paperId':paperId});
-        CreatePaper.render();
+        CreatePaper.render({'id':paperId});
     }
 
 };
@@ -35,7 +35,7 @@ $(document).ready(function (){
     var presenter = new Presenter(view, paperRepo,questionRepo);
 
     $('#create_question_paper').click(function(){
-       CreatePaper.render()
+       CreatePaper.render({})
     });
     $('.question_paper_title').click(function(){
         var id = $(this).attr('id');

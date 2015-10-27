@@ -1,0 +1,25 @@
+<html>
+<link rel="import" href="../index.html">
+<script src="../../js/app.js"></script>
+<script src="all_questions_view.js"></script>
+<link rel="stylesheet" type="text/css" href="../dashboard/dashboard.css"/>
+<link rel="stylesheet" type="text/css" href="./all_questions.css"/>
+<link rel="stylesheet" type="text/css" href="../../library/taggle/assets/css/taggle.css"/>
+<div id="create_question_container">
+    <button id="create_question" type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-lg">+ Question</button>
+</div>
+<div id="myModal" role="dialog" class="modal fade"></div>
+<div id="browseAllQuestionContainer">
+    <div id="allQuestionHeading">Questions</div><br/>
+    <div class="input-group col-md-12">
+        <div id="tagsInput" class="input textarea tagbox"></div>
+    </div>
+    <div id="all_question_container"></div>
+    <!--button(id="addQuestionsToQuestionPaper", type="button" ,class="btn btn-primary btn-lg") Add To Paper-->
+</div>
+<div id="questionPreviewContainer"></div>
+<script src="../../library/taggle/assets/js/jquery-1.10.1.js"></script>
+<script src="../../library/taggle/assets/js/jquery-ui.js"></script>
+<script src="../../library/taggle/assets/js/taggle.js"></script>
+</body>
+</html>

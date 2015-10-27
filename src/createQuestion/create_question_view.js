@@ -1,5 +1,5 @@
-var Presenter = require('./createQuestion/create_question_presenter.js').Presenter;
-var Question_repository = require('./repository/create_question_repo.js').Question_repository;
+var Presenter = require('../createQuestion/create_question_presenter.js').Presenter;
+var Question_repository = require('../repository/create_question_repo.js').Question_repository;
 var lodash  = require('lodash');
 var view ={
     getSelection:function(){

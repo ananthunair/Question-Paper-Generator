@@ -1,5 +1,5 @@
-var Presenter = require('./dashboard/dashboard_presenter.js').Presenter;
-var Question_papers_repository = require('./repository/question_paper_repo.js').Question_papers_repository;
+var Presenter = require('./dashboard_presenter.js').Presenter;
+var Question_papers_repository = require('../repository/question_paper_repo.js').Question_papers_repository;
 var jade = require('jade');
 var extraArgs ={};
 
@@ -15,13 +15,19 @@ var sortQuestionPaperByTitle = function(questionPapers){
 
 }
 
+
+var getValueFromParams = function(valueOf ,url){
+    var match = RegExp('[?&]' + valueOf + '=([^&]*)').exec(url);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
 var view = {
     showQuestionPapers: function (questionPapers) {
         var sortedQuestionPapers = sortQuestionPaperByTitle(questionPapers);
         var codeFormatedQuestions = jade.renderFile('./src/Dashboard/questionPapersToShow.jade', {'questionPapers': sortedQuestionPapers});
         $('#questionPapers').html(codeFormatedQuestions)
         if(sortedQuestionPapers.length) {
-            var id = extraArgs.paperId || sortedQuestionPapers[0].id;
+            var id = getValueFromParams('id',window.location.href) || sortedQuestionPapers[0].id;
             $("#" + id).click()
         }else{
             $("#preview_button").hide();
@@ -35,14 +41,14 @@ $(function(){
     var repo = new Question_papers_repository();
     var presenter = new Presenter(view, repo);
     presenter.onDocumentReady();
-
     $('#create_question').click(function(){
-        CreateQuestion.render()
+        CreateQuestion.render({})
     });
 
     $('#showAllQuestions').click(function(){
-        BrowseQuestions.render()
+        BrowseQuestions.render({})
     })
+
 });
 
 var fetchExtraArgs=function(){

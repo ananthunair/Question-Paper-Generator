@@ -1,5 +1,5 @@
-var Presenter = require('./BrowseAllQuestions/all_questions_presenter.js').Presenter;
-var Question_repository = require('./repository/create_question_repo').Question_repository;
+var Presenter = require('../BrowseAllQuestions/all_questions_presenter.js').Presenter;
+var Question_repository = require('../repository/create_question_repo').Question_repository;
 var jade = require('jade');
 var lodash = require('lodash');
 var repo = new Question_repository();
@@ -42,7 +42,7 @@ $(document).ready(function(){
     presenter.setAutosuggetions();
 
     $('#create_question').click(function(){
-        CreateQuestion.render();
+        CreateQuestion.render({});
         $(".close").click(function () {
             presenter.onNewQuestionAdded();
         })

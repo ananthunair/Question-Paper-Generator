@@ -1,9 +1,9 @@
-var Presenter = require('./createQuestionPaper/create_question_paper_presenter.js').Presenter;
-var Question_repository = require('./repository/create_question_repo').Question_repository;
-var Question_papers_repository = require('./repository/question_paper_repo.js').Question_papers_repository;
+var Presenter = require('../CreateQuestionPaper/create_question_paper_presenter.js').Presenter;
+var Question_repository = require('../repository/create_question_repo').Question_repository;
+var Question_papers_repository = require('../repository/question_paper_repo.js').Question_papers_repository;
 var jade = require('jade');
 var repo = new Question_repository();
-var preview = require('./preview/showPreview.js');
+var preview = require('../preview/showPreview.js');
 var paper_repo = new Question_papers_repository();
 var lodash = require('lodash');
 var view = {
@@ -47,6 +47,7 @@ var view = {
     ,
 
     addToQuestionPaper: function (selectedQuestions,notes) {
+        console.log
         var htmlForSelectedQuestions = jade.renderFile("./src/createQuestionPaper/selectedQuestions.jade", {'questions': selectedQuestions,'notes':notes});
 
         $('#body').html(htmlForSelectedQuestions);
@@ -83,8 +84,7 @@ var view = {
     }
     ,
     renderDashbord :function(paperId){
-        Dashboard.setExtraArgs({'paperId':paperId})
-        Dashboard.render();
+        Dashboard.render({'id':paperId});
     },
     getNote : function(index){
         return $('#'+index+'_text').val();
@@ -133,9 +133,15 @@ var setNoteListener =function(){
     });
 
 }
-$(document).ready(function () {
 
-    presenter.onDocumentReady(CreatePaper.extraArgs);
+var getValueFromParams = function(valueOf ,url){
+    var match = RegExp('[?&]' + valueOf + '=([^&]*)').exec(url);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+$(document).ready(function () {
+    var paperId = getValueFromParams('id',window.location.href);
+    presenter.onDocumentReady(paperId);
     CreatePaper.resetArgs();
     presenter.setAutosuggetions();
     $("#addQuestions").click(function () {
@@ -145,7 +151,7 @@ $(document).ready(function () {
         presenter.onSaveClick();
     });
     $('#create_questions').click(function () {
-        CreateQuestion.render();
+        CreateQuestion.render({});
         $(".close").click(function () {
             presenter.onNewQuestionAdded();
         });

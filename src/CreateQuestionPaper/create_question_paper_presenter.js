@@ -13,30 +13,36 @@ exports.Presenter = function (view, questions_repo,paper_repo) {
 exports.Presenter.prototype = {
 
 
-    onDocumentReady:function(extraArgs){
+    onDocumentReady:function(paperId){
         var presenter =  this;
-        var openInEditMode = Object.keys(extraArgs).length;
+        var openInEditMode = paperId.length;
+        console.log(paperId);
+        var repo = this.repo;
+        var onCompleteOfFetchPaper = function(err,paper){
 
-        var onComplete = function(err,questions,extraArgs){
-            presenter.all_questions = questions;
-            if(Object.keys(extraArgs).length){
-                presenter.all_questions = difference(extraArgs.questions,questions);
-            }
-            presenter.view.showQuestions(presenter.all_questions);
-        };
+            var onComplete = function(err,questions,paper){
+                presenter.all_questions = questions;
+                if(Object.keys(paper).length){
+                    presenter.all_questions = difference(paper.questions,questions);
+                    var questionsOfPaper = getQuestionsOfPaper(paper.questions,questions);
+                    presenter.loadPaperInEditMode(paper,questionsOfPaper);
+                }
+                presenter.view.showQuestions(presenter.all_questions);
+            };
 
-        this.repo.fetchQuestions(onComplete,extraArgs);
-        if(openInEditMode){
-            this.loadPaperInEditMode(extraArgs);
+            repo.fetchQuestions(onComplete,paper);
         }
+        this.paper_repo.getPaper(paperId,onCompleteOfFetchPaper);
+
     },
 
-    loadPaperInEditMode : function(paperContents){
-        this.questionPaper = paperContents.questions;
+    loadPaperInEditMode : function(paperContents,questionOfPaper){
+        console.log('')
+        this.questionPaper = questionOfPaper;
         this.notes = paperContents.notes ? paperContents.notes : {};
         this.view.addToQuestionPaper(this.questionPaper,this.notes);
         this.view.setPaperTitle(paperContents.title);
-        this.paperId = paperContents.paperId;
+        this.paperId = paperContents.id.toString();
         this.view.showEditMode();
     },
 
@@ -51,7 +57,8 @@ exports.Presenter.prototype = {
     onAddOrRemoveTag :  function(tags){
             var presenter =  this;
             var onComplete = function(err,questions){
-                presenter.all_questions = difference(presenter.questionPaper,questions);
+                var questionPaperIds = presenter.questionPaper.map(extractId);
+                presenter.all_questions = difference(questionPaperIds,questions);
 
                 presenter.view.showQuestions(presenter.all_questions);
             };
@@ -134,13 +141,21 @@ exports.Presenter.prototype = {
 };
 
 
-var difference = function(questionInPaper,allQuestion){
+var difference = function(questionsId,allQuestion){
 
-    var questionInPaperId = questionInPaper.map(extractId);
    return allQuestion.filter(function(question){
-       return questionInPaperId.indexOf(question.id.toString())<0;
+       return questionsId.indexOf(question.id.toString())<0;
    })
 };
+
+var getQuestionsOfPaper = function(questionsId,allQuestion){
+
+    return allQuestion.filter(function(question){
+        return questionsId.indexOf(question.id.toString())>=0;
+    })
+};
+
+
 
 var extractId =function(question){
     return question.id.toString();

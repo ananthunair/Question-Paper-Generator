@@ -32,6 +32,7 @@ describe("create_question_paper_presenter", function () {
         var paper_repo = {};
         paper_repo.getAllQuestionPapers = function(){};
         paper_repo.saveQuestionPaper = function(){};
+        paper_repo.getPaper = function(){};
         repo.create = function () {};
         repo.getAllQuestions = function () {};
         moke_view = mokito.JsMockito.mock(view);
@@ -43,10 +44,15 @@ describe("create_question_paper_presenter", function () {
         it('should load questions and show it on view', function () {
             var questions = [{'id': 1, 'question': 'how are you?', 'answer': 'fine'}];
             var editModeContents = {};
+            var paper = {id:'someId',questions:['id1','id2'],notes:'botes',title:'some-title'};
             moke_repo.fetchQuestions = function (oncomplete,editModeContents) {
                     oncomplete(null, questions,editModeContents)
             };
-            var presenter = new Presenter(moke_view, moke_repo);
+            moke_paper_repo.getPaper = function(paperId,onCompleteOfFetchPaper){
+                onCompleteOfFetchPaper(null,paper);
+            };
+
+            var presenter = new Presenter(moke_view, moke_repo,moke_paper_repo);
 
             presenter.onDocumentReady(editModeContents);
             moke_view.showQuestions =function(argument){
@@ -58,16 +64,22 @@ describe("create_question_paper_presenter", function () {
             var questions = [{'id': 1, 'question': 'how are you?', 'answer': 'fine'},
                 {'id':2,'question': 'whats your name', 'answer': 'Pooja'}];
             var editModeContents = {'questions':[{'id':2,'question': 'whats your name', 'answer': 'Pooja'}]};
+            var paper = {id:'someId',questions:['id1','id2'],notes:'botes',title:'some-title'};
             moke_repo.fetchQuestions = function (oncomplete,editModeContents) {
                 oncomplete(null, questions,editModeContents)
             };
-            var presenter = new Presenter(moke_view, moke_repo);
+
+            moke_paper_repo.getPaper = function(paperId,onCompleteOfFetchPaper){
+                onCompleteOfFetchPaper(null,paper);
+            };
+
+            var presenter = new Presenter(moke_view, moke_repo, moke_paper_repo);
             presenter.all_questions = [{'id': 1, 'question': 'how are you?', 'answer': 'fine'}];
 
             presenter.onDocumentReady(editModeContents);
             mokito.JsMockito.verify(moke_view).showQuestions(presenter.all_questions);
 
-        })
+        });
 
 
 
