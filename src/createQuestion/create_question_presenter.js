@@ -32,8 +32,9 @@ exports.Presenter.prototype = {
                 tags: tags
             };
 
-            var onComplete = function(err){
+            var onComplete = function(err,savedQuestion){
                 view.clearScreen();
+                view.showSuccessMessage(savedQuestion.id.toString());
             };
             this.repo.create(questionDetails, onComplete);
             view.showSuccessMessage()

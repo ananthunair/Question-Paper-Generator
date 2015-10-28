@@ -82,7 +82,7 @@
 }
  .successAlert{
      box-shadow: 0px 3px 2px #888888;
-     width:44%;
+     width:53%;
      height:4%;
      margin-top: -2.5%;
      margin-left: 27%;
@@ -91,6 +91,12 @@
      font-weight: bold;
      padding:1%;
      text-align: center;
+ }
+ #viewQuestion{
+     margin-left: 3%;
+     color: blue;
+     cursor: pointer;
+     text-decoration: underline;
  }
 
  .close{

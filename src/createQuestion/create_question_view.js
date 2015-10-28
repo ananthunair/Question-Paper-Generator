@@ -29,8 +29,8 @@ var view ={
     showErrorMessage:function(){
         setAlert("alert alert-danger", "Question and Tag field can not be empty");
     },
-    showSuccessMessage:function(){
-        setAlert("alert alert-success","Question saved successfully")
+    showSuccessMessage:function(savedQuestionID){
+        setAlert("alert alert-success","Question saved successfully.",savedQuestionID)
     },
     setupTagBox:function(tags){
         this.tagBox = setupTagBox(tags)
@@ -41,11 +41,16 @@ var view ={
     }
 }
 
-var setAlert = function(className, message){
+var setAlert = function(className, message,questionId){
     $('#successAlert').fadeIn().addClass('successAlert').text(message);
+    $('#successAlert').append('<a id= "viewQuestion" data-dismiss="modal" >'+'View here'+'</a>');
     $('.modal-body').focusin(function(){
         $('#successAlert').fadeOut();
-    })
+    });
+    $('#viewQuestion').click(function(){
+        BrowseQuestions.setExtraArgs({questionId:questionId});
+        BrowseQuestions.render();
+    });
 }
 
 $(document).ready(function() {

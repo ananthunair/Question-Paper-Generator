@@ -3,8 +3,10 @@ var Question_repository = require('../repository/create_question_repo').Question
 var jade = require('jade');
 var lodash = require('lodash');
 var repo = new Question_repository();
+var extraArgs ={};
 var view = {
     showAllQuestions:function(questions){
+        questions.reverse();
         var htmlForQuestionsToSelect = jade.renderFile('./src/BrowseAllQuestions/questions_to_show.jade', {'questions': questions});
         $('#all_question_container').html(htmlForQuestionsToSelect);
         if(questions.length == 0){
@@ -12,8 +14,11 @@ var view = {
             $('#questionPreviewContainer').html(htmlForQuestionsToSelect)
         }
         else {
-            $("#" + questions[0]['id']).click();
+            var id = extraArgs.questionId ||questions[0]['id'];
+            var selectedQuestion = $("#" + id);
+            selectedQuestion.click();
         }
+
     },
     setupTagBoxData: function(tags){
         this.tagBox = setupTagBox(tags)
@@ -34,12 +39,18 @@ var view = {
     }
 
 }
+var fetchBrowseQuestionsArgs=function(){
+    extraArgs = BrowseQuestions.extraArgs;
+    BrowseQuestions.resetArgs();
+}
 
 var presenter = new Presenter(view, repo);
+
 
 $(document).ready(function(){
     var headerHtml = jade.renderFile('./src/index.jade');
     $('#header').html(headerHtml);
+    fetchBrowseQuestionsArgs();
     presenter.onDocumentReady();
     presenter.setAutosuggetions();
 
