@@ -71,7 +71,7 @@ describe("create_question_presenter", function () {
                 assert.equal(answer,questionDetails.answer);
                 assert.equal(tags.length,questionDetails.tags.length);
             };
-            presenter.onCreate();
+            presenter.onCreate({id:''});
 
         });
         it("should create question with blank answer when answer is empty", function () {
@@ -83,7 +83,7 @@ describe("create_question_presenter", function () {
             mokito.JsMockito.when(moke_view).getTags().thenReturn(tags);
 
             var presenter = new Presenter(moke_view,moke_repo);
-            presenter.onCreate();
+            presenter.onCreate({id:''});
             moke_repo.create =function(questionDetails,onComplete){
                 assert.equal(question,questionDetails.question);
                 assert.equal(answer,questionDetails.answer);
@@ -100,7 +100,7 @@ describe("create_question_presenter", function () {
             mokito.JsMockito.when(moke_view).getTags().thenReturn(tags);
 
             var presenter = new Presenter(moke_view,moke_repo);
-            presenter.onCreate();
+            presenter.onCreate({id:''});
             moke_repo.create =function(questionDetails,onComplete){
                 assert.equal(question,questionDetails.question);
                 assert.equal(answer,questionDetails.answer);
@@ -116,7 +116,7 @@ describe("create_question_presenter", function () {
             mokito.JsMockito.when(moke_view).getTags().thenReturn(tags);
 
             var presenter = new Presenter(moke_view,moke_repo);
-            presenter.onCreate();
+            presenter.onCreate({id:''});
             moke_repo.create =function(questionDetails,onComplete){
                 assert.equal(question,questionDetails.question);
                 assert.equal(answer,questionDetails.answer);
@@ -133,7 +133,7 @@ describe("create_question_presenter", function () {
                 onComplete({err:1});
             };
             var presenter = new Presenter(moke_view,moke_repo);
-            presenter.onCreate();
+            presenter.onCreate({id:''});
             mokito.JsMockito.verify(moke_view).showError();
         });
         it("Should give error message if question has only empty spaces", function() {
@@ -146,7 +146,7 @@ describe("create_question_presenter", function () {
                 onComplete({err:1});
             };
             var presenter = new Presenter(moke_view,moke_repo);
-            presenter.onCreate();
+            presenter.onCreate({id:''});
             mokito.JsMockito.verify(moke_view).showError();
 
         });
@@ -156,7 +156,7 @@ describe("create_question_presenter", function () {
             mokito.JsMockito.when(moke_view).getTags().thenReturn(newSuggetions);
             mokito.JsMockito.when(moke_view).getQuestion().thenReturn("how are you?");
             var preseneter = new  Presenter(moke_view, moke_repo);
-            preseneter.onCreate();
+            preseneter.onCreate({id:''});
             mokito.JsMockito.verify(moke_view).addSuggetions(newSuggetions)
         })
 
@@ -168,7 +168,7 @@ describe("create_question_presenter", function () {
                 oncomplete(null,suggestedTags)
             };
             var preseneter = new  Presenter(moke_view, moke_repo);
-            preseneter.onDocumentReady();
+            preseneter.onDocumentReady({id:''});
             mokito.JsMockito.verify(moke_view).setupTagBox(suggestedTags)
         });
     });
