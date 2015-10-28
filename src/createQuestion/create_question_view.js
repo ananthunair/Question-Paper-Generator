@@ -51,6 +51,9 @@ var view ={
     },
     closePopUp: function(){
         $('.close').click();
+    },
+    showUpdatedQuestion:function(id){
+        BrowseQuestions.render({'questionId':id});
     }
 }
 

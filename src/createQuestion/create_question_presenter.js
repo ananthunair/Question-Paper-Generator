@@ -51,6 +51,7 @@ exports.Presenter.prototype = {
                 this.repo.updateQuestion(extraArgs.id, questionDetails, onComplete);
                 view.addSuggetions(tags);
                 view.closePopUp();
+                view.showUpdatedQuestion(extraArgs.id);
             }else{
 
                 var onComplete = function(err,savedQuestion){
