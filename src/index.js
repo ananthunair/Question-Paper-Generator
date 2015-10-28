@@ -9,11 +9,6 @@ var setArgs =function(extraArgs){
     this.extraArgs = extraArgs;
 }
 
-var render =function(path,options){
-    var html = jade.renderFile(path,options)
-    $('#container').html(html);
-};
-
 var index = {
     'constructUrlParams': function (optionsToPass) {
         var url = optionsToPass ? '?' : '';
