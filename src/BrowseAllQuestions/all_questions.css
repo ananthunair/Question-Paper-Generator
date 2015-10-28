@@ -42,7 +42,7 @@
     position: absolute;
     width: 98%;
     height: 84%;
-    overflow: auto;
+    overflow: hidden;
 }
 
 #all_question_container{
