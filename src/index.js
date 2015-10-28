@@ -1,5 +1,5 @@
 var jade = require('jade');
-require('/Users/ananthu/Documents/Workspace/Question-Paper-Generator/src/repo.js').connectDb("qpg_prod");
+require('../repo.js').connectDb("qpg_prod");
 
 var resetArgs=function(){
     this.extraArgs ={};
