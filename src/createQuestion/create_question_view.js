@@ -1,6 +1,6 @@
 var Presenter = require('../createQuestion/create_question_presenter.js').Presenter;
-var QuestionPresenter = require('./createQuestion/create_question_presenter.js').Presenter;
-var Question_repository = require('./repository/create_question_repo.js').Question_repository;
+var QuestionPresenter = require('../createQuestion/create_question_presenter.js').Presenter;
+var Question_repository = require('../repository/create_question_repo.js').Question_repository;
 var lodash  = require('lodash');
 var extraArgs = {};
 var view ={

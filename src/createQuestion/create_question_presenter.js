@@ -44,39 +44,6 @@ exports.Presenter.prototype = {
                 answer: this.view.getAnswer(),
                 tags: tags
             };
-
-            var onComplete = function(err,savedQuestion){
-                view.clearScreen();
-                view.showSuccessMessage(savedQuestion.id.toString());
-            };
-            this.repo.create(questionDetails, onComplete);
-            view.showSuccessMessage()
-            view.addSuggetions(tags);
-        }
-        else{
-            !question.trim() && view.showError("question")
-            !tags.length && view.showError("tags")
-        }
-    },
-    onUpdateQuestionClick:function(id){
-        var view = this.view;
-        var question = this.view.getQuestion();
-        var tags = this.view.getTags();
-
-        if (tags.length && question.trim()) {
-
-            var questionDetails = {
-                question: question,
-                answer: this.view.getAnswer(),
-                tags: tags
-            };
-
-            var onComplete = function(err){
-                view.clearScreen();
-            };
-            this.repo.updateQuestion(id, questionDetails, onComplete);
-            view.showSuccessMessage()
-            view.addSuggetions(tags);
             if(extraArgs.id.length) {
                 var onComplete = function (err) {
                     view.clearScreen();
@@ -84,15 +51,17 @@ exports.Presenter.prototype = {
                 this.repo.updateQuestion(extraArgs.id, questionDetails, onComplete);
                 view.addSuggetions(tags);
                 view.closePopUp();
-            }
-            else{
-                var onComplete = function (err) {
+            }else{
+
+                var onComplete = function(err,savedQuestion){
                     view.clearScreen();
+                    view.showSuccessMessage(savedQuestion.id.toString());
                 };
                 this.repo.create(questionDetails, onComplete);
                 view.showSuccessMessage()
                 view.addSuggetions(tags);
             }
+
         }
         else{
             !question.trim() && view.showError("question")
