@@ -32,7 +32,7 @@ exports.Presenter.prototype = {
         var postFix = text.substring(selection.end);
         this.view.setQuestion(preFix + wrapWithCode(selectedText) + postFix)
     },
-    onCreate: function () {
+    onCreate: function (extraArgs) {
         var view = this.view;
         var question = this.view.getQuestion();
         var tags = this.view.getTags();
@@ -77,12 +77,27 @@ exports.Presenter.prototype = {
             this.repo.updateQuestion(id, questionDetails, onComplete);
             view.showSuccessMessage()
             view.addSuggetions(tags);
+            if(extraArgs.id.length) {
+                var onComplete = function (err) {
+                    view.clearScreen();
+                };
+                this.repo.updateQuestion(extraArgs.id, questionDetails, onComplete);
+                view.addSuggetions(tags);
+                view.closePopUp();
+            }
+            else{
+                var onComplete = function (err) {
+                    view.clearScreen();
+                };
+                this.repo.create(questionDetails, onComplete);
+                view.showSuccessMessage()
+                view.addSuggetions(tags);
+            }
         }
         else{
             !question.trim() && view.showError("question")
             !tags.length && view.showError("tags")
         }
-
     }
 };
 var setAutosuggetions = function (repo, view) {

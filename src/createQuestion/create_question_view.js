@@ -48,10 +48,9 @@ var view ={
         this.tagBox.add(questionDetail.tags);
         $('#create').attr('id','updateQuestion');
         $('#updateQuestion').html('Update');
-        $('#updateQuestion').click(function(){
-            console.log('update====================')
-            questionPresenter.onUpdateQuestionClick(questionDetail.id);
-        })
+    },
+    closePopUp: function(){
+        $('.close').click();
     }
 }
 
@@ -65,15 +64,15 @@ var setAlert = function(className, message,questionId){
         BrowseQuestions.render({'questionId':questionId});
     });
 }
-var repo = new  Question_repository();
 
-var questionPresenter = new QuestionPresenter(view,repo);
 $(document).ready(function() {
+    var repo = new  Question_repository();
+    var questionPresenter = new QuestionPresenter(view,repo);
     view.tagBox = setupTagBox([]);
     fetchExtraArgs();
     $("#markAsCode").on('click',function(){questionPresenter.markAsCode()});
     $("#create").on('click',function(){
-        questionPresenter.onCreate();
+        questionPresenter.onCreate(extraArgs);
     });
     $(".validate").keyup(function (e) {
         $(".validate").css("border-color", "");
