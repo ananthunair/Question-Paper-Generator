@@ -17,9 +17,13 @@ describe("create_question_presenter", function () {
         view.setupTagBox =function(){}
         view.addSuggetions =function(){};
         view.showSuccessMessage = function(){};
+        view.closePopUp = function(){};
+        view.showUpdatedQuestion = function(){};
+        view.populateCreateQuestionPage = function(){};
         var repo = {};
         repo.create = function(){};
         repo.getUniqueTags =function(){};
+        repo.updateQuestion = function(){};
         moke_view=mokito.JsMockito.mock(view);
         moke_repo=mokito.JsMockito.mock(repo);
     })
@@ -73,6 +77,26 @@ describe("create_question_presenter", function () {
             };
             presenter.onCreate({id:''});
 
+        });
+        it("should update question with answer and tags when id is exists", function () {
+            var question = "do you have a piece of code?";
+            var answer = "yes";
+            var tags = ["array","object"];
+            mokito.JsMockito.when(moke_view).getQuestion().thenReturn(question);
+            mokito.JsMockito.when(moke_view).getAnswer().thenReturn(answer);
+            mokito.JsMockito.when(moke_view).getTags().thenReturn(tags);
+
+            var presenter = new Presenter(moke_view,moke_repo);
+            moke_repo.updateQuestion = function (id,questionDetails,onComplete){
+                assert.equal(question,questionDetails.question);
+                assert.equal(id,'length');
+                assert.equal(answer,questionDetails.answer);
+                assert.equal(tags.length,questionDetails.tags.length);
+            };
+            presenter.onCreate({id:'length'});
+            mokito.JsMockito.verify(moke_view).addSuggetions(tags);
+            mokito.JsMockito.verify(moke_view).closePopUp();
+            mokito.JsMockito.verify(moke_view).showUpdatedQuestion('length');
         });
         it("should create question with blank answer when answer is empty", function () {
             var question = "i have no answer";
