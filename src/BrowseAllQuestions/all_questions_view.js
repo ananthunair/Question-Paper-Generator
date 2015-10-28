@@ -14,7 +14,7 @@ var view = {
             $('#questionPreviewContainer').html(htmlForQuestionsToSelect)
         }
         else {
-            var id = extraArgs.questionId ||questions[0]['id'];
+            var id = getValueFromParams('questionId',window.location.href) || questions[0]['id'];
             var selectedQuestion = $("#" + id);
             selectedQuestion.click();
         }
@@ -42,6 +42,11 @@ var view = {
 var fetchBrowseQuestionsArgs=function(){
     extraArgs = BrowseQuestions.extraArgs;
     BrowseQuestions.resetArgs();
+}
+
+var getValueFromParams = function(valueOf ,url){
+    var match = RegExp('[?&]' + valueOf + '=([^&]*)').exec(url);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 }
 
 var presenter = new Presenter(view, repo);

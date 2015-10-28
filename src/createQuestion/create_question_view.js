@@ -48,8 +48,7 @@ var setAlert = function(className, message,questionId){
         $('#successAlert').fadeOut();
     });
     $('#viewQuestion').click(function(){
-        BrowseQuestions.setExtraArgs({questionId:questionId});
-        BrowseQuestions.render();
+        BrowseQuestions.render({'questionId':questionId});
     });
 }
 

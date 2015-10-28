@@ -56,8 +56,9 @@ CreatePaper ={
 
 BrowseQuestions ={
     extraArgs:{},
-    render:function(){
-        window.location.href = "../BrowseAllQuestions/all_questions.html"
+    render:function(option){
+        var params = index.constructUrlParams(option);
+        window.location.href = "../BrowseAllQuestions/all_questions.html"+params
     },
     resetArgs:resetArgs,
     setExtraArgs:setArgs
