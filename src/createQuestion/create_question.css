@@ -12,7 +12,7 @@
     margin-bottom: 5%;
 }
 
-#create{
+.createButton{
     text-align: center;
     background-color: #008dca;
     vertical-align: middle;

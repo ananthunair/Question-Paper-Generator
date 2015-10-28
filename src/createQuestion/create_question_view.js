@@ -1,6 +1,8 @@
 var Presenter = require('../createQuestion/create_question_presenter.js').Presenter;
-var Question_repository = require('../repository/create_question_repo.js').Question_repository;
+var QuestionPresenter = require('./createQuestion/create_question_presenter.js').Presenter;
+var Question_repository = require('./repository/create_question_repo.js').Question_repository;
 var lodash  = require('lodash');
+var extraArgs = {};
 var view ={
     getSelection:function(){
         var textComponent = document.getElementById('question');
@@ -33,11 +35,23 @@ var view ={
         setAlert("alert alert-success","Question saved successfully.",savedQuestionID)
     },
     setupTagBox:function(tags){
-        this.tagBox = setupTagBox(tags)
+       this.tagBox.resetSuggetions(tags)
     },
 
     addSuggetions:function(tags){
       this.tagBox.resetSuggetions(tags)
+    },
+
+    populateCreateQuestionPage: function(questionDetail){
+        $('#question').val(questionDetail.question);
+        $('#answer').val(questionDetail.answer);
+        this.tagBox.add(questionDetail.tags);
+        $('#create').attr('id','updateQuestion');
+        $('#updateQuestion').html('Update');
+        $('#updateQuestion').click(function(){
+            console.log('update====================')
+            questionPresenter.onUpdateQuestionClick(questionDetail.id);
+        })
     }
 }
 
@@ -51,18 +65,22 @@ var setAlert = function(className, message,questionId){
         BrowseQuestions.render({'questionId':questionId});
     });
 }
+var repo = new  Question_repository();
 
+var questionPresenter = new QuestionPresenter(view,repo);
 $(document).ready(function() {
-    var repo = new  Question_repository();
-    var presenter =new Presenter(view,repo);
-    $("#markAsCode").on('click',function(){presenter.markAsCode()});
+    view.tagBox = setupTagBox([]);
+    fetchExtraArgs();
+    $("#markAsCode").on('click',function(){questionPresenter.markAsCode()});
     $("#create").on('click',function(){
-        presenter.onCreate();
+        questionPresenter.onCreate();
     });
     $(".validate").keyup(function (e) {
         $(".validate").css("border-color", "");
     });
-    presenter.onDocumentReady()
+    questionPresenter.onDocumentReady(extraArgs);
+    CreateQuestion.resetArgs();
+
 });
 
 var setupTagBox = function(tags) {
@@ -79,4 +97,9 @@ var clearTags =function(){
    tags.forEach(function(tag){
         view.tagBox.remove(tag,true);
     })
+}
+
+var fetchExtraArgs=function(){
+    extraArgs.id =CreateQuestion.extraArgs;
+    CreateQuestion.resetArgs();
 }

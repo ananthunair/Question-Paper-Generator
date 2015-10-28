@@ -11,8 +11,7 @@ exports.Presenter.prototype = {
         var presenter = this;
         var view = this.view;
         var onComplete = function(err, question){
-
-            var questionDetail = {};//question['_doc'];
+            var questionDetail = {};
             questionDetail.tags = question['_doc']["tags"];
             questionDetail.answer = question['_doc']["answer"];
             questionDetail.question = question['_doc']["question"];
@@ -20,5 +19,8 @@ exports.Presenter.prototype = {
             view.questionPreview(questionDetail)
         };
         this.repo.fetchQuestionDetail(id, onComplete);
+    },
+    openQuestionInEditMode: function(){
+        this.view.openQuestionInEditView();
     }
 };

@@ -27,6 +27,14 @@ exports.Question_repository.prototype = {
 
     },
 
+    updateQuestion: function(id, questionDetail, onComplete){
+        var QP = mongoose.model("Question");
+        QP.update({_id:id},questionDetail,{multi:true},function(err,updatedStatus){
+            onComplete(err,{id:id},updatedStatus);
+        });
+    },
+
+
     fetchQuestions: function (onComplete,editModeContents) {
         var QuestionCollection = mongoose.model("Question");
         QuestionCollection.find({},function(err,questions){
