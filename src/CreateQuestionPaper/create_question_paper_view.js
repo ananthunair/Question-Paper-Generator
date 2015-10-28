@@ -138,6 +138,20 @@ var getValueFromParams = function(valueOf ,url){
     return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 }
 
+var registerButton = function(paperId){
+    if(paperId){
+        $('#save').attr('id','update');
+        $('#update').html('Update');
+        $('#update').click(function(){
+            presenter.onUpdateClick();
+        });
+    }else{
+        $('#save').click(function () {
+            presenter.onSaveClick();
+        });
+    }
+}
+
 $(document).ready(function () {
 
     var headerHtml = jade.renderFile('./src/index.jade');
@@ -149,9 +163,7 @@ $(document).ready(function () {
     $("#addQuestions").click(function () {
         presenter.onAddClick();
     });
-    $('#save').click(function () {
-        presenter.onSaveClick();
-    });
+    registerButton(paperId);
     $('#create_questions').click(function () {
         CreateQuestion.render({});
         $(".close").click(function () {

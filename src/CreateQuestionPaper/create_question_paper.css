@@ -327,7 +327,7 @@ code, pre{
     position: absolute;
     width: 98%;
     height: 84%;
-    overflow: auto;
+    overflow: hidden;
 }
 
 .ui-autocomplete{

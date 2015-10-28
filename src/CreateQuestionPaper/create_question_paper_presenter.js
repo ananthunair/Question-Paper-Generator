@@ -20,7 +20,6 @@ exports.Presenter.prototype = {
             presenter.showQuestions(paper);
         }
         if(paperId){
-            console.log('---id---',paperId);
             this.paperId = paperId;
             this.paper_repo.getPaper(paperId,onCompleteOfFetchPaper);
         }
@@ -50,7 +49,7 @@ exports.Presenter.prototype = {
         this.questionPaper = questionOfPaper;
         this.notes = paperContents.notes ? paperContents.notes : {};
         this.view.addToQuestionPaper(this.questionPaper,this.notes);
-        this.view.setPaperTitle(paperContents.title);
+        this.view.setPaperTitle(paperContents.header.title);
         this.view.showEditMode();
     },
 

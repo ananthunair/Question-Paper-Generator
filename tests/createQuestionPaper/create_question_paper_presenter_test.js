@@ -44,7 +44,7 @@ describe("create_question_paper_presenter", function () {
         it('should load questions and show it on view', function () {
             var questions = [{'id': 1, 'question': 'how are you?', 'answer': 'fine'}];
             var editModeContents = {};
-            var paper = {id:'someId',questions:['id1','id2'],notes:'botes',title:'some-title'};
+            var paper = {id:'someId',questions:['id1','id2'],notes:'botes',"header":{title:'some-title'}};
             moke_repo.fetchQuestions = function (oncomplete,editModeContents) {
                     oncomplete(null, questions,editModeContents)
             };
@@ -64,7 +64,7 @@ describe("create_question_paper_presenter", function () {
             var questions = [{'id': 1, 'question': 'how are you?', 'answer': 'fine'},
                 {'id':2,'question': 'whats your name', 'answer': 'Pooja'}];
             var editModeContents = {'questions':[{'id':2,'question': 'whats your name', 'answer': 'Pooja'}]};
-            var paper = {id:'someId',questions:['id1','id2'],notes:'botes',title:'some-title'};
+            var paper = {id:'someId',questions:['id1','id2'],notes:'botes',"header":{title:'some-title'}};
             moke_repo.fetchQuestions = function (oncomplete,editModeContents) {
                 oncomplete(null, questions,editModeContents)
             };

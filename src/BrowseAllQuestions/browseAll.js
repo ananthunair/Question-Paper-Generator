@@ -1,8 +1,5 @@
 var jade = require('jade');
-//var view = require('./BrowseAllQuestions/all_questions_view.js')
 $(document).ready(function(){
-     //render("./src/BrowseAllQuestions/all_questions.jade")
-    console.log(window.location)
     var qs = (function(a) {
         if (a == "") return {};
         var b = {};
@@ -16,9 +13,6 @@ $(document).ready(function(){
         }
         return b;
     })(window.location.search.substr(1).split('&'))
-    console.log(qs)
-
-    //view.ready();
 });
 var render =function(path,options){
     var html = jade.renderFile(path,options)
