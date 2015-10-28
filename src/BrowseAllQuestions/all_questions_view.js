@@ -36,8 +36,10 @@ var view = {
 }
 
 var presenter = new Presenter(view, repo);
-$(document).ready(function(){
 
+$(document).ready(function(){
+    var headerHtml = jade.renderFile('./src/index.jade');
+    $('#header').html(headerHtml);
     presenter.onDocumentReady();
     presenter.setAutosuggetions();
 
@@ -47,7 +49,9 @@ $(document).ready(function(){
             presenter.onNewQuestionAdded();
         })
     })
-
+    $("#home").click(function(){
+        Dashboard.render({})
+    })
 });
 
 

@@ -47,7 +47,6 @@ var view = {
     ,
 
     addToQuestionPaper: function (selectedQuestions,notes) {
-        console.log
         var htmlForSelectedQuestions = jade.renderFile("./src/createQuestionPaper/selectedQuestions.jade", {'questions': selectedQuestions,'notes':notes});
 
         $('#body').html(htmlForSelectedQuestions);
@@ -140,6 +139,9 @@ var getValueFromParams = function(valueOf ,url){
 }
 
 $(document).ready(function () {
+
+    var headerHtml = jade.renderFile('./src/index.jade');
+    $('#title').html(headerHtml);
     var paperId = getValueFromParams('id',window.location.href);
     presenter.onDocumentReady(paperId);
     CreatePaper.resetArgs();
@@ -168,7 +170,9 @@ $(document).ready(function () {
     $("#preview_button").click(function () {
         presenter.onPreviewClick();
     });
-
+    $("#home").click(function(){
+        Dashboard.render({})
+    });
 });
 
 

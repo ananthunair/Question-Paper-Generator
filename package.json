@@ -1,10 +1,10 @@
 {
   "name": "Question-Paper-Generator",
   "description": "Question Paper Generator.",
-  "main": "src/index.html",
+  "main": "src/dashboard/dashboard.html",
   "window": {
     "show": true,
-    "toolbar": false
+    "toolbar": true
   },
   "scripts": {
     "init": "sh scripts/initialize_app.sh",

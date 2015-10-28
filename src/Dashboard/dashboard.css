@@ -50,10 +50,7 @@
     font-size: 1vw;
     font-family: "Helvetica Neue";
     background-color: #008dca;
-}
-
-#create_question_container {
-    height: 10%;
+    margin-top: -0.5%;
 }
 
 .questionPaperTitleInPreview {
@@ -188,6 +185,7 @@ code, pre{
 #create_question_container{
     width: 100%;
     display: inline-block;
+    height: 5%;
 }
 
 #paper_heading, #length_of_qun_papers{

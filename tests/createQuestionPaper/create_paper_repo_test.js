@@ -45,6 +45,7 @@ describe('create_paper_repo', function () {
                 repo.updateQuestionPaper(savedQuestionPaper.id,expectedQuestionPaper,function(err,savedPaperId,updatedStatus){
                     assert.equal(updatedStatus.ok,1);
                     assert.equal(updatedStatus.nModified,1);
+                    assert.equal(updatedStatus.n,1);
                     done();
                 });
             });

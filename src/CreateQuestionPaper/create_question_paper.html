@@ -1,41 +1,43 @@
 <html>
-<link rel="import" href="../index.html">
-<script src="../../js/app.js"></script>
-<script src="create_question_paper_view.js"></script>
-<link rel="stylesheet" type="text/css" href="../dashboard/dashboard.css"/>
-<link rel="stylesheet" type="text/css" href="./create_question_paper.css"/>
-<link rel="stylesheet" type="text/css" href="../../library/taggle/assets/css/taggle.css"/>
-<div id="inner-container" class="inner-container fullHeight">
-    <div id="myModal" role="dialog" class="modal fade"></div>
-    <button id="create_questions" type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-lg">+ Question</button>
-    <div id="questionsToSelect">
-        <div id="question_heading">Questions</div><br/>
-        <div class="input-group col-md-12">
-            <div id="tagsInput" class="input textarea tagbox"></div>
-        </div>
-        <div id="all_question_container"></div>
-        <button id="addQuestions" type="button" class="btn btn-primary btn-lg">Add</button>
-    </div>
-    <div id="questionPaper">
-        <div id="questionPaperContents">
-            <div id="header">
-                <div class="titleHolder">
-                    <input type="text" id="questionPaperTitle" placeholder="Enter Title"/>
-                </div>
-                <div class="noOfQuestionHolder">
-                    <label class="totalQuestionLabel">Total questions:</label>
-                    <div id="totalQuestions">0</div>
-                </div>
+    <link rel="import" href="../index.html">
+    <script src="../../js/app.js"></script>
+    <script src="create_question_paper_view.js"></script>
+    <link rel="stylesheet" type="text/css" href="../dashboard/dashboard.css"/>
+    <link rel="stylesheet" type="text/css" href="./create_question_paper.css"/>
+    <link rel="stylesheet" type="text/css" href="../../library/taggle/assets/css/taggle.css"/>
+
+    <div id="title"></div>
+    <div id="inner-container" class="inner-container fullHeight">
+        <div id="myModal" role="dialog" class="modal fade"></div>
+        <button id="create_questions" type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-lg">+ Question</button>
+        <div id="questionsToSelect">
+            <div id="question_heading">Questions</div><br/>
+            <div class="input-group col-md-12">
+                <div id="tagsInput" class="input textarea tagbox"></div>
             </div>
-            <div id="body"></div>
+            <div id="all_question_container"></div>
+            <button id="addQuestions" type="button" class="btn btn-primary btn-lg">Add</button>
         </div>
-        <div id="footer">
-            <button id="preview_button" type="button" class="btn btn-primary btn-lg">Preview</button>
-            <button type="button" id="save" class="btn btn-primary btn-lg saveButton">Save</button>
+        <div id="questionPaper">
+            <div id="questionPaperContents">
+                <div id="header">
+                    <div class="titleHolder">
+                        <input type="text" id="questionPaperTitle" placeholder="Enter Title"/>
+                    </div>
+                    <div class="noOfQuestionHolder">
+                        <label class="totalQuestionLabel">Total questions:</label>
+                        <div id="totalQuestions">0</div>
+                    </div>
+                </div>
+                <div id="body"></div>
+            </div>
+            <div id="footer">
+                <button id="preview_button" type="button" class="btn btn-primary btn-lg">Preview</button>
+                <button type="button" id="save" class="btn btn-primary btn-lg saveButton">Save</button>
+            </div>
         </div>
     </div>
-</div>
-<script src="../../library/taggle/assets/js/jquery-1.10.1.js"></script>
-<script src="../../library/taggle/assets/js/jquery-ui.js"></script>
-<script src="../../library/taggle/assets/js/taggle.js"></script>
+    <script src="../../library/taggle/assets/js/jquery-1.10.1.js"></script>
+    <script src="../../library/taggle/assets/js/jquery-ui.js"></script>
+    <script src="../../library/taggle/assets/js/taggle.js"></script>
 </html>

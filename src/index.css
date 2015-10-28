@@ -16,3 +16,7 @@ a#home.navbar-brand{
 }
 
 html, body { height: 100% }
+
+#header {
+    height: 8%;
+}

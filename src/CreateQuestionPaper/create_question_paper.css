@@ -105,15 +105,15 @@ li {
     border-color: #D0D1D1;
 }
 
-#questionPaper{
-    height: 109%;
+#questionPaper {
+    height: 101.5%;
     width: 69%;
     border-radius: 5px;
     border: 1px solid #D0D1D1;
     padding: 10px;
     float: right;
     margin-right: 1%;
-    margin-top: -4%;
+    margin-top: -1%;
     display: inline-block;
     position: relative;
 }
@@ -174,7 +174,7 @@ li {
 #create_questions {
     width: 28%;
     height: 8%;
-    margin-left: 1%;
+    margin-left: -28%;
     margin-bottom: 0.3%;
     margin-top: -1%;
     background-color: #008dca;
@@ -231,8 +231,8 @@ code, pre{
 }
 
 
-#questionsToSelect{
-    height: 100%;
+#questionsToSelect {
+    height: 91%;
     width: 28%;
     border-radius: 5px;
     border: 1px solid #D0D0D0;
@@ -243,7 +243,9 @@ code, pre{
     font-weight: 200;
     font-size: initial;
     color: #a0a0a0;
+    margin-top: 4%;
 }
+
 #question_heading{
     padding-left: 4%;
     padding-top: 4%;
@@ -266,10 +268,10 @@ code, pre{
     width: 7%;
 }
 
-
-#body{
+#body {
     width: 99%;
     height: 100%;
+    margin-top: 2%;
 }
 
 .titleHolder {
@@ -277,6 +279,7 @@ code, pre{
     display: block;
     text-align: center;
 }
+
 .noOfQuestionHolder{
     height: 5%;
     display: block;
@@ -319,12 +322,14 @@ code, pre{
 #totalQuestions {
     margin: 1.25%;
 }
+
 .searchTagBox{
     position: absolute;
     width: 98%;
     height: 84%;
     overflow: auto;
 }
+
 .ui-autocomplete{
     max-height: 220% !important;
     z-index: 2;
@@ -364,11 +369,13 @@ code, pre{
     margin-top: 1%;
     cursor: hand;
 }
+
 .noteText{
     margin-left: 1%;
     margin-bottom: 1%;
     width: 98%;
 }
 
-
-
+#title {
+    height: 9%;
+}

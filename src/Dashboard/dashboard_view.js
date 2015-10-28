@@ -24,6 +24,9 @@ var getValueFromParams = function(valueOf ,url){
 var view = {
     showQuestionPapers: function (questionPapers) {
         var sortedQuestionPapers = sortQuestionPaperByTitle(questionPapers);
+
+
+
         var codeFormatedQuestions = jade.renderFile('./src/Dashboard/questionPapersToShow.jade', {'questionPapers': sortedQuestionPapers});
         $('#questionPapers').html(codeFormatedQuestions)
         if(sortedQuestionPapers.length) {
@@ -38,6 +41,8 @@ var view = {
 
 $(function(){
    fetchExtraArgs()
+    var headerHtml = jade.renderFile('./src/index.jade');
+    $('#header').html(headerHtml);
     var repo = new Question_papers_repository();
     var presenter = new Presenter(view, repo);
     presenter.onDocumentReady();
@@ -48,7 +53,9 @@ $(function(){
     $('#showAllQuestions').click(function(){
         BrowseQuestions.render({})
     })
-
+    $("#home").click(function(){
+        Dashboard.render({})
+    })
 });
 
 var fetchExtraArgs=function(){
