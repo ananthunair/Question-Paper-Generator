@@ -1,5 +1,3 @@
-var lodash  = require('lodash');
-
 exports.Presenter = function (view, questions_repo,paper_repo) {
     this.view = view;
     this.repo = questions_repo;
@@ -51,6 +49,7 @@ exports.Presenter.prototype = {
         this.view.addToQuestionPaper(this.questionPaper,this.notes);
         this.view.setPaperTitle(paperContents.header.title);
         this.view.showEditMode();
+        this.view.showTotalNumberOfQuestion(this.questionPaper.length);
     },
 
     generateQuestionPaper : function(questionPaper,view) {
