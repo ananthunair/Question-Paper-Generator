@@ -43,8 +43,17 @@ var view = {
             ids.push(this.name);
         });
         return ids;
-    }
-    ,
+    },
+
+    getSelectedQuestionsForSuffling: function () {
+        var ids = [];
+        $('.inputQuestionCheckbox input:checked').each(function () {
+            ids.push(this.name);
+        });
+        return ids;
+    },
+
+
 
     addToQuestionPaper: function (selectedQuestions,notes) {
         var htmlForSelectedQuestions = jade.renderFile("./src/createQuestionPaper/selectedQuestions.jade", {'questions': selectedQuestions,'notes':notes});
@@ -167,6 +176,13 @@ $(document).ready(function () {
         presenter.onAddClick();
     });
     registerButton(paperId);
+
+    $('#up').click(function(){
+        var ids = view.getSelectedQuestionsForSuffling()
+    })
+    $('#down').click(function(){
+        var ids = view.getSelectedQuestionsForSuffling()
+    })
     $('#create_questions').click(function () {
         CreateQuestion.render({});
         $(".close").click(function () {
