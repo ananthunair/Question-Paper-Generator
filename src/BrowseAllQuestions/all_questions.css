@@ -95,6 +95,7 @@
 
 #questionContentHandler, #answerHandler{
     border-top: solid 1px #D0D1D1;
+    white-space: pre-wrap;
 }
 
 .tagLabel{

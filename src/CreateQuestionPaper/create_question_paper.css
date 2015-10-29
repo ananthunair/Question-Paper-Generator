@@ -81,6 +81,7 @@
 #selectedQuestion{
     width: 101%;
     margin-top: 1%;
+    white-space: pre-wrap;
 }
 
 li {
