@@ -63,7 +63,12 @@ $(document).ready(function(){
         CreateQuestion.render({});
         $(".close").click(function () {
             presenter.onNewQuestionAdded();
-        })
+        });
+        $(document).keyup(function(e) {
+            if (e.keyCode == 27) {
+                presenter.onNewQuestionAdded();
+            }
+        });
     })
     $("#home").click(function(){
         Dashboard.render({})
