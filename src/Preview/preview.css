@@ -55,3 +55,12 @@ ol > li:before {
     text-align: right;
     content: counter(item) ".";
 }
+
+.fullQuestion{
+    text-align: justify;
+    display: inline-flex;
+    margin-left: 0%;
+    width: 80em;
+    word-wrap: break-word;
+    margin-bottom: 1%;
+}
