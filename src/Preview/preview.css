@@ -43,7 +43,7 @@ ol {
 }
 
 ol > li {
-    padding: 0 0 0 2em;
+    padding: 1em 1em 0 2em;
     counter-increment: item;
 }
 
@@ -58,15 +58,16 @@ ol > li:before {
 
 .fullQuestion{
     white-space: pre-wrap;
-    display: inline;
+    width: 80em;
+    margin-left: 5%;
+    margin-top: -1.4%;
 }
 
 .fullQuestion pre {
-
     text-align: justify;
     display: inline-flex;
     width: 80em;
     word-wrap: break-word;
-    margin: 1%;
     margin-left: -1px;
+    margin-top: 0.1%;
 }
