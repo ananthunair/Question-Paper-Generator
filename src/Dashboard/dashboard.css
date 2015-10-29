@@ -166,7 +166,7 @@ code, pre{
     text-align: justify;
 }
 
-#clone_button, #preview_button, #edit_button{
+#clone_button, #preview_button, #edit_button, #preview_with_answer_button{
     color: #ffffff;
     float: inherit;
     width: 15%;
