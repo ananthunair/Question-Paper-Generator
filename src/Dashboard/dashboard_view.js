@@ -24,15 +24,14 @@ var getValueFromParams = function(valueOf ,url){
 var view = {
     showQuestionPapers: function (questionPapers) {
         var sortedQuestionPapers = sortQuestionPaperByTitle(questionPapers);
-
-
-
         var codeFormatedQuestions = jade.renderFile('./src/Dashboard/questionPapersToShow.jade', {'questionPapers': sortedQuestionPapers});
         $('#questionPapers').html(codeFormatedQuestions)
         if(sortedQuestionPapers.length) {
             var id = getValueFromParams('id',window.location.href) || sortedQuestionPapers[0].id;
             $("#" + id).click()
         }else{
+            $("#preview_with_answer_button").hide()
+            $("#edit_button").hide();
             $("#preview_button").hide();
         }
 
