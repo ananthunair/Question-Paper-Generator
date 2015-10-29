@@ -23,5 +23,8 @@ exports.Presenter.prototype = {
     },
     onEditClick : function(){
         this.view.openPaperInEditMode();
+    },
+    onPreviewWithAnswerClick:function(){
+        this.view.openPreviewWithAnswer();
     }
 };

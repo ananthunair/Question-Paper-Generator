@@ -24,6 +24,9 @@ var view = {
     openPaperInEditMode : function(){
         CreatePaper.setExtraArgs({title: titleOfPaper, 'questions': setOfQuestionsOfPaper.map(extractQuestion),'notes': notesOfPaper,'paperId':paperId});
         CreatePaper.render({'id':paperId});
+    },
+    openPreviewWithAnswer:function(){
+        preview.showWithAnswer({title: titleOfPaper, 'questions': setOfQuestionsOfPaper.map(extractQuestionWithAnswer),'notes': notesOfPaper}, screen)
     }
 
 };
@@ -49,6 +52,10 @@ $(document).ready(function (){
     $("#edit_button").click(function(){
         presenter.onEditClick();
     });
+    $("#preview_with_answer_button").click(function(){
+        presenter.onPreviewWithAnswerClick();
+    });
+
 
 
 });
@@ -56,3 +63,7 @@ $(document).ready(function (){
 var extractQuestion = function(questionObject){
     return {'id':questionObject._doc._id,'question':questionObject._doc.question};
 };
+
+var extractQuestionWithAnswer = function(questionObject){
+    return {'id':questionObject._doc._id,'question':questionObject._doc.question, 'answer':questionObject._doc.answer};
+}

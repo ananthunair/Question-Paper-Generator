@@ -1,0 +1,21 @@
+html
+   head
+      title #{questionPaper.title}
+      link(rel="stylesheet" type="text/css" href="../Preview/preview.css")
+      script(src="../../js/jquery-1.11.3.min.js")
+      script(src="../../js/shortcut.js")
+      script(src='../Preview/preview.js' type='text/javascript')
+   body(class='paperContent')
+      h1(class="questionPaperTitle") #{questionPaper.title}
+      ol
+         each question,index in questionPaper.questions
+            if(questionPaper.notes)
+               div(class="note")
+                  pre #{questionPaper.notes[index]}
+             li !{question.question.replace('<code>','<pre><code>').replace('</code>','</pre></code>')}
+            if(question.answer.length)
+               p Answer: #{question.answer}
+         if(questionPaper.notes)
+            each key in Object.keys(questionPaper.notes)
+               if(key>=questionPaper.questions.length)
+                  div(class="note") #{questionPaper.notes[key]}
