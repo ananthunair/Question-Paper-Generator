@@ -144,6 +144,19 @@ exports.Presenter.prototype = {
     ,
     onSaveNotes:function(id,note) {
         this.notes[id] =note;
+    },
+    suffleQuestions : function(questionIds){
+        this.questionPaper = this.questionPaper.map(function(question,index,questions) {
+            if(index==questionIds[0]-1 || questionIds.indexOf(index)>=0){
+                    question = questions[index+1];
+                if(index==questionIds[questionIds.length-1]){
+                    question = questions[index-questionIds.length];
+                }
+                return question;
+            }
+            else
+                return question;
+        })
     }
 };
 

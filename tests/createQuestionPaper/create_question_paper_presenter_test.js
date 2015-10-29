@@ -311,4 +311,15 @@ describe("create_question_paper_presenter", function () {
 
         })
     })
+    context('#onSuffleQuestion',function(){
+        it('should move selected question up to one place',function(){
+            var presenter =  new Presenter(moke_view,moke_repo,moke_paper_repo);
+            var questions = ['what is this', 'how are you', 'where do u leave', 'whats your name', 'what do you do'];
+            var selectedQuestionIds = [2,3];
+            presenter.questionPaper = questions;
+            presenter.suffleQuestions(selectedQuestionIds);
+            var expectedQuestionPaper = ['what is this','where do u leave','whats your name','how are you','what do you do'];
+            assert.deepEqual(presenter.questionPaper,expectedQuestionPaper);
+        })
+    })
 });
