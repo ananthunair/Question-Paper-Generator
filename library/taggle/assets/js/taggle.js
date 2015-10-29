@@ -583,6 +583,7 @@
         self.resetSuggetions = function (tags) {
             var container = this.getContainer();
             var input = this.getInput();
+            var tagbox = this;
             $(input).autocomplete({
                 source: tags,
                 appendTo: container,
@@ -590,7 +591,7 @@
                 select: function (e, v) {
                     e.preventDefault();
                     if (e.which === 1) {
-                        this.add(v.item.value);
+                        tagbox.add(v.item.value);
                     }
                 }
             });
