@@ -12,8 +12,8 @@ html
             if(questionPaper.notes)
                div(class="note")
                   pre #{questionPaper.notes[index]}
-             li
-                div(class='fullQuestion') !{question.question.replace('<code>','<pre><code>').replace('</code>','</pre></code>')}
+            li
+               div(class='fullQuestion')!{question.question.replace('<code>','<pre><code>').replace('</code>','</pre></code>')}
             if(question.answer.length)
                div(class="answerTitle") Answer :
                div(class='answers') #{question.answer}
