@@ -14,7 +14,8 @@ html
                   pre #{questionPaper.notes[index]}
              li !{question.question.replace('<code>','<pre><code>').replace('</code>','</pre></code>')}
             if(question.answer.length)
-               p Answer: #{question.answer}
+               div(class="answerTitle") Answer :
+               div(class='answers') #{question.answer}
          if(questionPaper.notes)
             each key in Object.keys(questionPaper.notes)
                if(key>=questionPaper.questions.length)

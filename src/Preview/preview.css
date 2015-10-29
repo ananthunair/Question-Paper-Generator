@@ -21,3 +21,15 @@ li {
 pre {
     font-family: -webkit-body;
 }
+
+.answerTitle{
+    font-weight: bolder;
+    margin-left: -1.5%;
+    margin-bottom: 1%;
+    display: inline-block;
+}
+
+.answers{
+    display: inline-block;
+    margin-left: 1%;;
+}
