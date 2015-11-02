@@ -13,10 +13,11 @@ li {
     text-align: center;
 }
 
-.note {
-    margin-bottom: 1.6%;
-    margin-left: -1.4%;
-    margin-top: 1%;
+.note pre {
+    margin-bottom: -0.5%;
+    margin-left: 2.3%;
+    height: inherit;
+    white-space: inherit;
 }
 
 pre {
@@ -30,6 +31,7 @@ pre {
     margin-left: 2.5%;
     margin-bottom: 1%;
     display: inline-block;
+    margin-top: 1%;
 }
 
 .answers{
@@ -46,6 +48,7 @@ ol {
 ol > li {
     padding: 1em 1em 0 2em;
     counter-increment: item;
+    margin-top: 1em;
 }
 
 ol > li:before {

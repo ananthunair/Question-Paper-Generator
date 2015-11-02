@@ -9,7 +9,7 @@ html
         h1(class="questionPaperTitle") #{questionPaper.title}
         ol
             each question,index in questionPaper.questions
-                if(questionPaper.notes)
+                if(questionPaper.notes[index])
                     div(class="note")
                      pre #{questionPaper.notes[index]}
                 li
