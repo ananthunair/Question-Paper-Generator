@@ -6,7 +6,10 @@ each question,index in questions
     textarea(id='#{index}' class='form-control noteText') #{notes[index]}
  div(class="well input-group input-group-lg" style="float:left" ,id="selectedQuestion")
   div(class="questionHeader")
-   div(id= "#{index}" class="addNote") Add note
+   if(notes[index])
+    div(id= "#{index}" class="addNote" style="display: none;") Add note
+   else
+     div(id= "#{index}" class="addNote") Add note
    div(id= "#{question.id}" class="remove")  ✖
   | !{question.question.replace('<code>','<pre><code>').replace('</code>','</pre></code>')}
 if(notes)

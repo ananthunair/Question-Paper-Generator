@@ -111,6 +111,7 @@ var registerAddNotesListeners =function(){
          $("#"+id+"_noteHolder").html(jade.renderFile('./src/createQuestionPaper/addNote.jade',{id:id}))
         //$("#"+id+"_noteHolder").html(jade.renderFile('./src/createQuestionPaper/addNote.jade',{id:id}));
         //$('#noteID' + id).focus();
+        $(this).hide();
         setNoteListener();
     });
     setNoteListener();
@@ -124,6 +125,8 @@ var setNoteListener =function(){
         var id = $(this).attr('id')
         presenter.onRemoveNotes(id)
         $("#"+id+"_noteHolder").empty();
+        $(".addNote#"+id).show();
+
     });
     $(".noteText").focusout(function(){
         var id = $(this).attr('id')
