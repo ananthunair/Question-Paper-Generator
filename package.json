@@ -4,7 +4,7 @@
   "main": "src/dashboard/dashboard.html",
   "window": {
     "show": true,
-    "toolbar": true,
+    "toolbar": false,
     "width": 1280,
     "height": 800
   },

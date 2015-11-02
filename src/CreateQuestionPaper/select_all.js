@@ -18,4 +18,8 @@ $(document).ready(function () {
             $('#selectAll').prop('checked',false);
         }
     });
+    $(".questionContainer").click(function(){
+        var id = $(this).attr('id');
+        $(this).find('input',{'value':id}).click();
+    })
 });
