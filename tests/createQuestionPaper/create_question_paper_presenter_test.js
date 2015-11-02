@@ -314,11 +314,122 @@ describe("create_question_paper_presenter", function () {
     context('#onSuffleQuestion',function(){
         it('should move selected question up to one place',function(){
             var presenter =  new Presenter(moke_view,moke_repo,moke_paper_repo);
-            var questions = ['what is this', 'how are you', 'where do u leave', 'whats your name', 'what do you do'];
+            var questions = [{id:'id1',question:'what is this'},{ id:'id2',question:'how are you'},{id:'id3',question:'where do u leave'} , {id:'id4',question:'whats your name'} , {id:'id5',question:'what do you do'}];
             var selectedQuestionIds = [2,3];
             presenter.questionPaper = questions;
-            presenter.suffleQuestions(selectedQuestionIds);
-            var expectedQuestionPaper = ['what is this','where do u leave','whats your name','how are you','what do you do'];
+            presenter.OnUpQuestions(selectedQuestionIds);
+            var expectedQuestionPaper = [ { id: 'id1', question: 'what is this' },
+                { id: 'id3', question: 'where do u leave' },
+                { id: 'id4', question: 'whats your name' },
+                { id: 'id2', question: 'how are you' },
+                { id: 'id5', question: 'what do you do' } ]
+            assert.deepEqual(presenter.questionPaper,expectedQuestionPaper);
+        })
+
+        it('should move selected question from different place up to one place',function(){
+            var presenter =  new Presenter(moke_view,moke_repo,moke_paper_repo);
+            var questions = [{id:'id1',question:'what is this'},{ id:'id2',question:'how are you'},{id:'id3',question:'where do u leave'} , {id:'id4',question:'whats your name'} , {id:'id5',question:'what do you do'}];
+            var selectedQuestionIds = [2,4];
+            presenter.questionPaper = questions;
+            presenter.OnUpQuestions(selectedQuestionIds);
+            var expectedQuestionPaper = [ { id: 'id1', question: 'what is this' },
+                { id: 'id3', question: 'where do u leave' },
+                { id: 'id5', question: 'what do you do' },
+                { id: 'id2', question: 'how are you' },
+                { id: 'id4', question: 'whats your name' } ]
+            assert.deepEqual(presenter.questionPaper,expectedQuestionPaper);
+        });
+
+        it('should move selected question down to one place',function(){
+            var presenter =  new Presenter(moke_view,moke_repo,moke_paper_repo);
+            var questions = [{id:'id1',question:'what is this'},
+                { id:'id2',question:'how are you'},
+                {id:'id3',question:'where do u leave'} ,
+                {id:'id4',question:'whats your name'} ,
+                {id:'id5',question:'what do you do'}];
+            var selectedQuestionIds = [1,2];
+            presenter.questionPaper = questions;
+            presenter.OnDownQuestions(selectedQuestionIds);
+            var expectedQuestionPaper = [ { id: 'id1', question: 'what is this' },
+                { id: 'id4', question: 'whats your name' },
+                { id: 'id2', question: 'how are you' },
+                { id: 'id3', question: 'where do u leave' },
+                { id: 'id5', question: 'what do you do' } ];
+            assert.deepEqual(presenter.questionPaper,expectedQuestionPaper);
+        })
+
+        it('should move selected question from different place down to one place',function(){
+            var presenter =  new Presenter(moke_view,moke_repo,moke_paper_repo);
+            var questions = [{id:'id1',question:'what is this'},
+                { id:'id2',question:'how are you'},
+                {id:'id3',question:'where do u leave'} ,
+                {id:'id4',question:'whats your name'} ,
+                {id:'id5',question:'what do you do'}];
+            var selectedQuestionIds = [1,3];
+            presenter.questionPaper = questions;
+            presenter.OnDownQuestions(selectedQuestionIds);
+            var expectedQuestionPaper = [ { id: 'id1', question: 'what is this' },
+                {id:'id3',question:'where do u leave'} ,
+                {id:'id5',question:'what do you do'},
+                { id:'id2',question:'how are you'},
+                {id:'id4',question:'whats your name'}
+            ];
+            assert.deepEqual(presenter.questionPaper,expectedQuestionPaper);
+        })
+
+        it('should move selected question  to given position',function(){
+            var presenter =  new Presenter(moke_view,moke_repo,moke_paper_repo);
+            var questions = [{id:'id1',question:'what is this'},
+                { id:'id2',question:'how are you'},
+                {id:'id3',question:'where do u leave'},
+                {id:'id4',question:'whats your name'},
+                {id:'id5',question:'what do you do'}];
+            var selectedQuestionIds = [1];
+            var destinationPosition = 4;
+            presenter.questionPaper = questions;
+            presenter.onMoveQuestion(selectedQuestionIds,destinationPosition);
+            var expectedQuestionPaper = [{id:'id1',question:'what is this'},
+                {id:'id3',question:'where do u leave'},
+                {id:'id4',question:'whats your name'},
+                { id:'id2',question:'how are you'},
+                {id:'id5',question:'what do you do'}];
+            assert.deepEqual(presenter.questionPaper,expectedQuestionPaper);
+        })
+
+        it('should move selected question to given position',function(){
+            var presenter =  new Presenter(moke_view,moke_repo,moke_paper_repo);
+            var questions = [{id:'id1',question:'what is this'},
+                { id:'id2',question:'how are you'},
+                {id:'id3',question:'where do u leave'},
+                {id:'id4',question:'whats your name'},
+                {id:'id5',question:'what do you do'}];
+            var selectedQuestionIds = [4];
+            var destinationPosition = 2;
+            presenter.questionPaper = questions;
+            presenter.onMoveQuestion(selectedQuestionIds,destinationPosition);
+            var expectedQuestionPaper =  [{id:'id1',question:'what is this'},
+                {id:'id5',question:'what do you do'},
+                { id:'id2',question:'how are you'},
+                {id:'id3',question:'where do u leave'},
+                {id:'id4',question:'whats your name'}];
+            assert.deepEqual(presenter.questionPaper,expectedQuestionPaper);
+        })
+        it('should move selected question from different position to given position',function(){
+            var presenter =  new Presenter(moke_view,moke_repo,moke_paper_repo);
+            var questions = [{id:'id1',question:'what is this'},
+                { id:'id2',question:'how are you'},
+                {id:'id3',question:'where do u leave'},
+                {id:'id4',question:'whats your name'},
+                {id:'id5',question:'what do you do'}];
+            var selectedQuestionIds = [2,3];
+            var destinationPosition = 1;
+            presenter.questionPaper = questions;
+            presenter.onMoveQuestion(selectedQuestionIds,destinationPosition);
+            var expectedQuestionPaper =  [{id:'id1',question:'what is this'},
+                {id:'id3',question:'where do u leave'},
+                {id:'id4',question:'whats your name'},
+                { id:'id2',question:'how are you'},
+                {id:'id5',question:'what do you do'}];
             assert.deepEqual(presenter.questionPaper,expectedQuestionPaper);
         })
     })

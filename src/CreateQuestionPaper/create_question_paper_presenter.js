@@ -145,18 +145,35 @@ exports.Presenter.prototype = {
     onSaveNotes:function(id,note) {
         this.notes[id] =note;
     },
-    suffleQuestions : function(questionIds){
-        this.questionPaper = this.questionPaper.map(function(question,index,questions) {
-            if(index==questionIds[0]-1 || questionIds.indexOf(index)>=0){
-                    question = questions[index+1];
-                if(index==questionIds[questionIds.length-1]){
-                    question = questions[index-questionIds.length];
-                }
-                return question;
-            }
-            else
-                return question;
-        })
+    OnUpQuestions : function(questionIds,indexToMove){
+         var questionsOfPaper = this.questionPaper;
+         firstIndexOfThirdPart = indexToMove ? indexToMove-1 :questionIds[0]-1;
+         var firstPart = questionsOfPaper.slice(0,firstIndexOfThirdPart);
+         var secondPart = questionIds.map(function(index) {return questionsOfPaper[index]});
+         var thirdPart = this.questionPaper.filter(function(question){
+             return firstPart.indexOf(question)<0 && secondPart.indexOf(question)<0
+             }
+         );
+         this.questionPaper = firstPart.concat(secondPart).concat(thirdPart);
+    },
+    OnDownQuestions : function(questionIds,indexToMove){
+        var questionsOfPaper = this.questionPaper;
+        firstIndexOfThirdPart = indexToMove ? indexToMove : questionIds[questionIds.length-1]+2;
+        var thirdPart = questionsOfPaper.slice(firstIndexOfThirdPart);
+        var secondPart = questionIds.map(function(index) {return questionsOfPaper[index]});
+        var firstPart = this.questionPaper.filter(function(question){
+            return thirdPart.indexOf(question)<0 && secondPart.indexOf(question)<0
+        });
+        this.questionPaper = firstPart.concat(secondPart).concat(thirdPart);
+    },
+    onMoveQuestion : function(questionIds,indexTomove){
+        (questionIds.length>1) && (indexTomove = indexTomove+(questionIds.length-1));
+        if(indexTomove>questionIds[0]){
+            this.OnDownQuestions(questionIds,indexTomove)
+        }
+        else{
+            this.OnUpQuestions(questionIds,indexTomove);
+        }
     }
 };
 
