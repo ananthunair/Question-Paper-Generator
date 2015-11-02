@@ -5,7 +5,9 @@
 #title-header{
     background-color: #008dca;
 }
-
+code{
+    tab-size: 4;
+}
 .navbar-default {
     background-color: #337AB7;
 }
