@@ -199,20 +199,24 @@ li {
 
 .remove {
     cursor: hand;
-    display: inline;
+    display: inline-block;
     float: right;
     margin: -1%;
     margin-right: 0.1%;
-    margin-top: -2.4%;
+    margin-top: 0;
+}
+
+.remove :after {
+    height: auto;
 }
 
 .addNote {
-    display: inline;
+    display: inline-block;
     height: 10%;
-    width: 5%;
-    margin-left: 89%;
-    padding-right: 3%;
-    color: #008dca; /*check*/
+    width: 12%;
+    margin-left: 87%;
+    padding-right: 4%;
+    color: #008dca;
     cursor: hand;
 }
 
