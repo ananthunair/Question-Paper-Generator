@@ -102,6 +102,11 @@ var view = {
         $('#update').click(function(){
             presenter.onUpdateClick();
         })
+    },
+
+    getDestinationPosition : function(){
+        var position = $('.destinationPosition').val();
+        return parseInt(position);
     }
 
 
@@ -200,6 +205,10 @@ $(document).ready(function () {
 
     $("#preview_button").click(function () {
         presenter.onPreviewClick();
+    });
+    $("#go").click(function () {
+        var ids = view.getSelectedQuestionsForSuffling();
+        presenter.onMoveQuestion(ids);
     });
     $("#home").click(function(){
         Dashboard.render({})

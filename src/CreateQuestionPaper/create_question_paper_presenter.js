@@ -168,7 +168,8 @@ exports.Presenter.prototype = {
         this.questionPaper = firstPart.concat(secondPart).concat(thirdPart);
         this.view.addToQuestionPaper(this.questionPaper,this.notes);
     },
-    onMoveQuestion : function(questionIds,indexTomove){
+    onMoveQuestion : function(questionIds){
+        var indexTomove = this.view.getDestinationPosition();
         (questionIds.length>1) && (indexTomove = indexTomove+(questionIds.length-1));
         if(indexTomove>questionIds[0]){
             this.OnDownQuestions(questionIds,indexTomove)
