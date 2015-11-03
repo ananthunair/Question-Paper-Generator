@@ -47,8 +47,8 @@ var view = {
 
     getSelectedQuestionsForSuffling: function () {
         var ids = [];
-        $('.inputQuestionCheckbox input:checked').each(function () {
-            ids.push(this.name);
+        $('.question_no_container input:checked').each(function () {
+            ids.push(parseInt(this.name));
         });
         return ids;
     },
@@ -57,10 +57,8 @@ var view = {
 
     addToQuestionPaper: function (selectedQuestions,notes) {
         var htmlForSelectedQuestions = jade.renderFile("./src/createQuestionPaper/selectedQuestions.jade", {'questions': selectedQuestions,'notes':notes});
-
         $('#body').html(htmlForSelectedQuestions);
         registerAddNotesListeners();
-
     }
     ,
 
@@ -178,10 +176,12 @@ $(document).ready(function () {
     registerButton(paperId);
 
     $('#up').click(function(){
-        var ids = view.getSelectedQuestionsForSuffling()
-    })
+        var ids = view.getSelectedQuestionsForSuffling();
+        presenter.OnUpQuestions(ids);
+    });
     $('#down').click(function(){
-        var ids = view.getSelectedQuestionsForSuffling()
+        var ids = view.getSelectedQuestionsForSuffling();
+        presenter.OnDownQuestions(ids);
     })
     $('#create_questions').click(function () {
         CreateQuestion.render({});

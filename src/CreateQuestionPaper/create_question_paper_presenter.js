@@ -155,6 +155,7 @@ exports.Presenter.prototype = {
              }
          );
          this.questionPaper = firstPart.concat(secondPart).concat(thirdPart);
+        this.view.addToQuestionPaper(this.questionPaper,this.notes);
     },
     OnDownQuestions : function(questionIds,indexToMove){
         var questionsOfPaper = this.questionPaper;
@@ -165,6 +166,7 @@ exports.Presenter.prototype = {
             return thirdPart.indexOf(question)<0 && secondPart.indexOf(question)<0
         });
         this.questionPaper = firstPart.concat(secondPart).concat(thirdPart);
+        this.view.addToQuestionPaper(this.questionPaper,this.notes);
     },
     onMoveQuestion : function(questionIds,indexTomove){
         (questionIds.length>1) && (indexTomove = indexTomove+(questionIds.length-1));

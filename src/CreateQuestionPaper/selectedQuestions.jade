@@ -11,7 +11,10 @@ each question,index in questions
    else
      div(id= "#{index}" class="addNote") Add note
    div(id= "#{question.id}" class="remove")  ✖
-  | !{question.question.replace('<code>','<pre><code>').replace('</code>','</pre></code>')}
+  div(class= "question_no_container") #{index+1}
+   input(type="checkbox" name='#{index}')
+  div(class="question_box")
+   | !{question.question.replace('<code>','<pre><code>').replace('</code>','</pre></code>')}
 if(notes)
  each key in Object.keys(notes)
   if(key>=questions.length)

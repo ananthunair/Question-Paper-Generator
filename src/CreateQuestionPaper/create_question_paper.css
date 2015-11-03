@@ -393,9 +393,15 @@ code, pre{
 .question_box{
     border: 1px solid #888888;
     width: 95%;
-    margin-left: 3%;
+    /*margin-left: 3%;*/
     display: inline-table;
     padding: 1%;
+}
+.question_no_container{
+    border: 1px solid #888888;
+    width: 3%;
+    display: inline-table;
+    margin-right: 2%;
 }
 
 #questionFooter{
