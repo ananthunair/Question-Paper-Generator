@@ -73,6 +73,11 @@ $(document).ready(function(){
     $("#home").click(function(){
         Dashboard.render({})
     })
+
+    $("#addQuestionsToQuestionPaper").click(function(){
+        var html = jade.renderFile('./src/AddToQuestionPaper/add_to_question_paper.jade');
+        $('#addToQuestionPaper').html(html);
+    })
 });
 
 

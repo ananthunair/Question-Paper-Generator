@@ -1,0 +1,14 @@
+.modal-content{
+    height: 70%;
+    width: 70%;
+    margin: auto;
+}
+
+.modal-header {
+    background-color: #dbeeff !important;
+}
+
+.modal-dialog{
+    margin-top: 7.5%;
+}
+
