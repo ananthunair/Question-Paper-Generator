@@ -1,4 +1,11 @@
 each question,index in questions
+ if(notes[index])
+  button(id= "#{index}" class="addNote btn btn-default" style="display: none;"  )
+    span(class="glyphicon glyphicon-plus" aria-hidden="true")
+ else
+  button(id= "#{index}" class="addNote btn btn-default" )
+   span(class="glyphicon glyphicon-plus" aria-hidden="true")
+
  div(id="#{index}_noteHolder")
   if(notes[index])
    div(class="notesPlaceHolder")
@@ -6,15 +13,12 @@ each question,index in questions
     textarea(id='#{index}' class='form-control noteText') #{notes[index]}
  div(class="well input-group input-group-lg" style="float:left" ,id="selectedQuestion")
   div(class="questionHeader")
-   if(notes[index])
-    div(id= "#{index}" class="addNote" style="display: none;") Add note
-   else
-     div(id= "#{index}" class="addNote") Add note
    div(id= "#{question.id}" class="remove")  ✖
-  div(class= "question_no_container") #{index+1}
-   input(type="checkbox" name='#{index}')
-  div(class="question_box")
-   | !{question.question.replace('<code>','<pre><code>').replace('</code>','</pre></code>')}
+  div(class="questionAndNumberContainer")
+   div(class= "question_no_container") #{index+1}
+    input(type="checkbox" name='#{index}')
+   div(class="question_box")
+    | !{question.question.replace('<code>','<pre><code>').replace('</code>','</pre></code>')}
 if(notes)
  each key in Object.keys(notes)
   if(key>=questions.length)

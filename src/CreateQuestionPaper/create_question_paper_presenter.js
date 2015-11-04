@@ -9,8 +9,6 @@ exports.Presenter = function (view, questions_repo,paper_repo) {
 
 
 exports.Presenter.prototype = {
-
-
     onDocumentReady:function(paperId){
         var repo = this.repo;
         var presenter =  this;
@@ -25,7 +23,6 @@ exports.Presenter.prototype = {
             presenter.showQuestions({});
 
     },
-
     showQuestions : function(paper){
         var presenter =  this;
         var onComplete = function(err,questions,paper){
@@ -39,9 +36,6 @@ exports.Presenter.prototype = {
         };
         this.repo.fetchQuestions(onComplete,paper);
     },
-
-
-
 
     loadPaperInEditMode : function(paperContents,questionOfPaper){
         this.questionPaper = questionOfPaper;
