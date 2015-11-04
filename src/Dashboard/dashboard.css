@@ -120,32 +120,6 @@ code, pre{
     margin: 20%;
 }
 
-.question_paper_title{
-    margin-top: 1%;
-    margin-bottom: 1%;
-    background-color: #F9FCFF;
-    vertical-align: middle;
-    padding: 2.5%;
-    font-family: "Helvetica";
-    font-weight: initial;
-    color: #86868C;
-    cursor: hand;
-    border-bottom: 1px solid lightgray;
-    border-top: 1px solid lightgray;
-    font-size: medium;
-    word-wrap: break-word;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.question_paper_title.selected{
-    background-color: #dbeeff;
-    border-left: 6px solid #008df5;
-    color: #000;
-    font-weight: bold;
-}
-
 #create_question_paper{
     vertical-align: bottom;
     width: 100%;

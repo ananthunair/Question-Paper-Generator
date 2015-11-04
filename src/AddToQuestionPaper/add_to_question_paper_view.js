@@ -11,6 +11,18 @@ var view = {
             var htmlForQuestionsToSelect = jade.renderFile('./src/AddToQuestionPaper/no_result_found.jade');
             $('#showAllQuestionPapers').html(htmlForQuestionsToSelect)
         }
+        else{
+            var htmlForQuestionsToSelect = jade.renderFile('./src/AddToQuestionPaper/papers_to_show.jade',
+                {'questionPaper':questionPaper});
+            $('#showAllQuestionPapers').html(htmlForQuestionsToSelect)
+        }
+    },
+    setSuggetions:function(titles){
+        var container = $("#suggetionContainer");
+        $(".search").autocomplete({
+            source: titles,
+            appendTo:container
+        })
     }
 }
 

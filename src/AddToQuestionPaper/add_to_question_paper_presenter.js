@@ -11,8 +11,14 @@ exports.Presenter.prototype = {
         var onComplete = function(err, questionPapers){
             err && console.log("Error while showing all question papers: ",err);
             view.showQuestionPapers(questionPapers);
+            view.setSuggetions(getTitles(questionPapers))
         };
         this.repo.fetchQuestionPapers(onComplete);
     }
 
+}
+var getTitles = function(questionPapers){
+    return questionPapers.map(function(paper){
+        return paper.header.title
+    });
 }
