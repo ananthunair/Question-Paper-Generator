@@ -42,7 +42,7 @@ $(document).ready(function(){
             });
         }
     });
-    
+
     $('.select_question_checkbox').on('click',function(){
         if($('.select_question_checkbox:checked').length == $('.select_question_checkbox').length){
             $('#selectAll').prop('checked',true);

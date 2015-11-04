@@ -1,8 +1,11 @@
 link(rel="stylesheet" type="text/css" href="../AddToQuestionPaper/add_to_question_paper.css")
+script(src="../AddToQuestionPaper/add_to_question_paper_view.js")
 div(class="modal-dialog modal-lg")
-    div(class="modal-content")
+    div(class="modal-content body")
         div(class="modal-header")
             button(type="button",class="close",data-dismiss="modal") &times
             h4(class="modal-title") Add to question paper
         div(class="modal-body")
-            div
+            div(id="popUpBody")
+                button(id="goToQuestionPaper", class="btn btn-primary btn-lg createButton") + Create Paper
+                div(id="showAllQuestionPapers")
