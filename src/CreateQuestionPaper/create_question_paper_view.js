@@ -209,9 +209,10 @@ $(document).ready(function () {
     $("#go").click(function () {
         var ids = view.getSelectedQuestionsForSuffling();
         presenter.onMoveQuestion(ids);
+        $(".destinationPosition").val('');
     });
     $("#home").click(function(){
-        Dashboard.render({})
+        Dashboard.render({});
     });
 });
 
