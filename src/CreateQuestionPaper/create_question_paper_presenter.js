@@ -140,17 +140,18 @@ exports.Presenter.prototype = {
     onSaveNotes:function(id,note) {
         this.notes[id] =note;
     },
+
     OnUpQuestions : function(questionIds,indexToMove){
-         var questionsOfPaper = this.questionPaper;
-         firstIndexOfThirdPart = indexToMove ? indexToMove-1 :questionIds[0]-1;
-         var firstPart = questionsOfPaper.slice(0,firstIndexOfThirdPart);
-         var secondPart = questionIds.map(function(index) {return questionsOfPaper[index]});
-         var thirdPart = this.questionPaper.filter(function(question){
-             return firstPart.indexOf(question)<0 && secondPart.indexOf(question)<0
-             }
-         );
-         this.questionPaper = firstPart.concat(secondPart).concat(thirdPart);
+        var questionsOfPaper = this.questionPaper;
+        firstIndexOfThirdPart = indexToMove ? indexToMove-1 :questionIds[0]-1;
+        var firstPart = questionsOfPaper.slice(0,firstIndexOfThirdPart);
+        var secondPart = questionIds.map(function(index) {return questionsOfPaper[index]});
+        var thirdPart = this.questionPaper.filter(function(question){
+            return firstPart.indexOf(question)<0 && secondPart.indexOf(question)<0
+        });
+        this.questionPaper = firstPart.concat(secondPart).concat(thirdPart);
         this.view.addToQuestionPaper(this.questionPaper,this.notes);
+        this.view.resetCheckBox(questionIds);
     },
     OnDownQuestions : function(questionIds,indexToMove){
         var questionsOfPaper = this.questionPaper;

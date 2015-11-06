@@ -53,6 +53,12 @@ var view = {
         return ids;
     },
 
+    resetCheckBox : function(ids){
+        ids.forEach(function(id){
+            $('#'+id+'question').prop('checked',true);
+        })
+    },
+
 
 
     addToQuestionPaper: function (selectedQuestions,notes) {
@@ -183,7 +189,9 @@ $(document).ready(function () {
     $('#up').click(function(){
         var ids = view.getSelectedQuestionsForSuffling();
         presenter.OnUpQuestions(ids);
+
     });
+
     $('#down').click(function(){
         var ids = view.getSelectedQuestionsForSuffling();
         presenter.OnDownQuestions(ids);
