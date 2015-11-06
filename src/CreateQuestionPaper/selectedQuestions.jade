@@ -15,7 +15,7 @@ each question,index in questions
   div(class="questionHeader")
    div(id= "#{question.id}" class="remove")  ✖
   div(class="questionAndNumberContainer")
-   div(class= "question_no_container") #{index+1}
+   div(class= "question_no_container") #{index+1} .
     input(type="checkbox" name='#{index}')
    div(class="question_box")
     | !{question.question.replace('<code>','<pre><code>').replace('</code>','</pre></code>')}
