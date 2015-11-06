@@ -185,3 +185,8 @@ code, pre{
     font-weight: 400;
     font-size: initial;
 }
+
+.ui-autocomplete{
+    max-height: 220% !important;
+    z-index: 2;
+}

@@ -79,6 +79,8 @@
 }
 .ui-autocomplete{
     left : 0 !important;
+    top: 3em !important;
+
 }
  .successAlert{
      box-shadow: 0px 3px 2px #888888;
