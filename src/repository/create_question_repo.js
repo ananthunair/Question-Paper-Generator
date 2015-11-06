@@ -5,7 +5,6 @@ var lodash = require('lodash');
 exports.Question_repository = function () {
     var db = mongoose.connection;
     this.db = db;
-    //db.on('error', console.error.bind(console, 'connection error:'));
     db.once('open', function (callback) {
         console.log("Questions Repo opened");
     });
@@ -43,11 +42,16 @@ exports.Question_repository.prototype = {
     },
 
     fetchQuestionsOfSpecificTags : function(tags,onComplete){
-      getQuestions(tags,onComplete,false);
+        if(lodash.isEmpty(tags)){
+            this.fetchQuestions(onComplete);
+            return;
+        };
+        var QuestionCollection = mongoose.model("Question");
+        QuestionCollection.find({'tags':{'$all':tags}},function(err,questions){
+            onComplete(err,questions.map(buildQuestion));
+        });
     },
-    fetchQuestionsHavingAnyOfTags:function(tags,onComplete){
-        getQuestions(tags,onComplete,true);
-    },
+
 
     getUniqueTags: function (onComplete) {
         var tags = mongoose.model("Tags");
@@ -69,17 +73,7 @@ exports.Question_repository.prototype = {
     }
 
 };
-var getQuestions =function(tags,onComplete,anyOf){
-    if(lodash.isEmpty(tags)){
-        this.fetchQuestions(onComplete);
-        return;
-    };
-    var tagFilter = anyOf?{'$in':tags}:{'$all':tags};
-    var QuestionCollection = mongoose.model("Question");
-    QuestionCollection.find({'tags':tagFilter},function(err,questions){
-        onComplete(err,questions.map(buildQuestion));
-    });
-}
+
 var saveTag = function(tag){
     var Tags = mongoose.model("Tags");
     var tags = new Tags({name : tag });

@@ -24,7 +24,7 @@ var getValueFromParams = function(valueOf ,url){
 
 var view = {
     showQuestionPapers: function (questionPapers) {
-        renderPaper('#questionPapers','./src/Dashboard/questionPapersToShow.jade',questionPapers)
+        renderPaper('#questionPapers','./src/Dashboard/questionPapersToShow.jade',questionPapers,getValueFromParams('id',window.location.href))
 
     },
     showFilterResult:function(filterdPapers){
@@ -81,13 +81,12 @@ var setupTagBox = function (tags) {
     tagbox.resetSuggetions(tags)
     return tagbox;
 }
-var renderPaper =function(containerId,filePath,questionPapers){
+var renderPaper =function(containerId,filePath,questionPapers,defaultSelection){
     var sortedQuestionPapers = sortQuestionPaperByTitle(questionPapers);
-    console.log("path: ",filePath,"paper: ",sortedQuestionPapers)
     var codeFormatedQuestions = jade.renderFile(filePath, {'questionPapers': sortedQuestionPapers});
     $(containerId).html(codeFormatedQuestions)
     if(sortedQuestionPapers.length) {
-        var id = getValueFromParams('id',window.location.href) || sortedQuestionPapers[0].id;
+        var id = defaultSelection|| sortedQuestionPapers[0].id;
         $("#" + id).click()
     }else{
         $("#preview_with_answer_button").hide()

@@ -11,6 +11,7 @@ var createQuestionPaperCollection = function () {
     var questionPaperSchema = new Schema({
         notes : Object,
         questions: [String],
+        tags:[String],
         header: {title: String, marks: Number, duration: String}
     });
 

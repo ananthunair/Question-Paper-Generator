@@ -1,3 +1,4 @@
+var lodash=require('lodash');
 exports.Presenter = function (view, questions_repo,paper_repo) {
     this.view = view;
     this.repo = questions_repo;
@@ -10,7 +11,6 @@ exports.Presenter = function (view, questions_repo,paper_repo) {
 
 exports.Presenter.prototype = {
     onDocumentReady:function(paperId){
-        var repo = this.repo;
         var presenter =  this;
         var onCompleteOfFetchPaper = function(err,paper){
             presenter.showQuestions(paper);
@@ -50,6 +50,7 @@ exports.Presenter.prototype = {
         return {
             notes : this.notes,
             questions: questionPaper.map(extractId),
+            tags:getTagsForPaper(questionPaper),
             header: {title: view.getQuestionPaperTitle(), marks: "", duration: ""}
         };
     },
@@ -188,7 +189,12 @@ var getQuestionsOfPaper = function(questionsId,allQuestion){
         return questionsId.indexOf(question.id.toString())>=0;
     })
 };
-
+var getTagsForPaper=function(questionPaper){
+    var alltags= questionPaper.reduce(function(tags,question){
+        return lodash.union(tags,question.tags)
+    },[]);
+    return alltags;
+}
 
 
 var extractId =function(question){

@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var lodash = require('lodash');
 var QuestionPaper ;
 exports.Question_papers_repository = function(){
     var db = mongoose.connection;
@@ -39,6 +40,16 @@ exports.Question_papers_repository.prototype = {
         QP.findOne({'_id' : paperid },function(err,paper){
             onComplete(err,buildPaper(paper));
         });
+    },
+    fetchPapersOfSpecificTag :function(tags,onComplete){
+        if(lodash.isEmpty(tags)){
+            this.fetchQuestionPapers(onComplete);
+            return;
+        };
+        var QuestionPaper = mongoose.model("QuestionPaper");
+        QuestionPaper.find({'tags':{'$all':tags}},function(err,papers){
+            onComplete(err,papers.map(buildPaper));
+        });
     }
 
 };
@@ -46,12 +57,10 @@ exports.Question_papers_repository.prototype = {
 
 
 var buildPaper = function(dbPaper){
-    return {id:dbPaper._id,notes:dbPaper.notes,questions:dbPaper.questions,header:buildHeader(dbPaper.header)};
+    return {id:dbPaper._id,notes:dbPaper.notes,questions:dbPaper.questions,tags:dbPaper.tags,header:buildHeader(dbPaper.header)};
 };
 var buildHeader = function(dbHeader){
     return { duration: dbHeader.duration, marks:dbHeader.marks, title: dbHeader.title };
 };
-var buildQuestion =function(dbQuestion){
-    return {id:dbQuestion.id,note:dbQuestion.note};
-};
+
 

@@ -26,26 +26,5 @@ exports.Presenter.prototype = {
     },
     onPreviewWithAnswerClick:function(){
         this.view.openPreviewWithAnswer();
-    }//,
-    //setAutosuggetions : function(){
-    //    var view = this.view;
-    //    this.question_repo.getUniqueTags(function (err,tags) {
-    //        if(!err)
-    //            view.setupTagBoxData(tags);
-    //    });
-    //},
-    //onAddOrRemoveTag :  function(tags){
-    //    var presenter = this;
-    //    var onComplete = function(err,questions){
-    //        presenter.all_questions = questions;
-    //        var questionIds = getQuestionIds(presenter.all_questions);
-    //    };
-    //    this.question_repo.fetchQuestionsOfSpecificTags(tags,onComplete);
-    //}
+    }
 };
-
-//var getQuestionIds = function(arrayOfQuestions){
-//    return arrayOfQuestions.map(function(question){
-//        return question.id.toString();
-//    })
-//}
