@@ -43,14 +43,10 @@ exports.Question_repository.prototype = {
     },
 
     fetchQuestionsOfSpecificTags : function(tags,onComplete){
-        if(lodash.isEmpty(tags)){
-            this.fetchQuestions(onComplete);
-            return;
-        };
-        var QuestionCollection = mongoose.model("Question");
-        QuestionCollection.find({'tags':{'$all':tags}},function(err,questions){
-            onComplete(err,questions.map(buildQuestion));
-        });
+      getQuestions(tags,onComplete,false);
+    },
+    fetchQuestionsHavingAnyOfTags:function(tags,onComplete){
+        getQuestions(tags,onComplete,true);
     },
 
     getUniqueTags: function (onComplete) {
@@ -73,6 +69,17 @@ exports.Question_repository.prototype = {
     }
 
 };
+var getQuestions =function(tags,onComplete,anyOf){
+    if(lodash.isEmpty(tags)){
+        this.fetchQuestions(onComplete);
+        return;
+    };
+    var tagFilter = anyOf?{'$in':tags}:{'$all':tags};
+    var QuestionCollection = mongoose.model("Question");
+    QuestionCollection.find({'tags':tagFilter},function(err,questions){
+        onComplete(err,questions.map(buildQuestion));
+    });
+}
 var saveTag = function(tag){
     var Tags = mongoose.model("Tags");
     var tags = new Tags({name : tag });

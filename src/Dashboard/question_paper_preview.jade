@@ -1,15 +1,15 @@
 html
  head
  link(rel="stylesheet" type="text/css" href="./dashboard.css")
- body(class='paperContent')
-  h1(class="questionPaperTitleInPreview") #{title}
-  ol
-   each question,index in questions
-    if(notes)
-     div(class='notes') !{notes[index]}
-    li
-     question !{question.question.replace('<code>','<pre><code>').replace('</code>','</pre></code>')}
-   if(notes)
-    each key in Object.keys(notes)
-     if(key>=questions.length)
-      div(class='notes') !{notes[key]}
+ div(class='paperContent')
+    h1(class="questionPaperTitleInPreview") #{title}
+    ol
+     each question,index in questions
+      if(notes)
+       div(class='notes') !{notes[index]}
+      li
+       question !{question.question.replace('<code>','<pre><code>').replace('</code>','</pre></code>')}
+     if(notes)
+      each key in Object.keys(notes)
+       if(key>=questions.length)
+        div(class='notes') !{notes[key]}

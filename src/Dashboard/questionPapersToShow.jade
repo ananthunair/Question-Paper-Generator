@@ -9,14 +9,14 @@ div(id='papers')
     //input(type="text" id="st-search-input" autocomplete="off" placeholder="search" autocorrect="off" autocapitalize="off")
     br
     div(id='tagsQp' class='input textarea tagbox')
-
-    if questionPapers.length == 0
-        div(id='no_question_paper_container')
-            div(id='noQuestionPaperAvailable') No Papers Available
-    else
-        div(id='question_paper_container')
-            each qp in questionPapers
-                div(class="col-xs-12 jumbotron question_paper_title" id='#{qp.id}') #{qp.header.title}
+    div(id='paper_list')
+        if questionPapers.length == 0
+            div(id='no_question_paper_container')
+                div(id='noQuestionPaperAvailable') No Papers Available
+        else
+            div(id='question_paper_container')
+                each qp in questionPapers
+                    div(class="col-xs-12 jumbotron question_paper_title" id='#{qp.id}') #{qp.header.title}
     button(id="create_question_paper", type="button" ,class="btn btn-primary btn-lg") + Question Paper
 div(id='showQuestionPaper')
     div(id='question_paper')
