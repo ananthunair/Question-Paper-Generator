@@ -378,43 +378,26 @@ describe("create_question_paper_presenter", function () {
             assert.deepEqual(presenter.questionPaper,expectedQuestionPaper);
         })
 
-        //it('should move selected question  to given position',function(){
-        //    mokito.JsMockito.when(moke_view).getDestinationPosition().thenReturn(4)
-        //    var presenter =  new Presenter(moke_view,moke_repo,moke_paper_repo);
-        //    var questions = [{id:'id1',question:'what is this'},
-        //        { id:'id2',question:'how are you'},
-        //        {id:'id3',question:'where do u leave'},
-        //        {id:'id4',question:'whats your name'},
-        //        {id:'id5',question:'what do you do'}];
-        //    var selectedQuestionIds = [1];
-        //    presenter.questionPaper = questions;
-        //    presenter.onMoveQuestion(selectedQuestionIds);
-        //    var expectedQuestionPaper = [{id:'id1',question:'what is this'},
-        //        {id:'id3',question:'where do u leave'},
-        //        {id:'id4',question:'whats your name'},
-        //        { id:'id2',question:'how are you'},
-        //        {id:'id5',question:'what do you do'}];
-        //    assert.deepEqual(presenter.questionPaper,expectedQuestionPaper);
-        //})
 
-        it('should move selected question to given position',function(){
-            mokito.JsMockito.when(moke_view).getDestinationPosition().thenReturn(1)
+        it('should move selected question  to given position',function(){
+            mokito.JsMockito.when(moke_view).getDestinationPosition().thenReturn(3)
             var presenter =  new Presenter(moke_view,moke_repo,moke_paper_repo);
             var questions = [{id:'id1',question:'what is this'},
                 { id:'id2',question:'how are you'},
                 {id:'id3',question:'where do u leave'},
                 {id:'id4',question:'whats your name'},
                 {id:'id5',question:'what do you do'}];
-            var selectedQuestionIds = [4];
+            var selectedQuestionIds = [1];
             presenter.questionPaper = questions;
             presenter.onMoveQuestion(selectedQuestionIds);
-            var expectedQuestionPaper =  [{id:'id1',question:'what is this'},
-                {id:'id5',question:'what do you do'},
-                { id:'id2',question:'how are you'},
+            var expectedQuestionPaper = [{id:'id1',question:'what is this'},
                 {id:'id3',question:'where do u leave'},
-                {id:'id4',question:'whats your name'}];
+                {id:'id4',question:'whats your name'},
+                { id:'id2',question:'how are you'},
+                {id:'id5',question:'what do you do'}];
             assert.deepEqual(presenter.questionPaper,expectedQuestionPaper);
-        })
+        });
+
         it('should move selected question from different position to given position',function(){
             mokito.JsMockito.when(moke_view).getDestinationPosition().thenReturn(1);
             var presenter =  new Presenter(moke_view,moke_repo,moke_paper_repo);
@@ -423,14 +406,14 @@ describe("create_question_paper_presenter", function () {
                 {id:'id3',question:'where do u leave'},
                 {id:'id4',question:'whats your name'},
                 {id:'id5',question:'what do you do'}];
-            var selectedQuestionIds = [2,3];
+            var selectedQuestionIds = [2,3,4];
             presenter.questionPaper = questions;
             presenter.onMoveQuestion(selectedQuestionIds);
             var expectedQuestionPaper =  [{id:'id1',question:'what is this'},
                 {id:'id3',question:'where do u leave'},
                 {id:'id4',question:'whats your name'},
-                { id:'id2',question:'how are you'},
-                {id:'id5',question:'what do you do'}];
+                {id:'id5',question:'what do you do'},
+                { id:'id2',question:'how are you'}];
             assert.deepEqual(presenter.questionPaper,expectedQuestionPaper);
         })
     })
