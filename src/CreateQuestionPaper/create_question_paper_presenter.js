@@ -151,7 +151,6 @@ exports.Presenter.prototype = {
         });
         this.questionPaper = firstPart.concat(secondPart).concat(thirdPart);
         this.view.addToQuestionPaper(this.questionPaper,this.notes);
-        this.view.resetCheckBox(questionIds);
     },
     OnDownQuestions : function(questionIds,indexToMove){
         var questionsOfPaper = this.questionPaper;
@@ -164,14 +163,15 @@ exports.Presenter.prototype = {
         this.questionPaper = firstPart.concat(secondPart).concat(thirdPart);
         this.view.addToQuestionPaper(this.questionPaper,this.notes);
     },
+
     onMoveQuestion : function(questionIds){
-        var indexTomove = this.view.getDestinationPosition();
-        (questionIds.length>1) && (indexTomove = indexTomove+(questionIds.length-1));
-        if(indexTomove>questionIds[0]){
-            this.OnDownQuestions(questionIds,indexTomove)
+        var movingPosition = this.view.getDestinationPosition();
+        movingPosition =  (questionIds.length>1) ? (movingPosition+(questionIds.length-1)) : (movingPosition+1);
+        if(movingPosition>questionIds[0]){
+            this.OnDownQuestions(questionIds,movingPosition)
         }
         else{
-            this.OnUpQuestions(questionIds,indexTomove);
+            this.OnUpQuestions(questionIds,movingPosition);
         }
     }
 };

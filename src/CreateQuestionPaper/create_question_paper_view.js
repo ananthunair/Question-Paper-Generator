@@ -53,20 +53,15 @@ var view = {
         return ids;
     },
 
-    resetCheckBox : function(ids){
-        ids.forEach(function(id){
-            $('#'+id+'question').prop('checked',true);
-        })
-    },
-
 
 
     addToQuestionPaper: function (selectedQuestions,notes) {
         var htmlForSelectedQuestions = jade.renderFile("./src/createQuestionPaper/selectedQuestions.jade", {'questions': selectedQuestions,'notes':notes});
         $('#body').html(htmlForSelectedQuestions);
         registerAddNotesListeners();
-    }
-    ,
+    },
+
+
 
     getQuestionPaperTitle: function () {
         return $('#questionPaperTitle').val();
@@ -112,7 +107,7 @@ var view = {
 
     getDestinationPosition : function(){
         var position = $('.destinationPosition').val();
-        return parseInt(position);
+        return parseInt(position)-1;
     }
 
 
@@ -192,10 +187,14 @@ $(document).ready(function () {
 
     });
 
+
     $('#down').click(function(){
         var ids = view.getSelectedQuestionsForSuffling();
         presenter.OnDownQuestions(ids);
-    })
+
+    });
+
+
     $('#create_questions').click(function () {
         CreateQuestion.render({});
         $(".close").click(function () {

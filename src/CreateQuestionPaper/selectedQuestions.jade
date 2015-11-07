@@ -4,7 +4,7 @@ each question,index in questions
     span(class="glyphicon glyphicon-plus" aria-hidden="true")
  else
   button(id= "#{index}" class="addNote btn btn-default" )
-   span(class="glyphicon glyphicon-plus" aria-hidden="true")
+   span(class="glyphicon glyphicon-plus plusButton" aria-hidden="true")
 
  div(id="#{index}_noteHolder")
   if(notes[index])
