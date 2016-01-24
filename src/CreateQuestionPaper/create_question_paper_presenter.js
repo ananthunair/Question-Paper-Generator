@@ -143,32 +143,38 @@ exports.Presenter.prototype = {
 
     OnUpQuestions : function(questionIds,indexToMove){
         var questionsOfPaper = this.questionPaper;
-        firstIndexOfThirdPart = indexToMove ? indexToMove :questionIds[0]-1;
+        firstIndexOfThirdPart = indexToMove!=undefined ? indexToMove :questionIds[0]-1;
+
         var firstPart = questionsOfPaper.slice(0,firstIndexOfThirdPart);
         var secondPart = questionIds.map(function(index) {return questionsOfPaper[index]});
         var thirdPart = this.questionPaper.filter(function(question){
             return firstPart.indexOf(question)<0 && secondPart.indexOf(question)<0
         });
+
         this.questionPaper = firstPart.concat(secondPart).concat(thirdPart);
         this.view.addToQuestionPaper(this.questionPaper,this.notes);
     },
 
     OnDownQuestions : function(questionIds,indexToMove){
         var questionsOfPaper = this.questionPaper;
-        var lastQuestion = (indexToMove==(this.questionPaper.length-1) && questionIds.length>1);
 
-        firstIndexOfThirdPart = indexToMove ? indexToMove+1 : questionIds[questionIds.length-1]+2;
+        var lastQuestion = (indexToMove==(this.questionPaper.length-1) && questionIds.length>1);
+        firstIndexOfThirdPart = indexToMove!=undefined ? indexToMove+questionIds.length : questionIds[questionIds.length-1]+2;
         var thirdPart = questionsOfPaper.slice(firstIndexOfThirdPart);
         var secondPart = questionIds.map(function(index) {return questionsOfPaper[index]});
+
         var firstPart = this.questionPaper.filter(function(question){
             return thirdPart.indexOf(question)<0 && secondPart.indexOf(question)<0
         });
+        
         this.questionPaper = lastQuestion ? firstPart.concat(secondPart) : firstPart.concat(secondPart).concat(thirdPart);
         this.view.addToQuestionPaper(this.questionPaper,this.notes);
     },
 
     onMoveQuestion : function(questionIds){
+
         var movingPosition = this.view.getDestinationPosition();
+
         if(movingPosition>questionIds[0]){
             this.OnDownQuestions(questionIds,movingPosition)
         }
