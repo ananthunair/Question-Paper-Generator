@@ -1,7 +1,7 @@
 /**
  * Created by vijaypratapsingh on 15/09/15.
  */
-var Presenter = require('../../src/createQuestionPaper/create_question_paper_presenter.js').Presenter;
+var Presenter = require('../../src/CreateQuestionPaper/create_question_paper_presenter.js').Presenter;
 var assert = require('chai').assert;
 var mokito = require('jsmockito');
 var moke_view;
