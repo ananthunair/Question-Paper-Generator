@@ -1,4 +1,5 @@
 
+[![Build Status](https://snap-ci.com/anantasur/Question-Paper-Generator/branch/master/build_image)](https://snap-ci.com/anantasur/Question-Paper-Generator/branch/master)
 ## Screen shot
 
 ## APIs
