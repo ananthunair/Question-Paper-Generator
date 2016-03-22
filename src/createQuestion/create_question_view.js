@@ -12,13 +12,13 @@ var view ={
         return $('#question').val(question)
     },
     getQuestion:function(){
-        return $('#question').val()
+        return CKEDITOR.instances.question.getData();
     },
     getAnswer:function(){
         return $('#answer').val()
     },
     clearScreen:function(){
-        document.getElementById("question").value = "";
+        CKEDITOR.instances.question.setData('');
         document.getElementById("answer").value = "";
         clearTags();
     },

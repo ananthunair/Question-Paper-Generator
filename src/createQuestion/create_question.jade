@@ -8,11 +8,9 @@ div(class="modal-dialog modal-lg")
         div(class="modal-body")
             div
                 div(id="successAlert")
-                div(id="questionContainer")
-                    button(id = "markAsCode", class="btn btn-default") Code
                 div(id="Qun")
-                textarea(name="question" id="question" class="validate" cols="75" rows="10" placeholder="Question" autofocus)
-                textarea(name="answer" id="answer" cols="75" rows="10" placeholder="Answer")
+                    textarea(name="question" id="question" class="validate" cols="75" rows="10" placeholder="Question" autofocus)
+                    textarea(name="answer" id="answer" cols="75" rows="10" placeholder="Answer")
                 div(id="bottomHolder")
                     div(class="input textarea tagbox validate" id="tags")
                     button(id="create", class="btn btn-primary btn-lg createButton") Create
@@ -22,4 +20,7 @@ script(src="../../library/taggle/assets/js/jquery-1.10.1.js")
 script(src="../../library/taggle/assets/js/jquery-ui.js")
 script(src="../../library/taggle/assets/js/taggle.js")
 script(src="../createQuestion/create_question_view.js")
+script(src="../../library/ckeditor/ckeditor.js")
+script.
+    CKEDITOR.replace( 'question' );
 
