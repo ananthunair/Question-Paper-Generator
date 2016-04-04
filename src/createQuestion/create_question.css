@@ -1,12 +1,5 @@
-#question{
-    height: 30%;
-    width: 94%;
-    margin-left: 2%;
-    margin-bottom: 5%;
-}
-
 #answer {
-    height: 10%;
+    height: 8%;
     width: 94%;
     margin-left: 2%;
     margin-bottom: 5%;
@@ -20,7 +13,7 @@
     width: 14%;
     display: inline-block;
     float: right;
-    height: 68%;
+    height: 58%;
     padding: 0;
 
 }
@@ -66,11 +59,14 @@
 
 .modal-dialog{
     margin-top: 7.5%;
+    padding-bottom: 15%;
 }
 
 .modal-lg{
     width: 40%;
+    height: 151%;
 }
+
 .createTagBox {
     position: fixed;
     width: 74%;
@@ -104,4 +100,11 @@
 
  .close{
      opacity: .4;
+ }
+
+ #cke_question{ 
+    height: 24%;
+    width: 93%;
+    margin-left: 2%;
+    margin-bottom : 5%;
  }
