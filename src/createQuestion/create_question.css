@@ -107,4 +107,5 @@
     width: 93%;
     margin-left: 2%;
     margin-bottom : 5%;
+    overflow: auto;
  }
