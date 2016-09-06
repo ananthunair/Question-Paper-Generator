@@ -1,4 +1,4 @@
-##Based on lots of request we are currently in a process of cleaning up the codebase and providing a good documentation on ##dev setup so that others can contibute.
+##Based on lots of request we are currently in a process of cleaning up the codebase and providing a good documentation on dev setup so that others can contibute.
 
 ## Question-Paper-Generator       
 
