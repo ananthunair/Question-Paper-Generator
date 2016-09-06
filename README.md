@@ -1,8 +1,4 @@
-
-[![Build Status](https://snap-ci.com/anantasur/Question-Paper-Generator/branch/master/build_image)](https://snap-ci.com/anantasur/Question-Paper-Generator/branch/master)
-## Screen shot
-
-## APIs
+##Based on lots of request we are currently in a process of cleaning up the codebase and providing a good documentation on ##dev setup so that others can contibute.
 
 ## Question-Paper-Generator       
 
